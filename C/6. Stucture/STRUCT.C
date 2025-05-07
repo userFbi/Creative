@@ -20,9 +20,9 @@ struct Time
 	int d,h,m,s;
 }a,b;
 
-void main()
+int main()
 {
-	int day=0;hours,minute,seconds;
+	int day=0,hours,minute,seconds;
 	clrscr();
 	printf("1st Hour : ");
 	scanf("%d",&a.h);
@@ -71,5 +71,5 @@ void main()
 	printf(" -> %d Seconds\n",seconds);
 
 
-	getch();
+	return 0;
 }
