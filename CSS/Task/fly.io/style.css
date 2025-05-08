@@ -289,16 +289,16 @@
 
 /* brand-section 07 */
 
-.brand-section{
+.brand-section {
     margin: auto;
     margin-bottom: 100px;
 }
 
-.brands{
+.brands {
     justify-content: space-evenly;
 }
 
-.brand-section  h4{
+.brand-section h4 {
     color: #7c3aed;
     justify-content: center;
     text-transform: uppercase;
@@ -306,24 +306,132 @@
 
 /* 08 section  */
 
-.laguage-left-section-main{
+.laguage-section-main {
+    padding: 80px;
     background-color: #7c3aed;
+    margin-bottom: 90px;
 }
 
-.laguage-section{
+.laguage-section {
     margin: auto;
 }
 
-.laguage-left-section h1{
+.laguage-left-section h1 {
     color: #FFFFFF;
     font-size: 30px;
+    margin-bottom: 20px;
 }
 
-.laguage-left-section p{
+.laguage-left-section p {
     color: #FFFFFFB3;
+    margin-bottom: 40px;
 }
 
-.laguage-left-section a{
+.laguage-left-section a {
+    border: 1px solid rgb(255 255 255 / .25);
     text-decoration: none;
     color: #FFFFFF;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+.laguage-right-section ul li {
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.laguage-right-section ul li {
+    color: #FFFFFF;
+}
+
+.w-33{
+    width: 33.33%;
+}
+
+.w-33 ul li a{
+    color: #FFFFFF;
+    border-radius: 20px;
+    padding: 50px;
+    /* border: 1px solid rgb(255 255 255 / .25); */
+}
+
+
+/* 09 section */
+
+.end-section {
+    margin: auto;
+    justify-content: space-between;
+    margin-bottom: 90px;
+}
+
+.end-left h1 {
+    font-size: 40px;
+    color: #281950;
+    margin-bottom: 10px;
+}
+
+.end-left p {
+    color: #281950BF;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.end-left a {
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #7c3aed;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+
+.end-right img {
+    width: 512px;
+}
+
+
+/* footer section */
+
+.footer-section {
+    padding: 100px;
+    padding-top: 100px;
+    background-color: #191034;
+    justify-content: space-between;
+}
+
+.footer-left-side{
+    margin-bottom: 170px;
+}
+
+.footer-left-side a{
+    color: #FFFFFF;
+}
+
+.footer-right-side{
+    gap: 80px;
+}
+
+
+
+.footer-right-side ul li {
+    list-style: none;
+    padding: 5px;
+}
+
+.footer-right-side h5 {
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0px 0px 12px;
+}
+
+.footer-right-side ul li a {
+    text-decoration: none;
+    color: #A39AC1;
+}
+
+.copyright{
+    color: #A39AC1;
+    background-color: #191034;
+    justify-content: center;
+    padding-bottom: 40px;
 }
