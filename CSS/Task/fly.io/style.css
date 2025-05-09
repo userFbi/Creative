@@ -49,7 +49,7 @@
     border: 1px solid #000000;
     border-radius: 100px;
     display: flex;
-    padding: 0 5px;
+    padding:  5px;
 }
 
 .btn a {
@@ -59,6 +59,7 @@
 
 .bg-img img {
     width: 100%;
+    margin-bottom: 80px;
 }
 
 .sign-up-left {
@@ -140,6 +141,7 @@
 
 .sub-img-section img {
     width: 400px;
+    
 }
 
 /* specification-section - 04 */
@@ -302,32 +304,33 @@
     color: #7c3aed;
     justify-content: center;
     text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
 /* 08 section  */
 
-.laguage-section-main {
+.language-section-main {
     padding: 80px;
     background-color: #7c3aed;
     margin-bottom: 90px;
 }
 
-.laguage-section {
+.language-section {
     margin: auto;
 }
 
-.laguage-left-section h1 {
+.language-left-section h1 {
     color: #FFFFFF;
     font-size: 30px;
     margin-bottom: 20px;
 }
 
-.laguage-left-section p {
+.language-left-section p {
     color: #FFFFFFB3;
     margin-bottom: 40px;
 }
 
-.laguage-left-section a {
+.language-left-section a {
     border: 1px solid rgb(255 255 255 / .25);
     text-decoration: none;
     color: #FFFFFF;
@@ -335,12 +338,12 @@
     padding: 10px 20px;
 }
 
-.laguage-right-section ul li {
+.language-right-section ul li {
     flex-wrap: wrap;
     list-style: none;
 }
 
-.laguage-right-section ul li {
+.language-right-section ul li {
     color: #FFFFFF;
 }
 
@@ -381,7 +384,7 @@
     color: #FFFFFF;
     background-color: #7c3aed;
     border-radius: 20px;
-    padding: 10px;
+    padding: 13px 20px;
 }
 
 
@@ -434,4 +437,29 @@
     background-color: #191034;
     justify-content: center;
     padding-bottom: 40px;
+}
+
+.language-left-section{
+    width: 50%;
+}
+.language-right-section{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+
+}
+.language-right-section a{
+    background-image: linear-gradient(to bottom right, rgb(255 255 255 / .075), rgb(255 255 255 / .075), rgb(255 255 255 / .2));
+    display: inline-block;
+    padding: 30px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #FFFFFF;
+}
+
+.brand-heading h4{
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 40px;
 }
