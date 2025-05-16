@@ -286,6 +286,7 @@ span::after{
     position: relative;
     z-index: 1;
 }
+
 .box::before {
     content: "";
     width: 100%;
@@ -295,7 +296,8 @@ span::after{
     opacity: 0.5;
     /* backgro1und-color: rgba(0, 0, 0, 0.5); */
     z-index: -1;
-}   
+}
+
 .box h1,
 p {
     color: white;

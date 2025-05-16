@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/* 
+h1 {
+    margin: 60px 15px 0;
+    padding-left: 10px;
+} */
+
+.box {
+    width: 360px;
+    /* background-color: black; */
+    /* height: 200px; */
+    /* display: flex; */
+    /* margin: auto; */
+    /* padding: 10px; */
+    /* gap: 20px; */
+    transition: 1s;
+}
+
+.box img {
+    display: block;
+}
+
+.box:hover {
+    /* transform: rotateX(90deg);
+    transform: rotateY(90deg);
+    transform: rotate(360deg); */
+
+    /* transform: scaleX(2);
+    transform: scaleY(2);
+    transform: scale(2); */
+
+    /* transform: skewX(90deg);
+    transform: skewY(90deg);
+    transform: skew(90deg); */
+
+    /* transform: translateX(50px); */
+    /* transform: translateY(50px); */
+    /* transform: translate(50px, 100px); */
+
+    filter: blur(2px);
+    filter: brightness(2);
+    filter: contrast(2);
+    filter: grayscale(2);
+    opacity: 50%;
+    opacity: 0.5;
+}
