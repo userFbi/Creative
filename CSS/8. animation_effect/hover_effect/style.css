@@ -166,8 +166,8 @@
 
 .img9 img:hover {
     filter: sepia(0);
+    
 }
-
 /* ------------------------------- 10. Blur + Gray Scalev -------------- */
 .img10 {
     display: block;
