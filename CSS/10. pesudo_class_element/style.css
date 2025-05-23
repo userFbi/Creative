@@ -2,7 +2,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* a:link{
+a:link{
     color: aquamarine;
 }
 a:active{
@@ -13,7 +13,7 @@ a:visited{
 }
 a:hover{
     color: green;
-} */
+}
 
 /* li:first-child{
     color: aqua;
@@ -81,9 +81,13 @@ p::first-letter{
     color: cornflowerblue;
 }
 p::first-line{
-    color: rgb(24, 24, 102);
+    color: rgb(15, 15, 80);
 }
 p::selection{
-    background-color: grey;
+    background-color: aliceblue;
     /* color: black; */
+}
+
+a:target{
+    color: blue;
 }
