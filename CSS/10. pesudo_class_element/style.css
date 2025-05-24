@@ -1,17 +1,20 @@
-*{
+* {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-a:link{
+a:link {
     color: aquamarine;
 }
-a:active{
+
+a:active {
     color: red;
 }
-a:visited{
+
+a:visited {
     color: gold;
 }
-a:hover{
+
+a:hover {
     color: green;
 }
 
@@ -66,28 +69,36 @@ input:out-of-range{
     background-color: brown;
 } */
 
-input:valid{
+/* input:valid {
     background-color: green;
     color: white;
-}
-input:invalid{
+} */
+
+/* input:invalid {
     background-color: red;
     color: white;
-}
-input::placeholder{
+} */
+
+/* input::placeholder {
     color: aqua;
-}
-p::first-letter{
-    color: cornflowerblue;
-}
-p::first-line{
-    color: rgb(15, 15, 80);
-}
-p::selection{
-    background-color: aliceblue;
-    /* color: black; */
+} */
+
+p::first-letter {
+    color: blue;
 }
 
-a:target{
-    color: blue;
+p::first-line {
+    color: white;
+    background-color: red;
+}
+
+/* p::selection {
+    background-color: blue;
+    color: white;
+} */
+
+a:target {
+    border: 2px solid darkorange;
+    background-color: beige;
+    color: black;
 }

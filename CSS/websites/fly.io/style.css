@@ -310,6 +310,7 @@
 
 .brands {
     justify-content: space-evenly;
+    /* animation: infinite-scroll var(60s) linear infinite; */
 }
 
 .brand-section h4 {
