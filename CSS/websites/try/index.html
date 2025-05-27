@@ -1,0 +1,253 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Trip to Ratnagiri & Chiplun</title>
+    <style>
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background: #f0f4f8;
+        color: #333;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      h1 {
+        margin-bottom: 0.5rem;
+        color: #0077b6;
+        text-align: center;
+        font-weight: 700;
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+      }
+
+      h2 {
+        color: #023e8a;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        color: #0077b6;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      /* Timeline container */
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        padding-left: 30px;
+        border-left: 4px solid #0077b6;
+      }
+
+      /* Timeline item */
+      .timeline-item {
+        margin-bottom: 3rem;
+        opacity: 0;
+        transform: translateX(-50px);
+        animation: fadeSlideIn 0.8s forwards;
+      }
+
+      /* Stagger animation delay */
+      .timeline-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .timeline-item:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .timeline-item:nth-child(3) {
+        animation-delay: 0.5s;
+      }
+      .timeline-item:nth-child(4) {
+        animation-delay: 0.7s;
+      }
+      .timeline-item:nth-child(5) {
+        animation-delay: 0.9s;
+      }
+      .timeline-item:nth-child(6) {
+        animation-delay: 1.1s;
+      }
+
+      /* Circle marker */
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -12px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+        background: #0077b6;
+        border-radius: 50%;
+        border: 4px solid #90e0ef;
+        box-shadow: 0 0 8px #0077b6aa;
+      }
+
+      /* Content box */
+      .content {
+        background: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+        position: relative;
+        transition: transform 0.3s ease;
+      }
+      .content:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 16px rgb(0 0 0 / 0.15);
+      }
+
+      /* Image styles */
+      .content img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-top: 0.8rem;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
+        transition: transform 0.3s ease;
+      }
+      .content img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        .timeline {
+          padding-left: 20px;
+          border-left-width: 3px;
+        }
+        .timeline-item::before {
+          width: 16px;
+          height: 16px;
+          border-width: 3px;
+          left: -10px;
+          top: 8px;
+        }
+        .content {
+          padding: 1rem;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeSlideIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Trip to Ratnagiri & Chiplun</h1>
+    <p class="subtitle">Trip Dates: 14th June - 18th June</p>
+
+    <section class="timeline">
+      <article class="timeline-item">
+        <div class="content">
+          <h2>14th June: Departure & Arrival</h2>
+          <p>
+            Train departure at <strong>8:00 PM</strong>. Arrive at Ratnagiri
+            station by <strong>6:00 AM</strong>.
+          </p>
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60"
+            alt="Train station"
+          />
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <h2>14th June: Ratnagiri to Chiplun</h2>
+          <p>
+            Take another train from Ratnagiri to Chiplun. Stay at my friend's
+            house.
+          </p>
+          <img
+            src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7c14?auto=format&fit=crop&w=800&q=60"
+            alt="Chiplun train station"
+          />
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <h2>15th June: Rest & Explore Village</h2>
+          <p>Relax and explore the village around Chiplun.</p>
+          <img
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=60"
+            alt="Village exploration"
+          />
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <h2>16th June: Nageshwar Trek</h2>
+          <p>Go for the Nageshwar trek in Chiplun.</p>
+          <img
+            src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=60"
+            alt="Mountain trek"
+          />
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <h2>17th June: Ganpatiphule & Beaches</h2>
+          <p>
+            Visit Ganpatiphule Temple, then Aare Ware Beach, followed by Kasheli
+            Beach.
+          </p>
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60"
+            alt="Ganpatiphule Temple"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60"
+            alt="Beach view"
+            style="margin-top: 10px"
+          />
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <h2>18th June: Explore Ratnagiri & Return</h2>
+          <p>
+            Explore Ratnagiri places during the day. Evening train back home at
+            8:00 PM.
+          </p>
+          <img
+            src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=60"
+            alt="Ratnagiri landscape"
+          />
+        </div>
+      </article>
+    </section>
+  </body>
+</html> -->
+
+
