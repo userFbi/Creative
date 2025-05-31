@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<conio.h>
+#include<dos.h>
+/*
+	1 second - 1000 milisecond
+*/
+void main()
+{
+	int i;
+	clrscr();
+	printf("start...\n");
+	//delay(2000);
+	//sleep(2);
+
+	for(i=1 ; i<=10 ; i++)
+	{
+		sleep(1);
+		printf("%d\n",i);
+	}
+
+	printf("end...\n");
+	getch();
+}

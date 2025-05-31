@@ -18,7 +18,6 @@
     .w-1140 {
         width: 960px;
     }
-
 }
 
 @media (min-width:769px) and (max-width:960px) {
@@ -55,4 +54,4 @@
     .box {
         width: 100%;
     }
-} 
+}
