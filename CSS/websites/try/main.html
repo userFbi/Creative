@@ -200,6 +200,66 @@
           font-size: 1.8rem;
         }
       }
+      .slider {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        height: 200px; /* fixed height */
+        overflow: hidden;
+        border-radius: 6px;
+        border: 1px solid #3399ff;
+      }
+
+      .slider img.slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; /* fill the slider height */
+        object-fit: cover;
+        display: none;
+        transition: opacity 0.5s ease;
+        user-select: none;
+      }
+
+      .slider img.slide.active {
+        display: block;
+        position: relative; /* to show active slide */
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent; /* Removed background */
+        border: none;
+        color: #0b3259; /* Keep the blue color */
+        font-size: 1.8rem;
+        padding: 0.2rem 0.6rem;
+        cursor: pointer;
+        border-radius: 3px;
+        user-select: none;
+        transition: color 0.3s ease;
+      }
+
+      .slider-btn:hover {
+        color: #66b2ff; /* Lighter blue on hover */
+      }
+
+      .prev-btn {
+        left: 5px;
+      }
+
+      .next-btn {
+        right: 5px;
+      }
+
+      @media (max-width: 600px) {
+        .slider {
+          max-width: 100%;
+          max-height: 250px;
+        }
+      }
 
       /* h1 img {
       height: 30px;
@@ -287,26 +347,118 @@
 
       <article class="timeline-item">
         <div class="content">
-          <div class="date-header">17th June: Ganpatiphule & Beaches</div>
+          <div class="date-header">17th June: Road Trip & Exploration</div>
           <div class="content-body">
-            <div class="content-img">
+            <div class="content-img slider">
+              <img
+                src="images/sawatsada.jfif"
+                alt="Sawatsada Waterfall"
+                class="slide active"
+              />
+              <img
+                src="images/parshuram-temple.jfif"
+                alt="Parshuram Temple"
+                class="slide"
+              />
+              <img
+                src="images/Guhagar.jfif"
+                alt="Guhagar Beach"
+                class="slide"
+              />
+              <img
+                src="images/Hedvi beach.jfif"
+                alt="Hedvi Beach"
+                class="slide"
+              />
+              <img
+                src="images/Jaigad.jfif"
+                alt="Dhopave Jetty (Jaigad Ferry)"
+                class="slide"
+              />
               <img
                 src="images/04-ganpatiphule.jfif"
-                alt="Ganpatiphule Temple"
+                alt="Ganpatipule"
+                class="slide"
               />
+
+              <button class="slider-btn prev-btn" aria-label="Previous Slide">
+                &#10094;
+              </button>
+              <button class="slider-btn next-btn" aria-label="Next Slide">
+                &#10095;
+              </button>
             </div>
             <div class="content-text">
               <ul>
-                <li>Visit Ganpatiphule Temple in the morning</li>
-                <li>Explore Aare Ware Beach</li>
-                <li>Relax at Kasheli Beach</li>
+                <li>Sawatsada Waterfall</li>
+                <li>Parshuram Temple</li>
+                <li>Guhagar</li>
+                <li>Hedvi - Dhopave Jetty (Jaigad Ferry) - Ganpatipule</li>
+                <li>Jaigad Fort</li>
+                <li>Ganpatipule</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="timeline-item">
+        <div class="content">
+          <div class="date-header">18th June: Explore Some Place & Return</div>
+          <div class="content-body">
+            <div class="content-img slider">
+              <img
+                src="images/sawatsada.jfif"
+                alt="Sawatsada Waterfall"
+                class="slide active"
+              />
+              <img
+                src="images/parshuram-temple.jfif"
+                alt="Parshuram Temple"
+                class="slide"
+              />
+              <img
+                src="images/Guhagar.jfif"
+                alt="Guhagar Beach"
+                class="slide"
+              />
+              <img
+                src="images/Hedvi beach.jfif"
+                alt="Hedvi Beach"
+                class="slide"
+              />
+              <img
+                src="images/Jaigad.jfif"
+                alt="Dhopave Jetty (Jaigad Ferry)"
+                class="slide"
+              />
+              <img
+                src="images/04-ganpatiphule.jfif"
+                alt="Ganpatipule"
+                class="slide"
+              />
+
+              <button class="slider-btn prev-btn" aria-label="Previous Slide">
+                &#10094;
+              </button>
+              <button class="slider-btn next-btn" aria-label="Next Slide">
+                &#10095;
+              </button>
+            </div>
+            <div class="content-text">
+              <ul>
+                <li>Sawatsada Waterfall</li>
+                <li>Parshuram Temple</li>
+                <li>Guhagar</li>
+                <li>Hedvi - Dhopave Jetty (Jaigad Ferry) - Ganpatipule</li>
+                <li>Jaigad Fort</li>
+                <li>Ganpatipule</li>
               </ul>
             </div>
           </div>
         </div>
       </article>
 
-      <article class="timeline-item">
+      <!-- <article class="timeline-item">
         <div class="content">
           <div class="date-header">18th June: Explore Some Place & Return</div>
           <div class="content-body">
@@ -322,7 +474,7 @@
             </div>
           </div>
         </div>
-      </article>
+      </article> -->
     </section>
 
     <section class="packing-section">
@@ -375,6 +527,30 @@
           localStorage.setItem(key, checkbox.checked);
         });
       });
+
+      const slider = document.querySelector(".slider");
+      if (slider) {
+        const slides = slider.querySelectorAll("img.slide");
+        const prevBtn = slider.querySelector(".prev-btn");
+        const nextBtn = slider.querySelector(".next-btn");
+        let currentIndex = 0;
+
+        function showSlide(index) {
+          slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
+          });
+        }
+
+        prevBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          showSlide(currentIndex);
+        });
+      }
     </script>
   </body>
 </html>

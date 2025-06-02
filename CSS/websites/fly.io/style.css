@@ -5,7 +5,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-*::selection{
+*::selection {
     background-color: #7c3aed;
     color: white;
 }
@@ -534,3 +534,54 @@ a i {
 }    
     - sroll speed : 60s;
 */
+
+/* Media-quary */
+
+
+@media (max-width: 1200px) {
+    .w-1140 {
+        width: 1140px;
+    }
+}
+
+@media (min-width:993px) and (max-width: 1200px) {
+    .w-1140 {
+        width: 980px;
+    }
+}
+
+@media (max-width: 992px) {
+    .w-1140 {
+        width: 960px;
+    }
+}
+
+@media (min-width:769px) and (max-width: 960px) {
+    .w-1140 {
+        width: 720px;
+    }
+}
+
+@media (max-width:768px) {
+    .w-1140 {
+        width: 720px;
+    }
+}
+
+@media (min-width:577px) and (max-width: 720px) {
+    .w-1140 {
+        width: 540px;
+    }
+}
+
+@media (max-width: 576px) {
+    .w-1140 {
+        width: 100%;
+    }
+}
+
+@media (max-width:480px) {
+    .w-1140 {
+        width: 100%;
+    }
+}
