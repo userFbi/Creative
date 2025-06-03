@@ -9,8 +9,10 @@
       content="Itinerary for a 3-day trip across Ratnagiri and Chiplun including packing checklist and scenic exploration."
     />
     <title>3 Days in Ratnagiri & Chiplun</title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="src/style.css" />
   </head>
+  <script type="module" src="src/main.js"></script>
+
   <body>
     <h1>
       3 Days in Ratnagiri & Chiplun
@@ -115,7 +117,7 @@
                 class="slide"
               />
               <img
-                src="images/Jaigad.jfif"
+                src="images/jaigad.jfif"
                 alt="Dhopave Jetty (Jaigad Ferry)"
                 class="slide"
               />
@@ -157,7 +159,7 @@
                 <h3>Ganpatipule Beach</h3>
               </div>
               <div class="img-grid-item">
-                <img src="images/Aare-ware.jfif" alt="Aare-Ware" />
+                <img src="images/aare-ware.jfif" alt="Aare-Ware" />
                 <h3>Aare-Ware</h3>
               </div>
               <div class="img-grid-item">
@@ -243,5 +245,56 @@
     >
       - Life Hai Bidu, Moj Karle
     </footer>
+
+    <!-- <script>
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") nextBtn.click();
+        if (e.key === "ArrowLeft") prevBtn.click();
+      });
+
+      // Persist checkbox state using localStorage
+      const checkboxes = document.querySelectorAll(
+        '#packing-form input[type="checkbox"]'
+      );
+
+      checkboxes.forEach((checkbox) => {
+        const key = `packing_${checkbox.dataset.item}`;
+        checkbox.checked = localStorage.getItem(key) === "true";
+
+        checkbox.addEventListener("change", () => {
+          localStorage.setItem(key, checkbox.checked);
+        });
+      });
+
+      // Handle slider ONLY for 17th June
+      const sliders = document.querySelectorAll(".slider");
+
+      sliders.forEach((slider) => {
+        const slides = slider.querySelectorAll("img.slide");
+        const prevBtn = slider.querySelector(".prev-btn");
+        const nextBtn = slider.querySelector(".next-btn");
+        let currentIndex = 0;
+
+        function showSlide(index) {
+          slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
+          });
+        }
+
+        // Initial show
+        showSlide(currentIndex);
+
+        // Event Listeners
+        prevBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          showSlide(currentIndex);
+        });
+      });
+    </script> -->
   </body>
 </html>
