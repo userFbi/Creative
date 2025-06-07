@@ -1,9 +1,14 @@
 @media (prefers-reduced-motion: reduce) {
-  body, header, section, footer, input, textarea {
-    transition: none !important;
-  }
-}
 
+    body,
+    header,
+    section,
+    footer,
+    input,
+    textarea {
+        transition: none !important;
+    }
+}
 
 * {
     margin: 0;
@@ -15,6 +20,17 @@ body {
     font-family: 'Segoe UI', sans-serif;
     line-height: 1.6;
 }
+
+.logo img {
+    height: 100px;
+    transition: filter 0.3s ease;
+}
+
+/* Optional tweaks to auto-adjust based on dark/light background */
+body.dark .logo img {
+    filter: brightness(1.2) contrast(1.1);
+}
+
 
 .container {
     width: 90%;
@@ -65,13 +81,77 @@ footer {
     padding: 20px 0;
 }
 
-form input,
-form textarea,
-form button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+.upload-box {
+    text-align: center;
+    margin-bottom: 20px;
 }
+
+.upload-box input {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.photo-item {
+    position: relative;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.03);
+}
+
+.download-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 6px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+/* Dark mode support */
+body.dark .download-btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
 
 
 /* Theme toggle button */
@@ -122,8 +202,9 @@ textarea {
 }
 
 #theme-toggle {
-  transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
+
 #theme-toggle:active {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }

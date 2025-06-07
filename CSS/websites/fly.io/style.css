@@ -162,7 +162,6 @@ header {
     margin: auto;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-bottom: 50px;
 }
 
 .sub-div {
@@ -271,7 +270,7 @@ header {
 .qualification-section {
     margin: auto;
     justify-content: space-evenly;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
 }
 
 .first-li {
@@ -350,6 +349,7 @@ header {
 
 .language-section {
     margin: auto;
+    column-gap: 20px;
 }
 
 .language-left-section h1 {
@@ -441,10 +441,6 @@ header {
     padding-top: 100px;
     background-color: #191034;
     justify-content: space-between;
-}
-
-.footer-left-side {
-    margin-bottom: 170px;
 }
 
 .footer-left-side a {
@@ -605,6 +601,7 @@ a i {
 
     .end-section {
         padding: 20px;
+        margin-bottom: 0;
     }
 
     .footer-left-side {
@@ -619,35 +616,52 @@ a i {
         width: 960px;
     }
 
+    .hero svg {
+        height: 100px;
+    }
+
+    .links {
+        display: none;
+    }
+
     .specification-section {
-        padding: 20px;
+        flex-direction: column;
+        align-items: center;
     }
 
     .sub-text-section p {
         font-size: 16px;
     }
 
-    .sub-div .first {
-        margin-bottom: 96px;
+    .sub-container {
+        margin-bottom: 50px;
     }
 
-    .sub-div .second {
-        margin-bottom: 96px;
+    .sub-div {
+        margin-bottom: 50px;
+        width: 80%;
     }
 
-    .sub-div .third {
-        margin-bottom: 96px;
+    .explore-section {
+        width: 80%;
     }
 
-    .sub-div .fourth {
-        margin-bottom: 96px;
+    .sub-explore {
+        width: 80%;
+        padding: 20px 0px;
+        flex-direction: column-reverse;
     }
 
+    .img-section img {
+        margin-right: 170px;
+        width: 472px;
+    }
 
     .language-section-main {
         padding: 0;
         padding-top: 20px;
         padding-bottom: 20px;
+        margin-bottom: 0;
     }
 
     .language-section {
@@ -675,6 +689,7 @@ a i {
 
     .end-section {
         padding: 20px;
+        margin-bottom: 0;
     }
 
     .footer-left-side {
@@ -683,10 +698,6 @@ a i {
 
     .footer-right-side {
         margin-bottom: 20px;
-    }
-
-    .w-33 a {
-        padding: 10px;
     }
 
     .brands {
@@ -732,10 +743,23 @@ a i {
         font-size: 16px;
     }
 
+    .language-section {
+        flex-direction: column;
+        row-gap: 40px;
+    }
+
     .language-section-main {
         padding: 0;
         padding-top: 20px;
         padding-bottom: 20px;
+    }
+
+    .language-left-section {
+        width: 100%;
+    }
+
+    .language-right-section {
+        width: 100%;
     }
 
     .sub-text-section h1 {
@@ -796,6 +820,16 @@ a i {
 
     .end-section {
         margin-bottom: 0;
+    }
+
+    .footer-section{
+        flex-direction: column;
+        /* column-gap: 20px; */
+        row-gap: 20px;
+    }
+
+    .footer-right-side{
+        flex-wrap: wrap;
     }
 
 }

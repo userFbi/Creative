@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Website Title</title>
     <link rel="stylesheet" href="style.css" />
-    
   </head>
   <body>
     <!-- Header -->
     <header>
       <div class="container">
-        <h1>Your Logo</h1>
+        <a href="#home" class="logo">
+          <img
+            src="images/ChatGPT Image Jun 7, 2025, 09_04_24 AM.png"
+            alt="Travel Diary Logo"
+            id="site-logo"
+          />
+        </a>
+
         <nav>
           <ul>
             <li><a href="#home">Home</a></li>
@@ -66,26 +72,38 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="container">
-        <h2>Contact Us</h2>
-        <form>
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea placeholder="Your Message" required></textarea>
-          <button type="submit">Send</button>
-        </form>
+  <section id="photo-library">
+  <div class="container">
+    <h2>Photo Library</h2>
+
+    <!-- Upload Input -->
+    <div class="upload-box">
+      <input type="file" id="upload-input" accept="image/*" multiple />
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="photo-grid" id="photo-grid">
+      <!-- Images added here -->
+      <div class="photo-item">
+        <img src="images/trip1.jpg" alt="Trip Photo 1" />
+        <a href="images/trip1.jpg" download class="download-btn">⬇</a>
       </div>
-    </section>
+      <!-- Add more photo-item blocks -->
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="Full View" />
+  </div>
+</section>
 
     <!-- Footer -->
     <footer>
       <div class="container">
-        <p>&copy; 2025 Your Website Name. All rights reserved.</p>
+        <p>&copy; 2025 Travelars. All rights reserved.</p>
       </div>
     </footer>
-
 
     <script src="script.js"></script>
   </body>
