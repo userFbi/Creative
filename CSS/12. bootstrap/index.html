@@ -17,42 +17,57 @@
   </head>
   <body>
     <h1>* Background</h1>
-    <p class="bg-primary">Hello</p>
-    <p class="bg-secondary">Hello</p>
-    <p class="bg-success">Hello</p>
-    <p class="bg-danger">Hello</p>
-    <p class="bg-warning">Hello</p>
-    <p class="bg-info">Hello</p>
-    <p class="bg-light">Hello</p>
-    <p class="bg-dark text-white">Hello</p>
+    <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
+    <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
+    <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+    <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
+    <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
+    <div class="p-3 mb-2 bg-info text-dark">.bg-info</div>
+    <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
+    <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
     <br />
 
     <h1>* Background-Gradiendt</h1>
-    <p class="bg-primary bg-gradient">Hello</p>
-    <p class="bg-primary bg-gradient">Hello</p>
-    <p class="bg-secondary bg-gradient">Hello</p>
-    <p class="bg-success bg-gradient">Hello</p>
-    <p class="bg-danger bg-gradient">Hello</p>
-    <p class="bg-warning bg-gradient">Hello</p>
-    <p class="bg-info bg-gradient">Hello</p>
-    <p class="bg-light bg-gradient">Hello</p>
-    <p class="bg-dark text-white bg-gradient">Hello</p>
+    <div class="p-3 mb-2 bg-primary bg-gradient text-white">
+      .bg-primary.bg-gradient
+    </div>
+    <div class="p-3 mb-2 bg-secondary bg-gradient text-white">
+      .bg-secondary.bg-gradient
+    </div>
+    <div class="p-3 mb-2 bg-success bg-gradient text-white">
+      .bg-success.bg-gradient
+    </div>
+    <div class="p-3 mb-2 bg-danger bg-gradient text-white">
+      .bg-danger.bg-gradient
+    </div>
+    <div class="p-3 mb-2 bg-warning bg-gradient text-dark">
+      .bg-warning.bg-gradient
+    </div>
+    <div class="p-3 mb-2 bg-info bg-gradient text-dark">
+      .bg-info.bg-gradient
+    </div>
+    <div class="p-3 mb-2 bg-light bg-gradient text-dark">
+      .bg-light.bg-gradient
+    </div>
+    <div class="p-3 mb-2 bg-dark bg-gradient text-white">
+      .bg-dark.bg-gradient
+    </div>
     <br />
 
     <h1>* Border + Border-color</h1>
-    <p class="bg-primary border-danger border">Hello</p>
-    <p class="bg-primary border-danger border-top">Hello</p>
-    <p class="bg-primary border-danger border-bottom">Hello</p>
-    <p class="bg-primary border-danger border-start">Hello</p>
-    <p class="bg-primary border-danger border-end">Hello</p>
+    <p class="bg-primary p-3 border-danger border">Hello</p>
+    <p class="bg-primary p-3 border-danger border-top">Hello</p>
+    <p class="bg-primary p-3 border-danger border-bottom">Hello</p>
+    <p class="bg-primary p-3 border-danger border-start">Hello</p>
+    <p class="bg-primary p-3 border-danger border-end">Hello</p>
     <br />
 
     <h1>* Border-radius</h1>
-    <p class="bg-secondary border border-danger rounded-pill">Hello</p>
-    <p class="bg-secondary border border-danger rounded-top">Hello</p>
-    <p class="bg-secondary border border-danger rounded-bottom">Hello</p>
-    <p class="bg-secondary border border-danger rounded-start">Hello</p>
-    <p class="bg-secondary border border-danger rounded-end">Hello</p>
+    <p class="bg-secondary p-3 border border-danger rounded-pill">Hello</p>
+    <p class="bg-secondary p-3 border border-danger rounded-top">Hello</p>
+    <p class="bg-secondary p-3 border border-danger rounded-bottom">Hello</p>
+    <p class="bg-secondary p-3 border border-danger rounded-start">Hello</p>
+    <p class="bg-secondary p-3 border border-danger rounded-end">Hello</p>
     <br />
 
     <h1>* Colors</h1>
@@ -69,6 +84,26 @@
     <p class="text-white bg-dark">.text-white</p>
     <p class="text-black-50">.text-black-50</p>
     <p class="text-white-50 bg-dark">.text-white-50</p>
+
+    <h1>* Flex</h1>
+    <div class="d-flex p-2 mb-3 border border-5 bd-highlight">
+      I'm a flexbox container!
+    </div>
+    <div class="d-inline-flex p-2 mb-3 border border-5 bd-highlight">
+      I'm an inline flexbox container!
+    </div>
+
+    <div class="d-flex border flex-row bd-highlight mb-3">
+      <div class="p-2 border">Flex item 1</div>
+      <div class="p-2 border">Flex item 2</div>
+      <div class="p-2 border">Flex item 3</div>
+    </div>
+    <div class="d-flex border flex-row-reverse bd-highlight">
+      <div class="p-2 border">Flex item 1</div>
+      <div class="p-2 border">Flex item 2</div>
+      <div class="p-2 border">Flex item 3</div>
+    </div>
+    <br /><br />
 
     <h1>* Intractions</h1>
     <p class="user-select-all">
@@ -96,18 +131,29 @@
     <br />
 
     <h1>* Shadows</h1>
-    <div class="shadow-none p-3 mb-5 bg-light rounded">No shadow</div>
-    <div class="shadow-sm p-3 mb-5 bg-body rounded">Small shadow</div>
-    <div class="shadow p-3 mb-5 bg-body rounded">Regular shadow</div>
-    <div class="shadow-lg p-3 mb-5 bg-body rounded">Larger shadow</div>
+    <div class="shadow-none p-3 mb-4 bg-light rounded">No shadow</div>
+    <div class="shadow-sm p-3 mb-4 bg-body rounded">Small shadow</div>
+    <div class="shadow p-3 mb-4 bg-body rounded">Regular shadow</div>
+    <div class="shadow-lg p-3 mb-4 bg-body rounded">Larger shadow</div>
     <br />
 
     <h1>* Sizing</h1>
-    <div class="w-25 p-3 border border-dark">Width 25%</div>
-    <div class="w-50 p-3 border border-dark">Width 50%</div>
-    <div class="w-75 p-3 border border-dark">Width 75%</div>
-    <div class="w-100 p-3 border border-dark">Width 100%</div>
-    <div class="w-auto p-3 border border-dark">Width auto</div>
+    <div class="w-25 p-3 mb-2 border border-dark">Width 25%</div>
+    <div class="w-50 p-3 mb-2 border border-dark">Width 50%</div>
+    <div class="w-75 p-3 mb-2 border border-dark">Width 75%</div>
+    <div class="w-100 p-3 mb-2 border border-dark">Width 100%</div>
+    <div class="w-auto p-3 mb-2 border border-dark">Width auto</div>
+
+    <h1>* Text</h1>
+    <div class="badge bg-primary text-wrap" style="width: 6rem">
+      This text should wrap.
+    </div>
+    <div class="text-nowrap bd-highlight" style="width: 8rem">
+      This text should overflow the parent.
+    </div>
+    <p class="text-break">
+      mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    </p>
 
     <!-- online -->
     <!-- <script
