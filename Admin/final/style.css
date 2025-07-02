@@ -41,17 +41,26 @@ body {
     color: #ffffff;
 }
 
-/* Team Section */
-.team-section .card {
-    background-color: #1e1e1e;
-    border: none;
+/* About us section */
+
+.about-us-section {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    /* background-color: #000; */
 }
 
-.team-section img {
-    object-fit: cover;
+
+.about-us-section h2 {
+    font-weight: bold;
+}
+
+.about-us-section p {
+    font-size: 1.1rem;
 }
 
 
+/* Carousel section */
 .carousel-section img {
     height: 500px;
     object-fit: cover;
@@ -71,6 +80,7 @@ ul li {
     margin-bottom: 0.5rem;
 }
 
+/* Footer */
 
 footer {
     font-size: 0.9rem;
