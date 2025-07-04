@@ -4,6 +4,10 @@ body {
     color: #ffffff;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .navbar .nav-link {
     color: #ccc;
 }
