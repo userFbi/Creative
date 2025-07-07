@@ -6,13 +6,13 @@ if (!localStorage.getItem("adminUsername")) {
 
 function checkAuth() {
   if (localStorage.getItem("isAdmin") !== "true") {
-    window.location.href = "login.html";
+    window.location.href = "./login.html";
   }
 }
 
 function logout() {
   localStorage.removeItem("isAdmin");
-  window.location.href = "index.html";
+  window.location.href = "./index.html";
 }
 
 document.getElementById("loginForm")?.addEventListener("submit", function (e) {
@@ -24,7 +24,7 @@ document.getElementById("loginForm")?.addEventListener("submit", function (e) {
 
   if (u === user && p === pass) {
     localStorage.setItem("isAdmin", "true");
-    window.location.href = "admin.html";
+    window.location.href = "../final/admin/admin.html";
   } else {
     document.getElementById("errorText").classList.remove("d-none");
   }
