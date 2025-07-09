@@ -1,123 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Member</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        margin: 0;
-        font-family: "Segoe UI", sans-serif;
-        background-color: #f8f9fc;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fc;
+    }
+    .sidebar {
+      width: 220px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #0d1321;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem 1rem;
+    }
+    .sidebar h5 {
+      font-weight: bold;
+      margin-bottom: 2rem;
+      padding-left: 10px;
+    }
+    .sidebar a {
+      display: block;
+      color: #ccc;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      margin-bottom: 0.4rem;
+      border-radius: 6px;
+    }
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #1c2232;
+      color: #fff;
+    }
+    .logout-btn {
+      text-align: center;
+    }
+    .main-content {
+      margin-left: 220px;
+      padding: 2rem;
+    }
+    .card-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+    .card-box h4 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .value {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div>
+      <h5>Admin Panel</h5>
+      <a href="admin.html" class="active">Dashboard</a>
+      <a href="viewMember.html">View Members</a>
+      <a href="addMember.html">Add Member</a>
+    </div>
+    <div class="logout-btn">
+      <a href="#" onclick="logout()" class="text-danger">Logout</a>
+    </div>
+  </div>
 
-      .sidebar {
-        width: 220px;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #0d1321;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 1.5rem 1rem;
-      }
+  <div class="main-content">
+    <h2 class="fw-bold mb-4">Dashboard</h2>
 
-      .nav-section {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .sidebar a {
-        display: block;
-        color: #ccc;
-        padding: 0.6rem 1rem;
-        text-decoration: none;
-        margin-bottom: 0.4rem;
-        border-radius: 6px;
-        transition: background 0.2s ease;
-      }
-
-      .sidebar a:hover,
-      .sidebar a.active {
-        background-color: #1c2232;
-        color: #fff;
-      }
-
-      .logout-link {
-        color: #ff4d4f !important;
-        margin-top: auto;
-      }
-
-      .logout-link:hover {
-        background-color: rgba(255, 77, 79, 0.15);
-        color: #fff !important;
-      }
-
-      .sidebar h5 {
-        font-weight: bold;
-        margin-bottom: 2rem;
-        padding-left: 10px;
-      }
-
-      .logout-btn {
-        text-align: center;
-      }
-
-      .main-content {
-        margin-left: 220px;
-        padding: 2rem;
-      }
-
-      .card {
-        border-radius: 12px;
-        border: none;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      }
-
-      .form-control,
-      .form-select {
-        border-radius: 8px;
-        padding: 0.75rem;
-      }
-
-      .btn-primary {
-        background-color: #3b82f6;
-        border: none;
-        border-radius: 8px;
-        padding: 0.6rem 1.2rem;
-      }
-
-      .btn-outline-secondary {
-        border-radius: 8px;
-        padding: 0.6rem 1.2rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <div class="nav-section">
-        <h5>Admin Panel</h5>
-        <a href="#" class="active">Dashboard</a>
-        <a href="viewMember.html">View Members</a>
-        <a href="addMember.html">Add Member</a>
+    <div class="row g-3 mb-4">
+      <div class="col-md-3">
+        <div class="card-box text-center">
+          <h4>Total Contacts</h4>
+          <div class="value">1,234</div>
+          <small class="text-success">+12% from last month</small>
+        </div>
       </div>
-      <div class="logout-btn">
-        <a href="#" onclick="logout()" class="text-danger">Logout</a>
+      <div class="col-md-3">
+        <div class="card-box text-center">
+          <h4>New This Month</h4>
+          <div class="value" id="newMonth">0</div>
+          <small class="text-success">+5% from last month</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card-box text-center">
+          <h4>Recently Viewed</h4>
+          <div class="value" id="recentViewed">0</div>
+          <small class="text-success">+8% from last month</small>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card-box text-center">
+          <h4>Growth Rate</h4>
+          <div class="value">23%</div>
+          <small class="text-success">+2% from last month</small>
+        </div>
       </div>
     </div>
 
-    <script>
-      function logout() {
-        localStorage.removeItem("isAdmin");
-        window.location.href = "../index.html";
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card-box">
+          <h5>Contact Overview</h5>
+          <canvas id="barChart" height="200"></canvas>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card-box">
+          <h5>Status Distribution</h5>
+          <canvas id="pieChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("isAdmin");
+      window.location.href = "login.html";
+    }
+
+    // Auto-increment stats
+    let newMonth = parseInt(localStorage.getItem("newMonth") || "42") + Math.floor(Math.random() * 4 + 1);
+    let recentViewed = parseInt(localStorage.getItem("recentViewed") || "150") + Math.floor(Math.random() * 6 + 1);
+    document.getElementById("newMonth").textContent = newMonth;
+    document.getElementById("recentViewed").textContent = recentViewed;
+    localStorage.setItem("newMonth", newMonth);
+    localStorage.setItem("recentViewed", recentViewed);
+
+    // Bar chart (Example contact data per month)
+    new Chart(document.getElementById("barChart"), {
+      type: "bar",
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [{
+          label: "Contacts",
+          backgroundColor: "#3b82f6",
+          data: [120, 135, 150, 160, 180, newMonth]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        }
       }
-    </script>
-  </body>
+    });
+
+    // Pie chart (Example active vs inactive users)
+    new Chart(document.getElementById("pieChart"), {
+      type: "pie",
+      data: {
+        labels: ["Active", "Inactive"],
+        datasets: [{
+          backgroundColor: ["#34d399", "#f87171"],
+          data: [newMonth, 12]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        }
+      }
+    });
+  </script>
+</body>
 </html>
