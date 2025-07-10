@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Member</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
@@ -110,10 +115,6 @@
 
     <div class="main-content">
       <div class="card p-4">
-        <div id="successAlert" class="alert alert-success d-none" role="alert">
-          Member added successfully!
-        </div>
-
         <h5 class="section-title fw-bold">Member Information</h5>
         <form id="memberForm" class="row g-3">
           <div class="col-md-6">
@@ -158,40 +159,31 @@
               placeholder="Enter full address"
             />
           </div>
-          <!-- <div class="col-md-6">
+          <div class="col-md-6">
             <label class="form-label">T-shirt</label>
-            <select class="form-select">
-              <option selected disabled>Select Size</option>
-              <option>sm</option>
-              <option>md</option>
-              <option>l</option>
-              <option>xl</option>
-              <option>xxl</option>
-              <option>xxxl</option>
+            <select name="" id="" class="form-control">
+              <option value="" label="Select-Size" hidden>Select Size</option>
+              <option value="">sm</option>
+              <option value="">md</option>
+              <option value="">l</option>
+              <option value="">xl</option>
+              <option value="">xxl</option>
+              <option value="">xxxl</option>
             </select>
           </div>
           <div class="col-md-6">
             <label class="form-label">Shorts</label>
-            <select class="form-select">
-              <option selected>Select Size</option>
-              <option>34</option>
-              <option>36</option>
-              <option>38</option>
-              <option>40</option>
-              <option>42</option>
-              <option>44</option>
-              <option>46</option>
-              <option>48</option>
+            <select name="" id="" class="form-control">
+              <option value="" label="Select-Size" hidden>Select Size</option>
+              <option value="">sm</option>
+              <option value="">md</option>
+              <option value="">l</option>
+              <option value="">xl</option>
+              <option value="">xxl</option>
+              <option value="">xxxl</option>
             </select>
-          </div> -->
-          <div class="col-12">
-            <label class="form-label">Notes</label>
-            <textarea
-              class="form-control"
-              rows="3"
-              placeholder="Add any additional notes..."
-            ></textarea>
           </div>
+
           <div class="col-12 d-flex gap-2">
             <button type="submit" class="btn btn-primary">Add Member</button>
             <button type="reset" class="btn btn-outline-secondary">
@@ -200,14 +192,10 @@
           </div>
         </form>
       </div>
+      <div id="successAlert" class="alert alert-success d-none" role="alert">
+        Member added successfully!
+      </div>
     </div>
-
-    <script>
-      function logout() {
-        localStorage.removeItem("isAdmin");
-        window.location.href = "../index.html";
-      }
-    </script>
 
     <script>
       function logout() {
@@ -227,56 +215,20 @@
             email: this[3].value.trim(),
             address: this[4].value.trim(),
             notes: this[5].value.trim(),
+            createdAt: new Date().toISOString(),
           };
 
           const members = JSON.parse(localStorage.getItem("members") || "[]");
           members.push(member);
           localStorage.setItem("members", JSON.stringify(members));
 
-          // Show success popup
+          // Show success alert
           const alert = document.getElementById("successAlert");
           alert.classList.remove("d-none");
           setTimeout(() => alert.classList.add("d-none"), 2000);
 
-          this.reset(); // Clear form
-        });
-    </script>
-
-    <script>
-      document
-        .getElementById("memberForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const members = JSON.parse(localStorage.getItem("members") || "[]");
-
-          const newMember = {
-            firstName: document.querySelector(
-              '[placeholder="Enter first name"]'
-            ).value,
-            lastName: document.querySelector('[placeholder="Enter last name"]')
-              .value,
-            phone: document.querySelector('[placeholder="Enter phone number"]')
-              .value,
-            email: document.querySelector('[placeholder="Enter email"]').value,
-            address: document.querySelector(
-              '[placeholder="Enter full address"]'
-            ).value,
-            notes: document.querySelector(
-              '[placeholder="Add any additional notes..."]'
-            ).value,
-          };
-
-          members.push(newMember);
-          localStorage.setItem("members", JSON.stringify(members));
-          alert("Member added successfully!");
           this.reset();
         });
-
-      function logout() {
-        localStorage.removeItem("isAdmin");
-        window.location.href = "../index.html";
-      }
     </script>
   </body>
 </html>
