@@ -54,6 +54,16 @@
             vertical-align: middle;
         }
 
+        .icon-action {
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .icon-action:hover {
+            transform: scale(1.2);
+        }
+
         .btn-view {
             background-color: #0d6efd;
             color: #fff;
@@ -148,6 +158,8 @@
         </div>
     </div>
 
+
+
     <script>
         const pageSize = 10;
         let currentPage = 1;
@@ -178,10 +190,11 @@
           <td>${member.phone}</td>
           <td>${member.address}</td>
           <td>
-            <button class="btn btn-sm btn-view me-1" onclick="viewMember(${(currentPage - 1) * pageSize + index})"><i class="bi bi-eye"></i></button>
-            <button class="btn btn-sm btn-edit me-1" onclick="editMember(${(currentPage - 1) * pageSize + index})"><i class="bi bi-pencil-fill"></i></button>
-            <button class="btn btn-sm btn-delete" onclick="deleteMember(${(currentPage - 1) * pageSize + index})"><i class="bi bi-trash-fill"></i></button>
-          </td>
+            <i class="bi bi-eye text-primary me-3 icon-action" onclick="viewMember(${(currentPage - 1) * pageSize + index})"></i>
+            <i class="bi bi-pencil-fill text-warning me-3 icon-action" onclick="editMember(${(currentPage - 1) * pageSize + index})"></i>
+            <i class="bi bi-trash-fill text-danger icon-action" onclick="deleteMember(${(currentPage - 1) * pageSize + index})"></i>
+</td>
+
         `;
                 table.appendChild(row);
             });
