@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Community</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+
+      .about-section {
+        padding: 80px 20px;
+        background-color: #fff;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-header h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .section-header .highlight-primary {
+        color: #007bff;
+      }
+
+      .section-header p {
+        font-size: 1.2rem;
+        color: #555;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        margin-bottom: 80px;
+      }
+
+      .card {
+        background: linear-gradient(145deg, #fafafa, #f0f0f0);
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .icon-circle {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 16px;
+      }
+
+      .icon-circle i {
+        color: #fff;
+        width: 32px;
+        height: 32px;
+      }
+
+      .card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+        color: #222;
+      }
+
+      .card p {
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.5;
+      }
+
+      /* Mission Section */
+      .mission-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        background: linear-gradient(135deg, #f5f7fa, #e4ebf3);
+        border-radius: 16px;
+        padding: 40px;
+      }
+
+      .mission-content h3 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .mission-content p {
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        text-align: center;
+        gap: 20px;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #777;
+      }
+
+      .primary {
+        color: #007bff;
+      }
+
+      .secondary {
+        color: #6610f2;
+      }
+
+      .accent {
+        color: #ff9800;
+      }
+
+      /* Mission Visual Boxes */
+      .mission-visual {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1/1;
+      }
+
+      .box {
+        position: absolute;
+        border-radius: 16px;
+      }
+
+      .outer {
+        inset: 0;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        opacity: 0.2;
+      }
+
+      .middle {
+        inset: 20px;
+        background: linear-gradient(to right, #00bcd4, #3f51b5);
+        opacity: 0.3;
+      }
+
+      .inner {
+        inset: 40px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .big-icon {
+        width: 64px;
+        height: 64px;
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="about-section">
+      <div class="container">
+        <!-- Heading -->
+        <div class="section-header">
+          <h2>About Our <span class="highlight-primary">Community</span></h2>
+          <p>
+            We are a vibrant community dedicated to bringing people together,
+            fostering connections, and creating meaningful experiences that
+            enrich our lives and strengthen our bonds.
+          </p>
+        </div>
+
+        <!-- Cards -->
+        <div class="card-grid">
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="heart"></i>
+            </div>
+            <h3>Community Care</h3>
+            <p>
+              We support each other through life's ups and downs, building
+              lasting friendships and bonds.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="users"></i>
+            </div>
+            <h3>Togetherness</h3>
+            <p>
+              Bringing people from all walks of life together to celebrate our
+              shared values and traditions.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="star"></i>
+            </div>
+            <h3>Excellence</h3>
+            <p>
+              Striving for excellence in all our community activities and
+              initiatives.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="target"></i>
+            </div>
+            <h3>Purpose</h3>
+            <p>
+              Working towards meaningful goals that benefit our community and
+              future generations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+          <div class="mission-content">
+            <h3>Our Mission</h3>
+            <p>
+              To create a supportive, inclusive community where every member
+              feels valued, connected, and empowered to contribute their unique
+              talents and perspectives. We believe in the power of unity and
+              shared purpose to create positive change.
+            </p>
+            <div class="stats">
+              <div>
+                <div class="stat-value primary">500+</div>
+                <div class="stat-label">Members</div>
+              </div>
+              <div>
+                <div class="stat-value secondary">15+</div>
+                <div class="stat-label">Years</div>
+              </div>
+              <div>
+                <div class="stat-value accent">100+</div>
+                <div class="stat-label">Events</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mission-visual">
+            <div class="box outer"></div>
+            <div class="box middle"></div>
+            <div class="box inner">
+              <i data-lucide="users" class="big-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
