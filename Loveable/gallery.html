@@ -73,7 +73,15 @@
         background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
         padding: 20px;
         color: white;
-        transition: background 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+      }
+
+      .card:hover .overlay-text {
+        opacity: 1;
+        visibility: visible;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
       }
 
       .overlay-text h3 {
