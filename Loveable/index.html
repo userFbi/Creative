@@ -44,7 +44,7 @@
           class="text-xl md:text-2xl mb-8 text-white/90 animate-fade-in"
           style="animation-delay: 0.2s"
         >
-          Together we grow, together we thrive
+          Together we grow, together we
         </p>
 
         <!-- Login Button (can be hooked to modal via JS) -->
@@ -134,17 +134,17 @@
             </p>
             <div class="stats">
               <div>
-                <div class="stat-value primary">500+</div>
+                <div class="stat-value primary">400+</div>
                 <div class="stat-label">Members</div>
               </div>
               <div>
-                <div class="stat-value secondary">15+</div>
+                <div class="stat-value secondary">36+</div>
                 <div class="stat-label">Years</div>
               </div>
-              <div>
+              <!-- <div>
                 <div class="stat-value accent">100+</div>
                 <div class="stat-label">Events</div>
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -162,7 +162,7 @@
 
     <!-- Gallery Section -->
     <section class="gallery-section">
-      <h2>About Our <span>Community</span></h2>
+      <h2>Our <span>Memories</span></h2>
       <p class="subtitle">
         We are a vibrant community dedicated to bringing people together,
         fostering connections, and creating meaningful experiences that enrich
@@ -227,7 +227,7 @@
         <h2 class="author-heading">Meet <span>the Author</span></h2>
         <div class="author-card">
           <img
-            src="https://img.freepik.com/premium-photo/happy-man-ai-generated-portrait-user-profile_1119669-1.jpg"
+            src="https://shorturl.at/x2ce8"
             alt="Author"
             class="author-img"
           />
@@ -248,7 +248,7 @@
               ></a>
               <a
                 href="https://api.whatsapp.com/send?phone=9725720612"
-                class="social-icon"
+                class="social-icon "
                 target="_blank"
                 ><i class="bi bi-whatsapp"></i
               ></a>
@@ -268,21 +268,32 @@
     <!-- Join Us -->
     <section id="contact" class="join-section">
       <div class="join-container container">
-        <h2 class="join-heading">Contact Us</h2>
-        <p class="join-subheading">We’d love to hear from you!</p>
+        <h2 class="join-heading">Join Our Group</h2>
+        <p class="join-subheading">
+          We'd love to have you on board! Fill out the form below to join our
+          community.
+        </p>
 
         <form class="join-form">
           <div class="form-row">
             <input type="text" placeholder="Your Name" required />
             <input type="tel" placeholder="Your Number" required />
           </div>
-          <textarea placeholder="Your Message" rows="5"></textarea>
+          <textarea placeholder="Your Address" rows="5" required></textarea>
           <button type="submit" class="join-button">Send Message</button>
         </form>
       </div>
     </section>
-
     <!-- Join Us End -->
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content container">
+        <p>© 2025 <strong>KGSC</strong> -All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Footer End -->
 
     <!-- Modal Overlay -->
     <div
@@ -363,7 +374,8 @@
         ></h2>
 
         <form onsubmit="event.preventDefault(); alert('Logged in!')">
-          <input
+          <input 
+           id="username"
             type="email"
             placeholder="Email"
             class="w-full mb-3 px-4 py-2 border rounded-md"
@@ -387,13 +399,8 @@
 
     <!-- Hero Script -->
     <script>
-      function openLoginModal() {
-        alert("Show login modal here or redirect to login page.");
-      }
-    </script>
+      let selectedUserType = null;
 
-    <!-- main files -->
-    <script>
       function openLoginModal() {
         document.getElementById("modalOverlay").classList.remove("hidden");
         document.getElementById("accessPortal").classList.remove("hidden");
@@ -401,6 +408,8 @@
       }
 
       function openLoginForm(role) {
+        selectedUserType = role; // Store selected user type
+
         document.getElementById("accessPortal").classList.add("hidden");
         document.getElementById("loginForm").classList.remove("hidden");
 
@@ -418,6 +427,33 @@
         document.getElementById("loginForm").classList.add("hidden");
         document.getElementById("modalOverlay").classList.add("hidden");
         document.body.style.overflow = "auto";
+      }
+
+      function login() {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (!selectedUserType) {
+          alert("Please select Admin or Manager first.");
+          return;
+        }
+
+        const isAdminValid =
+          selectedUserType === "admin" &&
+          username === "admin" &&
+          password === "admin";
+        const isManagerValid =
+          selectedUserType === "manager" &&
+          username === "manager" &&
+          password === "manager";
+
+        if (isAdminValid) {
+          window.location.href = "admin.html";
+        } else if (isManagerValid) {
+          window.location.href = "manager.html";
+        } else {
+          alert("Invalid credentials. Try again.");
+        }
       }
     </script>
 

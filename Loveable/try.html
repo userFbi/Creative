@@ -3,81 +3,184 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-
+    <title>Draggable Card Slider</title>
     <style>
-      .author-section {
-        background-color: #f9f9f9;
-        padding: 60px 20px;
-        text-align: center;
+      * {
+        box-sizing: border-box;
       }
 
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-      }
-
-      .author-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: white;
-        padding: 30px;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      }
-
-      .author-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 20px;
-        border: 4px solid #6c63ff;
-      }
-
-      .author-name {
-        font-size: 24px;
-        font-weight: bold;
+      body {
         margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: #f5f5f5;
+      }
+
+      .slider-section {
+        padding: 60px 20px;
+        background: #fff;
+      }
+
+      .slider-section h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
         color: #333;
       }
 
-      .author-role {
-        font-size: 16px;
-        color: #666;
-        margin-bottom: 15px;
+      .slider-container {
+        max-width: 1100px;
+        margin: auto;
+        position: relative;
       }
 
-      .author-bio {
-        font-size: 15px;
-        color: #444;
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.6;
+      .slider-wrapper {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 20px;
+        padding-bottom: 10px;
+      }
+
+      .slider-wrapper::-webkit-scrollbar {
+        display: none;
+      }
+
+      .card {
+        flex: 0 0 auto;
+        width: 280px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .card img {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .card-content {
+        padding: 15px;
+      }
+
+      .card-content h4 {
+        margin: 0 0 10px;
+        color: #7c3bed;
+      }
+
+      .card-content p {
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #7c3bed;
+        color: #fff;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .slider-btn.left {
+        left: -20px;
+      }
+
+      .slider-btn.right {
+        right: -20px;
+      }
+
+      @media (max-width: 768px) {
+        .slider-btn {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
-    <section class="author-section">
-      <div class="container">
-        <div class="author-card">
-          <img
-            src="https://via.placeholder.com/100"
-            alt="Author"
-            class="author-img"
-          />
-          <div class="author-info">
-            <h2 class="author-name">Tushar Pawar</h2>
-            <p class="author-role">Frontend Developer & UI Designer</p>
-            <p class="author-bio">
-              Passionate about building clean, user-friendly web interfaces with
-              HTML, CSS, and JavaScript. I enjoy turning ideas into reality
-              through code.
-            </p>
+    <section class="slider-section">
+      <h2>Our Members</h2>
+      <div class="slider-container">
+        <button class="slider-btn left" onclick="scrollLeft()">‹</button>
+        <div class="slider-wrapper" id="slider">
+          <!-- Card 1 -->
+          <div class="card">
+            <img src="https://placehold.co/280x180" alt="Image 1" />
+            <div class="card-content">
+              <h4>Member One</h4>
+              <p>Frontend Developer passionate about clean UI.</p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="card">
+            <img src="https://placehold.co/280x180" alt="Image 2" />
+            <div class="card-content">
+              <h4>Member Two</h4>
+              <p>Creative designer with love for smooth UX.</p>
+            </div>
+          </div>
+          <!-- Add more cards as needed -->
+          <div class="card">
+            <img src="https://placehold.co/280x180" alt="Image 3" />
+            <div class="card-content">
+              <h4>Member Three</h4>
+              <p>Works on building responsive web apps.</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://placehold.co/280x180" alt="Image 4" />
+            <div class="card-content">
+              <h4>Member Four</h4>
+              <p>UI/UX Designer with detail-oriented mindset.</p>
+            </div>
           </div>
         </div>
+        <button class="slider-btn right" onclick="scrollRight()">›</button>
       </div>
     </section>
+
+    <script>
+      const slider = document.getElementById("slider");
+
+      let isDragging = false;
+      let startX, scrollLeft;
+
+      slider.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener("mouseleave", () => {
+        isDragging = false;
+      });
+
+      slider.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      slider.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+
+      function scrollLeft() {
+        slider.scrollBy({ left: -300, behavior: "smooth" });
+      }
+
+      function scrollRight() {
+        slider.scrollBy({ left: 300, behavior: "smooth" });
+      }
+    </script>
   </body>
 </html>

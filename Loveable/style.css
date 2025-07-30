@@ -202,11 +202,15 @@
 }
 
 .mission-content h3 {
+  display: flex;
+  justify-content: center;
   font-size: 2rem;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
 .mission-content p {
+  text-align: center;
   font-size: 1.1rem;
   color: #555;
   line-height: 1.6;
@@ -215,7 +219,7 @@
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   text-align: center;
   gap: 20px;
 }
@@ -493,7 +497,6 @@ h2 span {
 .back-arrow {
   font-size: 20px;
 }
-
 /* NEW-HERO END */
 
 /* AUTHOR SECTION */
@@ -570,8 +573,16 @@ h2 span {
   transition: color 0.3s;
 }
 
-.author-socials .social-icon:hover {
-  color: #007bff;
+.author-socials .social-icon:hover:first-child {
+  color: #bb4fb2;
+}
+
+.author-socials .social-icon:hover:nth-child(2) {
+  color: green;
+}
+
+.author-socials .social-icon:hover:last-child {
+  color: rgb(226, 37, 37);
 }
 
 /* Responsive for wider screens */
@@ -598,24 +609,22 @@ h2 span {
 }
 
 /* JOIN US */
-/* Contact Section - Matching Dark Theme */
+
 .join-section {
-  background-color: #111827; /* dark background */
+  background-color: #212529; /* deep dark background - #0f172a */
   padding: 60px 20px;
   color: #fff;
 }
 
 .join-container {
-  /* max-width: ; */
   margin: auto;
-  background: rgba(255, 255, 255, 0.05); /* glassy look */
+  background: rgba(255, 255, 255, 0.05);
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
 }
 
 .join-heading {
@@ -651,23 +660,18 @@ h2 span {
 .join-form textarea {
   width: 100%;
   padding: 12px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
   outline: none;
-  transition: border-color 0.3s;
+  transition: border 0.3s;
 }
 
 .join-form input::placeholder,
 .join-form textarea::placeholder {
   color: rgba(255, 255, 255, 0.5);
-}
-
-.join-form input:focus,
-.join-form textarea:focus {
-  border-color: #7342c9; /* Tailwind's sky-400 */
 }
 
 .join-button {
@@ -682,7 +686,29 @@ h2 span {
 }
 
 .join-button:hover {
-  background-color: #44208b;
+  background-color: #6d28d9;
 }
 
 /* JOIN US END */
+
+/* FOOTER */
+.site-footer {
+  background-color: #212529;
+  color: #cbd5e1;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 1px solid grey;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.site-footer strong {
+  /* color: #7c3bed; */
+  font-weight: 500;
+}
+
+/* FOOTER END */
