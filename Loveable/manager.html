@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manager Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .bg-gradient-primary {
+        background: linear-gradient(90deg, #4f46e5, #3b82f6);
+        color: white;
+      }
+      .bg-gradient-card {
+        background: linear-gradient(to bottom right, #ffffff, #f1f5f9);
+      }
+      .text-primary {
+        color: #4f46e5 !important;
+      }
+      .text-secondary {
+        color: #0d9488 !important;
+      }
+      .badge-default {
+        background-color: #4f46e5;
+      }
+      .badge-secondary {
+        background-color: #0d9488;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="bg-gradient-primary py-4 mb-4">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <a href="#" class="btn text-white btn-sm">
+            <i data-feather="arrow-left"></i>
+          </a>
+          <div>
+            <h3 class="mb-0">Manager Dashboard</h3>
+            <small>Community Member Management</small>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <i data-feather="users"></i>
+          <span>Welcome, Manager</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Statistic Cards -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="card bg-gradient-card shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="fw-semibold">Total Members</small>
+                <i data-feather="users"></i>
+              </div>
+              <h3 class="mt-2">5</h3>
+              <small class="text-muted">Active community members</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-gradient-card shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="fw-semibold">New Members</small>
+                <i data-feather="user-plus"></i>
+              </div>
+              <h3 class="mt-2 text-primary">2</h3>
+              <small class="text-muted">Joined recently</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-gradient-card shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="fw-semibold">Existing Members</small>
+                <i data-feather="users"></i>
+              </div>
+              <h3 class="mt-2 text-secondary">3</h3>
+              <small class="text-muted">Long-term members</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-6">
+          <div class="card bg-gradient-card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">Member Distribution</h5>
+              <p class="card-subtitle mb-3 text-muted">
+                New vs Existing Members
+              </p>
+              <div
+                class="rounded-circle bg-gradient-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3"
+                style="width: 100px; height: 100px; font-size: 24px"
+              >
+                5
+              </div>
+              <div class="d-flex justify-content-center gap-4">
+                <div class="d-flex align-items-center gap-2">
+                  <span
+                    class="badge bg-primary rounded-circle"
+                    style="width: 10px; height: 10px"
+                  ></span>
+                  <small>New: 2</small>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <span
+                    class="badge bg-secondary rounded-circle"
+                    style="width: 10px; height: 10px"
+                  ></span>
+                  <small>Existing: 3</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card bg-gradient-card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Recent Activity</h5>
+              <p class="card-subtitle mb-3 text-muted">Last 5 new members</p>
+              <div class="list-group small">
+                <div
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <strong>Jane Smith</strong>
+                    <br />
+                    <span class="text-muted">jane@example.com</span>
+                  </div>
+                  <span class="badge bg-secondary">New</span>
+                </div>
+                <div
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <strong>Sarah Davis</strong>
+                    <br />
+                    <span class="text-muted">sarah@example.com</span>
+                  </div>
+                  <span class="badge bg-secondary">New</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member Management -->
+      <div class="card bg-gradient-card shadow-sm mb-5">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <h5 class="card-title mb-1">Member Management</h5>
+              <small class="text-muted"
+                >View and manage community members</small
+              >
+            </div>
+            <button class="btn btn-primary">
+              <i data-feather="user-plus" class="me-1"></i> Add Member
+            </button>
+          </div>
+
+          <div class="mb-3 position-relative">
+            <i
+              data-feather="search"
+              class="position-absolute"
+              style="top: 10px; left: 10px"
+            ></i>
+            <input
+              type="text"
+              class="form-control ps-5"
+              placeholder="Search members by name, email, or city..."
+            />
+          </div>
+
+          <!-- Manager Table Section -->
+          <!-- Manager Table Section -->
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td class="text-muted">john@example.com</td>
+                  <td>555-0101</td>
+                  <td>
+                    <!-- View -->
+                    <button
+                      class="border-0 bg-transparent me-2"
+                      title="View"
+                      onclick="viewDetails('John Doe', 'john@example.com', '555-0101')"
+                    >
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/709/709612.png"
+                        alt="View"
+                        width="20"
+                      />
+                    </button>
+
+                    <!-- Edit -->
+                    <button class="border-0 bg-transparent me-2" title="Edit">
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png"
+                        alt="Edit"
+                        width="20"
+                      />
+                    </button>
+
+                    <!-- Delete -->
+                    <button class="border-0 bg-transparent" title="Delete">
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                        alt="Delete"
+                        width="20"
+                      />
+                    </button>
+                  </td>
+                </tr>
+                <!-- Repeat row structure for more data -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>
