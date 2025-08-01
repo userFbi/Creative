@@ -369,21 +369,30 @@
           class="text-xl font-semibold text-center text-gray-800 mb-4"
         ></h3>
 
-        <!-- <form onsubmit="event.preventDefault(); alert('Logged in!')"> -->
-        <form onsubmit="event.preventDefault(); login()">
+        <form onsubmit="return login(event);" autocomplete="off">
           <input
             id="username"
+            autocomplete="off"
             type="text"
             placeholder="Email"
             class="w-full mb-3 px-4 py-2 border rounded-md"
             required
           />
           <input
+            id="password"
+            autocomplete="new-password"
             type="password"
             placeholder="Password"
             class="w-full mb-6 px-4 py-2 border rounded-md"
             required
           />
+          <div class="mb-4 text-left">
+            <label class="text-sm text-gray-600">
+              <input type="checkbox" onclick="togglePassword()" class="mr-2" />
+              Show Password
+            </label>
+          </div>
+
           <button
             type="submit"
             class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md"
@@ -408,13 +417,23 @@
         selectedUserType = role;
         document.getElementById("accessPortal").classList.add("hidden");
         document.getElementById("loginForm").classList.remove("hidden");
+
         document.getElementById("loginTitle").innerText =
           role === "manager" ? "Manager Login" : "Admin Login";
+
+        // Clear fields and focus username
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("username").focus();
       }
 
       function backToSelection() {
         document.getElementById("loginForm").classList.add("hidden");
         document.getElementById("accessPortal").classList.remove("hidden");
+
+        // Clear inputs
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
       }
 
       function closeModal() {
@@ -422,15 +441,21 @@
         document.getElementById("loginForm").classList.add("hidden");
         document.getElementById("modalOverlay").classList.add("hidden");
         document.body.style.overflow = "auto";
+
+        // Clear inputs
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
       }
 
-      function login() {
+      function login(event) {
+        event.preventDefault(); // now it's explicitly passed
+
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
 
         if (!selectedUserType) {
           alert("Please choose Admin or Manager before logging in.");
-          return;
+          return false;
         }
 
         if (
@@ -448,11 +473,17 @@
         } else {
           alert("Invalid credentials. Please try again.");
         }
+
+        return false; // prevent form from submitting
+      }
+
+      function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        passwordInput.type =
+          passwordInput.type === "password" ? "text" : "password";
       }
     </script>
-
-    <!-- Hero Script end -->
-
+    
     <!-- About-us Script -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
