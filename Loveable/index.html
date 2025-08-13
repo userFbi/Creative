@@ -249,11 +249,12 @@
                 ><i class="bi bi-whatsapp"></i
               ></a>
               <a
-                href="mailto:pawartushar.katsargam@gmail.com"
-                class="social-icon"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=pawartushar2024.katargam@gmail.com&su=Hello%20Tushar&body=I%20wanted%20to%20contact%20you."
                 target="_blank"
-                ><i class="bi bi-envelope-fill"></i
-              ></a>
+                class="social-icon"
+              >
+                <i class="bi bi-envelope-fill"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -273,7 +274,13 @@
         <form class="join-form">
           <div class="form-row">
             <input type="text" placeholder="Your Name" required />
-            <input type="tel" placeholder="Your Number" required />
+            <input
+              type="tel"
+              placeholder="Your Number"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              required
+            />
           </div>
           <textarea placeholder="Your Address" rows="5" required></textarea>
           <button type="submit" class="join-button">Send Message</button>
@@ -483,7 +490,7 @@
           passwordInput.type === "password" ? "text" : "password";
       }
     </script>
-    
+
     <!-- About-us Script -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>

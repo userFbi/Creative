@@ -1,11 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello admin!</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Festival Expense Manager – Frontend Only</title>
+    <!-- Bootstrap 5 + Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <style>
+      :root {
+        --fest-orange: #f59e0b; /* header accent */
+        --fest-orange-2: #f97316; /* buttons */
+        --income: #16a34a; /* green */
+        --expense: #dc2626; /* red */
+      }
+      body {
+        background: #f8f7f5;
+      }
+      .app-shell {
+        max-width: 1100px;
+      }
+
+      /* Gradient header text */
+      .brand-title {
+        font-weight: 800;
+        font-size: clamp(28px, 4vw, 40px);
+        background: linear-gradient(90deg, #f59e0b, #f97316);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .bg-festival-gradient {
+        background: linear-gradient(90deg, #f59e0b, #f97316) !important;
+      }
+      .btn-festival {
+        background: linear-gradient(90deg, #f59e0b, #f97316);
+        color: #fff;
+        border: none;
+      }
+      .btn-festival:hover {
+        filter: brightness(0.95);
+        color: #fff;
+      }
+
+      .search-wrap .form-control {
+        padding-left: 40px;
+      }
+      .search-wrap .bi-search {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9aa3af;
+      }
+
+      .tab-pill {
+        background: #f2f2f2;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .tab-pill .nav-link {
+        color: #333;
+        font-weight: 600;
+      }
+      .tab-pill .nav-link.active {
+        background: #fff;
+        border: 1px solid #e9ecef;
+      }
+
+      .empty-card {
+        border: 1px solid #e9ecef;
+        background: #fff;
+      }
+
+      .stat-box {
+        border: 1px solid #ececec;
+        border-radius: 10px;
+        padding: 14px;
+        background: #fff;
+      }
+      .text-income {
+        color: var(--income) !important;
+      }
+      .text-expense {
+        color: var(--expense) !important;
+      }
+      .bg-income-light {
+        background: rgba(22, 163, 74, 0.08);
+      }
+      .bg-expense-light {
+        background: rgba(220, 38, 38, 0.08);
+      }
+
+      /* Modal styles */
+      .modal .nav-pills .nav-link {
+        font-weight: 600;
+      }
+      .modal .nav-pills .nav-link.active {
+        background: #f5f5f5;
+        color: #111;
+      }
+      .required::after {
+        content: " *";
+        color: var(--expense);
+      }
+
+      .entry-row {
+        background: #fafafa;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+      }
+
+      /* Cards hover */
+      .record-card {
+        transition: box-shadow 0.2s ease;
+      }
+      .record-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      }
+
+      .badge-soft-income {
+        background: rgba(22, 163, 74, 0.12);
+        color: var(--income);
+        border: 1px solid rgba(22, 163, 74, 0.3);
+      }
+      .badge-soft-expense {
+        background: rgba(220, 38, 38, 0.12);
+        color: var(--expense);
+        border: 1px solid rgba(220, 38, 38, 0.3);
+      }
+
+      .small-muted {
+        font-size: 0.85rem;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container app-shell py-4">
+      <!-- Header -->
+      <div class="text-center mb-4">
+        <h1 class="brand-title mb-1">Festival Expense Manager</h1>
+        <p class="text-muted fs-5">
+          Track expenses and income for your cultural celebrations
+        </p>
+      </div>
+
+      <!-- Search + Add -->
+      <div
+        class="d-flex gap-3 align-items-stretch mb-3 flex-column flex-md-row"
+      >
+        <div class="flex-grow-1 position-relative search-wrap">
+          <i class="bi bi-search"></i>
+          <input
+            id="searchInput"
+            class="form-control"
+            placeholder="Search records, items, or categories..."
+          />
+        </div>
+        <button
+          id="addRecordBtn"
+          class="btn btn-festival d-flex align-items-center gap-2 px-3"
+        >
+          <i class="bi bi-plus-lg"></i>
+          <span>Add New Record</span>
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <ul
+        class="nav nav-tabs tab-pill px-1 py-1 mb-3"
+        id="eventTabs"
+        role="tablist"
+      >
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="tab-jan"
+            data-bs-toggle="tab"
+            data-bs-target="#panel-jan"
+            type="button"
+            role="tab"
+            aria-selected="true"
+          >
+            🦚 Janmashtami
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="tab-gan"
+            data-bs-toggle="tab"
+            data-bs-target="#panel-gan"
+            type="button"
+            role="tab"
+            aria-selected="false"
+          >
+            🐘 Ganesh Chaturthi
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="panel-jan" role="tabpanel">
+          <div id="list-Janmashtami" class="vstack gap-3"></div>
+        </div>
+        <div class="tab-pane fade" id="panel-gan" role="tabpanel">
+          <div id="list-Ganesh Chaturthi" class="vstack gap-3"></div>
+        </div>
+      </div>
+
+      <!-- Empty template (hidden) -->
+      <template id="emptyTemplate">
+        <div class="card empty-card p-4">
+          <div class="text-center py-4">
+            <div class="fs-1 mb-2" data-empty-emoji>🎉</div>
+            <h5 class="fw-bold mb-1">No Records Found</h5>
+            <div class="text-muted mb-3">
+              Start tracking expenses for <span data-empty-event></span>
+            </div>
+            <button class="btn btn-festival px-3" data-empty-add>
+              <i class="bi bi-plus-lg me-2"></i> Add First Record
+            </button>
+          </div>
+        </div>
+      </template>
+
+      <!-- Record card template -->
+      <template id="recordCardTemplate">
+        <div class="card record-card">
+          <div
+            class="card-header d-flex justify-content-between align-items-start"
+          >
+            <div>
+              <h5 class="mb-0 d-flex align-items-center gap-2">
+                <i class="bi bi-calendar-event text-warning"></i>
+                <span data-title></span>
+              </h5>
+              <div class="small-muted" data-desc></div>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-secondary btn-sm" data-edit>
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-outline-danger btn-sm" data-delete>
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-3">
+                <div class="stat-box bg-income-light">
+                  <div
+                    class="fw-semibold small-muted mb-1 d-flex align-items-center gap-2"
+                  >
+                    <i class="bi bi-graph-up-arrow text-income"></i> Income
+                  </div>
+                  <div class="h4 m-0 text-income" data-income>₹0</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div class="stat-box bg-expense-light">
+                  <div
+                    class="fw-semibold small-muted mb-1 d-flex align-items-center gap-2"
+                  >
+                    <i class="bi bi-graph-down-arrow text-expense"></i> Expenses
+                  </div>
+                  <div class="h4 m-0 text-expense" data-expense>₹0</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div class="stat-box" data-balance-box>
+                  <div class="fw-semibold small-muted mb-1">Balance</div>
+                  <div class="h4 m-0" data-balance>₹0</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div class="stat-box">
+                  <div class="fw-semibold small-muted mb-1">Entries</div>
+                  <div class="h4 m-0" data-count>0</div>
+                </div>
+              </div>
+            </div>
+
+            <div data-recent></div>
+          </div>
+        </div>
+      </template>
+
+      <!-- Toast -->
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+        <div
+          id="toast"
+          class="toast align-items-center"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div class="d-flex">
+            <div class="toast-body" id="toastBody">Saved</div>
+            <button
+              type="button"
+              class="btn-close me-2 m-auto"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add/Edit Record Modal -->
+    <div class="modal fade" id="recordModal" tabindex="-1" aria-hidden="true">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Add Record</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Top form: year + description -->
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-4">
+                <label class="form-label required">Year</label>
+                <select id="yearSelect" class="form-select"></select>
+              </div>
+              <div class="col-12 col-md-8">
+                <label class="form-label">Description</label>
+                <input
+                  id="recordDesc"
+                  class="form-control"
+                  placeholder="Brief description of the celebration"
+                />
+              </div>
+            </div>
+
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="pills-overview-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-overview"
+                  type="button"
+                  role="tab"
+                >
+                  Overview
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="pills-entries-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-entries"
+                  type="button"
+                  role="tab"
+                >
+                  Entries (<span id="entriesCount">0</span>)
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="pills-add-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-add"
+                  type="button"
+                  role="tab"
+                >
+                  Add Entry
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <!-- Overview -->
+              <div
+                class="tab-pane fade show active"
+                id="pills-overview"
+                role="tabpanel"
+              >
+                <div class="row g-3">
+                  <div class="col-12 col-md-4">
+                    <div class="stat-box bg-income-light">
+                      <div class="small-muted">Total Income</div>
+                      <div class="h3 text-income mb-0" id="ovIncome">₹0</div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="stat-box bg-expense-light">
+                      <div class="small-muted">Total Expense</div>
+                      <div class="h3 text-expense mb-0" id="ovExpense">₹0</div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="stat-box">
+                      <div class="small-muted">Balance</div>
+                      <div class="h3 mb-0" id="ovBalance">₹0</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Entries list -->
+              <div class="tab-pane fade" id="pills-entries" role="tabpanel">
+                <div id="entriesList" class="vstack gap-2"></div>
+                <div class="text-center text-muted mt-3" id="noEntriesMsg">
+                  No entries added yet.
+                </div>
+                <div class="text-center mt-2">
+                  <button
+                    class="btn btn-outline-secondary btn-sm"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-add"
+                  >
+                    <i class="bi bi-plus-lg me-1"></i>Add First Entry
+                  </button>
+                </div>
+              </div>
+              <!-- Add Entry form -->
+              <div class="tab-pane fade" id="pills-add" role="tabpanel">
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label required">Item Name</label>
+                    <input
+                      id="itemName"
+                      class="form-control"
+                      placeholder="e.g., Decorations, Sweets, Donations"
+                    />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label required">Amount (₹)</label>
+                    <input
+                      id="amount"
+                      type="number"
+                      min="0"
+                      class="form-control"
+                      value="0"
+                    />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label required">Type</label>
+                    <select id="type" class="form-select">
+                      <option value="expense">Expense</option>
+                      <option value="income">Income</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label required">Category</label>
+                    <select id="category" class="form-select">
+                      <option value="">Select category</option>
+                      <option>Donations</option>
+                      <option>Prasad</option>
+                      <option>Decorations</option>
+                      <option>Stage</option>
+                      <option>Sound</option>
+                      <option>Food</option>
+                      <option>Transport</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label">Date</label>
+                    <input id="date" type="date" class="form-control" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Description</label>
+                    <textarea
+                      id="entryDesc"
+                      rows="3"
+                      class="form-control"
+                      placeholder="Optional description for this entry"
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button id="addEntryBtn" class="btn btn-festival w-100">
+                      <i class="bi bi-plus-lg me-2"></i>Add Entry
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-festival" id="saveRecordBtn">
+              Save Record
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // ===== State =====
+      const STORAGE_KEY = 'festival-expense-records';
+      /** shape: { Janmashtami: Record[], 'Ganesh Chaturthi': Record[] } */
+      let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      if(!db['Janmashtami']) db['Janmashtami'] = [];
+      if(!db['Ganesh Chaturthi']) db['Ganesh Chaturthi'] = [];
+
+      let activeEvent = 'Janmashtami';
+      let editingId = null; // record id being edited (null when adding)
+      let draftEntries = []; // entries while modal open
+
+      // ===== Helpers =====
+      const q = (sel, root=document) => root.querySelector(sel);
+      const qa = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+      const money = n => '₹' + (n||0).toLocaleString('en-IN');
+
+      function saveDB(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); }
+
+      function summaryOf(record){
+        const income = record.entries.filter(e=>e.type==='income').reduce((s,e)=>s+Number(e.amount||0),0);
+        const expense = record.entries.filter(e=>e.type==='expense').reduce((s,e)=>s+Number(e.amount||0),0);
+        return { income, expense, balance: income - expense, count: record.entries.length };
+      }
+
+      function render(){
+        // which tab is active?
+        const activeTabBtn = q('.nav-link.active[id^="tab-"]');
+        activeEvent = activeTabBtn && activeTabBtn.id.includes('gan') ? 'Ganesh Chaturthi' : 'Janmashtami';
+
+        const listEl = q(`#list-${CSS.escape(activeEvent)}`);
+        listEl.innerHTML='';
+
+        const term = q('#searchInput').value.trim().toLowerCase();
+        const items = (db[activeEvent]||[])\
+          .filter(rec => {
+            if(!term) return true;
+            const inDesc = (rec.description||'').toLowerCase().includes(term);
+            const inYear = String(rec.year).includes(term);
+            const inEntries = rec.entries.some(e => (e.item||'').toLowerCase().includes(term) || (e.category||'').toLowerCase().includes(term));
+            return inDesc || inYear || inEntries;
+          })
+          .sort((a,b)=>b.year-a.year);
+
+        if(items.length===0){
+          // render empty
+          const tpl = q('#emptyTemplate').content.cloneNode(true);
+          tpl.querySelector('[data-empty-event]').textContent = activeEvent;
+          tpl.querySelector('[data-empty-emoji]').textContent = activeEvent==='Janmashtami' ? '🦚' : '🐘';
+          tpl.querySelector('[data-empty-add]').addEventListener('click', ()=> openModalForAdd());
+          listEl.appendChild(tpl);
+          return;
+        }
+
+        items.forEach(rec=>{
+          const tpl = q('#recordCardTemplate').content.cloneNode(true);
+          tpl.querySelector('[data-title]').textContent = `${rec.eventName} ${rec.year}`;
+          tpl.querySelector('[data-desc]').textContent = rec.description || 'No description provided';
+          const s = summaryOf(rec);
+          tpl.querySelector('[data-income]').textContent = money(s.income);
+          tpl.querySelector('[data-expense]').textContent = money(s.expense);
+          const balEl = tpl.querySelector('[data-balance]');
+          balEl.textContent = money(Math.abs(s.balance));
+          const box = tpl.querySelector('[data-balance-box]');
+          box.classList.toggle('bg-income-light', s.balance>=0);
+          box.classList.toggle('bg-expense-light', s.balance<0);
+          balEl.classList.toggle('text-income', s.balance>=0);
+          balEl.classList.toggle('text-expense', s.balance<0);
+          tpl.querySelector('[data-count]').textContent = s.count;
+
+          // recent entries
+          const recentEl = tpl.querySelector('[data-recent]');
+          if(rec.entries.length){
+            const head = document.createElement('h6'); head.className='fw-semibold mb-2'; head.textContent = 'Recent Entries';
+            recentEl.appendChild(head);
+            rec.entries.slice(-5).reverse().forEach(en=>{
+              const row = document.createElement('div');
+              row.className='d-flex justify-content-between align-items-center p-2 entry-row';
+              row.innerHTML = `
+                <div>
+                  <div class="d-flex align-items-center gap-2"><strong>${en.item}</strong> ${en.type==='income'?'<span class="badge badge-soft-income">income</span>':'<span class="badge badge-soft-expense">expense</span>'}</div>
+                  <div class="small-muted">${en.category||''}</div>
+                </div>
+                <div class="text-end">
+                  <div class="fw-bold ${en.type==='income'?'text-income':'text-expense'}">${en.type==='income'?'+':'-'}${money(Number(en.amount||0))}</div>
+                  <div class="small-muted">${en.date? new Date(en.date).toLocaleDateString() : ''}</div>
+                </div>`;
+              recentEl.appendChild(row);
+            });
+            if(rec.entries.length>5){
+              const more = document.createElement('div');
+              more.className='text-center text-muted mt-2';
+              more.textContent = `+${rec.entries.length-5} more entries...`;
+              recentEl.appendChild(more);
+            }
+          }
+
+          const card = tpl.firstElementChild;
+          card.querySelector('[data-edit]').addEventListener('click', ()=> openModalForEdit(rec.id));
+          card.querySelector('[data-delete]').addEventListener('click', ()=> deleteRecord(rec.id));
+          listEl.appendChild(card);
+        });
+      }
+
+      function deleteRecord(id){
+        if(!confirm('Delete this record?')) return;
+        db[activeEvent] = db[activeEvent].filter(r=>r.id!==id);
+        saveDB(); render();
+        showToast('Record Deleted');
+      }
+
+      // ===== Modal logic =====
+      let recordModal;
+      document.addEventListener('DOMContentLoaded', ()=>{
+        recordModal = new bootstrap.Modal('#recordModal');
+        // init years
+        const sel = q('#yearSelect');
+        const now = new Date().getFullYear();
+        const years = Array.from({length:11}, (_,i)=> now+5-i); // next 5 to past 5
+        years.forEach(y=>{
+          const opt = document.createElement('option'); opt.value = String(y); opt.textContent = y; sel.appendChild(opt);
+        });
+
+        // default date
+        q('#date').valueAsDate = new Date();
+
+        // listeners
+        q('#addRecordBtn').addEventListener('click', ()=> openModalForAdd());
+        q('#saveRecordBtn').addEventListener('click', saveRecordFromModal);
+        q('#addEntryBtn').addEventListener('click', addEntryFromForm);
+        q('#searchInput').addEventListener('input', render);
+
+        // tab change -> rerender to switch event
+        qa('button[data-bs-toggle="tab"]').forEach(btn=> btn.addEventListener('shown.bs.tab', render));
+
+        render();
+      });
+
+      function openModalForAdd(){
+        editingId = null;
+        q('#modalTitle').textContent = `Add ${activeEvent} Record`;
+        q('#recordDesc').value = '';
+        draftEntries = [];
+        q('#entriesList').innerHTML='';
+        q('#noEntriesMsg').style.display='';
+        q('#entriesCount').textContent='0';
+        updateOverview();
+        // switch to Overview tab
+        new bootstrap.Tab(q('#pills-overview-tab')).show();
+        recordModal.show();
+      }
+
+      function openModalForEdit(id){
+        const rec = db[activeEvent].find(r=>r.id===id);
+        if(!rec) return;
+        editingId = id;
+        q('#modalTitle').textContent = `Edit ${activeEvent} ${rec.year}`;
+        q('#yearSelect').value = String(rec.year);
+        q('#recordDesc').value = rec.description||'';
+        draftEntries = JSON.parse(JSON.stringify(rec.entries||[]));
+        renderEntriesList();
+        updateOverview();
+        new bootstrap.Tab(q('#pills-overview-tab')).show();
+        recordModal.show();
+      }
+
+      function addEntryFromForm(){
+        const item = q('#itemName').value.trim();
+        const amount = Number(q('#amount').value);
+        const type = q('#type').value;
+        const category = q('#category').value;
+        const date = q('#date').value;
+        const description = q('#entryDesc').value.trim();
+        if(!item || !amount || !category){ alert('Please fill Item, Amount and Category.'); return; }
+        draftEntries.push({ id:Date.now()+Math.random(), item, amount, type, category, date, description });
+        // reset form lightly
+        q('#itemName').value='';
+        q('#amount').value='0';
+        q('#category').value='';
+        q('#entryDesc').value='';
+        renderEntriesList();
+        updateOverview();
+        new bootstrap.Tab(q('#pills-entries-tab')).show();
+      }
+
+      function renderEntriesList(){
+        const list = q('#entriesList');
+        list.innerHTML='';
+        if(draftEntries.length===0){
+          q('#noEntriesMsg').style.display='';
+        } else {
+          q('#noEntriesMsg').style.display='none';
+        }
+        q('#entriesCount').textContent = String(draftEntries.length);
+        draftEntries.forEach((e,idx)=>{
+          const row = document.createElement('div');
+          row.className='d-flex justify-content-between align-items-start p-2 entry-row';
+          row.innerHTML = `
+            <div>
+              <div class="d-flex align-items-center gap-2"><strong>${e.item}</strong> ${e.type==='income'?'<span class="badge badge-soft-income">income</span>':'<span class="badge badge-soft-expense">expense</span>'}</div>
+              <div class="small-muted">${e.category||''} ${e.date? '• ' + new Date(e.date).toLocaleDateString() : ''}</div>
+              ${e.description? `<div class="small-muted">${e.description}</div>`:''}
+            </div>
+            <div class="text-end">
+              <div class="fw-bold ${e.type==='income'?'text-income':'text-expense'}">${e.type==='income'?'+':'-'}${money(Number(e.amount||0))}</div>
+              <button class="btn btn-sm btn-outline-danger mt-1"><i class="bi bi-x-lg"></i></button>
+            </div>`;
+          row.querySelector('button').addEventListener('click', ()=>{ draftEntries.splice(idx,1); renderEntriesList(); updateOverview(); });
+          list.appendChild(row);
+        });
+      }
+
+      function updateOverview(){
+        const rec = { entries: draftEntries };
+        const s = summaryOf(rec);
+        q('#ovIncome').textContent = money(s.income);
+        q('#ovExpense').textContent = money(s.expense);
+        const balEl = q('#ovBalance');
+        balEl.textContent = (s.balance>=0? '+':'-') + money(Math.abs(s.balance));
+        balEl.classList.toggle('text-income', s.balance>=0);
+        balEl.classList.toggle('text-expense', s.balance<0);
+      }
+
+      function saveRecordFromModal(){
+        const year = Number(q('#yearSelect').value);
+        const description = q('#recordDesc').value.trim();
+        if(!year){ alert('Please pick a year'); return; }
+        if(draftEntries.length===0){ if(!confirm('No entries added. Save empty record?')) return; }
+
+        if(editingId){
+          const idx = db[activeEvent].findIndex(r=>r.id===editingId);
+          if(idx>-1){
+            db[activeEvent][idx] = { ...db[activeEvent][idx], year, description, entries: draftEntries };
+          }
+          showToast('Record Updated');
+        } else {
+          const id = Date.now();
+          db[activeEvent].push({ id, eventName: activeEvent, year, description, entries: draftEntries });
+          showToast('Record Saved');
+        }
+        saveDB(); recordModal.hide(); render();
+      }
+
+      function showToast(msg){
+        q('#toastBody').textContent = msg;
+        const t = new bootstrap.Toast(q('#toast'));
+        t.show();
+      }
+    </script>
+  </body>
 </html>

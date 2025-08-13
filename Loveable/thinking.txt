@@ -1,0 +1,26 @@
+// Add navbar after hero section.
+
+// Replace img's to actual images.
+
+// Create manager section fully work.
+
+// Create admin section fully work.
+
+// Do changes in About-section cards.
+
+// Replace the summry of whole website.
+
+// fix join-us send message button.
+
+// fix footer year dynamicaly so when year changes year should be change it own.
+
+// Make website fully responsive.
+
+
+*                                           - HERO SECTION -                                                  * 
+*                                         - ABOUT-US SECTION -                                                * 
+*                                        - OUR-MISSION SECTION -                                              * 
+*                                        - OUT-MEMORIE SECTION -                                              * 
+*                                          - AUTHOR SECTION -                                                 * 
+*                                        - JOIN-GROUP SECTION -                                               * 
+*                                          - FOOTER SECTION -                                                 * 

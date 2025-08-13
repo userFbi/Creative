@@ -574,7 +574,17 @@ h2 span {
 }
 
 .author-socials .social-icon:hover:first-child {
-  color: #c44dba;
+  /* color: #c44dba; */
+  background: linear-gradient(
+    45deg,
+    #f58529,
+    #feda77,
+    #dd2a7b,
+    #8134af,
+    #515bd4
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .author-socials .social-icon:hover:nth-child(2) {
@@ -582,7 +592,7 @@ h2 span {
 }
 
 .author-socials .social-icon:hover:last-child {
-  color: rgb(226, 37, 37);
+  color: rgb(34, 132, 170);
 }
 
 /* Responsive for wider screens */
