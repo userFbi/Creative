@@ -722,3 +722,113 @@ h2 span {
 }
 
 /* FOOTER END */
+
+/* ============================= */
+/* RESPONSIVE DESIGN FIXES       */
+/* ============================= */
+
+/* ----- Mobile devices (max-width: 576px) ----- */
+@media (max-width: 576px) {
+  /* Hero Section */
+  .hero-section {
+    padding: 2rem 1rem;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-section h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  .hero-section p {
+    font-size: 0.95rem;
+  }
+
+  /* About Section */
+  .about-section {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .about-section img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  /* Gallery */
+  .gallery .col-md-3,
+  .gallery .col-sm-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .gallery img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Author Section */
+  .author-section {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  .author-section img {
+    max-width: 150px;
+    margin-bottom: 1rem;
+  }
+
+  /* Join Form */
+  .join-form input,
+  .join-form textarea,
+  .join-form select {
+    width: 100% !important;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Modals */
+  .modal-dialog {
+    max-width: 90%;
+    margin: 1.5rem auto;
+  }
+}
+
+/* ----- Tablets (min-width: 577px) and (max-width: 992px) ----- */
+@media (min-width: 577px) and (max-width: 992px) {
+  /* Hero Section */
+  .hero-section {
+    padding: 3rem 2rem;
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-section h1 {
+    font-size: 2.25rem;
+  }
+
+  /* About Section */
+  .about-section img {
+    max-width: 80%;
+    height: auto;
+  }
+
+  /* Gallery */
+  .gallery .col-md-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  /* Author Section */
+  .author-section img {
+    max-width: 180px;
+  }
+
+  /* Join Form */
+  .join-form input,
+  .join-form textarea,
+  .join-form select {
+    width: 100%;
+  }
+}
+
+/* ----- Desktops (min-width: 993px) ----- */
+@media (min-width: 993px) {
+  /* Everything remains as your original desktop design */
+}

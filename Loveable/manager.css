@@ -1,0 +1,77 @@
+body {
+  background-color: #f8f9fa;
+}
+
+/* Header gradient */
+.bg-gradient-primary {
+  background: linear-gradient(to right, #7c3bed, #a658fa);
+  color: white;
+}
+
+/* Cards subtle background */
+.bg-gradient-card {
+  background: linear-gradient(to bottom right, #ffffff, #f9f5ff);
+}
+
+/* Main text colors */
+.text-primary {
+  color: #7c3bed !important;
+}
+.text-secondary {
+  color: #6d28d9 !important;
+}
+
+#addMemberModal .form-label {
+  font-weight: 500;
+}
+#addMemberModal .form-control,
+#addMemberModal .form-select {
+  border-radius: 0.5rem;
+}
+
+/* Add Member button styling */
+.btn-add-member {
+  background: linear-gradient(to right, #7c3bed, #a658fa);
+  border: none;
+  padding: 0.35rem 0.9rem; /* smaller than default */
+  font-size: 0.875rem; /* slightly smaller text */
+  border-radius: 6px;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-icon {
+  font-size: 8px !important;
+}
+
+.btn-add-member:hover {
+  background: linear-gradient(to right, #6d28d9, #8e4bfa);
+}
+
+/* Badge colors */
+.badge-default {
+  background-color: #7c3bed;
+}
+.badge-secondary {
+  background-color: #6d28d9;
+}
+
+/* Table header highlight */
+thead.table-light {
+  background-color: #f3e8ff !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #7c3bed;
+  border-color: #7c3bed;
+}
+.btn-primary:hover {
+  background-color: #6d28d9;
+  border-color: #6d28d9;
+}
+
+/* Search icon in input */
+.form-control:focus {
+  border-color: #7c3bed;
+  box-shadow: 0 0 0 0.2rem rgba(124, 59, 237, 0.25);
+}
