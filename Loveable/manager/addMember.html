@@ -38,11 +38,15 @@
         display: flex;
         flex-direction: column;
       }
-
       .sidebar h5 {
-        font-weight: bold;
-        margin-bottom: 2rem;
         padding-left: 10px;
+        font-weight: 600;
+        font-size: 1.5rem; /* similar to h2 size */
+        margin-bottom: 1rem;
+        padding-top: 30px;
+        padding-bottom: 35px;
+        color: #fff;
+        border-bottom: 2px solid #1c2232; /* border separator */
       }
 
       .sidebar a {
@@ -114,6 +118,9 @@
     </div>
 
     <div class="main-content">
+      <h2 class="fw-bold">Add New Contact</h2>
+      <p class="text-muted">Create a new contact entry</p>
+
       <div class="card p-4">
         <h5 class="section-title fw-bold">Member Information</h5>
         <form id="memberForm" class="row g-3">
@@ -136,20 +143,35 @@
             />
           </div>
           <div class="col-md-6">
-            <label class="form-label">Phone Number</label>
+            <label class="form-label">Phone Number *</label>
             <input
-              type="tel"
+              id="phone"
+              type="text"
               class="form-control"
-              placeholder="Enter phone number"
+              placeholder="Enter 10-digit phone number"
+              inputmode="numeric"
+              maxlength="10"
+              pattern="\d{10}"
+              required
             />
+            <div class="invalid-feedback">
+              Phone number must be exactly 10 digits.
+            </div>
           </div>
           <div class="col-md-6">
-            <label class="form-label">Email Address</label>
+            <label class="form-label">Aadhaar Number *</label>
             <input
-              type="email"
+              id="aadhar"
+              type="text"
               class="form-control"
-              placeholder="Enter email"
+              placeholder="Enter 12-digit Aadhaar number"
+              pattern="\d{12}"
+              maxlength="12"
+              required
             />
+            <div class="invalid-feedback">
+              Aadhaar number must be exactly 12 digits.
+            </div>
           </div>
           <div class="col-12">
             <label class="form-label">Address</label>
@@ -198,6 +220,75 @@
     </div>
 
     <script>
+      function allowOnlyDigits(input, maxLength) {
+        // Only digits, enforce max length
+        input.addEventListener("input", function () {
+          this.value = this.value.replace(/\D/g, "").slice(0, maxLength);
+        });
+
+        // Block non-digit key presses
+        input.addEventListener("keydown", function (e) {
+          const allowed = [
+            "Backspace",
+            "Delete",
+            "ArrowLeft",
+            "ArrowRight",
+            "Tab",
+            "Home",
+            "End",
+          ];
+          if (allowed.includes(e.key)) return;
+          if (!/^\d$/.test(e.key)) e.preventDefault();
+        });
+      }
+
+      // Apply to Phone (10 digits) and Aadhaar (12 digits)
+      allowOnlyDigits(document.getElementById("phone"), 10);
+      allowOnlyDigits(document.getElementById("aadhar"), 12);
+
+      // 🔥 Move focus to next field when pressing Enter
+      document
+        .querySelectorAll("input, select, textarea")
+        .forEach((field, index, fields) => {
+          field.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+              e.preventDefault(); // stop auto submit
+              if (!field.checkValidity()) {
+                field.reportValidity(); // show error
+                return;
+              }
+              let next = fields[index + 1];
+              if (next) next.focus();
+            }
+          });
+        });
+    </script>
+
+    <script>
+      const phoneInput = document.getElementById("phone");
+
+      // Allow only digits while typing/pasting
+      phoneInput.addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "").slice(0, 10);
+      });
+
+      // Extra: block non-digit keys
+      phoneInput.addEventListener("keydown", function (e) {
+        const allowed = [
+          "Backspace",
+          "Delete",
+          "ArrowLeft",
+          "ArrowRight",
+          "Tab",
+          "Home",
+          "End",
+        ];
+        if (allowed.includes(e.key)) return;
+        if (!/^\d$/.test(e.key)) e.preventDefault();
+      });
+    </script>
+
+    <script>
       function logout() {
         localStorage.removeItem("isAdmin");
         window.location.href = "../../../index.html";
@@ -208,13 +299,20 @@
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
+          if (!this.checkValidity()) {
+            e.stopPropagation();
+            this.classList.add("was-validated");
+            return;
+          }
+
           const member = {
             firstName: this[0].value.trim(),
             lastName: this[1].value.trim(),
             phone: this[2].value.trim(),
-            email: this[3].value.trim(),
+            aadhar: this[3].value.trim(),
             address: this[4].value.trim(),
-            notes: this[5].value.trim(),
+            tshirt: this[5].value.trim(),
+            shorts: this[6].value.trim(),
             createdAt: new Date().toISOString(),
           };
 
@@ -228,6 +326,7 @@
           setTimeout(() => alert.classList.add("d-none"), 2000);
 
           this.reset();
+          this.classList.remove("was-validated");
         });
     </script>
   </body>
