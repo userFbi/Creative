@@ -134,13 +134,14 @@
             </p>
             <div class="stats">
               <div>
-                <div class="stat-value primary">400+</div>
+                <div class="stat-value primary">350+</div>
                 <div class="stat-label">Members</div>
               </div>
               <div>
-                <div class="stat-value secondary">36+</div>
+                <div class="stat-value secondary" id="years"></div>
                 <div class="stat-label">Years</div>
               </div>
+
               <!-- <div>
                 <div class="stat-value accent">100+</div>
                 <div class="stat-label">Events</div>
@@ -292,14 +293,23 @@
     <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-content container">
-        <p style="padding-right: 10px;">© 2025 <strong>KGSC</strong> -All Rights Reserved. <a
-                href="https://www.instagram.com/kamlaba_garden_sport_club/"
-                class="social-icon instagram"
-                target="_blank"
-                ><i class="bi bi-instagram"></i
-              ></a></p> 
+        <p style="padding-right: 10px">
+          © <span id="year"></span> <strong>KGSC</strong> - All Rights Reserved.
+          <a
+            href="https://www.instagram.com/kamlaba_garden_sport_club/"
+            class="social-icon instagram"
+            target="_blank"
+          >
+            <i class="bi bi-instagram"></i>
+          </a>
+        </p>
       </div>
     </footer>
+
+    <script>
+      // Set current year automatically
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 
     <!-- Footer End -->
 
@@ -502,5 +512,21 @@
       lucide.createIcons();
     </script>
     <!-- About-us Script end -->
+
+    <!-- Foundation Script  -->
+    <script>
+      // founding year
+      const foundingYear = 1988;
+
+      // current year
+      const currentYear = new Date().getFullYear();
+
+      // calculate years
+      const years = currentYear - foundingYear;
+
+      // update dynamically
+      document.getElementById("years").textContent = years + "+";
+    </script>
+    <!-- Foundation Script End -->
   </body>
 </html>
