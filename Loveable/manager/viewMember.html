@@ -159,9 +159,15 @@
     <div class="sidebar">
       <div class="nav-section">
         <h5>Manager Panel</h5>
-        <a href="admin.html">Dashboard</a>
-        <a href="#" class="active">View Members</a>
-        <a href="addMember.html">Add Member</a>
+        <a href="admin.html">
+          <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
+        >
+        <a href="viewMember.html" class="active">
+          <i class="bi bi-people me-2"></i>View Members</a
+        >
+        <a href="addMember.html">
+          <i class="bi bi-person-plus me-2"></i>Add Member</a
+        >
       </div>
       <div class="logout-btn">
         <a href="#" onclick="logout()" class="text-danger">Logout</a>
@@ -379,7 +385,7 @@
         <button class="btn btn-sm  text-primary" onclick="viewMember(${index})" title="View">
           <i class="bi bi-eye"></i>
         </button>
-        <button class="btn btn-sm text-success edit-btn action-btn" onclick="editMember(${index})" title="Edit">
+        <button class="btn btn-sm  edit-btn action-btn text-success" onclick="editMember(${index})" title="Edit">
   <i class="bi bi-pencil"></i>
 </button>
 
