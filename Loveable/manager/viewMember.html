@@ -152,6 +152,20 @@
       .form-control::placeholder {
         font-size: 0.9rem;
       }
+
+      .actions button i {
+        color: grey;
+      }
+
+      .bi-eye:hover {
+        color: #3b82f6;
+      }
+      .bi-pencil:hover {
+        color: green;
+      }
+      .bi-trash:hover {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -180,7 +194,9 @@
           <h2 class="fw-bold mb-0">Contacts</h2>
           <p class="text-muted">Manage and view all your contacts</p>
         </div>
-        <a href="addMember.html" class="btn btn-primary">+ Add Contact</a>
+        <a href="addMember.html" class="btn btn-primary"
+          ><i class="bi bi-person-plus me-2"></i> Add Contact</a
+        >
       </div>
 
       <div class="table-container">
@@ -381,15 +397,15 @@
       </td>
       <td>${member.phone || ""}</td>
       <td>${member.aadhar || ""}</td>
-      <td>
-        <button class="btn btn-sm  text-primary" onclick="viewMember(${index})" title="View">
+      <td class="actions">
+        <button class="btn btn-sm  text-muted" onclick="viewMember(${index})" title="View">
           <i class="bi bi-eye"></i>
         </button>
-        <button class="btn btn-sm  edit-btn action-btn text-success" onclick="editMember(${index})" title="Edit">
+        <button class="btn btn-sm  edit-btn action-btn text-muted" onclick="editMember(${index})" title="Edit">
   <i class="bi bi-pencil"></i>
 </button>
 
-        <button class="btn btn-sm  text-danger" onclick="deleteMember(${index})" title="Delete">
+        <button class="btn btn-sm  text-muted" onclick="deleteMember(${index})" title="Delete">
           <i class="bi bi-trash"></i>
         </button>
       </td>

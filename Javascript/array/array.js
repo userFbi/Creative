@@ -1,7 +1,5 @@
 let data = [10, 20];
-let data1 = [30, 40];
-
-console.log(data);
+// console.log(data);
 
 // at
 // console.log(data.at(5));
@@ -19,8 +17,8 @@ console.log(data);
 // console.log(data);
 
 // join
-data.join(data1);
-console.log(data);
+// let data1 = data.join('+');
+// console.log(data1);
 
 // reverse
 // data.reverse();

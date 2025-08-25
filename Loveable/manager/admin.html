@@ -93,6 +93,64 @@
       canvas {
         max-height: 300px;
       }
+      .text-purple {
+        color: #7c3bed;
+      }
+      .card-box {
+        border-radius: 12px;
+        background: #fff;
+        padding: 1.5rem;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+        height: 100%;
+        transition: box-shadow 0.3s ease; /* smooth shadow transition */
+      }
+
+      .card-box:hover {
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); /* deeper shadow */
+      }
+
+      .card-box h5 i {
+        color: #0a60eb;
+      }
+
+      .contact-icon i {
+        color: #2bab2b !important;
+      }
+      .recent-contact {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* ensures name & icon are vertically centered */
+        background: #f9fafb;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.6rem;
+        transition: background 0.2s ease;
+      }
+
+      .recent-contact:hover {
+        background: #f1f5f9;
+      }
+
+      .contact-name {
+        font-size: 0.95rem;
+        font-weight: 500; /* medium, not too bold */
+        color: #111827;
+      }
+
+      .view-btn {
+        background: none;
+        border: none;
+        color: #6b7280;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center; /* centers the eye icon vertically */
+      }
+
+      .view-btn:hover {
+        color: #111827;
+      }
     </style>
   </head>
   <body>
@@ -122,32 +180,79 @@
       </p>
 
       <div class="row g-3 mb-4">
+        <!-- Total Contacts -->
         <div class="col-md-3">
-          <div class="card-box">
-            <h5>Total Contacts <i class="bi bi-people-fill"></i> </h5>
-            <h3 id="totalCount">0</h3>
-            <small class="text-success">+12% from last month</small>
+          <div
+            class="card-box d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <p class="text-muted mb-1">Total Contacts</p>
+              <h3 id="totalCount">0</h3>
+              <small class="text-success">+12% from last month</small>
+            </div>
+            <div
+              class="rounded-circle d-flex justify-content-center align-items-center"
+              style="width: 45px; height: 45px; background-color: #e0edff"
+            >
+              <i class="bi bi-people fs-4 text-primary"></i>
+            </div>
           </div>
         </div>
+
+        <!-- New This Month -->
         <div class="col-md-3">
-          <div class="card-box">
-            <h5>New This Month</h5>
-            <h3 id="newThisMonth">0</h3>
-            <small class="text-success">Auto updated</small>
+          <div
+            class="card-box d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <p class="text-muted mb-1">New This Month</p>
+              <h3 id="newThisMonth">0</h3>
+              <small class="text-success">+5% from last month</small>
+            </div>
+            <div
+              class="rounded-circle d-flex justify-content-center align-items-center"
+              style="width: 45px; height: 45px; background-color: #d9fce5"
+            >
+              <i class="bi bi-person-plus fs-4 text-success"></i>
+            </div>
           </div>
         </div>
+
+        <!-- Recently Viewed -->
         <div class="col-md-3">
-          <div class="card-box">
-            <h5>Recently Viewed</h5>
-            <h3 id="recentCount">0</h3>
-            <small class="text-success">Last 7 days</small>
+          <div
+            class="card-box d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <p class="text-muted mb-1">Recently Viewed</p>
+              <h3 id="recentCount">0</h3>
+              <small class="text-success">+8% from last month</small>
+            </div>
+            <div
+              class="rounded-circle d-flex justify-content-center align-items-center"
+              style="width: 45px; height: 45px; background-color: #f0e9ff"
+            >
+              <i class="bi bi-eye fs-4 text-purple"></i>
+            </div>
           </div>
         </div>
+
+        <!-- Growth Rate -->
         <div class="col-md-3">
-          <div class="card-box">
-            <h5>Growth Rate</h5>
-            <h3>23%</h3>
-            <small class="text-success">+2% from last month</small>
+          <div
+            class="card-box d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <p class="text-muted mb-1">Growth Rate</p>
+              <h3>23%</h3>
+              <small class="text-success">+2% from last month</small>
+            </div>
+            <div
+              class="rounded-circle d-flex justify-content-center align-items-center"
+              style="width: 45px; height: 45px; background-color: #fff3e0"
+            >
+              <i class="bi bi-graph-up-arrow fs-4 text-warning"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -170,7 +275,7 @@
       <div class="row g-3">
         <div class="col-md-6">
           <div class="card-box">
-            <h5>Quick Actions</h5>
+            <h5><i class="bi bi-person-plus me-2"></i>Quick Actions</h5>
             <a href="addMember.html" class="btn btn-primary w-100 mb-2"
               >Add New Contact</a
             >
@@ -181,7 +286,9 @@
         </div>
         <div class="col-md-6">
           <div class="card-box">
-            <h5>Recent Contacts</h5>
+            <h5 class="fw-bold mb-3">
+              <i class="bi bi-people text-success me-2"></i> Recent Contacts
+            </h5>
             <div id="recentContacts"></div>
           </div>
         </div>
@@ -227,15 +334,19 @@
 
       const recentEl = document.getElementById("recentContacts");
       const recent = members.slice(-4).reverse();
+
       if (recent.length === 0) {
         recentEl.innerHTML = "<p class='text-muted'>No recent contacts.</p>";
       } else {
         recent.forEach((u) => {
           const div = document.createElement("div");
-          div.className = "recent-item";
-          div.innerHTML = `<strong>${u.firstName} ${
-            u.lastName
-          }</strong><br><small>${u.email || ""}</small>`;
+          div.className = "recent-contact";
+          div.innerHTML = `
+    <span class="contact-name">${u.firstName} ${u.lastName}</span>
+    <button class="view-btn" onclick="showContact('${u.firstName}', '${u.lastName}')">
+      <i class="bi bi-eye"></i>
+    </button>
+  `;
           recentEl.appendChild(div);
         });
       }

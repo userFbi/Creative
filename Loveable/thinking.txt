@@ -17,10 +17,10 @@
 // Make website fully responsive.
 
 
-*                                           - HERO SECTION -                                                  * 
-*                                         - ABOUT-US SECTION -                                                * 
-*                                        - OUR-MISSION SECTION -                                              * 
-*                                        - OUT-MEMORIE SECTION -                                              * 
-*                                          - AUTHOR SECTION -                                                 * 
-*                                        - JOIN-GROUP SECTION -                                               * 
-*                                          - FOOTER SECTION -                                                 * 
+- HERO SECTION  
+- ABOUT-US SECTION 
+- OUR-MISSION SECTION 
+- OUT-MEMORIE SECTION  
+- AUTHOR SECTION  
+- JOIN-GROUP SECTION 
+- FOOTER SECTION  
