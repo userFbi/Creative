@@ -398,9 +398,11 @@
       <td>${member.phone || ""}</td>
       <td>${member.aadhar || ""}</td>
       <td class="actions">
-        <button class="btn btn-sm  text-muted" onclick="viewMember(${index})" title="View">
-          <i class="bi bi-eye"></i>
-        </button>
+  
+ <button class="btn btn-sm text-muted" onclick="openDetails(${index})" title="View">
+  <i class="bi bi-eye"></i>
+</button>
+
         <button class="btn btn-sm  edit-btn action-btn text-muted" onclick="editMember(${index})" title="Edit">
   <i class="bi bi-pencil"></i>
 </button>
@@ -433,12 +435,8 @@
             renderMembers(filtered);
           });
       }
-
-      function viewMember(index) {
-        const member = allMembers[index];
-        alert(
-          `Full Name: ${member.firstName} ${member.lastName}\nEmail: ${member.email}\nPhone: ${member.phone}\nAddress: ${member.address}`
-        );
+      function openDetails(index) {
+        window.location.href = `viewMemberDetails.html?id=${index}`;
       }
 
       function editMember(index) {
