@@ -75,36 +75,23 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         padding: 1.25rem;
       }
-      .section-title {
-        font-weight: 700;
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
+
+      .card-like .info-row {
+        margin-bottom: 1rem;
       }
-      .item {
+
+      .card-like .label {
+        font-size: 0.9rem;
+        color: #6c757d; /* muted gray */
         display: flex;
-        font-size: 18px;
-        font-weight: 500;
-        gap: 0.75rem;
         align-items: center;
-        margin: 0.35rem 0;
-        color: #111827;
+        margin-bottom: 2px;
       }
-      .item .icon {
-        width: 28px;
-        text-align: center;
-        opacity: 0.8;
-      }
-      .top-actions {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 50px;
-      }
-      .btn-primary {
-        background: #3b82f6;
-        border: none;
-      }
-      .btn-outline-danger {
-        border-color: #dc3545;
+
+      .card-like .value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #000;
       }
     </style>
   </head>
@@ -159,39 +146,40 @@
       <div class="row g-4">
         <div class="col-12">
           <div class="card-like">
-            <div class="section-title">Contact Information</div>
+            <h5 class="mb-3 fw-bold">Contact Information</h5>
 
-            <div class="item">
-              <div class="icon"><i class="bi bi-person"></i></div>
-              <div id="ciFirstName">—</div>
+            <div class="info-row">
+              <div class="label"><i class="bi bi-telephone me-2"></i>Phone</div>
+              <div class="value" id="ciPhone">—</div>
             </div>
 
-            <div class="item">
-              <div class="icon"><i class="bi bi-telephone"></i></div>
-              <div id="ciPhone">—</div>
+            <div class="info-row">
+              <div class="label">
+                <i class="bi bi-credit-card-2-front me-2"></i>Aadhar
+              </div>
+              <div class="value" id="ciAadhar">—</div>
             </div>
-            <div class="item">
-              <div class="icon"><i class="bi bi-credit-card-2-front"></i></div>
-              <div id="ciAadhar">—</div>
+
+            <div class="info-row">
+              <div class="label"><i class="bi bi-geo-alt me-2"></i>Address</div>
+              <div class="value" id="ciAddress">—</div>
             </div>
-            <div class="item">
-              <div class="icon"><i class="bi bi-geo-alt"></i></div>
-              <div id="ciAddress">—</div>
+
+            <div class="info-row">
+              <div class="label">T-Shirt Size</div>
+              <div class="value" id="ciTshirt">—</div>
             </div>
-            <div class="mb-2 mt-2">
-              <strong>T-Shirt Size:</strong>
-              <div id="ciTshirt">—</div>
-            </div>
-            <div class="mb-3">
-              <strong>Shorts Size:</strong>
-              <div id="ciShorts">—</div>
+
+            <div class="info-row">
+              <div class="label">Shorts Size</div>
+              <div class="value" id="ciShorts">—</div>
             </div>
           </div>
         </div>
 
         <div class="col-12">
           <div class="card-like">
-            <div class="section-title">Notes</div>
+            <div class="section-title">Join Date -</div>
             <div id="notesText" class="text-muted">—</div>
           </div>
         </div>
@@ -218,22 +206,26 @@
 
       let member = members[idx];
 
-      // Fill
+      // Show full name
       qs("#contactName").textContent =
         `${member.firstName || ""} ${member.lastName || ""}`.trim() ||
         "Contact";
-      qs("#contactSubtitle").textContent = member.phone || "Member details";
-      qs("#ciFirstName").textContent =
-        member.firstName + member.lastName || "—";
+      // Show other fields
       qs("#ciPhone").textContent = member.phone || member.number || "—";
       qs("#ciAadhar").textContent = member.aadhar || "—";
       qs("#ciAddress").textContent = member.address || "—";
       qs("#ciTshirt").textContent = member.tshirt || "—";
       qs("#ciShorts").textContent = member.shorts || "—";
 
-      qs("#notesText").textContent = member.addedDate
-        ? `Added on ${member.addedDate}`
+      // Fix join date (createdAt)
+      qs("#notesText").textContent = member.createdAt
+        ? ` ${new Date(member.createdAt).toLocaleDateString()}`
         : "—";
+
+      //edit
+      qs("#editBtn").addEventListener("click", () => {
+        window.location.href = `addMember.html?edit=${idx}`;
+      });
 
       // Delete
       qs("#deleteBtn").addEventListener("click", () => {

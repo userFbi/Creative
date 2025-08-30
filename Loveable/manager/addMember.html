@@ -136,8 +136,8 @@
     </div>
 
     <div class="main-content">
-      <h2 class="fw-bold">Add New Contact</h2>
-      <p class="text-muted">Create a new contact entry</p>
+      <h2 id="formTitle" class="fw-bold">Add New Contact</h2>
+      <p id="formSubtitle" class="text-muted">Create a new contact entry</p>
 
       <div class="card p-4">
         <h5 class="section-title fw-bold">Member Information</h5>
@@ -146,6 +146,7 @@
             <label class="form-label">First Name *</label>
             <input
               type="text"
+              id="firstName"
               class="form-control"
               placeholder="Enter first name"
               required
@@ -155,6 +156,7 @@
             <label class="form-label">Last Name *</label>
             <input
               type="text"
+              id="lastName"
               class="form-control"
               placeholder="Enter last name"
               required
@@ -195,38 +197,46 @@
             <label class="form-label">Address</label>
             <input
               type="text"
+              id="address"
               class="form-control"
               placeholder="Enter full address"
             />
           </div>
+
           <div class="col-md-6">
             <label class="form-label">T-shirt</label>
-            <select class="form-select">
+            <select class="form-select" id="tshirtSize" required>
               <option value="" hidden>Select Size</option>
-              <option value="sm">SM</option>
-              <option value="md">MD</option>
-              <option value="l">L</option>
-              <option value="xl">XL</option>
-              <option value="xxl">XXL</option>
-              <option value="xxxl">XXXL</option>
+              <option value="SM">SM</option>
+              <option value="MD">MD</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+              <option value="XXXL">XXXL</option>
             </select>
           </div>
           <div class="col-md-6">
             <label class="form-label">Shorts</label>
-            <select class="form-select">
+            <select class="form-select" id="shortsSize" required>
               <option value="" hidden>Select Size</option>
-              <option value="sm">SM</option>
-              <option value="md">MD</option>
-              <option value="l">L</option>
-              <option value="xl">XL</option>
-              <option value="xxl">XXL</option>
-              <option value="xxxl">XXXL</option>
+              <option value="SM">SM</option>
+              <option value="MD">MD</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+              <option value="XXXL">XXXL</option>
             </select>
           </div>
 
           <div class="col-12 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Add Member</button>
-            <button type="reset" class="btn btn-outline-secondary">
+            <button type="submit" id="submitBtn" class="btn btn-primary">
+              Add Member
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              id="cancelBtn"
+            >
               Cancel
             </button>
           </div>
@@ -312,39 +322,103 @@
         window.location.href = "../../../index.html";
       }
 
-      document
-        .getElementById("memberForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+      const form = document.getElementById("memberForm");
 
-          if (!this.checkValidity()) {
-            e.stopPropagation();
-            this.classList.add("was-validated");
-            return;
-          }
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const editIndex = params.get("edit");
+        const members = JSON.parse(localStorage.getItem("members") || "[]");
 
-          const member = {
-            firstName: this[0].value.trim(),
-            lastName: this[1].value.trim(),
-            phone: this[2].value.trim(),
-            aadhar: this[3].value.trim(),
-            address: this[4].value.trim(),
-            tshirt: this[5].value.trim(),
-            shorts: this[6].value.trim(),
-            createdAt: new Date().toISOString(),
-          };
+        if (editIndex !== null && members[editIndex]) {
+          const m = members[editIndex];
 
-          const members = JSON.parse(localStorage.getItem("members") || "[]");
+          // Prefill values
+          document.getElementById("firstName").value = m.firstName || "";
+          document.getElementById("lastName").value = m.lastName || "";
+          document.getElementById("phone").value = m.phone || "";
+          document.getElementById("aadhar").value = m.aadhar || "";
+          document.getElementById("address").value = m.address || "";
+          document.getElementById("tshirtSize").value = m.tshirt || "";
+          document.getElementById("shortsSize").value = m.shorts || "";
+
+          // Change titles
+          document.getElementById("formTitle").textContent = "Edit Contact";
+          document.getElementById("formSubtitle").textContent =
+            "Edit your contact entry";
+          document.getElementById("submitBtn").textContent = "Update Contact";
+
+          // Save edit index
+          form.dataset.editIndex = editIndex;
+        }
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (!this.checkValidity()) {
+          e.stopPropagation();
+          this.classList.add("was-validated");
+          return;
+        }
+
+        let members = JSON.parse(localStorage.getItem("members") || "[]");
+
+        const member = {
+          firstName: document.getElementById("firstName").value.trim(),
+          lastName: document.getElementById("lastName").value.trim(),
+          phone: document.getElementById("phone").value.trim(),
+          aadhar: document.getElementById("aadhar").value.trim(),
+          address: document.getElementById("address").value.trim(),
+          tshirt: document.getElementById("tshirtSize").value.trim(),
+          shorts: document.getElementById("shortsSize").value.trim(),
+          createdAt: new Date().toISOString(),
+        };
+
+        if (this.dataset.editIndex !== undefined) {
+          // update existing
+          members[this.dataset.editIndex] = member;
+        } else {
+          // add new
           members.push(member);
-          localStorage.setItem("members", JSON.stringify(members));
+        }
 
-          // Show success alert
-          const alert = document.getElementById("successAlert");
-          alert.classList.remove("d-none");
-          setTimeout(() => alert.classList.add("d-none"), 2000);
+        localStorage.setItem("members", JSON.stringify(members));
 
+        // Success alert
+        const alert = document.getElementById("successAlert");
+        alert.textContent =
+          this.dataset.editIndex !== undefined
+            ? "Member updated successfully!"
+            : "Member added successfully!";
+        alert.classList.remove("d-none");
+        setTimeout(() => alert.classList.add("d-none"), 2000);
+
+        if (this.dataset.editIndex === undefined) {
           this.reset();
           this.classList.remove("was-validated");
+        } else {
+          window.location.href = "viewMember.html";
+        }
+      });
+      let editIndex = null;
+
+      // existing code for checking edit mode
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("edit")) {
+        // 🔥 use "edit" not "editIndex"
+        editIndex = params.get("edit");
+      }
+
+      document
+        .getElementById("cancelBtn")
+        .addEventListener("click", function () {
+          if (editIndex !== null) {
+            // in edit mode → go back to members list
+            window.location.href = "viewMember.html";
+          } else {
+            // in add mode → just reset the form
+            document.getElementById("memberForm").reset();
+          }
         });
     </script>
   </body>

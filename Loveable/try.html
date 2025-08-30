@@ -6,87 +6,241 @@
     <title>Document</title>
   </head>
   <body>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed facilis quasi
-      dolor sit quam, ipsum unde autem quaerat fugit in ipsa esse id impedit
-      error quos repudiandae culpa excepturi deserunt.
-    </p>
-    <a href=""
-      ><svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-eye w-4 h-4"
-        data-lov-id="src/components/ViewContacts.tsx:103:26"
-        data-lov-name="Eye"
-        data-component-path="src/components/ViewContacts.tsx"
-        data-component-line="103"
-        data-component-file="ViewContacts.tsx"
-        data-component-name="Eye"
-        data-component-content="%7B%22className%22%3A%22w-4%20h-4%22%7D"
-      >
-        <path
-          d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
-        ></path>
-        <circle cx="12" cy="12" r="3"></circle></svg
-    ></a>
-    <a href="">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-pen w-4 h-4"
-        data-lov-id="src/components/ViewContacts.tsx:109:26"
-        data-lov-name="Edit2"
-        data-component-path="src/components/ViewContacts.tsx"
-        data-component-line="109"
-        data-component-file="ViewContacts.tsx"
-        data-component-name="Edit2"
-        data-component-content="%7B%22className%22%3A%22w-4%20h-4%22%7D"
-      >
-        <path
-          d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
-        ></path>
-      </svg>
-    </a>
-    <a href="">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-trash2 w-4 h-4"
-        data-lov-id="src/components/ViewContacts.tsx:112:26"
-        data-lov-name="Trash2"
-        data-component-path="src/components/ViewContacts.tsx"
-        data-component-line="112"
-        data-component-file="ViewContacts.tsx"
-        data-component-name="Trash2"
-        data-component-content="%7B%22className%22%3A%22w-4%20h-4%22%7D"
-      >
-        <path d="M3 6h18"></path>
-        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-        <line x1="10" x2="10" y1="11" y2="17"></line>
-        <line x1="14" x2="14" y1="11" y2="17"></line>
-      </svg>
-    </a>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contact Details</title>
+
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+          rel="stylesheet"
+        />
+
+        <style>
+          body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #f8f9fc;
+          }
+          .sidebar {
+            width: 220px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #0d1321;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem 1rem;
+          }
+          .nav-section {
+            display: flex;
+            flex-direction: column;
+          }
+          .sidebar h5 {
+            padding-left: 10px;
+            font-weight: 500;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-top: 30px;
+            padding-bottom: 35px;
+            color: #fff;
+            border-bottom: 2px solid #1c2232;
+          }
+          .sidebar a {
+            display: block;
+            color: #ccc;
+            padding: 0.6rem 1rem;
+            text-decoration: none;
+            margin-bottom: 0.4rem;
+            border-radius: 6px;
+          }
+          .sidebar a:hover,
+          .sidebar a.active {
+            background-color: #1c2232;
+            color: #fff;
+          }
+          .logout-btn {
+            text-align: center;
+          }
+
+          .main-content {
+            margin-left: 220px;
+            padding: 2rem;
+          }
+          .card-like {
+            max-width: 500px;
+          }
+
+          .card-like .info-row {
+            margin-bottom: 1rem;
+          }
+
+          .card-like .label {
+            font-size: 0.9rem;
+            color: #6c757d; /* muted gray */
+            display: flex;
+            align-items: center;
+            margin-bottom: 2px;
+          }
+
+          .card-like .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000;
+          }
+        </style>
+      </head>
+      <body>
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="nav-section">
+            <h5>Manager Panel</h5>
+            <a href="admin.html"
+              ><i class="bi bi-speedometer2 me-2"></i>Dashboard</a
+            >
+            <a href="viewMember.html" class="active"
+              ><i class="bi bi-people me-2"></i>View Members</a
+            >
+            <a href="addMember.html"
+              ><i class="bi bi-person-plus me-2"></i>Add Member</a
+            >
+          </div>
+          <div class="logout-btn">
+            <a href="#" onclick="logout()" class="text-danger">Logout</a>
+          </div>
+        </div>
+
+        <!-- Main -->
+        <div class="main-content">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <!-- Back button -->
+              <a
+                href="viewMember.html"
+                class="btn btn-light d-inline-flex align-items-center border gap-2 mb-4"
+              >
+                <i class="bi bi-arrow-left"></i>
+                <span>Back to Contacts</span>
+              </a>
+
+              <!-- Contact name BELOW -->
+              <h3 class="fw-bold mb-0" id="contactName">Contact</h3>
+              <!-- <div class="text-muted" id="contactSubtitle">Member details</div> -->
+            </div>
+
+            <div class="top-actions">
+              <button class="btn btn-primary" id="editBtn">
+                <i class="bi bi-pencil me-1"></i>Edit Contact
+              </button>
+              <button class="btn btn-outline-danger" id="deleteBtn">
+                <i class="bi bi-trash me-1"></i>Delete
+              </button>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-12">
+              <div class="card-like">
+                <h5 class="mb-3 fw-bold">Contact Information</h5>
+
+                <div class="info-row">
+                  <div class="label">
+                    <i class="bi bi-telephone me-2"></i>Phone
+                  </div>
+                  <div class="value" id="ciPhone">—</div>
+                </div>
+
+                <div class="info-row">
+                  <div class="label">
+                    <i class="bi bi-credit-card-2-front me-2"></i>Aadhar
+                  </div>
+                  <div class="value" id="ciAadhar">—</div>
+                </div>
+
+                <div class="info-row">
+                  <div class="label">
+                    <i class="bi bi-geo-alt me-2"></i>Address
+                  </div>
+                  <div class="value" id="ciAddress">—</div>
+                </div>
+
+                <div class="info-row">
+                  <div class="label">T-Shirt Size</div>
+                  <div class="value" id="ciTshirt">—</div>
+                </div>
+
+                <div class="info-row">
+                  <div class="label">Shorts Size</div>
+                  <div class="value" id="ciShorts">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="card-like">
+                <div class="section-title">Join Date -</div>
+                <div id="notesText" class="text-muted">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+          function logout() {
+            localStorage.removeItem("isAdmin");
+            window.location.href = "../index.html";
+          }
+
+          const qs = (sel) => document.querySelector(sel);
+
+          // Load
+          const params = new URLSearchParams(window.location.search);
+          const idx = Number(params.get("id"));
+          const members = JSON.parse(localStorage.getItem("members") || "[]");
+
+          if (!Number.isInteger(idx) || idx < 0 || idx >= members.length) {
+            window.location.replace("viewMember.html");
+          }
+
+          let member = members[idx];
+
+          // Show full name
+          qs("#contactName").textContent =
+            `${member.firstName || ""} ${member.lastName || ""}`.trim() ||
+            "Contact";
+          // Show other fields
+          qs("#ciPhone").textContent = member.phone || member.number || "—";
+          qs("#ciAadhar").textContent = member.aadhar || "—";
+          qs("#ciAddress").textContent = member.address || "—";
+     qs("#ciTshirt").textContent = member.tshirt || member.tShirtSize || "—";
+qs("#ciShorts").textContent = member.shorts || member.shortsSize || "—";
+
+
+          // Fix join date (createdAt)
+          qs("#notesText").textContent = member.createdAt
+            ? ` ${new Date(member.createdAt).toLocaleDateString()}`
+            : "—";
+
+          // Delete
+          qs("#deleteBtn").addEventListener("click", () => {
+            if (confirm("Delete this contact?")) {
+              members.splice(idx, 1);
+              localStorage.setItem("members", JSON.stringify(members));
+              window.location.href = "viewMember.html";
+            }
+          });
+        </script>
+      </body>
+    </html>
   </body>
 </html>

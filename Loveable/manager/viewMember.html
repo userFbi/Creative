@@ -227,121 +227,7 @@
       </div>
     </div>
 
-    <!-- Edit Member Modal -->
-    <div
-      class="modal fade"
-      id="editMemberModal"
-      tabindex="-1"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit Member</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="editMemberForm">
-              <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input
-                  type="text"
-                  id="editName"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Surname</label>
-                <input
-                  type="text"
-                  id="editSurname"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Number</label>
-                <input
-                  type="text"
-                  id="editNumber"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Aadhar</label>
-                <input
-                  type="text"
-                  id="editAadhar"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Address</label>
-                <textarea
-                  id="editAddress"
-                  class="form-control"
-                  required
-                ></textarea>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">T-shirt Size</label>
-                <input
-                  type="text"
-                  id="editTshirt"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Shorts Size</label>
-                <input
-                  type="text"
-                  id="editShorts"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary">
-                Save Changes
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script>
-      let currentRow = null;
-
-      document.querySelectorAll(".edit-btn").forEach((button) => {
-        button.addEventListener("click", function () {
-          currentRow = this.closest("tr"); // find the row
-          let cells = currentRow.querySelectorAll("td");
-
-          // Fill modal fields with row data
-          document.getElementById("editName").value = cells[0].innerText;
-          document.getElementById("editSurname").value = cells[1].innerText;
-          document.getElementById("editNumber").value = cells[2].innerText;
-          document.getElementById("editAadhar").value = cells[3].innerText;
-          document.getElementById("editAddress").value = cells[4].innerText;
-          document.getElementById("editTshirt").value = cells[5].innerText;
-          document.getElementById("editShorts").value = cells[6].innerText;
-
-          // Show modal
-          let modal = new bootstrap.Modal(
-            document.getElementById("editMemberModal")
-          );
-          modal.show();
-        });
-      });
-
       // Save changes back to table
       document
         .getElementById("editMemberForm")
@@ -440,18 +326,8 @@
       }
 
       function editMember(index) {
-        const member = allMembers[index];
-        const updatedName = prompt(
-          "Edit full name",
-          `${member.firstName} ${member.lastName}`
-        );
-        if (updatedName) {
-          const [firstName, lastName] = updatedName.split(" ");
-          allMembers[index].firstName = firstName || "";
-          allMembers[index].lastName = lastName || "";
-          localStorage.setItem("members", JSON.stringify(allMembers));
-          loadAndRenderMembers();
-        }
+        // Simply redirect to addMember page in edit mode
+        window.location.href = `addMember.html?edit=${index}`;
       }
 
       function deleteMember(index) {
@@ -463,64 +339,11 @@
       }
 
       loadAndRenderMembers();
-    </script>
-    \
-    <script>
-      let members = JSON.parse(localStorage.getItem("members")) || [];
 
-      // Called when clicking pencil icon
       function editMember(index) {
-        let member = members[index];
-
-        // Store index in hidden field
-        document.getElementById("editIndex").value = index;
-
-        // Fill modal inputs
-        document.getElementById("editName").value = member.name;
-        document.getElementById("editSurname").value = member.surname;
-        document.getElementById("editNumber").value = member.number;
-        document.getElementById("editAadhar").value = member.aadhar;
-        document.getElementById("editAddress").value = member.address;
-        document.getElementById("editTshirt").value = member.tshirt;
-        document.getElementById("editShorts").value = member.shorts;
-
-        // Show modal
-        let modal = new bootstrap.Modal(
-          document.getElementById("editMemberModal")
-        );
-        modal.show();
+        // Simply redirect to addMember page in edit mode
+        window.location.href = `addMember.html?edit=${index}`;
       }
-
-      // Handle Save Changes
-      document
-        .getElementById("editMemberForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          let index = document.getElementById("editIndex").value;
-
-          // Update member object
-          members[index] = {
-            name: document.getElementById("editName").value,
-            surname: document.getElementById("editSurname").value,
-            number: document.getElementById("editNumber").value,
-            aadhar: document.getElementById("editAadhar").value,
-            address: document.getElementById("editAddress").value,
-            tshirt: document.getElementById("editTshirt").value,
-            shorts: document.getElementById("editShorts").value,
-          };
-
-          // Save back to localStorage
-          localStorage.setItem("members", JSON.stringify(members));
-
-          // Refresh table
-          renderMembers();
-
-          // Hide modal
-          bootstrap.Modal.getInstance(
-            document.getElementById("editMemberModal")
-          ).hide();
-        });
     </script>
   </body>
 </html>
