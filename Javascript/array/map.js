@@ -9,4 +9,3 @@ console.log(updatedData);
 // filter
 let filteredData = data.filter((el) => el < 50);
 console.log(filteredData);
-

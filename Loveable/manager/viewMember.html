@@ -173,7 +173,7 @@
     <div class="sidebar">
       <div class="nav-section">
         <h5>Manager Panel</h5>
-        <a href="admin.html">
+        <a href="manager.html">
           <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
         >
         <a href="viewMember.html" class="active">
@@ -223,6 +223,7 @@
 
             <tbody id="membersTableBody"></tbody>
           </table>
+          <div id="pagination" class="mt-3"></div>
         </div>
       </div>
     </div>
@@ -252,6 +253,10 @@
     </script>
 
     <script>
+      let currentPage = 1;
+      const itemsPerPage = 10;
+      let allMembers = [];
+
       function logout() {
         localStorage.removeItem("isAdmin");
         window.location.href = "../index.html";
@@ -269,45 +274,108 @@
         const tbody = document.getElementById("membersTableBody");
         tbody.innerHTML = "";
 
-        members.forEach((member, index) => {
+        // Pagination slice
+        const start = (currentPage - 1) * itemsPerPage;
+        const paginatedMembers = members.slice(start, start + itemsPerPage);
+
+        paginatedMembers.forEach((member, index) => {
           const fullName = `${member.firstName} ${member.lastName}`;
           const initials = getInitials(fullName);
 
           const row = document.createElement("tr");
           row.innerHTML = `
-      <td>
-        <div class="member-name">
-          <div class="initial-circle">${initials}</div>
-          ${fullName}
-        </div>
-      </td>
-      <td>${member.phone || ""}</td>
-      <td>${member.aadhar || ""}</td>
-      <td class="actions">
-  
- <button class="btn btn-sm text-muted" onclick="openDetails(${index})" title="View">
-  <i class="bi bi-eye"></i>
-</button>
-
-        <button class="btn btn-sm  edit-btn action-btn text-muted" onclick="editMember(${index})" title="Edit">
-  <i class="bi bi-pencil"></i>
-</button>
-
-        <button class="btn btn-sm  text-muted" onclick="deleteMember(${index})" title="Delete">
-          <i class="bi bi-trash"></i>
-        </button>
-      </td>
-    `;
+        <td>
+          <div class="member-name">
+            <div class="initial-circle">${initials}</div>
+            ${fullName}
+          </div>
+        </td>
+        <td>${member.phone || ""}</td>
+        <td>${member.aadhar || ""}</td>
+        <td class="actions">
+          <button class="btn btn-sm text-muted" onclick="openDetails(${
+            start + index
+          })" title="View">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="btn btn-sm text-muted" onclick="editMember(${
+            start + index
+          })" title="Edit">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-sm text-muted" onclick="deleteMember(${
+            start + index
+          })" title="Delete">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      `;
           tbody.appendChild(row);
         });
 
         document.getElementById("memberCount").innerText = members.length;
+        renderPagination(members);
+      }
+
+      function renderPagination(members) {
+        const totalPages = Math.ceil(members.length / itemsPerPage);
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+
+        // Back to First
+        if (currentPage > 1) {
+          const firstBtn = document.createElement("button");
+          firstBtn.innerText = "⏮ First";
+          firstBtn.className = "btn btn-sm btn-outline-primary me-1";
+          firstBtn.onclick = () => {
+            currentPage = 1;
+            renderMembers(allMembers);
+          };
+          pagination.appendChild(firstBtn);
+        }
+
+        // Previous
+        if (currentPage > 1) {
+          const prevBtn = document.createElement("button");
+          prevBtn.innerText = "◀ Prev";
+          prevBtn.className = "btn btn-sm btn-outline-primary me-1";
+          prevBtn.onclick = () => {
+            currentPage--;
+            renderMembers(allMembers);
+          };
+          pagination.appendChild(prevBtn);
+        }
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement("button");
+          pageBtn.innerText = i;
+          pageBtn.className = `btn btn-sm me-1 ${
+            i === currentPage ? "btn-primary" : "btn-outline-primary"
+          }`;
+          pageBtn.onclick = () => {
+            currentPage = i;
+            renderMembers(allMembers);
+          };
+          pagination.appendChild(pageBtn);
+        }
+
+        // Next
+        if (currentPage < totalPages) {
+          const nextBtn = document.createElement("button");
+          nextBtn.innerText = "Next ▶";
+          nextBtn.className = "btn btn-sm btn-outline-primary me-1";
+          nextBtn.onclick = () => {
+            currentPage++;
+            renderMembers(allMembers);
+          };
+          pagination.appendChild(nextBtn);
+        }
       }
 
       function loadAndRenderMembers() {
-        const members = JSON.parse(localStorage.getItem("members") || "[]");
-        window.allMembers = members;
-        renderMembers(members);
+        allMembers = JSON.parse(localStorage.getItem("members") || "[]");
+        renderMembers(allMembers);
 
         document
           .getElementById("searchInput")
@@ -318,15 +386,16 @@
                 .toLowerCase()
                 .includes(searchTerm)
             );
+            currentPage = 1; // reset to first page after search
             renderMembers(filtered);
           });
       }
+
       function openDetails(index) {
         window.location.href = `viewMemberDetails.html?id=${index}`;
       }
 
       function editMember(index) {
-        // Simply redirect to addMember page in edit mode
         window.location.href = `addMember.html?edit=${index}`;
       }
 
@@ -334,16 +403,11 @@
         if (confirm("Are you sure you want to delete this member?")) {
           allMembers.splice(index, 1);
           localStorage.setItem("members", JSON.stringify(allMembers));
-          loadAndRenderMembers();
+          renderMembers(allMembers);
         }
       }
 
       loadAndRenderMembers();
-
-      function editMember(index) {
-        // Simply redirect to addMember page in edit mode
-        window.location.href = `addMember.html?edit=${index}`;
-      }
     </script>
   </body>
 </html>

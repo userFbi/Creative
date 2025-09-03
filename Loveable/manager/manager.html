@@ -158,7 +158,7 @@
     <div class="sidebar">
       <div class="nav-section">
         <h5>Manager Panel</h5>
-        <a href="admin.html" class="active">
+        <a href="manager.html" class="active">
           <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
         >
         <a href="viewMember.html">
@@ -343,10 +343,13 @@
           div.className = "recent-contact";
           div.innerHTML = `
     <span class="contact-name">${u.firstName} ${u.lastName}</span>
-    <button class="view-btn" onclick="showContact('${u.firstName}', '${u.lastName}')">
+    <button class="view-btn" onclick="window.location.href='viewmemberdetails.html?id=${members.indexOf(
+      u
+    )}'">
       <i class="bi bi-eye"></i>
     </button>
   `;
+
           recentEl.appendChild(div);
         });
       }
