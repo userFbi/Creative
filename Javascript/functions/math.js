@@ -27,3 +27,5 @@ Math.tan(Math.PI / 4); // 1
 Math.PI; // 3.141592...
 Math.E; // 2.718 (Euler's number)
 Math.SQRT2; // 1.414 (square root of 2)
+
+// 1422.22px x 605.56px
