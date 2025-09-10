@@ -9,7 +9,7 @@ getMonth();
 getSeconds();
 getTime();
 
-// 🔹 Creating Date Objects
+// Creating Date Objects
 let now = new Date(); // Current date & time
 let d1 = new Date("2025-08-21"); // Specific date
 let d2 = new Date(2025, 7, 21, 10); // Year, Month(0-11), Day, Hour

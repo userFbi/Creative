@@ -28,4 +28,4 @@ dataArray.map((el, index) => {
   sum += Number(el);
 });
 console.log("Stroded Array:", dataArray);
-console.log("Sum Of Entered Values:",sum);
+console.log("Sum Of Entered Values:", sum);
