@@ -24,3 +24,32 @@
 - AUTHOR SECTION  
 - JOIN-GROUP SECTION 
 - FOOTER SECTION  
+
+
+project-root/
+│
+├── index.html                ← main entry (like Routes in React)
+│
+├── pages/                    ← all page-level HTML files
+│   ├── dashboard.html        ← Dashboard (DashboardOverview.jsx → converted)
+│   ├── add-transaction.html  ← Add Transaction page
+│   ├── financial-reports.html← Financial Reports page
+│
+├── components/               ← reusable UI parts
+│   ├── metric-card.html      ← MetricCard.jsx converted
+│   ├── quick-actions.html    ← QuickActions.jsx converted
+│   ├── recent-transactions.html ← RecentTransactions.jsx converted
+│   ├── spending-breakdown.html  ← SpendingBreakdown.jsx converted
+│
+├── assets/                   ← images, icons
+│   ├── logo.png
+│   └── ...
+│
+├── css/                      ← stylesheets
+│   ├── bootstrap.min.css     ← Bootstrap CDN copy (optional if offline)
+│   ├── style.css             ← your custom styles
+│
+└── js/                       ← JavaScript
+    ├── bootstrap.bundle.min.js
+    ├── app.js                ← custom scripts
+

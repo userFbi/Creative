@@ -4,276 +4,242 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Festival Finance Dashboard</title>
+    <!-- Bootstrap -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Icons -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
-        font-family: "Inter", sans-serif;
-        background-color: #f9fafb;
-        color: #111827;
-      }
-      .navbar {
-        background: #fff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa;
       }
       .card {
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
       }
-      .card h5 {
-        font-weight: 600;
+      .income {
+        color: #28a745;
       }
-      .value-positive {
-        color: #16a34a;
+      .expense {
+        color: #dc3545;
       }
-      .value-negative {
-        color: #dc2626;
-      }
-      .transaction-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #f1f5f9;
-      }
-      .transaction-item:last-child {
-        border-bottom: none;
-      }
-      .transaction-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
+      .balance {
+        color: #17a2b8;
       }
       .transaction-icon {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 8px;
-        background: #f3f4f6;
-        color: #111827;
+        font-size: 1.2rem;
+        margin-right: 8px;
       }
-      .quick-actions .card {
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-      .quick-actions .card:hover {
-        background: #f9fafb;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      }
-      footer {
-        margin-top: 20px;
-        padding: 15px 0;
-        border-top: 1px solid #e5e7eb;
+      .quick-action-card {
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        padding: 15px;
         text-align: center;
-        font-size: 14px;
-        color: #6b7280;
+        transition: all 0.3s ease;
+      }
+      .quick-action-card:hover {
+        background-color: #f1f3f5;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-      <div class="container-fluid px-4">
-        <a class="navbar-brand fw-bold" href="#">Festival Expense Manager</a>
-        <div>
-          <a href="dashboard.html" class="btn btn-outline-secondary me-2"
-            >Dashboard</a
-          >
-          <a href="add-transaction.html" class="btn btn-outline-secondary me-2"
-            >Add Transaction</a
-          >
-          <a href="reports.html" class="btn btn-outline-secondary">Reports</a>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-3">
+      <a class="navbar-brand fw-bold" href="#"
+        >Festival <span class="text-muted fs-6">Expense Manager</span></a
+      >
+      <div class="ms-auto">
+        <button class="btn btn-success me-2">
+          <i class="fa fa-plus"></i> Add Income
+        </button>
+        <button class="btn btn-danger">
+          <i class="fa fa-minus"></i> Add Expense
+        </button>
       </div>
     </nav>
 
-    <div class="container-fluid px-4 py-4">
+    <!-- Dashboard Content -->
+    <div class="container py-4">
       <!-- Header -->
-      <h2 class="fw-bold mb-2">Festival Finance Dashboard</h2>
-      <p class="text-muted mb-4">
+      <h3 class="fw-bold mb-4">Festival Finance Dashboard</h3>
+      <p class="text-muted">
         Track your celebration expenses and stay within budget
       </p>
 
-      <!-- Top Stats -->
-      <div class="row g-3 mb-4">
+      <!-- Stats Row -->
+      <div class="row mb-4">
         <div class="col-md-4">
-          <div class="card p-3">
-            <h5>Total Income</h5>
-            <h3 class="value-positive">$5,800.00</h3>
-            <small class="value-positive"
+          <div class="card shadow-sm p-3">
+            <h6>Total Income</h6>
+            <h3 class="income">$5,800.00</h3>
+            <small class="text-success"
               >↑ 12.5% Increased from last month</small
             >
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card p-3">
-            <h5>Total Expenses</h5>
-            <h3 class="value-negative">-$1,105.00</h3>
-            <small class="value-negative"
-              >↑ 8.3% Increased from last month</small
-            >
+          <div class="card shadow-sm p-3">
+            <h6>Total Expenses</h6>
+            <h3 class="expense">-$1,105.00</h3>
+            <small class="text-danger">↑ 8.3% Increased from last month</small>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card p-3">
-            <h5>Net Balance</h5>
-            <h3 class="value-positive">$4,695.00</h3>
-            <small class="value-positive"
+          <div class="card shadow-sm p-3">
+            <h6>Net Balance</h6>
+            <h3 class="balance">$4,695.00</h3>
+            <small class="text-success"
               >↑ 15.2% Increased from last month</small
             >
           </div>
         </div>
       </div>
 
-      <!-- Transactions + Chart -->
-      <div class="row g-3 mb-4">
+      <!-- Transactions & Spending -->
+      <div class="row">
+        <!-- Recent Transactions -->
         <div class="col-md-6">
-          <div class="card p-3">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h5>Recent Transactions</h5>
-              <a href="#" class="small">View All</a>
+          <div class="card shadow-sm p-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-bold">Recent Transactions</h6>
+              <a href="#" class="text-decoration-none">View All</a>
             </div>
 
-            <div class="transaction-item">
-              <div class="transaction-left">
-                <div class="transaction-icon">
-                  <i data-feather="dollar-sign"></i>
-                </div>
-                <div>
-                  <div>Monthly Salary - December</div>
-                  <small class="text-muted">Sep 8, 03:30 PM</small>
-                </div>
-              </div>
-              <div class="value-positive">+ $5,000.00</div>
-            </div>
-
-            <div class="transaction-item">
-              <div class="transaction-left">
-                <div class="transaction-icon"><i data-feather="gift"></i></div>
-                <div>
-                  <div>Christmas lights and ornaments</div>
-                  <small class="text-muted">Sep 8, 08:00 PM</small>
-                </div>
-              </div>
-              <div class="value-negative">- $250.00</div>
-            </div>
-
-            <div class="transaction-item">
-              <div class="transaction-left">
-                <div class="transaction-icon">
-                  <i data-feather="shopping-bag"></i>
-                </div>
-                <div>
-                  <div>Holiday dinner ingredients</div>
-                  <small class="text-muted">Sep 8, 10:15 PM</small>
-                </div>
-              </div>
-              <div class="value-negative">- $180.00</div>
-            </div>
-
-            <div class="transaction-item">
-              <div class="transaction-left">
-                <div class="transaction-icon">
-                  <i data-feather="dollar-sign"></i>
-                </div>
-                <div>
-                  <div>Year-end bonus</div>
-                  <small class="text-muted">Sep 7, 02:45 PM</small>
-                </div>
-              </div>
-              <div class="value-positive">+ $500.00</div>
-            </div>
-
-            <a href="#" class="small d-block mt-2">View 2 more transactions</a>
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span
+                  ><i class="fa fa-briefcase text-success transaction-icon"></i>
+                  Monthly Salary - December</span
+                >
+                <span class="text-success">+ $5,000.00</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span
+                  ><i class="fa fa-tree text-danger transaction-icon"></i>
+                  Christmas lights and ornaments</span
+                >
+                <span class="text-danger">- $250.00</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span
+                  ><i class="fa fa-utensils text-danger transaction-icon"></i>
+                  Holiday dinner ingredients</span
+                >
+                <span class="text-danger">- $180.00</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span
+                  ><i class="fa fa-gift text-success transaction-icon"></i>
+                  Year-end bonus</span
+                >
+                <span class="text-success">+ $500.00</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span
+                  ><i class="fa fa-gifts text-danger transaction-icon"></i>
+                  Christmas presents for family</span
+                >
+                <span class="text-danger">- $320.00</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span
+                  ><i class="fa fa-tshirt text-danger transaction-icon"></i> New
+                  Year party outfit</span
+                >
+                <span class="text-danger">- $150.00</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span
+                  ><i
+                    class="fa fa-laptop-code text-success transaction-icon"
+                  ></i>
+                  Website design project</span
+                >
+                <span class="text-success">+ $300.00</span>
+              </li>
+            </ul>
           </div>
         </div>
 
+        <!-- Spending Breakdown -->
         <div class="col-md-6">
-          <div class="card p-3">
-            <h5>Spending Breakdown</h5>
-            <canvas id="spendingChart" height="200"></canvas>
+          <div class="card shadow-sm p-3 mb-4">
+            <h6 class="fw-bold">Spending Breakdown</h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between">
+                <span>🎁 Gifts</span> <span>$320 (29.0%)</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>🎄 Decorations</span> <span>$250 (22.6%)</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>🍽 Food</span> <span>$180 (16.3%)</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>👕 Clothing</span> <span>$150 (13.6%)</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>🎶 Entertainment</span> <span>$120 (10.9%)</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>🚗 Transportation</span> <span>$85 (7.7%)</span>
+              </li>
+            </ul>
+            <div class="mt-3 fw-bold text-end">
+              Total Spending: <span class="expense">$1,105</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Quick Actions -->
-      <div class="row g-3 quick-actions">
+      <div class="row mt-4">
         <div class="col-md-4">
-          <div class="card p-3 text-center">
-            <h6><i data-feather="trending-up"></i> Add Income</h6>
+          <div class="quick-action-card">
+            <i class="fa fa-plus text-success"></i>
+            <h6>Add Income</h6>
             <small>Record money received</small>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card p-3 text-center">
-            <h6><i data-feather="trending-down"></i> Add Expense</h6>
+          <div class="quick-action-card">
+            <i class="fa fa-minus text-danger"></i>
+            <h6>Add Expense</h6>
             <small>Record money spent</small>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card p-3 text-center">
-            <h6><i data-feather="bar-chart-2"></i> View Reports</h6>
+          <div class="quick-action-card">
+            <i class="fa fa-chart-line text-primary"></i>
+            <h6>View Reports</h6>
             <small>Analyze spending patterns</small>
           </div>
         </div>
       </div>
 
-      <div class="d-flex justify-content-between align-items-center mt-4">
-        <button class="btn btn-outline-secondary">Export Data</button>
-        <button class="btn btn-outline-secondary">Transaction History</button>
+      <div class="text-center mt-4">
+        <button class="btn btn-outline-secondary me-2">Export Data</button>
+        <button class="btn btn-outline-dark">Transaction History</button>
       </div>
     </div>
-
-    <footer>© 2025 Festival Expense Manager</footer>
-
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-      feather.replace();
-
-      const ctx = document.getElementById("spendingChart").getContext("2d");
-      new Chart(ctx, {
-        type: "doughnut",
-        data: {
-          labels: [
-            "Gifts",
-            "Decorations",
-            "Food",
-            "Clothing",
-            "Entertainment",
-            "Transportation",
-          ],
-          datasets: [
-            {
-              data: [320, 250, 180, 150, 120, 85],
-              backgroundColor: [
-                "#047857",
-                "#f59e0b",
-                "#ef4444",
-                "#3b82f6",
-                "#8b5cf6",
-                "#6b7280",
-              ],
-              borderWidth: 0,
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            legend: { position: "right" },
-          },
-          cutout: "70%",
-        },
-      });
-    </script>
   </body>
 </html>

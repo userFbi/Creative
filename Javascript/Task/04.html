@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- +1 , -1 , +5 , -5 -->
+    <!-- <button onclick="demo()">`"Count is ", ${count}`</button>   
+        function demo(count) {
+        return count + 1;
+      } 
+    -->
+    <h1 id="count">0</h1>
+    <button onclick="pluseOne()">+1</button>
+    <button onclick="minusOne()">-1</button>
+    <button onclick="pluseFive()">+5</button>
+    <button onclick="minusFive()">-5</button>
+    <script>
+      function pluseOne() {
+        document.getElementById("count").innerHTML = "+1";
+      }
+      function minusOne() {
+        document.getElementById("count").innerHTML = "-1";
+      }
+      function pluseFive() {
+        document.getElementById("count").innerHTML = "+5";
+      }
+      function minusFive() {
+        document.getElementById("count").innerHTML = "-5";
+      }
+    </script>
+  </body>
+</html>

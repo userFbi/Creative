@@ -13,7 +13,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
     />
-    <!-- <link rel="stylesheet" href="../style.css" /> -->
+    <link rel="stylesheet" href="style.css" />
     <style>
       body {
         background-color: #f4f7f9;
@@ -50,64 +50,17 @@
       #spendingChart {
         max-width: 250px;
       }
-
-      .logo-icon {
-        background-color: green;
-        font-family: Inter, sans-serif;
-        font-weight: 400;
-        line-height: 1.5;
-        height: 32px;
-        width: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 20%;
-      }
-      .dropdown-menu.bg-danger .dropdown-item:hover {
-        background-color: #dc3545 !important; /* same red */
-        color: #fff !important; /* keep white text */
-      }
-      .logo-text {
-        font-size: 15px;
-        margin-top: 1px;
-      }
     </style>
   </head>
   <body>
     <nav
-      class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top "
+      class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top"
     >
       <div class="container-fluid">
-        <!-- Left: Logo + Text -->
         <a class="navbar-brand d-flex align-items-center" href="#">
-          <div class="logo-icon me-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-coins"
-            >
-              <circle cx="8" cy="8" r="6"></circle>
-              <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
-              <path d="M7 6h1v4"></path>
-              <path d="m16.71 13.88.7.71-2.82 2.82"></path>
-            </svg>
-          </div>
-          <div class="d-flex flex-column lh-1">
-            <span class="fw-bold">Festival</span>
-            <small class="text-muted fw-normal logo-text"
-              >Expense Manager</small
-            >
-          </div>
+          <img src="https://via.placeholder.com/40" alt="Logo" class="me-2" />
+          <span class="fs-5 fw-bold">Festival Expense Manager</span>
         </a>
-
-        <!-- Mobile Toggler -->
         <button
           class="navbar-toggler"
           type="button"
@@ -119,16 +72,11 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- Center: Navigation -->
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarNav"
-        >
-          <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#"
-                ><i class="bi bi-columns-gap"></i> Dashboard</a
+              <a class="nav-link active" href="#"
+                ><i class="bi bi-speedometer2 me-1"></i> Dashboard</a
               >
             </li>
             <li class="nav-item">
@@ -142,28 +90,22 @@
               >
             </li>
           </ul>
-        </div>
-
-        <!-- Right: Profile -->
-        <div class="d-flex align-items-center">
-          <div class="dropdown ms-3">
-            <a
-              href="#"
-              id="profileDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="bi bi-person-circle fs-4 text-dark"></i>
-            </a>
-            <ul
-              class="dropdown-menu bg-danger dropdown-menu-end"
-              aria-labelledby="profileDropdown"
-            >
-              <li>
-                <a class="dropdown-item text-light" href="#">Logout</a>
-              </li>
-            </ul>
+          <div class="ms-auto d-flex align-items-center">
+            <div class="dropdown ms-3">
+              <a>
+                <i class="bi bi-person-circle fs-4"></i>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdown"
+              >
+                <li>
+                  <a class="dropdown-item text-light bg-danger" href="#"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
