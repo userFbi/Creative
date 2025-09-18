@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main {
+        height: 200px;
+        width: 400px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: black;
+        justify-content: flex-start;
+      }
+      .circle {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+        border-radius: 50%;
+        display: flex;
+        cursor: pointer;
+      }
+      .off {
+        padding-left: 24px;
+        padding-top: 17px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- task :there is box, in that 1 circle on left side named by off color should
+    be red of that circle when i click to that circle it should be dragged to
+    right side color chaged to green and off chaged to on -->
+
+    <div class="main">
+      <div class="circle" onclick="off()"><h2 class="off">OFF</h2></div>
+    </div>
+
+    <script>
+      function off() {
+        let get = document.getElementsByClassName("main");
+        let chageStyle = get.style.justifyContent = "flex-end";
+      }
+    </script>
+  </body>
+</html>

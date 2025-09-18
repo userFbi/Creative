@@ -274,21 +274,57 @@
 
         <form class="join-form">
           <div class="form-row">
-            <input type="text" placeholder="Your Name" required />
+            <input type="text" name="name" placeholder="Your Name" required />
             <input
               type="tel"
+              name="number"
               placeholder="Your Number"
               pattern="[0-9]{10}"
               maxlength="10"
               required
             />
           </div>
-          <textarea placeholder="Your Address" rows="5" required></textarea>
+          <textarea
+            name="address"
+            placeholder="Your Address"
+            rows="5"
+            required
+          ></textarea>
           <button type="submit" class="join-button">Send Message</button>
         </form>
       </div>
     </section>
-    <!-- Join Us End -->
+
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      ;(function () {
+        // ✅ Initialize with your Public Key
+        emailjs.init('SkPoA_5QwGs2euUG4')
+      })()
+
+      document
+        .querySelector('.join-form')
+        .addEventListener('submit', function (e) {
+          e.preventDefault()
+
+          emailjs
+            .send('service_2vc09ja', 'template_fnch9t5', {
+              name: this.name.value,
+              number: this.number.value,
+              address: this.address.value
+            })
+            .then(
+              function (response) {
+                alert('✅ Message sent successfully!')
+              },
+              function (error) {
+                alert('❌ Failed to send message. Please try again.')
+                console.error('Error:', error)
+              }
+            )
+        })
+    </script>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -308,7 +344,7 @@
 
     <script>
       // Set current year automatically
-      document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById('year').textContent = new Date().getFullYear()
     </script>
 
     <!-- Footer End -->
@@ -427,105 +463,105 @@
 
     <!-- Hero Script -->
     <script>
-      let selectedUserType = null;
+      let selectedUserType = null
 
       function openLoginModal() {
-        document.getElementById("modalOverlay").classList.remove("hidden");
-        document.getElementById("accessPortal").classList.remove("hidden");
-        document.body.style.overflow = "hidden";
+        document.getElementById('modalOverlay').classList.remove('hidden')
+        document.getElementById('accessPortal').classList.remove('hidden')
+        document.body.style.overflow = 'hidden'
       }
 
       function openLoginForm(role) {
-        selectedUserType = role;
-        document.getElementById("accessPortal").classList.add("hidden");
-        document.getElementById("loginForm").classList.remove("hidden");
+        selectedUserType = role
+        document.getElementById('accessPortal').classList.add('hidden')
+        document.getElementById('loginForm').classList.remove('hidden')
 
-        document.getElementById("loginTitle").innerText =
-          role === "manager" ? "Manager Login" : "Admin Login";
+        document.getElementById('loginTitle').innerText =
+          role === 'manager' ? 'Manager Login' : 'Admin Login'
 
         // Clear fields and focus username
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
-        document.getElementById("username").focus();
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = ''
+        document.getElementById('username').focus()
       }
 
       function backToSelection() {
-        document.getElementById("loginForm").classList.add("hidden");
-        document.getElementById("accessPortal").classList.remove("hidden");
+        document.getElementById('loginForm').classList.add('hidden')
+        document.getElementById('accessPortal').classList.remove('hidden')
 
         // Clear inputs
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = ''
       }
 
       function closeModal() {
-        document.getElementById("accessPortal").classList.add("hidden");
-        document.getElementById("loginForm").classList.add("hidden");
-        document.getElementById("modalOverlay").classList.add("hidden");
-        document.body.style.overflow = "auto";
+        document.getElementById('accessPortal').classList.add('hidden')
+        document.getElementById('loginForm').classList.add('hidden')
+        document.getElementById('modalOverlay').classList.add('hidden')
+        document.body.style.overflow = 'auto'
 
         // Clear inputs
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = ''
       }
 
       function login(event) {
-        event.preventDefault(); // now it's explicitly passed
+        event.preventDefault() // now it's explicitly passed
 
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
+        const username = document.getElementById('username').value.trim()
+        const password = document.getElementById('password').value.trim()
 
         if (!selectedUserType) {
-          alert("Please choose Admin or Manager before logging in.");
-          return false;
+          alert('Please choose Admin or Manager before logging in.')
+          return false
         }
 
         if (
-          selectedUserType === "admin" &&
-          username === "admin" &&
-          password === "admin"
+          selectedUserType === 'admin' &&
+          username === 'admin' &&
+          password === 'admin'
         ) {
-          window.location.href = "admin/admin.html";
+          window.location.href = 'admin/admin.html'
         } else if (
-          selectedUserType === "manager" &&
-          username === "manager" &&
-          password === "manager"
+          selectedUserType === 'manager' &&
+          username === 'manager' &&
+          password === 'manager'
         ) {
-          window.location.href = "manager/manager.html";
+          window.location.href = 'manager/manager.html'
         } else {
-          alert("Invalid credentials. Please try again.");
+          alert('Invalid credentials. Please try again.')
         }
 
-        return false; // prevent form from submitting
+        return false // prevent form from submitting
       }
 
       function togglePassword() {
-        const passwordInput = document.getElementById("password");
+        const passwordInput = document.getElementById('password')
         passwordInput.type =
-          passwordInput.type === "password" ? "text" : "password";
+          passwordInput.type === 'password' ? 'text' : 'password'
       }
     </script>
 
     <!-- About-us Script -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-      lucide.createIcons();
+      lucide.createIcons()
     </script>
     <!-- About-us Script end -->
 
     <!-- Foundation Script  -->
     <script>
       // founding year
-      const foundingYear = 1988;
+      const foundingYear = 1988
 
       // current year
-      const currentYear = new Date().getFullYear();
+      const currentYear = new Date().getFullYear()
 
       // calculate years
-      const years = currentYear - foundingYear;
+      const years = currentYear - foundingYear
 
       // update dynamically
-      document.getElementById("years").textContent = years + "+";
+      document.getElementById('years').textContent = years + '+'
     </script>
     <!-- Foundation Script End -->
   </body>

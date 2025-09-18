@@ -17,8 +17,8 @@
     <style>
       body {
         background-color: #f4f7f9;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, sans-serif;
       }
 
       .navbar {
@@ -75,7 +75,7 @@
   </head>
   <body>
     <nav
-      class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top "
+      class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top"
     >
       <div class="container-fluid">
         <!-- Left: Logo + Text -->
@@ -392,68 +392,68 @@
       </section>
     </main>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById("spendingChart").getContext("2d");
+      document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('spendingChart').getContext('2d')
 
         const data = {
           labels: [
-            "Gifts",
-            "Decorations",
-            "Food",
-            "Clothing",
-            "Entertainment",
-            "Transportation",
+            'Gifts',
+            'Decorations',
+            'Food',
+            'Clothing',
+            'Entertainment',
+            'Transportation'
           ],
           datasets: [
             {
-              label: "Spending Breakdown",
+              label: 'Spending Breakdown',
               data: [320, 250, 180, 150, 120, 85],
               backgroundColor: [
-                "#ff6384",
-                "#36a2eb",
-                "#ffcd56",
-                "#4bc0c0",
-                "#9966ff",
-                "#ff9f40",
+                '#ff6384',
+                '#36a2eb',
+                '#ffcd56',
+                '#4bc0c0',
+                '#9966ff',
+                '#ff9f40'
               ],
-              hoverOffset: 4,
-            },
-          ],
-        };
+              hoverOffset: 4
+            }
+          ]
+        }
 
         const config = {
-          type: "doughnut",
+          type: 'doughnut',
           data: data,
           options: {
             responsive: true,
             plugins: {
               legend: {
-                display: false,
+                display: false
               },
               tooltip: {
                 callbacks: {
                   label: function (context) {
-                    let label = context.label || "";
+                    let label = context.label || ''
                     if (label) {
-                      label += ": ";
+                      label += ': '
                     }
                     if (context.parsed !== null) {
-                      label += new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(context.parsed);
+                      label += new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD'
+                      }).format(context.parsed)
                     }
-                    return label;
-                  },
-                },
-              },
+                    return label
+                  }
+                }
+              }
             },
-            maintainAspectRatio: false,
-          },
-        };
+            maintainAspectRatio: false
+          }
+        }
 
-        new Chart(ctx, config);
-      });
+        new Chart(ctx, config)
+      })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
