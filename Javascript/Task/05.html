@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Toggle with Buttons</title>
+    <title>Document</title>
     <style>
       .main {
         height: 200px;
@@ -26,7 +26,7 @@
         color: white;
         position: absolute;
         top: 50%;
-        left: 20px; /* default left */
+        left: 20px;
         transform: translateY(-50%);
         transition: left 0.6s ease, background-color 0.6s ease;
         user-select: none;
@@ -40,7 +40,7 @@
       .buttons {
         display: flex;
         gap: 10px;
-        justify-content: flex-start; /* align to left */
+        justify-content: flex-start;
       }
 
       button {
@@ -61,21 +61,19 @@
     </div>
 
     <script>
-      const circle = document.getElementById("circle");
-      const label = document.getElementById("label");
-      const box = document.getElementById("box");
+      const box = document.getElementById('box')
+      const circle = document.getElementById('circle')
+      const label = document.getElementById('label')
 
       function setOn() {
-        const maxX = box.offsetWidth - circle.offsetWidth - 20; // right side
-        circle.style.left = maxX + "px";
-        circle.style.backgroundColor = "green";
-        label.textContent = "ON";
+        circle.style.left = '320px'
+        circle.style.backgroundColor = 'green'
+        label.innerText = 'ON'
       }
-
       function setOff() {
-        circle.style.left = "20px";
-        circle.style.backgroundColor = "red";
-        label.textContent = "OFF";
+        circle.style.left = '20px'
+        circle.style.backgroundColor = 'red'
+        label.innerText = 'OFF'
       }
     </script>
   </body>

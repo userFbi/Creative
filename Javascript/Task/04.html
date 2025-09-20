@@ -26,63 +26,17 @@
 
     <script>
       function counter(value) {
-        let counterElement = document.getElementById("count");
-        let currentValue = Number(counterElement.innerText);
+        let counterElement = document.getElementById('count')
+        let currentValue = Number(counterElement.innerText)
 
-        let newValue = currentValue + value;
+        let newValue = currentValue + value
 
         if (newValue < 0) {
-          newValue = 0;
+          newValue = 0
         }
 
-        counterElement.innerText = newValue;
+        counterElement.innerText = newValue
       }
     </script>
   </body>
 </html>
-
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Counter Example</title>
-    <style>
-      h1 {
-        font-size: 3rem;
-      }
-      button {
-        font-size: 1.5rem;
-        margin: 5px;
-        padding: 10px 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1 id="counter">0</h1>
-
-    <button onclick="updateCounter(1)">+1</button>
-    <button onclick="updateCounter(-1)">-1</button>
-    <button onclick="updateCounter(5)">+5</button>
-    <button onclick="updateCounter(-5)">-5</button>
-
-    <script>
-      function updateCounter(value) {
-        let counterElement = document.getElementById("counter");
-        let currentValue = Number(counterElement.innerText); // convert string to number
-
-        let newValue = currentValue + value;
-
-        // prevent going below 0
-        if (newValue < 0) {
-          newValue = 0;
-        }
-
-        counterElement.innerText = newValue; // update h1
-      }
-    </script>
-  </body>
-</html>
-
--->

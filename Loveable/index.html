@@ -295,35 +295,89 @@
       </div>
     </section>
 
-    <!-- EmailJS Script -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-      ;(function () {
-        // ✅ Initialize with your Public Key
-        emailjs.init('SkPoA_5QwGs2euUG4')
-      })()
+    <!-- Popup Box -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="popup-close">&times;</span>
+        <h3 id="popup-title"></h3>
+        <p id="popup-message"></p>
+      </div>
+    </div>
 
-      document
-        .querySelector('.join-form')
-        .addEventListener('submit', function (e) {
+    <!-- EmailJS Script (keep this) -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <script>
+      // initialize EmailJS
+      emailjs.init('SkPoA_5QwGs2euUG4')
+
+      const form = document.querySelector('.join-form')
+      const submitBtn = form.querySelector('.join-button')
+
+      // Popup helper
+      function showPopup(title, message) {
+        const popup = document.getElementById('popup')
+        const popupTitle = document.getElementById('popup-title')
+        const popupMessage = document.getElementById('popup-message')
+
+        popupTitle.textContent = title
+        popupMessage.textContent = message
+        popup.style.display = 'flex'
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          popup.style.display = 'none'
+        }, 3000)
+      }
+
+      // Close popup manually
+      document.querySelector('.popup-close').onclick = function () {
+        document.getElementById('popup').style.display = 'none'
+      }
+
+      // Submit handler (uses EmailJS)
+      form.addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        const payload = {
+          name: (this.name.value || '').trim(),
+          number: (this.number.value || '').trim(),
+          address: (this.address.value || '').trim()
+        }
+
+        submitBtn.disabled = true
+        submitBtn.textContent = 'Sending...'
+
+        emailjs
+          .send('service_2vc09ja', 'template_fnch9t5', payload)
+          .then(function () {
+            showPopup('✅ Message Sent!', 'Your request was sent successfully!')
+            form.reset()
+          })
+          .catch(function (error) {
+            console.error('EmailJS Error:', error)
+            showPopup('❌ Failed', 'Something went wrong. Please try again.')
+          })
+          .finally(function () {
+            submitBtn.disabled = false
+            submitBtn.textContent = 'Send Message'
+          })
+      })
+
+      // Keyboard handler for Enter key
+      form.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault()
 
-          emailjs
-            .send('service_2vc09ja', 'template_fnch9t5', {
-              name: this.name.value,
-              number: this.number.value,
-              address: this.address.value
-            })
-            .then(
-              function (response) {
-                alert('✅ Message sent successfully!')
-              },
-              function (error) {
-                alert('❌ Failed to send message. Please try again.')
-                console.error('Error:', error)
-              }
+          if (typeof form.requestSubmit === 'function') {
+            form.requestSubmit()
+          } else {
+            form.dispatchEvent(
+              new Event('submit', { bubbles: true, cancelable: true })
             )
-        })
+          }
+        }
+      })
     </script>
 
     <!-- Footer -->
