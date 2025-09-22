@@ -284,6 +284,8 @@
               required
             />
           </div>
+          <input type="email" name="email" placeholder="Your Email" required />
+
           <textarea
             name="address"
             placeholder="Your Address"
@@ -296,11 +298,16 @@
     </section>
 
     <!-- Popup Box -->
-    <div id="popup" class="popup">
+    <div id="popup" class="popup" style="display: none">
       <div class="popup-content">
         <span class="popup-close">&times;</span>
-        <h3 id="popup-title"></h3>
-        <p id="popup-message"></p>
+        <h2 class="popup-brand">kamlaba Garden Sport Club</h2>
+        <hr />
+        <br />
+        <p class="popup-message">
+          Your request is sent. We will connect with you shortly.
+        </p>
+        <p class="popup-thank">Thank you!</p>
       </div>
     </div>
 
@@ -315,14 +322,24 @@
       const submitBtn = form.querySelector('.join-button')
 
       // Popup helper
-      function showPopup(title, message) {
+      function showPopup(type) {
         const popup = document.getElementById('popup')
-        const popupTitle = document.getElementById('popup-title')
-        const popupMessage = document.getElementById('popup-message')
 
-        popupTitle.textContent = title
-        popupMessage.textContent = message
-        popup.style.display = 'flex'
+        // Set popup content based on type
+        if (type === 'success') {
+          popup.querySelector('.popup-brand').textContent =
+            'Kamlaba Garden Sport Club'
+          popup.querySelector('.popup-message').textContent =
+            'Your request is sent. We will connect with you shortly.'
+          popup.querySelector('.popup-thank').textContent = 'Thank you!'
+        } else if (type === 'error') {
+          popup.querySelector('.popup-brand').textContent = 'Oops!'
+          popup.querySelector('.popup-message').textContent =
+            'Something went wrong. Please try again.'
+          popup.querySelector('.popup-thank').textContent = ''
+        }
+
+        document.getElementById('popup').style.display = 'flex'
 
         // Auto hide after 3 seconds
         setTimeout(() => {
@@ -342,7 +359,8 @@
         const payload = {
           name: (this.name.value || '').trim(),
           number: (this.number.value || '').trim(),
-          address: (this.address.value || '').trim()
+          address: (this.address.value || '').trim(),
+          email: (this.email.value || '').trim()
         }
 
         submitBtn.disabled = true
@@ -351,12 +369,12 @@
         emailjs
           .send('service_2vc09ja', 'template_fnch9t5', payload)
           .then(function () {
-            showPopup('✅ Message Sent!', 'Your request was sent successfully!')
             form.reset()
+            showPopup('success')
           })
           .catch(function (error) {
             console.error('EmailJS Error:', error)
-            showPopup('❌ Failed', 'Something went wrong. Please try again.')
+            showPopup('error') // error popup
           })
           .finally(function () {
             submitBtn.disabled = false

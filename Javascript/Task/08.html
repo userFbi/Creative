@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulb On Off</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: rgba(128, 128, 128, 0.678);
+        font-family: Arial, sans-serif;
+      }
+
+      .bulb {
+        width: 120px;
+        height: 120px;
+        background-color: #444;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.6);
+        transition: background-color 0.3s, box-shadow 0.3s;
+      }
+
+      .bulb.on {
+        background-color: yellow;
+        box-shadow: 0 0 30px yellow, 0 0 60px orange;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #007bff;
+        color: white;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bulb" id="bulb"></div>
+    <button id="toggleBtn">Turn On</button>
+
+    <script>
+      const bulb = document.getElementById('bulb')
+      const btn = document.getElementById('toggleBtn')
+
+      btn.addEventListener('click', () => {
+        bulb.classList.toggle('on')
+        if (bulb.classList.contains('on')) {
+          btn.textContent = 'Turn Off'
+        } else {
+          btn.textContent = 'Turn On'
+        }
+      })
+    </script>
+  </body>
+</html>

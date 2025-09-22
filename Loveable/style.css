@@ -845,62 +845,88 @@ h2 span {
 @media (min-width: 993px) {
   /* Everything remains as your original desktop design */
 }
-/* Popup Background */
+/* Popup Background Overlay */
 .popup {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  display: flex; /* Show this when needed */
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Center vertically */
   z-index: 9999;
+  padding: 20px;
 }
 
-/* Popup Content */
+/* Popup Content Box */
 .popup-content {
-  background: gray; /* Change to match your site's main theme color */
+  background: #1e1e1e; /* Dark gray like the image */
   color: #fff;
-  padding: 2rem;
+  padding: 2rem 2.5rem;
   border-radius: 12px;
   max-width: 400px;
-  width: 90%;
+  width: 100%;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
-  animation: popupFadeIn 0.3s ease;
-  font-family: "Arial", sans-serif;
+  animation: popupSlideBounce 0.5s ease forwards;
 }
 
-.popup-content h3 {
+/* Title */
+.popup-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
-  font-size: 1.3rem;
+  text-align: center;
 }
 
-.popup-content p {
+/* Message Text */
+.popup-message {
   font-size: 1rem;
-  margin: 0;
+  color: #cccccc;
+  line-height: 1.6;
 }
 
+/* Thank you Text */
+.popup-thank {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffe082;
+  margin-top: 0.8rem;
+}
+
+/* Close Button */
 .popup-close {
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 15px;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   cursor: pointer;
   color: #fff;
+  transition: transform 0.2s, color 0.2s;
 }
 
 .popup-close:hover {
-  color: #ddd;
+  color: #ffeb3b;
+  transform: rotate(90deg);
 }
 
-@keyframes popupFadeIn {
-  from {
+/* Bounce Animation */
+@keyframes popupSlideBounce {
+  0% {
     opacity: 0;
-    transform: scale(0.95);
+    transform: translateY(-60px);
   }
-  to {
+  60% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(10px);
+  }
+  80% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

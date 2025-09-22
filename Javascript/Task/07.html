@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar Toggle</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <style>
+      .close-icon {
+        font-size: 1.5rem;
+        color: white;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="collapse" id="navbarToggleExternalContent">
+      <div class="bg-dark p-4">
+        <h5 class="text-white h4">Collapsed content</h5>
+        <span class="text-muted">Toggleable via the navbar brand.</span>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleExternalContent"
+          aria-controls="navbarToggleExternalContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+          <span class="close-icon">&times;</span>
+        </button>
+      </div>
+    </nav>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const toggler = document.querySelector('.navbar-toggler')
+      const icon = toggler.querySelector('.navbar-toggler-icon')
+      const closeIcon = toggler.querySelector('.close-icon')
+
+      const collapse = document.getElementById('navbarToggleExternalContent')
+
+      collapse.addEventListener('show.bs.collapse', () => {
+        icon.style.display = 'none'
+        closeIcon.style.display = 'block'
+      })
+
+      collapse.addEventListener('hide.bs.collapse', () => {
+        icon.style.display = 'block'
+        closeIcon.style.display = 'none'
+      })
+    </script>
+  </body>
+</html>
