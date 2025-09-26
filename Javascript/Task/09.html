@@ -52,6 +52,9 @@
         width: 600px;
         border-bottom: 1px solid rgba(128, 128, 128, 0.733);
       }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -63,7 +66,7 @@
     </nav>
 
     <div class="content">
-      <!-- <div class="overview-content">
+      <div class="overview-content hidden">
         <h1>Lorem ipsum dolor</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt,
@@ -89,29 +92,32 @@
           necessitatibus velit quos voluptatum possimus ea at tenetur iusto!
           Quia, autem?
         </p>
-      </div> -->
-      <!-- <div class="course-content">
+      </div>
+      <div class="course-content hidden">
         <ul>
-          <li>Photoshop</li>
-          <li>Illustrator</li>
-          <li>Figma</li>
-          <li>Getting Familiar with HTML</li>
-          <li>Make IT Beautiful with CSS / CSS3</li>
-          <li>Bootstrap Responsive Layout</li>
+          <li><i class="bi bi-chevron-down"></i> Photoshop</li>
+          <li><i class="bi bi-chevron-down"></i> Illustrator</li>
+          <li><i class="bi bi-chevron-down"></i> Figma</li>
+          <li><i class="bi bi-chevron-down"></i> Getting Familiar with HTML</li>
+          <li>
+            <i class="bi bi-chevron-down"></i> Make IT Beautiful with CSS / CSS3
+          </li>
+          <li>
+            <i class="bi bi-chevron-down"></i> Bootstrap Responsive Layout
+          </li>
         </ul>
-      </div> -->
-      <!-- <div class="career-content">
+      </div>
+      <div class="career-content hidden">
         <ul>
-          <li><i class="bi bi-check-circle"></i>Web designer</li>
-          <li><i class="bi bi-check-circle"></i>Web designer</li>
-          <li><i class="bi bi-check-circle"></i>Web designer</li>
-          <li><i class="bi bi-check-circle"></i>Web designer</li>
-          <li><i class="bi bi-check-circle"></i>Web designer</li>
-          <li><i class="bi bi-check-circle"></i>Web designer</li>
-          <li><i class="bi bi-check-circle"></i>Web designer</li>
+          <li><i class="bi bi-check-circle"></i>Web Designer</li>
+          <li><i class="bi bi-check-circle"></i>UX/UI Designer</li>
+          <li><i class="bi bi-check-circle"></i>Web Developer</li>
+          <li><i class="bi bi-check-circle"></i>Mobile App Developer</li>
+          <li><i class="bi bi-check-circle"></i>Game Developer</li>
+          <li><i class="bi bi-check-circle"></i>Data Analyst</li>
         </ul>
-      </div> -->
-      <!-- <div class="reviews-content">
+      </div>
+      <div class="reviews-content hidden">
         <div class="review-box">
           <strong class="review-name">John Smith</strong>
           <div class="review-stars">★★★★☆</div>
@@ -146,21 +152,27 @@
             Nice design and easy to use. Customer service was also helpful.
           </p>
         </div>
-      </div> -->
+      </div>
     </div>
     <script>
       const navLinks = document.querySelectorAll('nav a')
-      navLinks.forEach(link => {
+      const sections = document.querySelectorAll('.content > div')
+
+      navLinks.forEach((link, index) => {
         link.addEventListener('click', function (event) {
-          event.preventDefault() // stop page from refreshing or jumping
+          event.preventDefault()
 
-          // Remove "active" class from all links
-          navLinks.forEach(link => link.classList.remove('active'))
-
-          // Add "active" class to the clicked link
+          navLinks.forEach(l => l.classList.remove('active'))
           this.classList.add('active')
+
+          sections.forEach(section => section.classList.add('hidden'))
+
+          sections[index].classList.remove('hidden')
         })
       })
+
+      sections.forEach(section => section.classList.add('hidden'))
+      sections[0].classList.remove('hidden')
     </script>
   </body>
 </html>

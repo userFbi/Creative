@@ -16,7 +16,7 @@
     <style>
       body {
         margin: 0;
-        font-family: "Segoe UI", sans-serif;
+        font-family: 'Segoe UI', sans-serif;
         background-color: #f8f9fc;
       }
 
@@ -136,6 +136,14 @@
     </div>
 
     <div class="main-content">
+      <a
+        href="viewMember.html"
+        class="btn btn-light d-inline-flex align-items-center border gap-2 mb-4"
+      >
+        <i class="bi bi-arrow-left"></i>
+        <span>Back to Contacts</span>
+      </a>
+
       <h2 id="formTitle" class="fw-bold">Add New Contact</h2>
       <p id="formSubtitle" class="text-muted">Create a new contact entry</p>
 
@@ -250,176 +258,176 @@
     <script>
       function allowOnlyDigits(input, maxLength) {
         // Only digits, enforce max length
-        input.addEventListener("input", function () {
-          this.value = this.value.replace(/\D/g, "").slice(0, maxLength);
-        });
+        input.addEventListener('input', function () {
+          this.value = this.value.replace(/\D/g, '').slice(0, maxLength)
+        })
 
         // Block non-digit key presses
-        input.addEventListener("keydown", function (e) {
+        input.addEventListener('keydown', function (e) {
           const allowed = [
-            "Backspace",
-            "Delete",
-            "ArrowLeft",
-            "ArrowRight",
-            "Tab",
-            "Home",
-            "End",
-          ];
-          if (allowed.includes(e.key)) return;
-          if (!/^\d$/.test(e.key)) e.preventDefault();
-        });
+            'Backspace',
+            'Delete',
+            'ArrowLeft',
+            'ArrowRight',
+            'Tab',
+            'Home',
+            'End'
+          ]
+          if (allowed.includes(e.key)) return
+          if (!/^\d$/.test(e.key)) e.preventDefault()
+        })
       }
 
       // Apply to Phone (10 digits) and Aadhaar (12 digits)
-      allowOnlyDigits(document.getElementById("phone"), 10);
-      allowOnlyDigits(document.getElementById("aadhar"), 12);
+      allowOnlyDigits(document.getElementById('phone'), 10)
+      allowOnlyDigits(document.getElementById('aadhar'), 12)
 
       // 🔥 Move focus to next field when pressing Enter
       document
-        .querySelectorAll("input, select, textarea")
+        .querySelectorAll('input, select, textarea')
         .forEach((field, index, fields) => {
-          field.addEventListener("keydown", function (e) {
-            if (e.key === "Enter") {
-              e.preventDefault(); // stop auto submit
+          field.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+              e.preventDefault() // stop auto submit
               if (!field.checkValidity()) {
-                field.reportValidity(); // show error
-                return;
+                field.reportValidity() // show error
+                return
               }
-              let next = fields[index + 1];
-              if (next) next.focus();
+              let next = fields[index + 1]
+              if (next) next.focus()
             }
-          });
-        });
+          })
+        })
     </script>
 
     <script>
-      const phoneInput = document.getElementById("phone");
+      const phoneInput = document.getElementById('phone')
 
       // Allow only digits while typing/pasting
-      phoneInput.addEventListener("input", function () {
-        this.value = this.value.replace(/\D/g, "").slice(0, 10);
-      });
+      phoneInput.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 10)
+      })
 
       // Extra: block non-digit keys
-      phoneInput.addEventListener("keydown", function (e) {
+      phoneInput.addEventListener('keydown', function (e) {
         const allowed = [
-          "Backspace",
-          "Delete",
-          "ArrowLeft",
-          "ArrowRight",
-          "Tab",
-          "Home",
-          "End",
-        ];
-        if (allowed.includes(e.key)) return;
-        if (!/^\d$/.test(e.key)) e.preventDefault();
-      });
+          'Backspace',
+          'Delete',
+          'ArrowLeft',
+          'ArrowRight',
+          'Tab',
+          'Home',
+          'End'
+        ]
+        if (allowed.includes(e.key)) return
+        if (!/^\d$/.test(e.key)) e.preventDefault()
+      })
     </script>
 
     <script>
       function logout() {
-        localStorage.removeItem("isAdmin");
-        window.location.href = "../../../index.html";
+        localStorage.removeItem('isAdmin')
+        window.location.href = '../../../index.html'
       }
 
-      const form = document.getElementById("memberForm");
+      const form = document.getElementById('memberForm')
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const params = new URLSearchParams(window.location.search);
-        const editIndex = params.get("edit");
-        const members = JSON.parse(localStorage.getItem("members") || "[]");
+      document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search)
+        const editIndex = params.get('edit')
+        const members = JSON.parse(localStorage.getItem('members') || '[]')
 
         if (editIndex !== null && members[editIndex]) {
-          const m = members[editIndex];
+          const m = members[editIndex]
 
           // Prefill values
-          document.getElementById("firstName").value = m.firstName || "";
-          document.getElementById("lastName").value = m.lastName || "";
-          document.getElementById("phone").value = m.phone || "";
-          document.getElementById("aadhar").value = m.aadhar || "";
-          document.getElementById("address").value = m.address || "";
-          document.getElementById("tshirtSize").value = m.tshirt || "";
-          document.getElementById("shortsSize").value = m.shorts || "";
+          document.getElementById('firstName').value = m.firstName || ''
+          document.getElementById('lastName').value = m.lastName || ''
+          document.getElementById('phone').value = m.phone || ''
+          document.getElementById('aadhar').value = m.aadhar || ''
+          document.getElementById('address').value = m.address || ''
+          document.getElementById('tshirtSize').value = m.tshirt || ''
+          document.getElementById('shortsSize').value = m.shorts || ''
 
           // Change titles
-          document.getElementById("formTitle").textContent = "Edit Contact";
-          document.getElementById("formSubtitle").textContent =
-            "Edit your contact entry";
-          document.getElementById("submitBtn").textContent = "Update Contact";
+          document.getElementById('formTitle').textContent = 'Edit Contact'
+          document.getElementById('formSubtitle').textContent =
+            'Edit your contact entry'
+          document.getElementById('submitBtn').textContent = 'Update Contact'
 
           // Save edit index
-          form.dataset.editIndex = editIndex;
+          form.dataset.editIndex = editIndex
         }
-      });
+      })
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
+      form.addEventListener('submit', function (e) {
+        e.preventDefault()
 
         if (!this.checkValidity()) {
-          e.stopPropagation();
-          this.classList.add("was-validated");
-          return;
+          e.stopPropagation()
+          this.classList.add('was-validated')
+          return
         }
 
-        let members = JSON.parse(localStorage.getItem("members") || "[]");
+        let members = JSON.parse(localStorage.getItem('members') || '[]')
 
         const member = {
-          firstName: document.getElementById("firstName").value.trim(),
-          lastName: document.getElementById("lastName").value.trim(),
-          phone: document.getElementById("phone").value.trim(),
-          aadhar: document.getElementById("aadhar").value.trim(),
-          address: document.getElementById("address").value.trim(),
-          tshirt: document.getElementById("tshirtSize").value.trim(),
-          shorts: document.getElementById("shortsSize").value.trim(),
-          createdAt: new Date().toISOString(),
-        };
+          firstName: document.getElementById('firstName').value.trim(),
+          lastName: document.getElementById('lastName').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          aadhar: document.getElementById('aadhar').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          tshirt: document.getElementById('tshirtSize').value.trim(),
+          shorts: document.getElementById('shortsSize').value.trim(),
+          createdAt: new Date().toISOString()
+        }
 
         if (this.dataset.editIndex !== undefined) {
           // update existing
-          members[this.dataset.editIndex] = member;
+          members[this.dataset.editIndex] = member
         } else {
           // add new
-          members.push(member);
+          members.push(member)
         }
 
-        localStorage.setItem("members", JSON.stringify(members));
+        localStorage.setItem('members', JSON.stringify(members))
 
         // Success alert
-        const alert = document.getElementById("successAlert");
+        const alert = document.getElementById('successAlert')
         alert.textContent =
           this.dataset.editIndex !== undefined
-            ? "Member updated successfully!"
-            : "Member added successfully!";
-        alert.classList.remove("d-none");
-        setTimeout(() => alert.classList.add("d-none"), 2000);
+            ? 'Member updated successfully!'
+            : 'Member added successfully!'
+        alert.classList.remove('d-none')
+        setTimeout(() => alert.classList.add('d-none'), 2000)
 
         if (this.dataset.editIndex === undefined) {
-          this.reset();
-          this.classList.remove("was-validated");
+          this.reset()
+          this.classList.remove('was-validated')
         } else {
-          window.location.href = "viewMember.html";
+          window.location.href = 'viewMember.html'
         }
-      });
-      let editIndex = null;
+      })
+      let editIndex = null
 
       // existing code for checking edit mode
-      const params = new URLSearchParams(window.location.search);
-      if (params.has("edit")) {
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('edit')) {
         // 🔥 use "edit" not "editIndex"
-        editIndex = params.get("edit");
+        editIndex = params.get('edit')
       }
 
       document
-        .getElementById("cancelBtn")
-        .addEventListener("click", function () {
+        .getElementById('cancelBtn')
+        .addEventListener('click', function () {
           if (editIndex !== null) {
             // in edit mode → go back to members list
-            window.location.href = "viewMember.html";
+            window.location.href = 'viewMember.html'
           } else {
             // in add mode → just reset the form
-            document.getElementById("memberForm").reset();
+            document.getElementById('memberForm').reset()
           }
-        });
+        })
     </script>
   </body>
 </html>
