@@ -21,7 +21,6 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-
     <style>
       * {
         margin: 0;
@@ -116,7 +115,7 @@
       }
 
       .orange-text {
-        color: #f59e0b;
+        color: #f59f0b;
       }
 
       .add-expense-btn {
@@ -133,9 +132,15 @@
         font-size: 14px;
         border-radius: 6px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .add-expense-btn button:hover {
+        background-color: #111827;
       }
 
       .form-section {
+        display: none;
         background-color: #f9fafb;
         padding: 20px;
         border-radius: 10px;
@@ -154,6 +159,15 @@
         border-radius: 6px;
         border: 1px solid #d1d5db;
         font-size: 14px;
+        transition: border-color 0.2s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 4px #3b82f6;
       }
 
       .form-actions {
@@ -168,6 +182,7 @@
         border-radius: 6px;
         border: none;
         cursor: pointer;
+        transition: background-color 0.3s ease;
       }
 
       .add-btn {
@@ -175,9 +190,17 @@
         color: white;
       }
 
+      .add-btn:hover {
+        background-color: #111827;
+      }
+
       .cancel-btn {
         background-color: #e5e7eb;
         color: #111827;
+      }
+
+      .cancel-btn:hover {
+        background-color: #d1d5db;
       }
 
       .transaction-history h2 {
@@ -197,6 +220,11 @@
         border-left: 5px solid #d1d5db;
         margin-bottom: 15px;
         border-radius: 8px;
+        transition: box-shadow 0.2s ease;
+      }
+
+      .transaction:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
       .transaction .category {
@@ -238,6 +266,13 @@
       .footer-bar i {
         margin-right: 6px;
       }
+
+      /* Responsive fixes */
+      @media (max-width: 768px) {
+        .stats {
+          flex-direction: column;
+        }
+      }
     </style>
   </head>
   <body>
@@ -269,7 +304,7 @@
         >
           <li class="nav-item">
             <a
-              class="nav-link text-muted px-3 py-1 rounded fw-medium d-flex align-items-center gap-1"
+              class="nav-link text-muted px-3 py-1 rounded fw-medium d-flex align-items-center gap-1 active"
               href="#dashboard"
             >
               <i class="bi bi-speedometer2"></i>
@@ -337,30 +372,8 @@
     <!-- Spacer for fixed navbar -->
     <div style="height: 64px"></div>
 
-    <!-- Mobile Bottom Navigation -->
-    <nav
-      class="custom-nav navbar bg-white fixed-bottom border-top d-md-none py-2"
-    >
-      <div class="container-fluid d-flex justify-content-around">
-        <a href="#dashboard" class="text-center text-primary small">
-          <i class="bi bi-house-door-fill fs-5"></i><br />
-          <span>Dashboard</span>
-        </a>
-        <a href="#add" class="text-center text-muted small">
-          <i class="bi bi-plus-circle fs-5"></i><br />
-          <span>Add</span>
-        </a>
-        <a href="#reports" class="text-center text-muted small">
-          <i class="bi bi-bar-chart-line fs-5"></i><br />
-          <span>Reports</span>
-        </a>
-      </div>
-    </nav>
-
-    <!-- Spacer for fixed navbar -->
-
     <div class="container">
-      <div class="header">
+      <div class="header" id="dashboard">
         <i class="fas fa-calculator"></i>
         <h1>Expense Manager</h1>
         <p>
@@ -372,80 +385,216 @@
       <!-- Stats -->
       <div class="stats">
         <div class="stat-card">
+          <p>Total Balance</p>
+          <h2 id="total-balance">$0.00</h2>
+        </div>
+        <div class="stat-card">
+          <p>Total Income</p>
+          <h2 class="blue-text" id="total-income">$0.00</h2>
+        </div>
+        <div class="stat-card">
           <p>Total Expenses</p>
-          <h2>$20500.00</h2>
-          <p>2 transactions recorded</p>
-        </div>
-        <div class="stat-card">
-          <p>Today's Activity</p>
-          <h2 class="blue-text">$20500.00</h2>
-          <p>2 expenses today</p>
-        </div>
-        <div class="stat-card">
-          <p>Top Category</p>
-          <h2 class="orange-text">$20500.00</h2>
-          <p>Other Expenses</p>
+          <h2 class="orange-text" id="total-expenses">$0.00</h2>
         </div>
       </div>
 
       <!-- Add Expense Button -->
-      <div class="add-expense-btn">
-        <button>+ Add New Expense</button>
+      <div class="add-expense-btn" id="add">
+        <button id="toggle-form-btn">+ Add New Transaction</button>
       </div>
 
       <!-- Expense Form -->
-      <div class="form-section">
+      <div class="form-section" style="display: none">
         <div class="form-group">
-          <input type="text" placeholder="Enter expense description" />
+          <input
+            type="text"
+            id="expense-title"
+            placeholder="Enter transaction title"
+          />
         </div>
         <div class="form-group">
-          <input type="number" placeholder="Amount ($)" />
+          <input type="number" id="expense-amount" placeholder="Amount ($)" />
         </div>
         <div class="form-group">
-          <select>
-            <option>Food & Dining</option>
-            <option>Travel</option>
-            <option>Other Expenses</option>
+          <select id="expense-category">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
           </select>
         </div>
         <div class="form-group">
           <textarea
-            placeholder="Additional details about this expense..."
+            id="expense-details"
+            placeholder="Additional details about this transaction..."
           ></textarea>
         </div>
         <div class="form-actions">
-          <button class="add-btn">Add Expense</button>
-          <button class="cancel-btn">Cancel</button>
+          <button class="add-btn" id="add-expense-btn">Add Transaction</button>
+          <button class="cancel-btn" id="cancel-btn">Cancel</button>
         </div>
       </div>
 
       <!-- Transaction History -->
-      <div class="transaction-history">
-        <h2>Transaction History <span class="record-count">2 records</span></h2>
-
-        <div class="transaction">
-          <div class="category">Other Expenses</div>
-          <div class="title">
-            mat for practice <span class="amount">$20000.00</span>
-          </div>
-          <div class="meta"><i class="far fa-clock"></i> Sep 10, 08:15 AM</div>
-          <p>new things needed.</p>
-        </div>
-
-        <div class="transaction">
-          <div class="category">Other Expenses</div>
-          <div class="title">matki <span class="amount">$500.00</span></div>
-          <div class="meta"><i class="far fa-clock"></i> Sep 10, 08:14 AM</div>
-          <p>2025.</p>
+      <div class="transaction-history" id="reports">
+        <h2>
+          Transaction History
+          <span class="record-count" id="record-count">0 records</span>
+        </h2>
+        <div id="transaction-list">
+          <!-- Transactions will be inserted here dynamically -->
         </div>
       </div>
 
       <!-- Footer bar -->
       <div class="footer-bar">
         <div><i class="fas fa-cloud-showers-heavy"></i> 1 cm of rain Sun</div>
-        <div><i class="fas fa-temperature-high"></i> Hot days ahead</div>
-        <div>ENG | 08:16 | 10-09-2025</div>
+        <div><i class="fas fa-temperature-high"></i> 27°C</div>
+        <div><i class="fas fa-wind"></i> 5 km/h wind</div>
       </div>
     </div>
+
+    <script>
+      // Load transactions from localStorage or start with empty array
+      let transactions = JSON.parse(localStorage.getItem('transactions')) || []
+
+      // Convert transaction date strings back to Date objects
+      transactions = transactions.map(tx => {
+        return { ...tx, date: new Date(tx.date) }
+      })
+
+      const totalBalanceEl = document.getElementById('total-balance')
+      const totalIncomeEl = document.getElementById('total-income')
+      const totalExpensesEl = document.getElementById('total-expenses')
+      const transactionListEl = document.getElementById('transaction-list')
+      const recordCountEl = document.getElementById('record-count')
+
+      const formSection = document.querySelector('.form-section')
+      const toggleFormBtn = document.getElementById('toggle-form-btn')
+      const addExpenseBtn = document.getElementById('add-expense-btn')
+      const cancelBtn = document.getElementById('cancel-btn')
+
+      const expenseTitleInput = document.getElementById('expense-title')
+      const expenseAmountInput = document.getElementById('expense-amount')
+      const expenseCategoryInput = document.getElementById('expense-category')
+      const expenseDetailsInput = document.getElementById('expense-details')
+
+      // Toggle form visibility
+      toggleFormBtn.addEventListener('click', () => {
+        if (
+          formSection.style.display === 'none' ||
+          formSection.style.display === ''
+        ) {
+          formSection.style.display = 'block'
+          toggleFormBtn.style.display = 'none'
+        }
+      })
+
+      cancelBtn.addEventListener('click', () => {
+        formSection.style.display = 'none'
+        toggleFormBtn.style.display = 'block'
+        clearForm()
+      })
+
+      // Format date like "Sep 30, 2025 14:10"
+      function formatDate(date) {
+        const options = {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }
+        return date.toLocaleDateString('en-US', options)
+      }
+
+      // Clear form inputs
+      function clearForm() {
+        expenseTitleInput.value = ''
+        expenseAmountInput.value = ''
+        expenseCategoryInput.value = 'income'
+        expenseDetailsInput.value = ''
+      }
+
+      // Update stats and transactions list
+      function updateUI() {
+        let totalIncome = 0
+        let totalExpenses = 0
+
+        transactionListEl.innerHTML = ''
+
+        transactions.forEach(tx => {
+          if (tx.category === 'income') {
+            totalIncome += tx.amount
+          } else {
+            totalExpenses += tx.amount
+          }
+
+          const transactionEl = document.createElement('div')
+          transactionEl.classList.add('transaction')
+
+          // Color border for income vs expense
+          transactionEl.style.borderLeftColor =
+            tx.category === 'income' ? '#3b82f6' : '#f59e0b'
+
+          transactionEl.innerHTML = `
+            <div class="category">${tx.category}</div>
+            <div class="title">${tx.title}</div>
+            <div class="amount" style="color: ${
+              tx.category === 'income' ? '#3b82f6' : '#f59e0b'
+            }">${tx.category === 'income' ? '+' : '-'}$${tx.amount.toFixed(
+            2
+          )}</div>
+            <div class="meta">${formatDate(tx.date)} ${
+            tx.details ? `| ${tx.details}` : ''
+          }</div>
+          `
+
+          transactionListEl.appendChild(transactionEl)
+        })
+
+        const totalBalance = totalIncome - totalExpenses
+
+        totalBalanceEl.textContent = `$${totalBalance.toFixed(2)}`
+        totalIncomeEl.textContent = `$${totalIncome.toFixed(2)}`
+        totalExpensesEl.textContent = `$${totalExpenses.toFixed(2)}`
+
+        recordCountEl.textContent = `${transactions.length} record${
+          transactions.length !== 1 ? 's' : ''
+        }`
+      }
+
+      // Add new transaction handler
+      addExpenseBtn.addEventListener('click', () => {
+        const title = expenseTitleInput.value.trim()
+        const amount = parseFloat(expenseAmountInput.value)
+        const category = expenseCategoryInput.value
+        const details = expenseDetailsInput.value.trim()
+
+        if (!title || isNaN(amount) || amount <= 0) {
+          alert('Please enter a valid title and amount greater than zero.')
+          return
+        }
+
+        const transaction = {
+          title,
+          amount,
+          category,
+          details,
+          date: new Date()
+        }
+
+        transactions.unshift(transaction)
+
+        // Save to localStorage
+        localStorage.setItem('transactions', JSON.stringify(transactions))
+
+        updateUI()
+        clearForm()
+        formSection.style.display = 'none'
+        toggleFormBtn.style.display = 'block'
+      })
+
+      // Initial UI update on page load
+      updateUI()
+    </script>
   </body>
 </html>
