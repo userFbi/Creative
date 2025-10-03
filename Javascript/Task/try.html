@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title></title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="css/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .item {
+        margin-bottom: 5px;
+      }
+      .deleteBtn {
+        margin-left: 10px;
+      }
+    </style>
   </head>
-  <body></body>
- 
+  <body>
+    <input type="text" id="getData" />
+    <button onclick="addData()">Submit</button>
+
+    <div id="dataList"></div>
+
+    <script>
+      function addData() {
+        const data = document.getElementById('getData').value.trim()
+        if (data === '') return
+
+        // Create a container div for this item
+        const itemDiv = document.createElement('div')
+        itemDiv.className = 'item'
+
+        // Create a span to hold the text
+        const textSpan = document.createElement('span')
+        textSpan.textContent = data
+
+        // Create delete button for this item
+        const deleteBtn = document.createElement('button')
+        deleteBtn.textContent = 'Delete'
+        deleteBtn.className = 'deleteBtn'
+        deleteBtn.onclick = function () {
+          itemDiv.remove() // remove only this item
+        }
+
+        // Append text and button to container
+        itemDiv.appendChild(textSpan)
+        itemDiv.appendChild(deleteBtn)
+
+        // Append container to the main list
+        document.getElementById('dataList').appendChild(itemDiv)
+
+        // Clear input
+        document.getElementById('getData').value = ''
+      }
+    </script>
+  </body>
 </html>
