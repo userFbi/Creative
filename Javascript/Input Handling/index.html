@@ -10,6 +10,7 @@
     <button onclick="change()">Submit</button>
 
     <span id="setData"></span>
+    <span id="editData"></span>
 
     <script>
       function change() {
@@ -17,12 +18,28 @@
 
         document.getElementById(
           'setData'
-        ).innerHTML += `<div> ${data} <button onclick="erase(this)">Delete </button> <br></div>`
+        ).innerHTML += `<div> ${data} <button onclick="erase(this)">Delete </button> <button onClick="edit(this)">Edit</button><br></div>`
 
         document.getElementById('getData').value = ''
       }
       function erase(btn) {
         btn.parentElement.remove()
+      }
+
+      function edit(el) {
+        var parentDiv = el.parentElement
+
+        // Get the current text (excluding the buttons)
+        var text = parentDiv.childNodes[0].textContent.trim()
+
+        // Prompt the user for a new value
+        var newText = prompt('Edit the text:', text)
+
+        // If user entered a new value (didn't press cancel)
+        if (newText !== null) {
+          // Update the innerHTML of the div (rebuild it)
+          parentDiv.innerHTML = `${newText} <button onclick="erase(this)">Delete</button> <button onclick="edit(this)">Edit</button><br>`
+        }
       }
     </script>
   </body>

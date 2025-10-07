@@ -1,404 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Festival Expense Manager</title>
-    <link rel="stylesheet" href="new.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Transaction — Festival Expense Manager</title>
+    <!-- Bootstrap 5 -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Icons -->
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
     <style>
+      :root {
+        --muted: #6b7280;
+        --card-bg: #f8fafb;
+        --accent: #10b981; /* green accent like screenshot */
+        --accent-dark: #0f766e;
+        --surface: #ffffff;
+      }
+      * {
+        box-sizing: border-box;
+      }
       body {
-        background-color: #f4f7f9;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial;
+        background: #f3f4f6;
+        color: #111827;
+      } /* Top nav (simple) */
+      /* Page layout */
+      .page {
+        max-width: 920px;
+        margin: 34px auto;
+        padding: 0 18px;
       }
-
-      .navbar {
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      .heading-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
       }
-
-      .card {
+      .back-btn {
+        color: var(--muted);
         border: none;
+        background: transparent;
+        font-size: 18px;
+      }
+      h1.page-title {
+        font-size: 24px;
+        margin: 0;
+        font-weight: 700;
+      } /* Tab pills */
+      .tab-pills {
+        display: flex;
+        gap: 8px;
+        margin: 18px 0 20px;
+      }
+      .pill {
+        padding: 10px 20px;
+        border-radius: 8px;
+        background: #eef2f4;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .pill.active {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12);
+      } /* Form card */
+      .card-form {
+        background: var(--surface);
+        border-radius: 12px;
+        padding: 22px;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+        border: 1px solid #e9eef0;
+      }
+      .form-label {
+        font-weight: 600;
+        color: #111827;
+        font-size: 14px;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .amount-input {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .success-preview {
+        margin-top: 18px;
+        background: #f8fffa;
+        border: 1px solid #dff5e9;
+        padding: 16px;
         border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        display: none;
       }
-
-      .list-group-item {
-        background-color: transparent;
-        border-color: #e9ecef;
+      .success-line {
+        color: var(--accent-dark);
+        font-weight: 700;
+        font-size: 18px;
       }
-
-      .list-group-item:last-child {
-        border-bottom: none;
+      .success-sub {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 6px;
       }
-
-      .color-dot {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
+      .actions {
+        margin-top: 16px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
       }
-
-      #spendingChart {
-        max-width: 250px;
+      .btn-ghost {
+        background: transparent;
+        border: none;
+        color: var(--muted);
+      }
+      @media (max-width: 720px) {
+        .page {
+          padding: 12px;
+          margin-top: 12px;
+        }
+        .tab-pills {
+          flex-wrap: wrap;
+        }
       }
     </style>
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src="https://via.placeholder.com/40" alt="Logo" class="me-2" />
-          <span class="fs-5 fw-bold">Festival Expense Manager</span>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+    <main class="page">
+      <!-- Heading -->
+      <div class="heading-row">
+        <button class="back-btn" id="backBtn" title="Back to dashboard">
+          <i class="bi bi-arrow-left"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="#"
-                ><i class="bi bi-speedometer2 me-1"></i> Dashboard</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"
-                ><i class="bi bi-plus-circle me-1"></i> Add Transaction</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"
-                ><i class="bi bi-bar-chart me-1"></i> Reports</a
-              >
-            </li>
-          </ul>
-          <div class="ms-auto d-flex align-items-center">
-            <div class="dropdown ms-3">
-              <a>
-                <i class="bi bi-person-circle fs-4"></i>
-              </a>
-              <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="profileDropdown"
-              >
-                <li>
-                  <a class="dropdown-item text-light bg-danger" href="#"
-                    >Logout</a
-                  >
-                </li>
-              </ul>
-            </div>
+        <div>
+          <h1 class="page-title" id="pageTitle">Add Income</h1>
+          <div class="muted" id="pageSubtitle">
+            Record money received during festival celebrations
           </div>
         </div>
       </div>
-    </nav>
-
-    <main class="container-fluid mt-5 pt-5">
-      <header class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="fs-3 fw-bold">Festival Finance Dashboard</h1>
-      </header>
-
-      <section class="row g-4 mb-4">
-        <div class="col-md-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                <h5 class="card-title text-muted">Total Income</h5>
-                <span class="text-success"
-                  ><i class="bi bi-graph-up-arrow"></i> 12.5%</span
-                >
-              </div>
-              <h2 class="card-text fw-bold mt-2">$5,800.00</h2>
-              <small class="text-muted">Increased from last month</small>
+      <!-- Tabs -->
+      <div class="tab-pills" role="tablist">
+        <div class="pill active" data-tab="income" id="tabIncome">
+          <i class="bi bi-graph-up"></i> &nbsp; Income
+        </div>
+        <div class="pill" data-tab="expense" id="tabExpense">
+          <i class="bi bi-graph-down"></i> &nbsp; Expense
+        </div>
+      </div>
+      <!-- Form card -->
+      <div class="card-form">
+        <form id="txForm" novalidate>
+          <input type="hidden" id="txType" value="income" />
+          <!-- Amount row -->
+          <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <div class="input-group">
+              <span class="input-group-text">₹</span>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                class="form-control amount-input"
+                id="amount"
+                placeholder="0.00"
+                required
+              />
+            </div>
+            <div class="muted mt-1">Enter the transaction amount in INR</div>
+          </div>
+          <!-- Date & Source -->
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Date</label>
+              <input type="date" class="form-control" id="date" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Source / Category</label>
+              <select class="form-select" id="source">
+                <option value="" selected disabled>Select source</option>
+                <option>Donation</option>
+                <option>Freelance Work</option>
+                <option>Sale</option>
+                <option>Other</option>
+              </select>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                <h5 class="card-title text-muted">Total Expenses</h5>
-                <span class="text-danger"
-                  ><i class="bi bi-graph-down-arrow"></i> 8.3%</span
-                >
-              </div>
-              <h2 class="card-text fw-bold text-danger mt-2">-$1,105.00</h2>
-              <small class="text-muted">Increased from last month</small>
-            </div>
+          <!-- Description -->
+          <div class="mb-3 mt-3">
+            <label class="form-label">Description</label>
+            <textarea
+              id="description"
+              class="form-control"
+              rows="3"
+              placeholder="Enter description (optional)"
+            ></textarea>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                <h5 class="card-title text-muted">Net Balance</h5>
-                <span class="text-success"
-                  ><i class="bi bi-graph-up-arrow"></i> 15.2%</span
-                >
-              </div>
-              <h2 class="card-text fw-bold mt-2">$4,695.00</h2>
-              <small class="text-muted">Increased from last month</small>
-            </div>
+          <!-- Buttons -->
+          <div class="actions">
+            <button type="button" id="saveBtn" class="btn btn-success">
+              Save Transaction
+            </button>
+            <button
+              type="button"
+              id="saveAddBtn"
+              class="btn btn-outline-success"
+            >
+              Save &amp; Add Another
+            </button>
+            <button type="button" id="cancelBtn" class="btn btn-ghost">
+              Cancel
+            </button>
           </div>
-        </div>
-      </section>
-
-      <section class="row g-4">
-        <div class="col-lg-6">
-          <div class="card h-100">
-            <div class="card-body">
+          <!-- Success preview / message -->
+          <div
+            class="success-preview"
+            id="successPreview"
+            role="status"
+            aria-live="polite"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div>
+                <div class="success-line" id="successTitle">Income Added</div>
+                <div class="muted" id="successDate">Tue, Oct 7, 2025</div>
+              </div>
+              <div style="text-align: right">
+                <div
+                  style="
+                    font-weight: 800;
+                    color: var(--accent-dark);
+                    font-size: 18px;
+                  "
+                  id="successAmount"
+                >
+                  +₹0.00
+                </div>
+                <div class="muted" id="successSource">Source</div>
+              </div>
+            </div>
+            <div
+              style="
+                margin-top: 12px;
+                border-top: 1px solid #eef2f4;
+                padding-top: 12px;
+              "
+            >
+              <div class="muted" style="margin-bottom: 6px">Description:</div>
+              <div id="successDesc" style="font-size: 14px; color: #111827">
+                —
+              </div>
               <div
-                class="d-flex justify-content-between align-items-center mb-3"
+                style="margin-top: 8px; color: var(--accent); font-weight: 600"
+                id="successMsg"
               >
-                <h5 class="card-title fw-bold">Recent Transactions</h5>
-                <a href="#" class="text-primary text-decoration-none"
-                  >View All</a
-                >
-              </div>
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <h6 class="mb-0">Monthly Salary - December</h6>
-                    <small class="text-muted">Salary • Sep 8, 03:30 PM</small>
-                  </div>
-                  <span class="fw-bold text-success">+$5,000.00</span>
-                </li>
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <h6 class="mb-0">Christmas lights and ornaments</h6>
-                    <small class="text-muted"
-                      >Decorations • Sep 8, 08:00 PM</small
-                    >
-                  </div>
-                  <span class="fw-bold text-danger">-$250.00</span>
-                </li>
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <h6 class="mb-0">Holiday dinner ingredients</h6>
-                    <small class="text-muted">Food • Sep 9, 10:15 PM</small>
-                  </div>
-                  <span class="fw-bold text-danger">-$180.00</span>
-                </li>
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <h6 class="mb-0">Year-end bonus</h6>
-                    <small class="text-muted">Bonus • Sep 7, 02:45 PM</small>
-                  </div>
-                  <span class="fw-bold text-success">+$500.00</span>
-                </li>
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <h6 class="mb-0">Christmas presents for family</h6>
-                    <small class="text-muted">Gifts • Sep 7, 04:50 PM</small>
-                  </div>
-                  <span class="fw-bold text-danger">-$320.00</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title fw-bold mb-3">Spending Breakdown</h5>
-              <div class="row align-items-center">
-                <div class="col-md-5 d-flex justify-content-center">
-                  <canvas id="spendingChart"></canvas>
-                </div>
-                <div class="col-md-7">
-                  <ul class="list-group list-group-flush">
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <span
-                          class="color-dot me-2"
-                          style="background-color: #ff6384"
-                        ></span
-                        >Gifts
-                      </div>
-                      <div>
-                        <span class="fw-bold">$320</span>
-                        <small class="text-muted">29.0%</small>
-                      </div>
-                    </li>
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <span
-                          class="color-dot me-2"
-                          style="background-color: #36a2eb"
-                        ></span
-                        >Decorations
-                      </div>
-                      <div>
-                        <span class="fw-bold">$250</span>
-                        <small class="text-muted">22.6%</small>
-                      </div>
-                    </li>
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <span
-                          class="color-dot me-2"
-                          style="background-color: #ffcd56"
-                        ></span
-                        >Food
-                      </div>
-                      <div>
-                        <span class="fw-bold">$180</span>
-                        <small class="text-muted">16.3%</small>
-                      </div>
-                    </li>
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <span
-                          class="color-dot me-2"
-                          style="background-color: #4bc0c0"
-                        ></span
-                        >Clothing
-                      </div>
-                      <div>
-                        <span class="fw-bold">$150</span>
-                        <small class="text-muted">13.6%</small>
-                      </div>
-                    </li>
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <span
-                          class="color-dot me-2"
-                          style="background-color: #9966ff"
-                        ></span
-                        >Entertainment
-                      </div>
-                      <div>
-                        <span class="fw-bold">$120</span>
-                        <small class="text-muted">10.9%</small>
-                      </div>
-                    </li>
-                    <li
-                      class="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <span
-                          class="color-dot me-2"
-                          style="background-color: #ff9f40"
-                        ></span
-                        >Transportation
-                      </div>
-                      <div>
-                        <span class="fw-bold">$85</span>
-                        <small class="text-muted">7.7%</small>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                <i class="bi bi-record-circle-fill"></i> Transaction saved
+                successfully
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </form>
+      </div>
     </main>
+    <!-- JS -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById("spendingChart").getContext("2d");
-
-        const data = {
-          labels: [
-            "Gifts",
-            "Decorations",
-            "Food",
-            "Clothing",
-            "Entertainment",
-            "Transportation",
-          ],
-          datasets: [
-            {
-              label: "Spending Breakdown",
-              data: [320, 250, 180, 150, 120, 85],
-              backgroundColor: [
-                "#ff6384",
-                "#36a2eb",
-                "#ffcd56",
-                "#4bc0c0",
-                "#9966ff",
-                "#ff9f40",
-              ],
-              hoverOffset: 4,
-            },
-          ],
-        };
-
-        const config = {
-          type: "doughnut",
-          data: data,
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
-                callbacks: {
-                  label: function (context) {
-                    let label = context.label || "";
-                    if (label) {
-                      label += ": ";
-                    }
-                    if (context.parsed !== null) {
-                      label += new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(context.parsed);
-                    }
-                    return label;
-                  },
-                },
-              },
-            },
-            maintainAspectRatio: false,
-          },
-        };
-
-        new Chart(ctx, config);
-      });
+      // DOM refs const tabIncome = document.getElementById('tabIncome') const tabExpense = document.getElementById('tabExpense') const pageTitle = document.getElementById('pageTitle') const pageSubtitle = document.getElementById('pageSubtitle') const txTypeInput = document.getElementById('txType') const backBtn = document.getElementById('backBtn') const amountInput = document.getElementById('amount') const dateInput = document.getElementById('date') const sourceInput = document.getElementById('source') const descInput = document.getElementById('description') const saveBtn = document.getElementById('saveBtn') const saveAddBtn = document.getElementById('saveAddBtn') const cancelBtn = document.getElementById('cancelBtn') const successPreview = document.getElementById('successPreview') const successTitle = document.getElementById('successTitle') const successDate = document.getElementById('successDate') const successAmount = document.getElementById('successAmount') const successSource = document.getElementById('successSource') const successDesc = document.getElementById('successDesc') const successMsg = document.getElementById('successMsg') // Init date to today function setTodayDateInput() { const today = new Date() const yyyy = today.getFullYear() const mm = String(today.getMonth() + 1).padStart(2, '0') const dd = String(today.getDate()).padStart(2, '0') dateInput.value = ${yyyy}-${mm}-${dd} } setTodayDateInput() // Tab switch function activateTab(tab) { if (tab === 'income') { tabIncome.classList.add('active') tabExpense.classList.remove('active') pageTitle.textContent = 'Add Income' pageSubtitle.textContent = 'Record money received during festival celebrations' txTypeInput.value = 'income' successTitle.textContent = 'Income Added' } else { tabExpense.classList.add('active') tabIncome.classList.remove('active') pageTitle.textContent = 'Add Expense' pageSubtitle.textContent = 'Record money spent during festival celebrations' txTypeInput.value = 'expense' successTitle.textContent = 'Expense Added' } } tabIncome.addEventListener('click', () => activateTab('income')) tabExpense.addEventListener('click', () => activateTab('expense')) // Back / Cancel goes to dashboard immediately backBtn.addEventListener('click', () => { window.location.href = 'admin.html' }) cancelBtn.addEventListener('click', () => { window.location.href = 'admin.html' }) // Format display for date & amount function formatDisplayDate(d) { try { const dt = new Date(d) const opts = { year: 'numeric', month: 'short', day: 'numeric' } return dt.toLocaleDateString('en-US', opts) } catch (e) { return d } } function formatCurrency(num) { // two decimals, thousands separator return new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num) } // Show success preview with transaction info function showSuccessPreview(tx) { successPreview.style.display = 'block' successDate.textContent = formatDisplayDate(tx.date) successAmount.textContent = (tx.type === 'income' ? '+' : '-') + '₹' + formatCurrency(tx.amount) successSource.textContent = tx.source || '—' successDesc.textContent = tx.description || '—' // small animation successPreview.animate( [ { opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'translateY(0)' } ], { duration: 220, easing: 'ease-out' } ) } // Save to localStorage (keeps single array 'transactions') function saveTransactionToStorage(tx) { const key = 'transactions' const raw = localStorage.getItem(key) let arr = raw ? JSON.parse(raw) : [] // store date as ISO string for portability arr.unshift({ ...tx, date: new Date(tx.date).toISOString() }) localStorage.setItem(key, JSON.stringify(arr)) } // Build transaction object from form (with validation) function collectTransaction() { const amount = parseFloat(amountInput.value) if (!amount || amount <= 0 || isNaN(amount)) { alert('Please enter a valid amount greater than 0.') return null } const dateVal = dateInput.value if (!dateVal) { alert('Please select a date.') return null } const tx = { type: txTypeInput.value, // 'income' or 'expense' amount: Math.round(amount * 100) / 100, date: dateVal, source: sourceInput.value || '', description: descInput.value.trim() || '' } return tx } // Save normal: show preview 5s then redirect to dashboard.html saveBtn.addEventListener('click', () => { const tx = collectTransaction() if (!tx) return saveTransactionToStorage(tx) showSuccessPreview(tx) // show 5s then redirect setTimeout(() => { window.location.href = 'dashboard.html' }, 5000) }) // Save & Add Another: show 2.5s message then clear form and keep on page saveAddBtn.addEventListener('click', () => { const tx = collectTransaction() if (!tx) return saveTransactionToStorage(tx) showSuccessPreview(tx) // message visible for 2.5s then clear form and focus amount setTimeout(() => { successPreview.style.display = 'none' // keep same tab active; clear fields amountInput.value = '' descInput.value = '' sourceInput.selectedIndex = 0 setTodayDateInput() amountInput.focus() }, 2500) })( // If user lands on page with query param ?type=expense or ?type=income, switch tab function handleInitialTabFromQuery() { const params = new URLSearchParams(location.search) const t = params.get('type') if (t === 'expense') activateTab('expense') else activateTab('income') } )() // Accessibility: press Enter in amount to trigger Save amountInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault() saveBtn.click() } })
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

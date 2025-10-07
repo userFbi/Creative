@@ -25,7 +25,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-
+    <!-- ₹ -->
     <style>
       * {
         margin: 0;
@@ -144,70 +144,6 @@
 
       .add-expense-btn button:hover {
         background-color: #111827;
-      }
-
-      .form-section {
-        display: none;
-        background-color: #f9fafb;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 30px;
-      }
-
-      .form-group {
-        margin-bottom: 15px;
-      }
-
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-        width: 100%;
-        padding: 12px;
-        border-radius: 6px;
-        border: 1px solid #d1d5db;
-        font-size: 14px;
-        transition: border-color 0.2s ease;
-      }
-
-      .form-group input:focus,
-      .form-group select:focus,
-      .form-group textarea:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 4px #3b82f6;
-      }
-
-      .form-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      .form-actions button {
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 6px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .add-btn {
-        background-color: #1f2937;
-        color: white;
-      }
-
-      .add-btn:hover {
-        background-color: #111827;
-      }
-
-      .cancel-btn {
-        background-color: #e5e7eb;
-        color: #111827;
-      }
-
-      .cancel-btn:hover {
-        background-color: #d1d5db;
       }
 
       .transaction-history h2 {
@@ -403,7 +339,7 @@
           <li class="nav-item">
             <a
               class="nav-link text-muted px-3 py-1 rounded fw-medium d-flex align-items-center gap-1 active"
-              href="#dashboard"
+              href="admin.html"
             >
               <i class="bi bi-speedometer2"></i>
               <span>Dashboard</span>
@@ -412,7 +348,7 @@
           <li class="nav-item">
             <a
               class="nav-link text-muted px-3 py-1 rounded fw-medium d-flex align-items-center gap-1"
-              href="#add"
+              href="add-transaction.html"
             >
               <i class="bi bi-plus-circle"></i>
               <span>Add Transaction</span>
@@ -460,21 +396,21 @@
     >
       <div class="container-fluid d-flex justify-content-around">
         <a
-          href="#dashboard"
+          href="admin.html"
           class="text-center text-primary small d-flex flex-column align-items-center"
         >
           <i class="bi bi-speedometer2 fs-5"></i>
           <span>Dashboard</span>
         </a>
         <a
-          href="#add"
+          href="add-transaction.html"
           class="text-center text-muted small d-flex flex-column align-items-center"
         >
           <i class="bi bi-plus-circle fs-5"></i>
           <span>Add</span>
         </a>
         <a
-          href="#reports"
+          href="admin.html"
           class="text-center text-muted small d-flex flex-column align-items-center"
         >
           <i class="bi bi-bar-chart-line fs-5"></i>
@@ -500,62 +436,24 @@
       <div class="stats">
         <div class="stat-card">
           <p>Total Balance</p>
-          <h2 id="total-balance">$0.00</h2>
+          <h2 id="total-balance">₹0.00</h2>
         </div>
         <div class="stat-card">
           <p>Total Income</p>
-          <h2 class="blue-text" id="total-income">$0.00</h2>
+          <h2 class="blue-text" id="total-income">₹0.00</h2>
         </div>
         <div class="stat-card">
           <p>Total Expenses</p>
-          <h2 class="orange-text" id="total-expenses">$0.00</h2>
+          <h2 class="orange-text" id="total-expenses">₹0.00</h2>
         </div>
       </div>
 
       <!-- Add Expense Button -->
+      <!-- Add Transaction Redirect -->
       <div class="add-expense-btn" id="add">
-        <button id="toggle-form-btn">+ Add New Transaction</button>
-      </div>
-
-      <!-- Expense Form -->
-      <div class="form-section" style="display: none">
-        <div class="form-group">
-          <input
-            type="text"
-            id="expense-title"
-            placeholder="Enter transaction title"
-          />
-        </div>
-        <div class="form-group">
-          <input type="number" id="expense-amount" placeholder="Amount ($)" />
-        </div>
-        <div class="form-group d-flex gap-3">
-          <div class="custom-select-wrapper flex-fill">
-            <select id="festival-name">
-              <option value="Janmashtami">Janmashtami</option>
-              <option value="Ganesh Chaturthi">Ganesh Chaturthi</option>
-            </select>
-            <i class="bi bi-caret-down-fill custom-select-icon"></i>
-          </div>
-          <div class="custom-select-wrapper flex-fill">
-            <select id="transaction-type ">
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
-            </select>
-            <i class="bi bi-caret-down-fill custom-select-icon"></i>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <textarea
-            id="expense-details"
-            placeholder="Additional details about this transaction..."
-          ></textarea>
-        </div>
-        <div class="form-actions">
-          <button class="add-btn" id="add-expense-btn">Add Transaction</button>
-          <button class="cancel-btn" id="cancel-btn">Cancel</button>
-        </div>
+        <a href="add-transaction.html">
+          <button>+ Add New Transaction</button>
+        </a>
       </div>
 
       <!-- Transaction History -->
@@ -574,27 +472,12 @@
         <div class="card-body">
           <h5 class="card-title mb-3">Quick Actions</h5>
           <div class="d-flex gap-3 flex-wrap">
-            <!-- View Reports -->
-            <div class="flex-fill border rounded shadow-sm action-card">
-              <div class="icon-box bg-primary bg-opacity-10">
-                <img
-                  src="https://img.icons8.com/?size=100&id=OWJGHncoeCRu&format=png&color=000000"
-                  alt="reports icon"
-                  class="icon-img"
-                />
-              </div>
-              <div class="action-card-text">
-                <p>View Reports</p>
-                <small>Analyze spending patterns</small>
-              </div>
-            </div>
-
             <!-- Add Income -->
             <div class="flex-fill border rounded shadow-sm action-card">
               <div class="icon-box bg-success bg-opacity-10">
                 <img
-                  src="https://img.icons8.com/?size=100&id=hQk5Uq0h1azR&format=png&color=000000"
-                  alt="income icon"
+                  src="https://img.icons8.com/?size=100&id=OWJGHncoeCRu&format=png&color=000000"
+                  alt="reports icon"
                   class="icon-img"
                 />
               </div>
@@ -608,14 +491,29 @@
             <div class="flex-fill border rounded shadow-sm action-card">
               <div class="icon-box bg-danger bg-opacity-10">
                 <img
-                  src="https://img.icons8.com/?size=100&id=209&format=png&color=000000"
-                  alt="expense icon"
+                  src="https://img.icons8.com/?size=100&id=hQk5Uq0h1azR&format=png&color=000000"
+                  alt="income icon"
                   class="icon-img"
                 />
               </div>
               <div class="action-card-text">
                 <p>Add Expense</p>
                 <small>Log a new expense</small>
+              </div>
+            </div>
+
+            <!-- View Reports -->
+            <div class="flex-fill border rounded shadow-sm action-card">
+              <div class="icon-box bg-primary bg-opacity-10">
+                <img
+                  src="https://img.icons8.com/?size=100&id=88491&format=png&color=000000"
+                  alt="expense icon"
+                  class="icon-img"
+                />
+              </div>
+              <div class="action-card-text">
+                <p>View Reports</p>
+                <small>Analyze spending patterns</small>
               </div>
             </div>
           </div>
@@ -645,33 +543,6 @@
       const transactionListEl = document.getElementById('transaction-list')
       const recordCountEl = document.getElementById('record-count')
 
-      const formSection = document.querySelector('.form-section')
-      const toggleFormBtn = document.getElementById('toggle-form-btn')
-      const addExpenseBtn = document.getElementById('add-expense-btn')
-      const cancelBtn = document.getElementById('cancel-btn')
-
-      const expenseTitleInput = document.getElementById('expense-title')
-      const expenseAmountInput = document.getElementById('expense-amount')
-      const expenseCategoryInput = document.getElementById('expense-category')
-      const expenseDetailsInput = document.getElementById('expense-details')
-
-      // Toggle form visibility
-      toggleFormBtn.addEventListener('click', () => {
-        if (
-          formSection.style.display === 'none' ||
-          formSection.style.display === ''
-        ) {
-          formSection.style.display = 'block'
-          toggleFormBtn.style.display = 'none'
-        }
-      })
-
-      cancelBtn.addEventListener('click', () => {
-        formSection.style.display = 'none'
-        toggleFormBtn.style.display = 'block'
-        clearForm()
-      })
-
       // Format date like "Sep 30, 2025 14:10"
       function formatDate(date) {
         const options = {
@@ -682,14 +553,6 @@
           minute: '2-digit'
         }
         return date.toLocaleDateString('en-US', options)
-      }
-
-      // Clear form inputs
-      function clearForm() {
-        expenseTitleInput.value = ''
-        expenseAmountInput.value = ''
-        expenseCategoryInput.value = 'income'
-        expenseDetailsInput.value = ''
       }
 
       // Update stats and transactions list
@@ -718,7 +581,7 @@
             <div class="title">${tx.title}</div>
             <div class="amount" style="color: ${
               tx.category === 'income' ? '#3b82f6' : '#f59e0b'
-            }">${tx.category === 'income' ? '+' : '-'}$${tx.amount.toFixed(
+            }">${tx.category === 'income' ? '+' : '-'}₹${tx.amount.toFixed(
             2
           )}</div>
             <div class="meta">${formatDate(tx.date)} ${
@@ -731,45 +594,14 @@
 
         const totalBalance = totalIncome - totalExpenses
 
-        totalBalanceEl.textContent = `$${totalBalance.toFixed(2)}`
-        totalIncomeEl.textContent = `$${totalIncome.toFixed(2)}`
-        totalExpensesEl.textContent = `$${totalExpenses.toFixed(2)}`
+        totalBalanceEl.textContent = `₹${totalBalance.toFixed(2)}`
+        totalIncomeEl.textContent = `₹${totalIncome.toFixed(2)}`
+        totalExpensesEl.textContent = `₹${totalExpenses.toFixed(2)}`
 
         recordCountEl.textContent = `${transactions.length} record${
           transactions.length !== 1 ? 's' : ''
         }`
       }
-
-      // Add new transaction handler
-      addExpenseBtn.addEventListener('click', () => {
-        const title = expenseTitleInput.value.trim()
-        const amount = parseFloat(expenseAmountInput.value)
-        const category = expenseCategoryInput.value
-        const details = expenseDetailsInput.value.trim()
-
-        if (!title || isNaN(amount) || amount <= 0) {
-          alert('Please enter a valid title and amount greater than zero.')
-          return
-        }
-
-        const transaction = {
-          title,
-          amount,
-          category,
-          details,
-          date: new Date()
-        }
-
-        transactions.unshift(transaction)
-
-        // Save to localStorage
-        localStorage.setItem('transactions', JSON.stringify(transactions))
-
-        updateUI()
-        clearForm()
-        formSection.style.display = 'none'
-        toggleFormBtn.style.display = 'block'
-      })
 
       // Initial UI update on page load
       updateUI()

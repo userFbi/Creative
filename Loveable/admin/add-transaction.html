@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    :root {
+      --muted: #6b7280;
+      --accent: #10b981;
+      --accent-dark: #059669;
+      --surface: #ffffff;
+    }
+
+    body {
+      background-color: white;
+      color: #111827;
+    }
+    .custom-nav {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+
+    .custom-logo {
+      width: 32px;
+      height: 32px;
+      background-color: #1f2937;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .nav-link {
+      color: #6b7280 !important; /* Inactive: gray */
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link.active {
+      color: #111827 !important; /* Active: black */
+      font-weight: 600;
+    }
+    .nav-link:hover {
+      color: #374151 !important; /* Tailwind's gray-700 */
+    }
+
+    .header {
+      padding-top: 50px; /* space from fixed navbar */
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .header i {
+      font-size: 32px;
+      color: #6b7280;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      flex: 1;
+      background-color: #f3f4f6;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .stat-card h2 {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .stat-card p {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 5px;
+    }
+
+    .blue-text {
+      color: #3b82f6;
+    }
+
+    .orange-text {
+      color: #f59f0b;
+    }
+
+    .add-expense-btn {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .add-expense-btn button {
+      background-color: #1f2937;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-expense-btn button:hover {
+      background-color: #111827;
+    }
+
+    .transaction-history h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .record-count {
+      font-size: 14px;
+      color: #6b7280;
+      float: right;
+    }
+
+    .transaction {
+      background-color: #f9fafb;
+      padding: 15px 20px;
+      border-left: 5px solid #d1d5db;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .transaction:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .transaction .category {
+      font-size: 12px;
+      background-color: #e5e7eb;
+      padding: 4px 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .transaction .title {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .transaction .amount {
+      float: right;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .transaction .meta {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 5px;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 40px;
+      padding-top: 10px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer-bar i {
+      margin-right: 6px;
+    }
+
+    .custom-select-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .custom-select-wrapper select {
+      width: 100%;
+      appearance: none; /* Hide default arrow */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 30px; /* Space for icon */
+      background-color: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      padding: 12px;
+      color: #111827;
+    }
+
+    .custom-select-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .custom-select-wrapper select {
+      color: #6b7280; /* Matches the rest of your form */
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+
+    select option {
+      color: #6b7280;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    select optgroup {
+      color: #9ca3af;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    /* Quick Actions – Gray style */
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #e5e7eb; /* light gray background */
+    }
+
+    .icon-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      filter: grayscale(100%); /* makes icon gray */
+    }
+
+    .action-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 12px;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      background-color: white; /* card background remains white */
+    }
+
+    .action-card:hover {
+      background-color: #f3f4f6; /* slightly darker on hover */
+      transform: translateY(-2px);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .action-card-text p {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      color: #111827; /* dark text */
+    }
+
+    .action-card-text small {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* Responsive fixes */
+    @media (max-width: 768px) {
+      .stats {
+        flex-direction: column;
+      }
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 34px auto;
+      padding: 0 18px;
+    }
+    .heading-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .back-btn {
+      color: var(--muted);
+      border: none;
+      background: transparent;
+      font-size: 18px;
+    }
+    h1.page-title {
+      font-size: 24px;
+      margin: 0;
+      font-weight: 700;
+    } /* Tab pills */
+    .tab-pills {
+      display: flex;
+      gap: 8px;
+      margin: 18px 0 20px;
+    }
+    .pill {
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: #eef2f4;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .pill.active {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12);
+    } /* Form card */
+    .card-form {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+      border: 1px solid #e9eef0;
+    }
+    .form-label {
+      font-weight: 600;
+      color: #111827;
+      font-size: 14px;
+    }
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .amount-input {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .success-preview {
+      margin-top: 18px;
+      background: #f8fffa;
+      border: 1px solid #dff5e9;
+      padding: 16px;
+      border-radius: 10px;
+      display: none;
+    }
+    .success-line {
+      color: var(--accent-dark);
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .success-sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+    }
+    @media (max-width: 720px) {
+      .page {
+        padding: 12px;
+        margin-top: 12px;
+      }
+      .tab-pills {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+  <body>
+    <!-- Navigation Bar -->
+    <nav
+      class="custom-nav navbar navbar-expand-md bg-white shadow-sm border-bottom fixed-top px-3"
+    >
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
+        <!-- Left: Logo -->
+        <div class="d-flex align-items-center gap-2">
+          <div class="custom-logo">
+            <i class="bi bi-coin"></i>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="fw-bold text-dark" style="font-size: 16px">KGSC</span>
+            <!-- <span class="text-muted small" style="margin-top: -4px"
+              >Expense Manager</span
+            > -->
+          </div>
+        </div>
+
+        <!-- Center: Navigation Items -->
+        <ul
+          class="navbar-nav d-none d-md-flex align-items-center gap-3 mx-auto"
+        >
+          <li class="nav-item">
+            <a
+              class="nav-link text-muted px-3 py-1 rounded fw-medium d-flex align-items-center gap-1"
+              href="admin.html"
+            >
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-muted px-3 py-1 rounded fw-medium d-flex align-items-center gap-1 active"
+              href="add-transaction.html"
+            >
+              <i class="bi bi-plus-circle"></i>
+              <span>Add Transaction</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-muted px-3 py-1 rounded fw-medium d-flex align-items-center gap-1"
+              href="#reports"
+            >
+              <i class="bi bi-bar-chart-line"></i>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Right: Profile Dropdown (No arrow) -->
+        <div class="dropdown d-none d-md-flex">
+          <button
+            class="btn btn-light rounded-circle ms-3"
+            type="button"
+            id="profileDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-person text-muted"></i>
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="profileDropdown"
+          >
+            <li>
+              <a class="dropdown-item text-danger" href="../index.html">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav
+      class="custom-nav navbar bg-white fixed-bottom border-top d-md-none py-2"
+    >
+      <div class="container-fluid d-flex justify-content-around">
+        <a
+          href="admin.html"
+          class="text-center text-primary small d-flex flex-column align-items-center"
+        >
+          <i class="bi bi-speedometer2 fs-5"></i>
+          <span>Dashboard</span>
+        </a>
+        <a
+          href="add-transaction.html"
+          class="text-center text-primary small d-flex flex-column align-items-center"
+        >
+          <i class="bi bi-plus-circle fs-5"></i>
+          <span>Add</span>
+        </a>
+
+        <a
+          href="admin.html"
+          class="text-center text-muted small d-flex flex-column align-items-center"
+        >
+          <i class="bi bi-bar-chart-line fs-5"></i>
+          <span>Reports</span>
+        </a>
+      </div>
+    </nav>
+    <!-- Spacer for fixed navbar -->
+    <div style="height: 64px"></div>
+
+    <main class="page">
+      <!-- Heading -->
+      <div class="heading-row">
+        <button class="back-btn" id="backBtn" title="Back to dashboard">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div>
+          <h1 class="page-title" id="pageTitle">Add Income</h1>
+          <div class="muted" id="pageSubtitle">
+            Record money received during festival celebrations
+          </div>
+        </div>
+      </div>
+      <!-- Tabs -->
+      <div class="tab-pills" role="tablist">
+        <div class="pill active" data-tab="income" id="tabIncome">
+          <i class="bi bi-graph-up"></i> &nbsp; Income
+        </div>
+        <div class="pill" data-tab="expense" id="tabExpense">
+          <i class="bi bi-graph-down"></i> &nbsp; Expense
+        </div>
+      </div>
+      <!-- Form card -->
+      <div class="card-form">
+        <form id="txForm" novalidate>
+          <input type="hidden" id="txType" value="income" />
+          <!-- Amount row -->
+          <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <div class="input-group">
+              <span class="input-group-text">₹</span>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                class="form-control amount-input"
+                id="amount"
+                placeholder="0.00"
+                required
+              />
+            </div>
+            <div class="muted mt-1">Enter the transaction amount in INR</div>
+          </div>
+          <!-- Date & Source -->
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Date</label>
+              <input type="date" class="form-control" id="date" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Source / Category</label>
+              <select class="form-select" id="source">
+                <option value="" selected disabled>Select source</option>
+                <option>Donation</option>
+                <option>Freelance Work</option>
+                <option>Sale</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <!-- Description -->
+          <div class="mb-3 mt-3">
+            <label class="form-label">Description</label>
+            <textarea
+              id="description"
+              class="form-control"
+              rows="3"
+              placeholder="Enter description (optional)"
+            ></textarea>
+          </div>
+          <!-- Buttons -->
+          <div class="actions">
+            <button type="button" id="saveBtn" class="btn btn-success">
+              Save Transaction
+            </button>
+            <button
+              type="button"
+              id="saveAddBtn"
+              class="btn btn-outline-success"
+            >
+              Save &amp; Add Another
+            </button>
+            <button type="button" id="cancelBtn" class="btn btn-ghost">
+              Cancel
+            </button>
+          </div>
+          <!-- Success preview / message -->
+          <div
+            class="success-preview"
+            id="successPreview"
+            role="status"
+            aria-live="polite"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div>
+                <div class="success-line" id="successTitle">Income Added</div>
+                <div class="muted" id="successDate">Tue, Oct 7, 2025</div>
+              </div>
+              <div style="text-align: right">
+                <div
+                  style="
+                    font-weight: 800;
+                    color: var(--accent-dark);
+                    font-size: 18px;
+                  "
+                  id="successAmount"
+                >
+                  +₹0.00
+                </div>
+                <div class="muted" id="successSource">Source</div>
+              </div>
+            </div>
+            <div
+              style="
+                margin-top: 12px;
+                border-top: 1px solid #eef2f4;
+                padding-top: 12px;
+              "
+            >
+              <div class="muted" style="margin-bottom: 6px">Description:</div>
+              <div id="successDesc" style="font-size: 14px; color: #111827">
+                —
+              </div>
+              <div
+                style="margin-top: 8px; color: var(--accent); font-weight: 600"
+                id="successMsg"
+              >
+                <i class="bi bi-record-circle-fill"></i> Transaction saved
+                successfully
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <!-- JS -->
+    <script>
+      /* DOM refs const tabIncome = document.getElementById('tabIncome') const tabExpense = document.getElementById('tabExpense') const pageTitle = document.getElementById('pageTitle') const pageSubtitle = document.getElementById('pageSubtitle') const txTypeInput = document.getElementById('txType') const backBtn = document.getElementById('backBtn') const amountInput = document.getElementById('amount') const dateInput = document.getElementById('date') const sourceInput = document.getElementById('source') const descInput = document.getElementById('description') const saveBtn = document.getElementById('saveBtn') const saveAddBtn = document.getElementById('saveAddBtn') const cancelBtn = document.getElementById('cancelBtn') const successPreview = document.getElementById('successPreview') const successTitle = document.getElementById('successTitle') const successDate = document.getElementById('successDate') const successAmount = document.getElementById('successAmount') const successSource = document.getElementById('successSource') const successDesc = document.getElementById('successDesc') const successMsg = document.getElementById('successMsg') // Init date to today function setTodayDateInput() { const today = new Date() const yyyy = today.getFullYear() const mm = String(today.getMonth() + 1).padStart(2, '0') const dd = String(today.getDate()).padStart(2, '0') dateInput.value = ${yyyy}-${mm}-${dd} } setTodayDateInput() // Tab switch function activateTab(tab) { if (tab === 'income') { tabIncome.classList.add('active') tabExpense.classList.remove('active') pageTitle.textContent = 'Add Income' pageSubtitle.textContent = 'Record money received during festival celebrations' txTypeInput.value = 'income' successTitle.textContent = 'Income Added' } else { tabExpense.classList.add('active') tabIncome.classList.remove('active') pageTitle.textContent = 'Add Expense' pageSubtitle.textContent = 'Record money spent during festival celebrations' txTypeInput.value = 'expense' successTitle.textContent = 'Expense Added' } } tabIncome.addEventListener('click', () => activateTab('income')) tabExpense.addEventListener('click', () => activateTab('expense')) // Back / Cancel goes to dashboard immediately backBtn.addEventListener('click', () => { window.location.href = 'admin.html' }) cancelBtn.addEventListener('click', () => { window.location.href = 'admin.html' }) // Format display for date & amount function formatDisplayDate(d) { try { const dt = new Date(d) const opts = { year: 'numeric', month: 'short', day: 'numeric' } return dt.toLocaleDateString('en-US', opts) } catch (e) { return d } } function formatCurrency(num) { // two decimals, thousands separator return new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num) } // Show success preview with transaction info function showSuccessPreview(tx) { successPreview.style.display = 'block' successDate.textContent = formatDisplayDate(tx.date) successAmount.textContent = (tx.type === 'income' ? '+' : '-') + '₹' + formatCurrency(tx.amount) successSource.textContent = tx.source || '—' successDesc.textContent = tx.description || '—' // small animation successPreview.animate( [ { opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'translateY(0)' } ], { duration: 220, easing: 'ease-out' } ) } // Save to localStorage (keeps single array 'transactions') function saveTransactionToStorage(tx) { const key = 'transactions' const raw = localStorage.getItem(key) let arr = raw ? JSON.parse(raw) : [] // store date as ISO string for portability arr.unshift({ ...tx, date: new Date(tx.date).toISOString() }) localStorage.setItem(key, JSON.stringify(arr)) } // Build transaction object from form (with validation) function collectTransaction() { const amount = parseFloat(amountInput.value) if (!amount || amount <= 0 || isNaN(amount)) { alert('Please enter a valid amount greater than 0.') return null } const dateVal = dateInput.value if (!dateVal) { alert('Please select a date.') return null } const tx = { type: txTypeInput.value, // 'income' or 'expense' amount: Math.round(amount * 100) / 100, date: dateVal, source: sourceInput.value || '', description: descInput.value.trim() || '' } return tx } // Save normal: show preview 5s then redirect to dashboard.html saveBtn.addEventListener('click', () => { const tx = collectTransaction() if (!tx) return saveTransactionToStorage(tx) showSuccessPreview(tx) // show 5s then redirect setTimeout(() => { window.location.href = 'dashboard.html' }, 5000) }) // Save & Add Another: show 2.5s message then clear form and keep on page saveAddBtn.addEventListener('click', () => { const tx = collectTransaction() if (!tx) return saveTransactionToStorage(tx) showSuccessPreview(tx) // message visible for 2.5s then clear form and focus amount setTimeout(() => { successPreview.style.display = 'none' // keep same tab active; clear fields amountInput.value = '' descInput.value = '' sourceInput.selectedIndex = 0 setTodayDateInput() amountInput.focus() }, 2500) })( // If user lands on page with query param ?type=expense or ?type=income, switch tab function handleInitialTabFromQuery() { const params = new URLSearchParams(location.search) const t = params.get('type') if (t === 'expense') activateTab('expense') else activateTab('income') } )() // Accessibility: press Enter in amount to trigger Save amountInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault() saveBtn.click() } }) */
+    </script>
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+<script></script>
