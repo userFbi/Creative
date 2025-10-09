@@ -3,40 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Direct Edit Example</title>
   </head>
   <body>
     <input type="text" id="getData" />
-    <button onclick="change()">Submit</button>
+    <button id="submitBtn" onclick="change()">Submit</button>
+
     <div id="setData"></div>
 
     <script>
+      let editTarget = null // to track which div is being edited
+
       function change() {
-        let data = document.getElementById('getData').value
+        const data = document.getElementById('getData').value.trim()
+        if (data === '') return
 
-        if (data !== '') {
-          // create container for text + delete button
-          let item = document.createElement('div')
-          item.style.margin = '5px 0'
-
-          let text = document.createElement('span')
-          text.textContent = data + ' '
-
-          let btn = document.createElement('button')
-          btn.textContent = 'Delete'
-
-          // delete only this item
-          btn.onclick = function () {
-            item.remove()
-          }
-
-          item.appendChild(text)
-          item.appendChild(btn)
-
-          document.getElementById('setData').appendChild(item)
-
+        // If editing an existing entry
+        if (editTarget) {
+          editTarget.querySelector('.text').textContent = data
+          editTarget = null
+          document.getElementById('submitBtn').textContent = 'Submit'
           document.getElementById('getData').value = ''
+          return
         }
+
+        // Add new entry
+        const container = document.createElement('div')
+        container.innerHTML = `
+          <span class="text">${data}</span>
+          <button onclick="erase(this)">Delete</button>
+          <button onclick="edit(this)">Edit</button>
+          <br>
+        `
+        document.getElementById('setData').appendChild(container)
+        document.getElementById('getData').value = ''
+      }
+
+      function erase(btn) {
+        btn.parentElement.remove()
+      }
+
+      function edit(btn) {
+        const parentDiv = btn.parentElement
+        const currentText = parentDiv.querySelector('.text').textContent
+        document.getElementById('getData').value = currentText
+        document.getElementById('submitBtn').textContent = 'Update'
+        editTarget = parentDiv
       }
     </script>
   </body>

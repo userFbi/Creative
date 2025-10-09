@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -302,6 +310,10 @@
       color: #6b7280;
     }
 
+    .heading-p {
+      font-size: 16px !important;
+    }
+
     /* Responsive fixes */
     @media (max-width: 768px) {
       .stats {
@@ -310,7 +322,7 @@
     }
 
     .page {
-      max-width: 920px;
+      max-width: 700px;
       margin: 34px auto;
       padding: 0 18px;
     }
@@ -327,28 +339,47 @@
       font-size: 18px;
     }
     h1.page-title {
-      font-size: 24px;
+      font-size: 27px;
       margin: 0;
       font-weight: 700;
-    } /* Tab pills */
+    }
+
+    /* Tab pills */
+
     .tab-pills {
       display: flex;
-      gap: 8px;
-      margin: 18px 0 20px;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 30px;
     }
+
+    /* Each tab pill */
     .pill {
-      padding: 10px 20px;
-      border-radius: 8px;
-      background: #eef2f4;
-      cursor: pointer;
+      flex: 1; /* makes both stretch equally */
+      text-align: center;
+      background-color: #f3f4f6;
+      padding: 12px 0;
+      border-radius: 6px;
       font-weight: 600;
-      color: var(--muted);
+      cursor: pointer;
+      transition: 0.3s ease;
+      border: 1px solid #e5e7eb;
     }
+
+    /* Active tab */
     .pill.active {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12);
-    } /* Form card */
+      background-color: #10b981;
+      color: #fff;
+      border-color: #16a34a;
+    }
+    /* Red active style for Expense tab */
+    .pill.active.expense {
+      background-color: #dc2626;
+      color: #fff;
+      border-color: #dc2626;
+    }
+
+    /* Form card */
     .card-form {
       background: var(--surface);
       border-radius: 12px;
@@ -398,6 +429,19 @@
       border: none;
       color: var(--muted);
     }
+
+    .card-h {
+      font-weight: bolder;
+      font-size: 18px;
+    }
+
+    .back-arrw {
+      color: gray;
+    }
+
+    .card-h i {
+      color: #10b981;
+    }
     @media (max-width: 720px) {
       .page {
         padding: 12px;
@@ -411,7 +455,7 @@
   <body>
     <!-- Navigation Bar -->
     <nav
-      class="custom-nav navbar navbar-expand-md bg-white shadow-sm border-bottom fixed-top px-3"
+      class="custom-nav navbar navbar-expand-md bg-white shadow-sm border-bottom fixed-top px-4"
     >
       <div
         class="container-fluid d-flex justify-content-between align-items-center"
@@ -519,15 +563,18 @@
     <!-- Spacer for fixed navbar -->
     <div style="height: 64px"></div>
 
+    <!-- Main page -->
     <main class="page">
       <!-- Heading -->
       <div class="heading-row">
         <button class="back-btn" id="backBtn" title="Back to dashboard">
-          <i class="bi bi-arrow-left"></i>
+          <a class="back-arrw" href="admin.html"
+            ><i class="bi bi-arrow-left"></i
+          ></a>
         </button>
         <div>
           <h1 class="page-title" id="pageTitle">Add Income</h1>
-          <div class="muted" id="pageSubtitle">
+          <div class="muted heading-p" id="pageSubtitle">
             Record money received during festival celebrations
           </div>
         </div>
@@ -547,9 +594,11 @@
           <input type="hidden" id="txType" value="income" />
           <!-- Amount row -->
           <div class="mb-3">
+            <h6 class="card-h">
+              <i class="bi bi-graph-up"></i> &nbsp; Income Details
+            </h6>
             <label class="form-label">Amount</label>
             <div class="input-group">
-              <span class="input-group-text">₹</span>
               <input
                 type="number"
                 step="0.01"
@@ -661,6 +710,78 @@
       </div>
     </main>
     <!-- JS -->
+    <script>
+      const tabIncome = document.getElementById('tabIncome')
+      const tabExpense = document.getElementById('tabExpense')
+      const pageTitle = document.getElementById('pageTitle')
+      const pageSubtitle = document.getElementById('pageSubtitle')
+      const txType = document.getElementById('txType')
+      const labelSource = document.querySelector(
+        'label[for="source"], label[for="category"]'
+      )
+      const sourceSelect = document.getElementById('source')
+      const saveBtn = document.getElementById('saveBtn')
+      const saveAddBtn = document.getElementById('saveAddBtn')
+
+      tabIncome.addEventListener('click', () => switchTab('income'))
+      tabExpense.addEventListener('click', () => switchTab('expense'))
+
+      function switchTab(type) {
+        if (type === 'income') {
+          // Tab styling
+          tabIncome.classList.add('active')
+          tabExpense.classList.remove('active', 'expense')
+
+          // Text & form updates
+          pageTitle.textContent = 'Add Income'
+          pageSubtitle.textContent =
+            'Record money received during festival celebrations'
+          txType.value = 'income'
+          labelSource.textContent = 'Source / Category'
+          sourceSelect.innerHTML = `
+        <option value="" selected disabled>Select source</option>
+        <option>Donation</option>
+        <option>Freelance Work</option>
+        <option>Sale</option>
+        <option>Other</option>
+      `
+
+          // Button colors
+          saveBtn.classList.remove('btn-danger')
+          saveBtn.classList.add('btn-success')
+          saveAddBtn.classList.remove('btn-outline-danger')
+          saveAddBtn.classList.add('btn-outline-success')
+        } else {
+          // Tab styling
+          tabExpense.classList.add('active', 'expense')
+          tabIncome.classList.remove('active')
+
+          // Text & form updates
+          pageTitle.textContent = 'Add Expense'
+          pageSubtitle.textContent =
+            'Track your festival spending and categorize expenses'
+          txType.value = 'expense'
+          labelSource.textContent = 'Category'
+          sourceSelect.innerHTML = `
+        <option value="" selected disabled>Select expense category</option>
+        <option>Food</option>
+        <option>Decorations</option>
+        <option>Supplies</option>
+        <option>Other</option>
+      `
+
+          // Button colors
+          saveBtn.classList.remove('btn-success')
+          saveBtn.classList.add('btn-danger')
+          saveAddBtn.classList.remove('btn-outline-success')
+          saveAddBtn.classList.add('btn-outline-danger')
+        }
+      }
+
+      // Initialize to income on page load
+      switchTab('income')
+    </script>
+
     <script>
       /* DOM refs const tabIncome = document.getElementById('tabIncome') const tabExpense = document.getElementById('tabExpense') const pageTitle = document.getElementById('pageTitle') const pageSubtitle = document.getElementById('pageSubtitle') const txTypeInput = document.getElementById('txType') const backBtn = document.getElementById('backBtn') const amountInput = document.getElementById('amount') const dateInput = document.getElementById('date') const sourceInput = document.getElementById('source') const descInput = document.getElementById('description') const saveBtn = document.getElementById('saveBtn') const saveAddBtn = document.getElementById('saveAddBtn') const cancelBtn = document.getElementById('cancelBtn') const successPreview = document.getElementById('successPreview') const successTitle = document.getElementById('successTitle') const successDate = document.getElementById('successDate') const successAmount = document.getElementById('successAmount') const successSource = document.getElementById('successSource') const successDesc = document.getElementById('successDesc') const successMsg = document.getElementById('successMsg') // Init date to today function setTodayDateInput() { const today = new Date() const yyyy = today.getFullYear() const mm = String(today.getMonth() + 1).padStart(2, '0') const dd = String(today.getDate()).padStart(2, '0') dateInput.value = ${yyyy}-${mm}-${dd} } setTodayDateInput() // Tab switch function activateTab(tab) { if (tab === 'income') { tabIncome.classList.add('active') tabExpense.classList.remove('active') pageTitle.textContent = 'Add Income' pageSubtitle.textContent = 'Record money received during festival celebrations' txTypeInput.value = 'income' successTitle.textContent = 'Income Added' } else { tabExpense.classList.add('active') tabIncome.classList.remove('active') pageTitle.textContent = 'Add Expense' pageSubtitle.textContent = 'Record money spent during festival celebrations' txTypeInput.value = 'expense' successTitle.textContent = 'Expense Added' } } tabIncome.addEventListener('click', () => activateTab('income')) tabExpense.addEventListener('click', () => activateTab('expense')) // Back / Cancel goes to dashboard immediately backBtn.addEventListener('click', () => { window.location.href = 'admin.html' }) cancelBtn.addEventListener('click', () => { window.location.href = 'admin.html' }) // Format display for date & amount function formatDisplayDate(d) { try { const dt = new Date(d) const opts = { year: 'numeric', month: 'short', day: 'numeric' } return dt.toLocaleDateString('en-US', opts) } catch (e) { return d } } function formatCurrency(num) { // two decimals, thousands separator return new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num) } // Show success preview with transaction info function showSuccessPreview(tx) { successPreview.style.display = 'block' successDate.textContent = formatDisplayDate(tx.date) successAmount.textContent = (tx.type === 'income' ? '+' : '-') + '₹' + formatCurrency(tx.amount) successSource.textContent = tx.source || '—' successDesc.textContent = tx.description || '—' // small animation successPreview.animate( [ { opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'translateY(0)' } ], { duration: 220, easing: 'ease-out' } ) } // Save to localStorage (keeps single array 'transactions') function saveTransactionToStorage(tx) { const key = 'transactions' const raw = localStorage.getItem(key) let arr = raw ? JSON.parse(raw) : [] // store date as ISO string for portability arr.unshift({ ...tx, date: new Date(tx.date).toISOString() }) localStorage.setItem(key, JSON.stringify(arr)) } // Build transaction object from form (with validation) function collectTransaction() { const amount = parseFloat(amountInput.value) if (!amount || amount <= 0 || isNaN(amount)) { alert('Please enter a valid amount greater than 0.') return null } const dateVal = dateInput.value if (!dateVal) { alert('Please select a date.') return null } const tx = { type: txTypeInput.value, // 'income' or 'expense' amount: Math.round(amount * 100) / 100, date: dateVal, source: sourceInput.value || '', description: descInput.value.trim() || '' } return tx } // Save normal: show preview 5s then redirect to dashboard.html saveBtn.addEventListener('click', () => { const tx = collectTransaction() if (!tx) return saveTransactionToStorage(tx) showSuccessPreview(tx) // show 5s then redirect setTimeout(() => { window.location.href = 'dashboard.html' }, 5000) }) // Save & Add Another: show 2.5s message then clear form and keep on page saveAddBtn.addEventListener('click', () => { const tx = collectTransaction() if (!tx) return saveTransactionToStorage(tx) showSuccessPreview(tx) // message visible for 2.5s then clear form and focus amount setTimeout(() => { successPreview.style.display = 'none' // keep same tab active; clear fields amountInput.value = '' descInput.value = '' sourceInput.selectedIndex = 0 setTodayDateInput() amountInput.focus() }, 2500) })( // If user lands on page with query param ?type=expense or ?type=income, switch tab function handleInitialTabFromQuery() { const params = new URLSearchParams(location.search) const t = params.get('type') if (t === 'expense') activateTab('expense') else activateTab('income') } )() // Accessibility: press Enter in amount to trigger Save amountInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault() saveBtn.click() } }) */
     </script>
