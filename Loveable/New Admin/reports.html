@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f9fc;
+      }
+      .sidebar {
+        width: 220px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #0d1321;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem 1rem;
+      }
+      .nav-section {
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar h5 {
+        padding-left: 10px;
+        font-weight: 500;
+        font-size: 1.5rem; /* similar to h2 size */
+        margin-bottom: 1rem;
+        padding-top: 30px;
+        padding-bottom: 35px;
+        color: #fff;
+        border-bottom: 2px solid #1c2232; /* border separator */
+      }
+
+      .sidebar a {
+        display: block;
+        color: #ccc;
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        margin-bottom: 0.4rem;
+        border-radius: 6px;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        color: #fff;
+        background-color: #1c2232;
+      }
+      .logout-btn {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="nav-section">
+        <h5>Admin Panel</h5>
+        <a href="manager.html" class="active">
+          <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
+        >
+        <a href="viewMember.html">
+          <i class="bi bi-plus-circle me-2"></i>Add Transaction</a
+        >
+        <a href="addMember.html">
+          <i class="bi bi-bar-chart-line me-2"></i>Reports</a
+        >
+      </div>
+      <div class="logout-btn">
+        <a href="#" onclick="logout()" class="text-danger">Logout</a>
+      </div>
+    </div>
+  </body>
+</html>

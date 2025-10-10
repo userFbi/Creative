@@ -9,16 +9,28 @@
     <input type="text" id="getData" />
     <button onclick="change()">Submit</button>
 
-    <span id="setData"></span>
-    <span id="editData"></span>
+    <ul id="setData"></ul>
 
     <script>
+      let editLi = null
       function change() {
         var data = document.getElementById('getData').value
+        
+        var ul = document.getElementById('setData')
 
-        document.getElementById(
-          'setData'
-        ).innerHTML += `<div> ${data} <button onclick="erase(this)">Delete </button> <button onClick="edit(this)">Edit</button><br></div>`
+        if (editLi) {
+          editLi.firstChild.textContent = data + ' '
+          editLi = null
+        } else {
+          var li = document.createElement('li')
+
+          li.innerHTML +=
+            data +
+            '<button onclick= erase(this)>Delete </button>' +
+            '<button onClick=edit(this)>Edit</button><br>'
+
+          ul.appendChild(li)
+        }
 
         document.getElementById('getData').value = ''
       }
@@ -27,19 +39,8 @@
       }
 
       function edit(el) {
-        var parentDiv = el.parentElement
-
-        // Get the current text (excluding the buttons)
-        var text = parentDiv.childNodes[0].textContent.trim()
-
-        // Prompt the user for a new value
-        var newText = prompt('Edit the text:', text)
-
-        // If user entered a new value (didn't press cancel)
-        if (newText !== null) {
-          // Update the innerHTML of the div (rebuild it)
-          parentDiv.innerHTML = `${newText} <button onclick="erase(this)">Delete</button> <button onclick="edit(this)">Edit</button><br>`
-        }
+        editLi = el.parentElement
+        document.getElementById('getData').value = editLi.firstChild.textContent
       }
     </script>
   </body>
