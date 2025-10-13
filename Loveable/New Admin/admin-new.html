@@ -158,13 +158,13 @@
     <div class="sidebar">
       <div class="nav-section">
         <h5>Admin Panel</h5>
-        <a href="manager.html" class="active">
+        <a href="admin-new.html" class="active">
           <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
         >
-        <a href="viewMember.html">
+        <a href="add-transaction.html">
           <i class="bi bi-plus-circle me-2"></i>Add Transaction</a
         >
-        <a href="addMember.html">
+        <a href="reports.html">
           <i class="bi bi-bar-chart-line me-2"></i>Reports</a
         >
       </div>
@@ -176,82 +176,73 @@
     <div class="main-content">
       <h2 class="fw-bold">Dashboard</h2>
       <p class="text-muted">
-        Welcome back! Here's what's happening with your admin panel.
+     Professional expense tracking and management system.
       </p>
 
       <div class="row g-3 mb-4">
-        <!-- Total Contacts -->
-        <div class="col-md-3">
+        <!-- Total Balance -->
+        <div class="col-md-4">
           <div
             class="card-box d-flex justify-content-between align-items-center"
           >
             <div>
-              <p class="text-muted mb-1">Total Contacts</p>
-              <h3 id="totalCount">0</h3>
-              <small class="text-success">+12% from last month</small>
+              <p class="text-muted mb-1">Total Balance</p>
+              <h3 id="totalBalance">₹0</h3>
+              <small class="text-success">Up to date</small>
             </div>
             <div
               class="rounded-circle d-flex justify-content-center align-items-center"
               style="width: 45px; height: 45px; background-color: #e0edff"
             >
-              <i class="bi bi-people fs-4 text-primary"></i>
+              <i class="bi bi-wallet2 fs-4 text-primary"></i>
             </div>
           </div>
         </div>
 
-        <!-- New This Month -->
-        <div class="col-md-3">
+        <!-- Total Income -->
+        <div class="col-md-4">
           <div
             class="card-box d-flex justify-content-between align-items-center"
           >
             <div>
-              <p class="text-muted mb-1">New This Month</p>
-              <h3 id="newThisMonth">0</h3>
-              <small class="text-success">+5% from last month</small>
+              <p class="text-muted mb-1">Total Income</p>
+              <h3 id="totalIncome">₹0</h3>
+              <small class="text-success">+15% from last month</small>
             </div>
             <div
               class="rounded-circle d-flex justify-content-center align-items-center"
               style="width: 45px; height: 45px; background-color: #d9fce5"
             >
-              <i class="bi bi-person-plus fs-4 text-success"></i>
+              <img
+                src="https://img.icons8.com/?size=100&id=OWJGHncoeCRu&format=png&color=198754"
+                alt="income icon"
+                class="icon-img"
+                style="width: 24px; height: 24px"
+              />
             </div>
           </div>
         </div>
 
-        <!-- Recently Viewed -->
-        <div class="col-md-3">
+        <!-- Total Expenses -->
+        <div class="col-md-4">
           <div
             class="card-box d-flex justify-content-between align-items-center"
           >
             <div>
-              <p class="text-muted mb-1">Recently Viewed</p>
-              <h3 id="recentCount">0</h3>
-              <small class="text-success">+8% from last month</small>
+              <p class="text-muted mb-1">Total Expenses</p>
+              <h3 id="totalExpenses">₹0</h3>
+              <small class="text-danger">-8% from last month</small>
             </div>
             <div
               class="rounded-circle d-flex justify-content-center align-items-center"
-              style="width: 45px; height: 45px; background-color: #f0e9ff"
+              style="width: 45px; height: 45px; background-color: #ffe0e0"
             >
-              <i class="bi bi-eye fs-4 text-purple"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Growth Rate -->
-        <div class="col-md-3">
-          <div
-            class="card-box d-flex justify-content-between align-items-center"
-          >
-            <div>
-              <p class="text-muted mb-1">Growth Rate</p>
-              <h3>23%</h3>
-              <small class="text-success">+2% from last month</small>
-            </div>
-            <div
-              class="rounded-circle d-flex justify-content-center align-items-center"
-              style="width: 45px; height: 45px; background-color: #fff3e0"
-            >
-              <i class="bi bi-graph-up-arrow fs-4 text-warning"></i>
+              <img
+                src="https://img.icons8.com/?size=100&id=hQk5Uq0h1azR&format=png&color=ff3b30"
+                alt="expense icon"
+                class="icon-img"
+                style="width: 24px; height: 24px"
+              />
             </div>
           </div>
         </div>

@@ -6,7 +6,8 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="text" id="getData" />
+    <input type="text" id="firstName" placeholder="First Name" />
+    <input type="text" id="lastName" placeholder="last Name" />
     <button onclick="change()">Submit</button>
 
     <ul id="setData"></ul>
@@ -14,25 +15,32 @@
     <script>
       let editLi = null
       function change() {
-        var data = document.getElementById('getData').value
-        
+     
+
+        var firstName = document.getElementById('firstName').value
+        var lastName = document.getElementById('lastName').value
+
         var ul = document.getElementById('setData')
 
         if (editLi) {
-          editLi.firstChild.textContent = data + ' '
+          editLi.firstChild.textContent = firstName + ' '
           editLi = null
         } else {
           var li = document.createElement('li')
 
           li.innerHTML +=
-            data +
+            firstName +
+            '-' +
+            lastName +
+            ' ' +
             '<button onclick= erase(this)>Delete </button>' +
             '<button onClick=edit(this)>Edit</button><br>'
 
           ul.appendChild(li)
         }
 
-        document.getElementById('getData').value = ''
+        document.getElementById('firstName').value = ''
+        document.getElementById('lastName').value = ''
       }
       function erase(btn) {
         btn.parentElement.remove()
@@ -40,7 +48,8 @@
 
       function edit(el) {
         editLi = el.parentElement
-        document.getElementById('getData').value = editLi.firstChild.textContent
+        document.getElementById('firstName').value =
+          editLi.firstChild.textContent
       }
     </script>
   </body>
