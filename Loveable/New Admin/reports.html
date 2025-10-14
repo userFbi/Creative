@@ -171,5 +171,39 @@
         <a href="#" onclick="logout()" class="text-danger">Logout</a>
       </div>
     </div>
+
+    <div class="main-content">
+      <h3>Transactions Report</h3>
+      <div id="reportsDiv"></div>
+    </div>
+
+    <script>
+      const reportsDiv = document.getElementById('reportsDiv')
+
+      // get saved transactions
+      let transactions = JSON.parse(
+        localStorage.getItem('transactions') || '[]'
+      )
+      transactions.forEach((t, index) => {
+        const div = document.createElement('div')
+        div.className = 'recent-contact'
+        div.innerHTML = `
+    <div>
+      <strong>${t.type.toUpperCase()}:</strong> ₹${t.amount} <br>
+      Date: ${t.date} | Source: ${t.source} <br>
+      ${t.description ? 'Desc: ' + t.description : ''}
+    </div>
+    <button class="view-btn" onclick="erase(${index})"><i class="bi bi-eye"></i></button>
+  `
+        reportsDiv.appendChild(div)
+      })
+
+      // delete a transaction
+      function erase(index) {
+        transactions.splice(index, 1)
+        localStorage.setItem('transactions', JSON.stringify(transactions))
+        location.reload()
+      }
+    </script>
   </body>
 </html>
