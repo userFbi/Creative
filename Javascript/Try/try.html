@@ -1,0 +1,43 @@
+<script>
+  let setData = []
+
+  function createData() {
+    const name = document.getElementById('name').value
+    const surname = document.getElementById('surname').value
+
+    const obj = { name, surname }
+    setData.push(obj)
+
+    console.log(setData)
+
+    document.getElementById('name').value = ''
+    document.getElementById('surname').value = ''
+    dataView()
+  }
+
+  function dataView() {
+    let myData = ''
+    setData.map((item, index) => {
+      myData += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.surname}</td>
+            </tr>
+            `
+      document.getElementById('showData').innerHTML = myData
+    })
+  }
+</script>
+
+<input type="text" id="name" /> <br /><br />
+<input type="text" id="surname" /> <br /><br />
+
+<button onclick="createData()">Submit</button><br /><br />
+
+<table border="1">
+  <tr>
+    <td>name</td>
+    <td>surname</td>
+  </tr>
+  <tbody id="showData"></tbody>
+</table>

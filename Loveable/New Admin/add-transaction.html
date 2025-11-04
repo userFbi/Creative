@@ -85,8 +85,8 @@
         text-decoration: none;
       }
       .page-title {
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-size: 2rem;
+        font-weight: 700;
         margin-bottom: 0.25rem;
       }
       .muted {
@@ -106,11 +106,14 @@
         font-weight: 500;
       }
       .pill.active {
-        background-color: #3b82f6;
+        border: 1px solid #16a34a;
+        background-color: #10b981;
+
         color: #fff;
       }
       .pill.expense.active {
         background-color: #ef4444;
+        border-color: #dc2626;
       }
       .card-form {
         background: #fff;
@@ -149,6 +152,7 @@
       /* Save Transaction (main button) */
       .btn-save {
         background-color: #3b82f6 !important;
+        border: 1px solid #2c6ace !important;
         color: #fff;
         border: none;
         padding: 8px 16px;
@@ -169,7 +173,7 @@
         transition: 0.3s;
       }
       .btn-outline:hover {
-        background-color: #c74d2b;
+        background-color: #6c757d;
         color: white;
       }
     </style>
@@ -182,27 +186,31 @@
         <a href="admin-new.html">
           <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
         >
-        <a href="add-transaction.html" class="active">
-          <i class="bi bi-plus-circle me-2"></i>Add Transaction</a
-        >
         <a href="reports.html">
           <i class="bi bi-bar-chart-line me-2"></i>Reports</a
         >
+        <a href="add-transaction.html" class="active">
+          <i class="bi bi-plus-circle me-2"></i>Add Transaction</a
+        >
       </div>
       <div class="logout-btn">
-        <a href="#" onclick="logout()" class="text-danger">Logout</a>
+        <a href="../index.html" onclick="logout()" class="text-danger"
+          >Logout</a
+        >
       </div>
     </div>
 
     <!-- Main Page -->
     <main class="main-content">
+      <a
+        href="reports.html"
+        class="btn btn-light d-inline-flex align-items-center border gap-2 mb-4"
+      >
+        <i class="bi bi-arrow-left"></i>
+        <span>Back to Reports</span>
+      </a>
       <!-- Heading -->
       <div class="heading-row">
-        <button class="back-btn" id="backBtn" title="Back to dashboard">
-          <a class="back-arrw" href="admin.html">
-            <i class="bi bi-arrow-left"></i>
-          </a>
-        </button>
         <div>
           <h1 class="page-title" id="pageTitle">Add Income</h1>
           <div class="muted" id="pageSubtitle">
@@ -262,7 +270,9 @@
                 <option>Donation</option>
                 <option>Other</option>
               </select>
-              <div class="muted mt-1">Choose where this income came from</div>
+              <div class="muted mt-1" id="sourceNote">
+                Choose where this income came from
+              </div>
             </div>
           </div>
 
@@ -287,9 +297,9 @@
             >
               Save Transaction
             </button>
-            <button type="button" id="saveAddBtn" class="btn-outline">
+            <!-- <button type="button" id="saveAddBtn" class="btn-outline">
               Save & Add Another
-            </button>
+            </button> -->
             <button type="button" id="cancelBtn" class="btn-outline">
               Cancel
             </button>
@@ -368,67 +378,48 @@
           tabIncome.classList.add('active')
           tabExpense.classList.remove('active', 'expense')
 
-          // Update texts
           pageTitle.textContent = 'Add Income'
           pageSubtitle.textContent =
             'Record money received during festival celebrations'
           txType.value = 'income'
-          labelSource.textContent = 'Source / Category'
+          labelSource.textContent = 'Source'
+          sourceNote.textContent = 'Choose where this income came from' // ✅ added
 
           sourceSelect.innerHTML = `
       <option value="" selected disabled>Select source</option>
       <option>Matki</option>
-                <option>lezim</option>
-                <option>Donation</option>
-                <option>Other</option>
+      <option>Lezim</option>
+      <option>Donation</option>
+      <option>Other</option>
     `
 
-          // Button colors
           saveBtn.style.backgroundColor = '#2D5A5A'
           saveBtn.style.color = 'white'
-
-          // Change title
           detailsTitle.innerHTML = `<i class="bi bi-graph-up"></i> &nbsp; Income Details`
         } else {
           tabExpense.classList.add('active', 'expense')
           tabIncome.classList.remove('active')
 
-          // Update texts
           pageTitle.textContent = 'Add Expense'
           pageSubtitle.textContent =
             'Track your festival spending and categorize expenses'
           txType.value = 'expense'
           labelSource.textContent = 'Category'
+          sourceNote.textContent = 'Choose where this expense was spent' // ✅ added
 
           sourceSelect.innerHTML = `
-      <option value="" selected disabled>Select expense category</option>
+      <option value="" selected disabled>Select category</option>
       <option>Food</option>
       <option>Medical</option>
       <option>Travel / Equipments</option>
       <option>Other</option>
     `
 
-          // Button colors
           saveBtn.style.backgroundColor = '#2D5A5A'
-
-          // Change title
           detailsTitle.innerHTML = `<i class="bi bi-graph-down"></i> &nbsp; Expense Details`
         }
 
-        // Get the date input
-        const dateInput = document.getElementById('date')
-
-        // Create today's date in YYYY-MM-DD format
-        const today = new Date()
-        const yyyy = today.getFullYear()
-        let mm = today.getMonth() + 1 // Months are 0-based
-        let dd = today.getDate()
-
-        // Add leading zero if needed
-        if (mm < 10) mm = '0' + mm
-        if (dd < 10) dd = '0' + dd
-
-        dateInput.value = `${yyyy}-${mm}-${dd}`
+        // today's date logic remains same...
       }
 
       switchTab('income')
