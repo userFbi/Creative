@@ -300,7 +300,12 @@
             <!-- <button type="button" id="saveAddBtn" class="btn-outline">
               Save & Add Another
             </button> -->
-            <button type="button" id="cancelBtn" class="btn-outline">
+            <button
+              type="button"
+              id="cancelBtn"
+              class="btn-outline"
+              onclick="clearForm()"
+            >
               Cancel
             </button>
           </div>
@@ -353,8 +358,72 @@
             </div>
           </div>
         </form>
+        <div
+          id="successAlert"
+          class="alert alert-success d-none mt-3"
+          role="alert"
+        >
+          Transaction added successfully!
+        </div>
       </div>
     </main>
+
+
+    <script>
+  const form = document.getElementById('transactionForm')
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+
+    // validate form
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated')
+      return
+    }
+
+    // get old transactions
+    let transactions = JSON.parse(localStorage.getItem('transactions') || '[]')
+
+    // collect form values
+    const transaction = {
+      type: document.getElementById('type').value.trim(),
+      amount: document.getElementById('amount').value.trim(),
+      date: document.getElementById('date').value.trim(),
+      source: document.getElementById('source').value.trim(),
+      description: document.getElementById('description').value.trim(),
+    }
+
+    // save it
+    transactions.push(transaction)
+    localStorage.setItem('transactions', JSON.stringify(transactions))
+
+    // ✅ show success alert
+    const alert = document.getElementById('successAlert')
+    alert.textContent = 'Transaction added successfully!'
+    alert.classList.remove('d-none')
+
+    // hide after 2 seconds
+    setTimeout(() => {
+      alert.classList.add('d-none')
+    }, 2000)
+
+    // reset form
+    form.reset()
+    form.classList.remove('was-validated')
+  })
+</script>
+
+
+    <!-- For Form Clear -->
+    <script>
+      function clearForm() {
+        // Select your form by its ID (replace 'transactionForm' with your actual form ID)
+        const form = document.getElementById('txForm')
+        if (form) {
+          form.reset() // clears all form inputs
+        }
+      }
+    </script>
 
     <!-- JS -->
     <script>

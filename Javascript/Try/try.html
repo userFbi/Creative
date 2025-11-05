@@ -1,14 +1,20 @@
 <script>
   let setData = []
+  let editId = null
 
   function createData() {
-    const name = document.getElementById('name').value
-    const surname = document.getElementById('surname').value
+    let name = document.getElementById('name').value
+    let surname = document.getElementById('surname').value
 
-    const obj = { name, surname }
-    setData.push(obj)
-
-    console.log(setData)
+    let obj = { name, surname }
+    
+    if(editId != null){
+      setData[editId] = obj
+      editId = null
+    }
+    else{
+      setData.push(obj)
+    }
 
     document.getElementById('name').value = ''
     document.getElementById('surname').value = ''
@@ -18,26 +24,39 @@
   function dataView() {
     let myData = ''
     setData.map((item, index) => {
-      myData += `
-            <tr>
-                <td>${item.name}</td>
-                <td>${item.surname}</td>
-            </tr>
-            `
-      document.getElementById('showData').innerHTML = myData
+      myData += `<tr>
+          <td>${item.name}</td>
+          <td>${item.surname}</td>
+          <td><button onClick=deleteData(${index})>Delete</button></td>
+          <td><button onClick=editData(${index})>Update</button></td>
+        </tr>`
+        document.getElementById('dataView').innerHTML = myData
     })
+  }
+
+  function deleteData(index){
+    setData.splice(index,1)
+    dataView()
+  }
+
+  function editData(index){
+    editId = index
+    let editRecord = setData[index]
+    document.getElementById('name').value = editRecord.name
+    document.getElementById('surname').value = editRecord.surname
   }
 </script>
 
-<input type="text" id="name" /> <br /><br />
-<input type="text" id="surname" /> <br /><br />
-
+<input type="text" name="" id="name" /><br /><br />
+<input type="text" name="" id="surname" /><br /><br />
 <button onclick="createData()">Submit</button><br /><br />
 
 <table border="1">
   <tr>
-    <td>name</td>
-    <td>surname</td>
+    <td>Name</td>
+    <td>Surname</td>
+    <td>Delete</td>
+    <td>Update</td>
   </tr>
-  <tbody id="showData"></tbody>
+  <tbody id="dataView"></tbody>
 </table>
