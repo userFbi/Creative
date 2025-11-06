@@ -3,16 +3,15 @@
   let editId = null
 
   function createData() {
-    let name = document.getElementById('name').value
-    let surname = document.getElementById('surname').value
+    const name = document.getElementById('name').value
+    const surname = document.getElementById('surname').value
 
-    let obj = { name, surname }
-    
-    if(editId != null){
+    const obj = { name, surname }
+
+    if (editId != null) {
       setData[editId] = obj
       editId = null
-    }
-    else{
+    } else {
       setData.push(obj)
     }
 
@@ -24,22 +23,17 @@
   function dataView() {
     let myData = ''
     setData.map((item, index) => {
-      myData += `<tr>
-          <td>${item.name}</td>
-          <td>${item.surname}</td>
-          <td><button onClick=deleteData(${index})>Delete</button></td>
-          <td><button onClick=editData(${index})>Update</button></td>
-        </tr>`
-        document.getElementById('dataView').innerHTML = myData
+      myData += `<tr><td>${item.name}</td><td>${item.surname}</td><td><button onClick=deleteData(${index})>Delete</button></td><td><button onClick=editData(${index})>Update</button></td></tr>`
     })
+    document.getElementById('showData').innerHTML = myData
   }
 
-  function deleteData(index){
-    setData.splice(index,1)
+  function deleteData(index) {
+    setData.splice(index, 1)
     dataView()
   }
 
-  function editData(index){
+  function editData(index) {
     editId = index
     let editRecord = setData[index]
     document.getElementById('name').value = editRecord.name
@@ -47,8 +41,9 @@
   }
 </script>
 
-<input type="text" name="" id="name" /><br /><br />
-<input type="text" name="" id="surname" /><br /><br />
+<input type="text" id="name" /><br /><br />
+<input type="text" id="surname" /><br /><br />
+
 <button onclick="createData()">Submit</button><br /><br />
 
 <table border="1">
@@ -58,5 +53,5 @@
     <td>Delete</td>
     <td>Update</td>
   </tr>
-  <tbody id="dataView"></tbody>
+  <tbody id="showData"></tbody>
 </table>
