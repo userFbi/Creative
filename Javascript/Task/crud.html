@@ -36,7 +36,7 @@
     let myData = ''
     setData.map((item, index) => {
       const sum = total(item.s1, item.s2, item.s3)
-        const per = (sum / 3).toFixed(2);
+      const per = sum / 3
       const min = Math.min(item.s1, item.s2, item.s3)
       const max = Math.max(item.s1, item.s2, item.s3)
 
@@ -58,8 +58,6 @@
 
     return myData
   }
-
-  total()
 
   function deleteData(index) {
     setData.splice(index, 1)

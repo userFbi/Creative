@@ -326,7 +326,7 @@
               <div style="text-align: right">
                 <div
                   style="
-                    font-weight: 800;
+                    font-weight: 700;
                     color: var(--accent-dark);
                     font-size: 18px;
                   "
@@ -368,66 +368,11 @@
       </div>
     </main>
 
-
     <script>
-  const form = document.getElementById('transactionForm')
+      /* ======= Unified script for add-transaction.html ======= */
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault()
-
-    // validate form
-    if (!form.checkValidity()) {
-      form.classList.add('was-validated')
-      return
-    }
-
-    // get old transactions
-    let transactions = JSON.parse(localStorage.getItem('transactions') || '[]')
-
-    // collect form values
-    const transaction = {
-      type: document.getElementById('type').value.trim(),
-      amount: document.getElementById('amount').value.trim(),
-      date: document.getElementById('date').value.trim(),
-      source: document.getElementById('source').value.trim(),
-      description: document.getElementById('description').value.trim(),
-    }
-
-    // save it
-    transactions.push(transaction)
-    localStorage.setItem('transactions', JSON.stringify(transactions))
-
-    // ✅ show success alert
-    const alert = document.getElementById('successAlert')
-    alert.textContent = 'Transaction added successfully!'
-    alert.classList.remove('d-none')
-
-    // hide after 2 seconds
-    setTimeout(() => {
-      alert.classList.add('d-none')
-    }, 2000)
-
-    // reset form
-    form.reset()
-    form.classList.remove('was-validated')
-  })
-</script>
-
-
-    <!-- For Form Clear -->
-    <script>
-      function clearForm() {
-        // Select your form by its ID (replace 'transactionForm' with your actual form ID)
-        const form = document.getElementById('txForm')
-        if (form) {
-          form.reset() // clears all form inputs
-        }
-      }
-    </script>
-
-    <!-- JS -->
-    <script>
-      const labelSource = document.querySelectorAll('.form-label')[2]
+      // DOM refs
+      const txForm = document.getElementById('txForm')
       const tabIncome = document.getElementById('tabIncome')
       const tabExpense = document.getElementById('tabExpense')
       const pageTitle = document.getElementById('pageTitle')
@@ -435,8 +380,11 @@
       const txType = document.getElementById('txType')
       const sourceSelect = document.getElementById('source')
       const saveBtn = document.getElementById('saveBtn')
-      const saveAddBtn = document.getElementById('saveAddBtn')
 
+      // safety: ensure form exists
+      if (!txForm) console.warn('txForm not found — check form id in HTML')
+
+      // Tab handlers
       tabIncome.addEventListener('click', () => switchTab('income'))
       tabExpense.addEventListener('click', () => switchTab('expense'))
 
@@ -451,8 +399,8 @@
           pageSubtitle.textContent =
             'Record money received during festival celebrations'
           txType.value = 'income'
-          labelSource.textContent = 'Source'
-          sourceNote.textContent = 'Choose where this income came from' // ✅ added
+          document.getElementById('sourceNote').textContent =
+            'Choose where this income came from'
 
           sourceSelect.innerHTML = `
       <option value="" selected disabled>Select source</option>
@@ -461,9 +409,6 @@
       <option>Donation</option>
       <option>Other</option>
     `
-
-          saveBtn.style.backgroundColor = '#2D5A5A'
-          saveBtn.style.color = 'white'
           detailsTitle.innerHTML = `<i class="bi bi-graph-up"></i> &nbsp; Income Details`
         } else {
           tabExpense.classList.add('active', 'expense')
@@ -473,8 +418,8 @@
           pageSubtitle.textContent =
             'Track your festival spending and categorize expenses'
           txType.value = 'expense'
-          labelSource.textContent = 'Category'
-          sourceNote.textContent = 'Choose where this expense was spent' // ✅ added
+          document.getElementById('sourceNote').textContent =
+            'Choose where this expense was spent'
 
           sourceSelect.innerHTML = `
       <option value="" selected disabled>Select category</option>
@@ -483,45 +428,126 @@
       <option>Travel / Equipments</option>
       <option>Other</option>
     `
-
-          saveBtn.style.backgroundColor = '#2D5A5A'
           detailsTitle.innerHTML = `<i class="bi bi-graph-down"></i> &nbsp; Expense Details`
         }
-
-        // today's date logic remains same...
       }
 
+      // initialize tab UI
       switchTab('income')
 
+      // Clear form helper
+      function clearForm() {
+        const form = document.getElementById('txForm')
+        if (form) {
+          form.reset()
+          // keep tab visuals in sync
+          switchTab(txType.value || 'income')
+        }
+      }
+
+      /* ======= SAVE TRANSACTION (year-wise) ======= */
       function saveTransaction() {
-        const amount = document.getElementById('amount').value
-        const date = document.getElementById('date').value
-        const source = document.getElementById('source').value
-        const description = document.getElementById('description').value
+        const amount = document.getElementById('amount').value.trim()
+        const inputDate = document.getElementById('date').value.trim()
+        const source = document.getElementById('source').value.trim()
+        const description = document.getElementById('description').value.trim()
         const type = document.getElementById('txType').value // income or expense
 
-        if (!amount || !date || !source) {
+        // basic validation
+        if (!amount || !inputDate || !source) {
           alert('Please fill in all required fields!')
           return
         }
 
-        // get existing transactions or empty array
-        let transactions = JSON.parse(
-          localStorage.getItem('transactions') || '[]'
-        )
+        // format date: yyyy-mm-dd -> dd-mm-yyyy
+        const parts = inputDate.split('-')
+        if (parts.length !== 3) {
+          alert(
+            'Invalid date format. Please choose a date using the date picker.'
+          )
+          return
+        }
+        const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`
 
-        // push new transaction as object
-        transactions.push({ amount, date, source, description, type })
+        // transaction object
+        const transaction = {
+          type,
+          amount: parseFloat(amount),
+          date: formattedDate,
+          source,
+          description
+        }
 
-        // save back to LocalStorage
-        localStorage.setItem('transactions', JSON.stringify(transactions))
+        // year-key uses original inputDate to extract full year
+        const year = new Date(inputDate).getFullYear()
+        const key = `transactions_${year}`
 
-        // clear form
+        // fetch existing, push and save
+        const existing = JSON.parse(localStorage.getItem(key) || '[]')
+        existing.push(transaction)
+        localStorage.setItem(key, JSON.stringify(existing))
+
+        console.log(`✅ Saved transaction to ${key}:`, transaction)
+
+        // success preview
+        const successPreview = document.getElementById('successPreview')
+        const successAmount = document.getElementById('successAmount')
+        const successTitle = document.getElementById('successTitle')
+        const successDate = document.getElementById('successDate')
+        const successSource = document.getElementById('successSource')
+        const successDesc = document.getElementById('successDesc')
+
+        if (successPreview) {
+          successPreview.style.display = 'block'
+          successTitle.textContent =
+            type === 'income' ? 'Income Added' : 'Expense Added'
+          successAmount.textContent =
+            (type === 'income' ? '+' : '-') +
+            '₹' +
+            parseFloat(amount).toFixed(2)
+          successDate.textContent = formattedDate
+          successSource.textContent = source
+          successDesc.textContent = description || '—'
+        }
+
+        // ✅ Show success alert for 3 seconds only
+        const alertBox = document.getElementById('successAlert')
+        alertBox.classList.remove('d-none')
+        alertBox.textContent = 'Transaction saved successfully!'
+
+        setTimeout(() => {
+          alertBox.classList.add('d-none')
+          successPreview.style.display = 'none'
+          // Redirect after alert fades
+          window.location.href = 'reports.html'
+        }, 3000)
+
+        // reset form
         document.getElementById('txForm').reset()
-        switchTab(type) // reset tab styles and today's date
-
-        alert('Transaction saved! Check Reports page.')
+        switchTab(type)
       }
+
+      /* ---- Optional: submit via form enter key ---- */
+      if (txForm) {
+        txForm.addEventListener('submit', function (e) {
+          e.preventDefault()
+          saveTransaction()
+        })
+      }
+
+      /* ===== simple debug helper: list stored years ===== */
+      function debugListYears() {
+        const keys = Object.keys(localStorage).filter(k =>
+          k.startsWith('transactions_')
+        )
+        console.log(
+          'Stored years:',
+          keys.map(k => k.split('_')[1])
+        )
+      }
+
+      // run once to show stored years in console (helpful while debugging)
+      debugListYears()
     </script>
   </body>
 </html>
