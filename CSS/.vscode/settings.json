@@ -2,5 +2,6 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "STRUCT.C": "cpp"
-    }
+    },
+    "liveServer.settings.port": 5501
 }
