@@ -1,9 +1,0 @@
-name
-s1
-s2
-s3
-
-submit
-
-
-no. name	s1	S2	S3	DELETE	UPDATE
