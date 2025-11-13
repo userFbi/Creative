@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+.header{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 ul li{
     background-color: chocolate;
 }

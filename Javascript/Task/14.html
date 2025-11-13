@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Switcher</title>
+    <style>
+      img {
+        width: 600px;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="image" src="../images/first.jpg" alt="Image" /><br /><br />
+    <button onclick="left()">LEFT</button>
+    <button onclick="right()">RIGHT</button>
+
+    <script>
+      let current = 1
+      const img = document.getElementById('image')
+
+      function left() {
+        if (current === 1) {
+          img.src = '../images/third.jpg'
+          current = 3
+        } else if (current === 3) {
+          img.src = '../images/second.jpg'
+          current = 2
+        } else {
+          img.src = '../images/first.jpg'
+          current = 1
+        }
+      }
+
+      function right() {
+        if (current === 1) {
+          img.src = '../images/second.jpg'
+          current = 2
+        } else if (current === 2) {
+          img.src = '../images/third.jpg'
+          current = 3
+        } else {
+          img.src = '../images/first.jpg'
+          current = 1
+        }
+      }
+    </script>
+  </body>
+</html>

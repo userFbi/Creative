@@ -161,8 +161,8 @@
       </div>
 
       <div class="table-container">
-        <div class="container mt-4">
-          <h5 class="text-white mb-3">Latest Transactions</h5>
+        <div class="latest-transactions-section mb-4">
+          <h5 class="fw-bold text-dark mb-3">Latest Transactions</h5>
           <div id="latestTransactions" class="row g-3"></div>
         </div>
 
@@ -213,6 +213,8 @@
       const container = document.getElementById('latestTransactions')
       container.innerHTML = ''
 
+ 
+
       // Collect all transactions from all years
       const allKeys = Object.keys(localStorage).filter(k =>
         k.startsWith('transactions_')
@@ -233,8 +235,8 @@
 
       // Sort by date (newest first)
       allTransactions.sort((a, b) => {
-        const [da, ma, ya] = a.date.split('-').map(Number)
-        const [db, mb, yb] = b.date.split('-').map(Number)
+        const [ya, ma, da] = a.date.split('-').map(Number)
+        const [yb, mb, db] = b.date.split('-').map(Number)
         return new Date(yb, mb - 1, db) - new Date(ya, ma - 1, da)
       })
 
@@ -271,6 +273,15 @@
 
     // Call it when reports page loads
     document.addEventListener('DOMContentLoaded', showLatestTransactions)
+
+    // 🔄 Update latest + reports when data changes (e.g. from add-transaction page)
+window.addEventListener('storage', e => {
+  if (e.key && e.key.startsWith('transactions_')) {
+    showLatestTransactions()
+    rebuildYearDropdown(true)
+  }
+})
+
 
     /* ===== Reports page unified script (replace existing script) ===== */
 

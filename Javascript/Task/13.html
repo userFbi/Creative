@@ -16,9 +16,10 @@
       .flex {
         display: flex;
         justify-content: space-evenly;
-
         align-items: center;
+        border-bottom: 1px solid black;
       }
+
       .links ul {
         display: flex;
         gap: 30px;
@@ -30,12 +31,22 @@
       .links a {
         display: none;
         font-size: 30px;
+        cursor: pointer;
+      }
+
+      .temp ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .temp {
+        display: none;
       }
 
       @media (max-width: 900px) {
-        .header {
-          height: auto;
-        }
         .links ul {
           display: none;
         }
@@ -50,13 +61,11 @@
       <div class="flex">
         <div class="logo">Creative</div>
         <div class="links">
-          <a id="menu" onclick="openMenu()">
-            <i class="bi bi-list"></i>
-          </a>
+          <a id="menu" onclick="openMenu()"><i class="bi bi-list"></i></a>
           <ul>
             <li>Home</li>
             <li>Courses</li>
-            <li>Activites</li>
+            <li>Activities</li>
             <li>Blog</li>
             <li>Know us</li>
             <li>Get in touch</li>
@@ -64,31 +73,36 @@
           </ul>
         </div>
       </div>
-      <!-- <div class="temp">
+      <div class="temp" id="temp">
         <ul>
           <li>Home</li>
           <li>Courses</li>
-          <li>Activites</li>
+          <li>Activities</li>
           <li>Blog</li>
           <li>Know us</li>
           <li>Get in touch</li>
           <li>Student zone</li>
         </ul>
-      </div> -->
+      </div>
     </div>
-  </body>
-  <script>
-    let i = 2
 
-    function openMenu() {
-      if (i % 2 == 0) {
-        document.getElementById('menu').innerHTML = '<i class="bi bi-x"></i>'
-        document.getElementById('temp')
-      } else {
-        document.getElementById('menu').innerHTML =
-          ' <i class="bi bi-list"></i>'
+    <script>
+      let menuOpen = false
+
+      function openMenu() {
+        const menuIcon = document.getElementById('menu')
+        const tempMenu = document.getElementById('temp')
+
+        if (!menuOpen) {
+          menuIcon.innerHTML = '<i class="bi bi-x"></i>'
+          tempMenu.style.display = 'block'
+        } else {
+          menuIcon.innerHTML = '<i class="bi bi-list"></i>'
+          tempMenu.style.display = 'none'
+        }
+
+        menuOpen = !menuOpen
       }
-      i++
-    }
-  </script>
+    </script>
+  </body>
 </html>
