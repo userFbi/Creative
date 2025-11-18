@@ -1,0 +1,52 @@
+<script>
+  let data = []
+
+  async function viewData() {
+    let response = await fetch('https://dummyjson.com/products')
+    let result = await response.json()
+    data = result.products
+    console.log(data)
+    showData()
+  }
+
+  function showData() {
+    let myData = ''
+    data.map((i, index) => {
+      let reviewers = i.reviews.map(item => item.rating).join(', ')
+      myData += `<tr>
+        <td>${i.id}</td>
+        <td>${i.title}</td>
+        <td>${i.description}</td>
+        <td>${i.category}</td>
+        <td>${i.price}</td>
+        <td>${i.discountPercentage}</td>
+        <td>${i.rating}</td>
+        <td>${i.stock}</td>
+        <td>${i.tags}</td>
+        <td>${i.brand}</td>
+        <td>${i.sku}</td>
+        <td>${reviewers}</td>
+    </tr>`
+    })
+    document.getElementById('dataId').innerHTML = myData
+  }
+  viewData()
+</script>
+
+<table border="1">
+  <tr>
+    <td>Id</td>
+    <td>Title</td>
+    <td>Description</td>
+    <td>Category</td>
+    <td>Price</td>
+    <td>DiscountPercentage</td>
+    <td>Rating</td>
+    <td>Stock</td>
+    <td>Tags</td>
+    <td>Brand</td>
+    <td>Sku</td>
+    <td>Ratings</td>
+  </tr>
+  <tbody id="dataId"></tbody>
+</table>
