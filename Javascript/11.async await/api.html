@@ -13,6 +13,8 @@
     let myData = ''
     data.map((i, index) => {
       let reviewers = i.reviews.map(item => item.rating).join(', ')
+      //let dimensions = dimensions.map(item => item.width).join(', ')
+
       myData += `<tr>
         <td>${i.id}</td>
         <td>${i.title}</td>
@@ -25,7 +27,14 @@
         <td>${i.tags}</td>
         <td>${i.brand}</td>
         <td>${i.sku}</td>
+        <td>${i.weight}</td>
+        <td>${i.warrantyInformation}</td>
+        <td>${i.shippingInformation}</td>
+        <td>${i.availabilityStatus}</td>
+        <td>${i.minimumOrderQuantity}</td>
         <td>${reviewers}</td>
+        <td>${i.returnPolicy}</td>
+        <td>${i.images}</td>
     </tr>`
     })
     document.getElementById('dataId').innerHTML = myData
@@ -46,7 +55,14 @@
     <td>Tags</td>
     <td>Brand</td>
     <td>Sku</td>
-    <td>Ratings</td>
+    <td>Weight</td>
+    <td>WarrantyInformation</td>
+    <td>ShippingInformation</td>
+    <td>AvailabilityStatus</td>
+    <td>MinimumOrderQuantity</td>
+    <td>Reviewers</td>
+    <td>ReturnPolicy</td>
+    <td>images</td>
   </tr>
   <tbody id="dataId"></tbody>
 </table>

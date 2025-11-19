@@ -82,12 +82,12 @@
       })
 
       function handleClick(cell, index) {
-        if (cell.textContent !== '' || !gameActive) {
-          return
-        }
+        if (cell.textContent !== '' || !gameActive) return
 
+       
         cell.textContent = currentPlayer
 
+        
         if (checkWinner()) {
           document.getElementById('status').textContent =
             currentPlayer + ' Wins!'
@@ -95,7 +95,7 @@
           return
         }
 
-        if () {
+        if ([...cells].every(c => c.textContent !== '')) {
           document.getElementById('status').textContent = "It's a Draw!"
           gameActive = false
           return
@@ -105,13 +105,18 @@
       }
 
       function checkWinner() {
-
+        return winningPatterns.some(pattern => {
+          let [a, b, c] = pattern
+          return (
+            cells[a].textContent === currentPlayer &&
+            cells[b].textContent === currentPlayer &&
+            cells[c].textContent === currentPlayer
+          )
+        })
       }
 
       function resetGame() {
-        cells.forEach((cell) => {
-          (cell.textContent = '')
-        })
+        cells.forEach(cell => (cell.textContent = ''))
         currentPlayer = 'X'
         gameActive = true
         document.getElementById('status').textContent = ''

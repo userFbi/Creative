@@ -15,7 +15,7 @@
     <style>
       body {
         margin: 0;
-        font-family: "Segoe UI", sans-serif;
+        font-family: 'Segoe UI', sans-serif;
         background-color: #f8f9fc;
       }
 
@@ -166,6 +166,31 @@
       .bi-trash:hover {
         color: red;
       }
+
+      .page-circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid #dcdcdc;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .page-circle:hover {
+        background: #f3f3f3;
+      }
+
+      .active-page {
+        background: #4da6ff !important;
+        color: white !important;
+        border: none !important;
+        font-weight: 600;
+      }
     </style>
   </head>
   <body>
@@ -231,58 +256,58 @@
     <script>
       // Save changes back to table
       document
-        .getElementById("editMemberForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+        .getElementById('editMemberForm')
+        .addEventListener('submit', function (e) {
+          e.preventDefault()
           if (currentRow) {
-            let cells = currentRow.querySelectorAll("td");
-            cells[0].innerText = document.getElementById("editName").value;
-            cells[1].innerText = document.getElementById("editSurname").value;
-            cells[2].innerText = document.getElementById("editNumber").value;
-            cells[3].innerText = document.getElementById("editAadhar").value;
-            cells[4].innerText = document.getElementById("editAddress").value;
-            cells[5].innerText = document.getElementById("editTshirt").value;
-            cells[6].innerText = document.getElementById("editShorts").value;
+            let cells = currentRow.querySelectorAll('td')
+            cells[0].innerText = document.getElementById('editName').value
+            cells[1].innerText = document.getElementById('editSurname').value
+            cells[2].innerText = document.getElementById('editNumber').value
+            cells[3].innerText = document.getElementById('editAadhar').value
+            cells[4].innerText = document.getElementById('editAddress').value
+            cells[5].innerText = document.getElementById('editTshirt').value
+            cells[6].innerText = document.getElementById('editShorts').value
 
             // Hide modal
             bootstrap.Modal.getInstance(
-              document.getElementById("editMemberModal")
-            ).hide();
+              document.getElementById('editMemberModal')
+            ).hide()
           }
-        });
+        })
     </script>
 
     <script>
-      let currentPage = 1;
-      const itemsPerPage = 10;
-      let allMembers = [];
+      let currentPage = 1
+      const itemsPerPage = 10
+      let allMembers = []
 
       function logout() {
-        localStorage.removeItem("isAdmin");
-        window.location.href = "../index.html";
+        localStorage.removeItem('isAdmin')
+        window.location.href = '../index.html'
       }
 
-      function getInitials(name = "") {
-        const names = name.trim().split(" ");
+      function getInitials(name = '') {
+        const names = name.trim().split(' ')
         return (
           names[0]?.charAt(0).toUpperCase() +
-          (names[1]?.charAt(0).toUpperCase() || "")
-        );
+          (names[1]?.charAt(0).toUpperCase() || '')
+        )
       }
 
       function renderMembers(members) {
-        const tbody = document.getElementById("membersTableBody");
-        tbody.innerHTML = "";
+        const tbody = document.getElementById('membersTableBody')
+        tbody.innerHTML = ''
 
         // Pagination slice
-        const start = (currentPage - 1) * itemsPerPage;
-        const paginatedMembers = members.slice(start, start + itemsPerPage);
+        const start = (currentPage - 1) * itemsPerPage
+        const paginatedMembers = members.slice(start, start + itemsPerPage)
 
         paginatedMembers.forEach((member, index) => {
-          const fullName = `${member.firstName} ${member.lastName}`;
-          const initials = getInitials(fullName);
+          const fullName = `${member.firstName} ${member.lastName}`
+          const initials = getInitials(fullName)
 
-          const row = document.createElement("tr");
+          const row = document.createElement('tr')
           row.innerHTML = `
         <td>
           <div class="member-name">
@@ -290,8 +315,8 @@
             ${fullName}
           </div>
         </td>
-        <td>${member.phone || ""}</td>
-        <td>${member.aadhar || ""}</td>
+        <td>${member.phone || ''}</td>
+        <td>${member.aadhar || ''}</td>
         <td class="actions">
           <button class="btn btn-sm text-muted" onclick="openDetails(${
             start + index
@@ -309,105 +334,108 @@
             <i class="bi bi-trash"></i>
           </button>
         </td>
-      `;
-          tbody.appendChild(row);
-        });
+      `
+          tbody.appendChild(row)
+        })
 
-        document.getElementById("memberCount").innerText = members.length;
-        renderPagination(members);
+        document.getElementById('memberCount').innerText = members.length
+        renderPagination(members)
       }
 
       function renderPagination(members) {
-        const totalPages = Math.ceil(members.length / itemsPerPage);
-        const pagination = document.getElementById("pagination");
-        pagination.innerHTML = "";
+        const totalPages = Math.ceil(members.length / itemsPerPage)
+        const pagination = document.getElementById('pagination')
+        pagination.innerHTML = ''
 
-        // Back to First
-        if (currentPage > 1) {
-          const firstBtn = document.createElement("button");
-          firstBtn.innerText = "⏮ First";
-          firstBtn.className = "btn btn-sm btn-outline-primary me-1";
-          firstBtn.onclick = () => {
-            currentPage = 1;
-            renderMembers(allMembers);
-          };
-          pagination.appendChild(firstBtn);
+        if (totalPages <= 1) return
+
+        const wrapper = document.createElement('div')
+        wrapper.style.display = 'flex'
+        wrapper.style.gap = '10px'
+        wrapper.style.justifyContent = 'flex-start'
+        wrapper.style.marginTop = '20px'
+
+        // Arrow: Previous
+        const prev = document.createElement('div')
+        prev.innerHTML = `<i class="bi bi-chevron-left"></i>`
+        prev.className = 'page-circle'
+        prev.style.cursor = currentPage > 1 ? 'pointer' : 'not-allowed'
+        prev.onclick = () => {
+          if (currentPage > 1) {
+            currentPage--
+            renderMembers(allMembers)
+          }
         }
+        wrapper.appendChild(prev)
 
-        // Previous
-        if (currentPage > 1) {
-          const prevBtn = document.createElement("button");
-          prevBtn.innerText = "◀ Prev";
-          prevBtn.className = "btn btn-sm btn-outline-primary me-1";
-          prevBtn.onclick = () => {
-            currentPage--;
-            renderMembers(allMembers);
-          };
-          pagination.appendChild(prevBtn);
-        }
-
-        // Page numbers
+        // Numbered page circles
         for (let i = 1; i <= totalPages; i++) {
-          const pageBtn = document.createElement("button");
-          pageBtn.innerText = i;
-          pageBtn.className = `btn btn-sm me-1 ${
-            i === currentPage ? "btn-primary" : "btn-outline-primary"
-          }`;
-          pageBtn.onclick = () => {
-            currentPage = i;
-            renderMembers(allMembers);
-          };
-          pagination.appendChild(pageBtn);
+          const circle = document.createElement('button')
+          circle.innerText = i
+          circle.className = 'page-circle'
+
+          if (i === currentPage) {
+            circle.classList.add('active-page')
+          }
+
+          circle.onclick = () => {
+            currentPage = i
+            renderMembers(allMembers)
+          }
+          wrapper.appendChild(circle)
         }
 
-        // Next
-        if (currentPage < totalPages) {
-          const nextBtn = document.createElement("button");
-          nextBtn.innerText = "Next ▶";
-          nextBtn.className = "btn btn-sm btn-outline-primary me-1";
-          nextBtn.onclick = () => {
-            currentPage++;
-            renderMembers(allMembers);
-          };
-          pagination.appendChild(nextBtn);
+        // Arrow: Next
+        const next = document.createElement('div')
+        next.innerHTML = `<i class="bi bi-chevron-right"></i>`
+        next.className = 'page-circle'
+        next.style.cursor = currentPage < totalPages ? 'pointer' : 'not-allowed'
+        next.onclick = () => {
+          if (currentPage < totalPages) {
+            currentPage++
+            renderMembers(allMembers)
+          }
         }
+        wrapper.appendChild(next)
+
+        pagination.appendChild(wrapper)
       }
 
       function loadAndRenderMembers() {
-        allMembers = JSON.parse(localStorage.getItem("members") || "[]");
-        renderMembers(allMembers);
+        allMembers = JSON.parse(localStorage.getItem('members') || '[]')
+        renderMembers(allMembers)
 
         document
-          .getElementById("searchInput")
-          .addEventListener("input", function () {
-            const searchTerm = this.value.toLowerCase();
-            const filtered = allMembers.filter((m) =>
+          .getElementById('searchInput')
+          .addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase()
+            const filtered = allMembers.filter(m =>
               `${m.firstName} ${m.lastName} ${m.email} ${m.phone} ${m.address}`
                 .toLowerCase()
                 .includes(searchTerm)
-            );
-            currentPage = 1; // reset to first page after search
-            renderMembers(filtered);
-          });
+            )
+            currentPage = 1 // reset to first page after search
+            renderMembers(filtered)
+          })
       }
 
       function openDetails(index) {
-        window.location.href = `viewMemberDetails.html?id=${index}`;
+        window.location.href = `viewMemberDetails.html?id=${index}`
       }
 
       function editMember(index) {
-        window.location.href = `addMember.html?edit=${index}`;
+        window.location.href = `addMember.html?edit=${index}`
       }
 
       function deleteMember(index) {
-        if (confirm("Are you sure you want to delete this member?")) {
-          allMembers.splice(index, 1);
-          localStorage.setItem("members", JSON.stringify(allMembers));
-          renderMembers(allMembers);
+        if (confirm('Are you sure you want to delete this member?')) {
+          allMembers.splice(index, 1)
+          localStorage.setItem('members', JSON.stringify(allMembers))
+          renderMembers(allMembers)
         }
       }
 
-      loadAndRenderMembers();
+      loadAndRenderMembers()
     </script>
   </body>
 </html>

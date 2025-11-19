@@ -123,6 +123,35 @@
         transform: translateY(-5px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       }
+
+      .page-circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid #d0d0d0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        cursor: pointer;
+        transition: 0.2s;
+        font-weight: 500;
+      }
+
+      .page-circle:hover {
+        background: #e9ecef;
+      }
+
+      .active-page {
+        background: #3b82f6 !important;
+        color: white !important;
+        border-color: #3b82f6 !important;
+      }
+
+      .page-circle i {
+        font-size: 18px;
+        pointer-events: none;
+      }
     </style>
   </head>
 
@@ -213,8 +242,6 @@
       const container = document.getElementById('latestTransactions')
       container.innerHTML = ''
 
- 
-
       // Collect all transactions from all years
       const allKeys = Object.keys(localStorage).filter(k =>
         k.startsWith('transactions_')
@@ -275,13 +302,12 @@
     document.addEventListener('DOMContentLoaded', showLatestTransactions)
 
     // 🔄 Update latest + reports when data changes (e.g. from add-transaction page)
-window.addEventListener('storage', e => {
-  if (e.key && e.key.startsWith('transactions_')) {
-    showLatestTransactions()
-    rebuildYearDropdown(true)
-  }
-})
-
+    window.addEventListener('storage', e => {
+      if (e.key && e.key.startsWith('transactions_')) {
+        showLatestTransactions()
+        rebuildYearDropdown(true)
+      }
+    })
 
     /* ===== Reports page unified script (replace existing script) ===== */
 
@@ -385,48 +411,63 @@ window.addEventListener('storage', e => {
 
     /* --- Pagination rendering --- */
     function renderPagination(reports) {
-      const totalPages = Math.max(1, Math.ceil(reports.length / itemsPerPage))
+      const totalPages = Math.ceil(reports.length / itemsPerPage)
       const pagination = document.getElementById('pagination')
       pagination.innerHTML = ''
 
-      // clamp currentPage
-      if (currentPage > totalPages) currentPage = totalPages
-      if (currentPage < 1) currentPage = 1
+      if (totalPages <= 1) return
 
-      if (currentPage > 1) {
-        const prevBtn = document.createElement('button')
-        prevBtn.innerText = '◀ Prev'
-        prevBtn.className = 'btn btn-sm btn-outline-primary me-1'
-        prevBtn.onclick = () => {
+      const wrapper = document.createElement('div')
+      wrapper.style.display = 'flex'
+      wrapper.style.gap = '10px'
+      wrapper.style.justifyContent = 'flex-start' // LEFT SIDE
+      wrapper.style.marginTop = '15px'
+
+      // Previous Arrow
+      const prev = document.createElement('div')
+      prev.innerHTML = `<i class="bi bi-chevron-left"></i>`
+      prev.className = 'page-circle'
+      prev.style.cursor = currentPage > 1 ? 'pointer' : 'not-allowed'
+      prev.onclick = () => {
+        if (currentPage > 1) {
           currentPage--
           renderReports(allReports)
         }
-        pagination.appendChild(prevBtn)
       }
+      wrapper.appendChild(prev)
 
+      // Page Number Circles
       for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button')
-        btn.innerText = i
-        btn.className = `btn btn-sm me-1 ${
-          i === currentPage ? 'btn-primary' : 'btn-outline-primary'
-        }`
-        btn.onclick = () => {
+        const circle = document.createElement('button')
+        circle.innerText = i
+        circle.className = 'page-circle'
+
+        if (i === currentPage) {
+          circle.classList.add('active-page')
+        }
+
+        circle.onclick = () => {
           currentPage = i
           renderReports(allReports)
         }
-        pagination.appendChild(btn)
+
+        wrapper.appendChild(circle)
       }
 
-      if (currentPage < totalPages) {
-        const nextBtn = document.createElement('button')
-        nextBtn.innerText = 'Next ▶'
-        nextBtn.className = 'btn btn-sm btn-outline-primary me-1'
-        nextBtn.onclick = () => {
+      // Next Arrow
+      const next = document.createElement('div')
+      next.innerHTML = `<i class="bi bi-chevron-right"></i>`
+      next.className = 'page-circle'
+      next.style.cursor = currentPage < totalPages ? 'pointer' : 'not-allowed'
+      next.onclick = () => {
+        if (currentPage < totalPages) {
           currentPage++
           renderReports(allReports)
         }
-        pagination.appendChild(nextBtn)
       }
+      wrapper.appendChild(next)
+
+      pagination.appendChild(wrapper)
     }
 
     /* --- Load reports for a year (year is string) --- */
