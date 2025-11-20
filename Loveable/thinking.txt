@@ -37,7 +37,7 @@ project-root/
 │
 ├── components/               ← reusable UI parts
 │   ├── metric-card.html      ← MetricCard.jsx converted
-│   ├── quick-actions.html    ← QuickActions.jsx converted
+│   ├── quick-actions.html    ← QuickActions.jsx converted#4da6ff 
 │   ├── recent-transactions.html ← RecentTransactions.jsx converted
 │   ├── spending-breakdown.html  ← SpendingBreakdown.jsx converted
 │
@@ -52,4 +52,3 @@ project-root/
 └── js/                       ← JavaScript
     ├── bootstrap.bundle.min.js
     ├── app.js                ← custom scripts
-

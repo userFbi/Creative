@@ -1,298 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Easy Tic Tac Toe</title>
-    <style>
-      :root {
-        --size: 80vmin;
-        --gap: 8px;
-        --bg: #0f172a;
-        --card: #0b1220;
-        --accent: #7c3aed;
-        --muted: #94a3b8;
-        color-scheme: dark;
-      }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(180deg, #021024 0%, #04102a 100%);
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto,
-          'Helvetica Neue', Arial;
-        color: white;
-        padding: 20px;
-      }
-      .card {
-        width: min(var(--size), 560px);
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.02),
-          rgba(255, 255, 255, 0.01)
-        );
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
-        text-align: center;
-      }
-      h1 {
-        margin: 6px 0 12px;
-        font-size: 20px;
-        letter-spacing: 0.3px;
-      }
-      .info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 12px;
-        font-size: 14px;
-        color: var(--muted);
-      }
-      .board {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--gap);
-        padding: 10px;
-      }
-      .cell {
-        background: transparent;
-        border: 2px solid rgba(255, 255, 255, 0.06);
-        aspect-ratio: 1 / 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: clamp(30px, 6vmin, 56px);
-        cursor: pointer;
-        user-select: none;
-        border-radius: 8px;
-        transition: transform 120ms ease, background 120ms;
-      }
-      .cell:hover {
-        transform: translateY(-3px);
-        background: rgba(255, 255, 255, 0.01);
-      }
-      .cell.disabled {
-        cursor: not-allowed;
-        opacity: 0.9;
-      }
-      .x {
-        color: #ffd166;
-        font-weight: 700;
-      }
-      .o {
-        color: #90e0ef;
-        font-weight: 700;
-      }
-      .buttons {
-        margin-top: 12px;
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-      }
-      button {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        color: var(--muted);
-        padding: 8px 12px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-      }
-      button.primary {
-        border-color: var(--accent);
-        color: white;
-        background: linear-gradient(
-          90deg,
-          rgba(124, 58, 237, 0.12),
-          rgba(124, 58, 237, 0.06)
-        );
-      }
-      .msg {
-        margin-top: 8px;
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .highlight {
-        color: var(--accent);
-        font-weight: 700;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="card" role="application" aria-label="Tic Tac Toe">
-      <h1>Easy Tic-Tac-Toe</h1>
-      <div class="info">
-        <div>Turn: <span id="turn" class="highlight">X</span></div>
-        <div>
-          Wins — X: <span id="xWins">0</span> | O: <span id="oWins">0</span>
-        </div>
-      </div>
+<input type="text" name="" id="name" /><br /><br />
+<input type="text" name="" id="surname" /><br /><br />
+<button onclick="createData()">Submit</button><br /><br />
 
-      <div id="board" class="board" aria-live="polite">
-        <!-- 9 cells created by JS -->
-      </div>
+<script>
+  let setData = []
+  let editId = null
+  function createData() {
+    let name = document.getElementById('name').value
+    let surname = document.getElementById('surname').value
 
-      <div class="msg" id="message">Click any square to start.</div>
+    let obj = { name, surname }
 
-      <div class="buttons">
-        <button id="newGame" class="primary">New Game</button>
-        <button id="resetScore">Reset Score</button>
-      </div>
-    </div>
+    if (editId != null) {
+      setData[editId] = obj
+      editId = null
+    } else {
+      setData.push(obj)
+    }
 
-    <script>
-      // Simple Tic-Tac-Toe
-      const boardEl = document.getElementById('board')
-      const turnEl = document.getElementById('turn')
-      const messageEl = document.getElementById('message')
-      const xWinsEl = document.getElementById('xWins')
-      const oWinsEl = document.getElementById('oWins')
-      const newGameBtn = document.getElementById('newGame')
-      const resetScoreBtn = document.getElementById('resetScore')
+    document.getElementById('name').value = ''
+    document.getElementById('surname').value = ''
+    dataView()
+  }
 
-      // Game state
-      let board = Array(9).fill(null) // null, 'X' or 'O'
-      let current = 'X'
-      let isFinished = false
-      let scores = { X: 0, O: 0 }
+  function dataView() {
+    let myData = ''
+    setData.map((item, index) => {
+      myData += `<tr>
+        <td>${item.name}</td>
+        <td>${item.surname}</td>
+        <td><button onClick='deleteData(${index})'>DELETE</button></td>
+        <td><button onClick='editeData(${index})'>UPDATE</button></td>
+      </tr>`
+    })
+    document.getElementById('showData').innerHTML = myData
+  }
 
-      // Winning combinations (indexes)
-      const wins = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8], // rows
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8], // cols
-        [0, 4, 8],
-        [2, 4, 6] // diagonals
-      ]
+  function deleteData(index) {
+    setData.splice(index, 1)
+    dataView()
+  }
 
-      // create cells
-      function createBoard() {
-        boardEl.innerHTML = ''
-        for (let i = 0; i < 9; i++) {
-          const cell = document.createElement('div')
-          cell.className = 'cell'
-          cell.setAttribute('data-index', i)
-          cell.setAttribute('role', 'button')
-          cell.setAttribute('aria-label', 'Empty cell ' + (i + 1))
-          cell.addEventListener('click', onCellClick)
-          boardEl.appendChild(cell)
-        }
-      }
-
-      function onCellClick(e) {
-        if (isFinished) return
-        const idx = Number(e.currentTarget.dataset.index)
-        if (board[idx]) return // already filled
-        makeMove(idx, current)
-      }
-
-      function makeMove(index, player) {
-        board[index] = player
-        const cell = boardEl.querySelector(`[data-index="${index}"]`)
-        cell.classList.add('disabled')
-        cell.textContent = player
-        cell.classList.add(player === 'X' ? 'x' : 'o')
-        cell.setAttribute(
-          'aria-label',
-          player + ' placed at cell ' + (index + 1)
-        )
-        // check win/draw
-        const result = checkResult()
-        if (result) {
-          handleResult(result)
-          return
-        }
-        // switch turn
-        current = current === 'X' ? 'O' : 'X'
-        updateUI()
-      }
-
-      function checkResult() {
-        // check wins
-        for (const combo of wins) {
-          const [a, b, c] = combo
-          if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            return { winner: board[a], combo }
-          }
-        }
-        // check draw
-        if (board.every(Boolean)) {
-          return { winner: null } // draw
-        }
-        return null // game continues
-      }
-
-      function handleResult(result) {
-        isFinished = true
-        if (result.winner) {
-          messageEl.innerHTML = `Player <span class="highlight">${result.winner}</span> wins!`
-          // highlight winning cells
-          result.combo.forEach(i => {
-            const c = boardEl.querySelector(`[data-index="${i}"]`)
-            if (c) c.style.boxShadow = '0 6px 20px rgba(124,58,237,0.25)'
-          })
-          scores[result.winner]++
-          xWinsEl.textContent = scores.X
-          oWinsEl.textContent = scores.O
-        } else {
-          messageEl.textContent = "It's a draw!"
-        }
-        turnEl.textContent = '-'
-      }
-
-      function updateUI() {
-        turnEl.textContent = current
-        messageEl.textContent = `${current} to play`
-      }
-
-      function newGame(resetBoardOnly = true) {
-        board = Array(9).fill(null)
-        current = 'X'
-        isFinished = false
-        // reset cell visuals
-        ;[...boardEl.children].forEach(c => {
-          c.textContent = ''
-          c.classList.remove('disabled', 'x', 'o')
-          c.style.boxShadow = ''
-          c.setAttribute(
-            'aria-label',
-            'Empty cell ' + (c.dataset.index * 1 + 1)
-          )
-        })
-        updateUI()
-        if (!resetBoardOnly) {
-          scores = { X: 0, O: 0 }
-          xWinsEl.textContent = '0'
-          oWinsEl.textContent = '0'
-        }
-      }
-
-      // keyboard support: press 1-9 to play that cell (1 = top-left, 9 = bottom-right)
-      window.addEventListener('keydown', e => {
-        if (e.key >= '1' && e.key <= '9' && !isFinished) {
-          const idx = Number(e.key) - 1
-          if (!board[idx]) makeMove(idx, current)
-        }
-        // 'r' = new round
-        if (e.key.toLowerCase() === 'r') newGame(true)
-        // 's' = reset scores + new game
-        if (e.key.toLowerCase() === 's') newGame(false)
-      })
-
-      // attach buttons
-      newGameBtn.addEventListener('click', () => newGame(true))
-      resetScoreBtn.addEventListener('click', () => newGame(false))
-
-      // initial setup
-      createBoard()
-      updateUI()
-    </script>
-  </body>
-</html>
+  function editeData(index) {
+    editId = index
+    let editRecord = setData[index]
+    console.log(editRecord);
+    document.getElementById('name').value = editRecord.name
+    document.getElementById('surname').value = editRecord.surname
+  }
+</script>
+<table border="1">
+  <tr>
+    <td>Name</td>
+    <td>Surname</td>
+    <td>Delete</td>
+    <td>Update</td>
+  </tr>
+  <tbody id="showData"></tbody>
+</table>
