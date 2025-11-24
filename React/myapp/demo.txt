@@ -1,0 +1,40 @@
+
+JS
+frontend => UI
+backend => server side handle => node, express
+
+React js
+=> frontend library [UI => user interface]
+=> JS
+=> 1 web app => popular
+=> 1 div => load
+
+=> node js download
+=> node_module => JS packages
+
+
+=> npx
+=> npm
+
+app create
+
+=> npx create-react-app appname
+
+
+
+node_module
+public => assets
+src => all files
+package.json => react => packages name with version
+
+run
+=> npm start
+
+=> jsx
+=> XML
+    - markup language
+
+=> file create rule
+=> first letter capital 
+
+=> react => return based
