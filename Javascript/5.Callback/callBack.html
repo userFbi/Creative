@@ -17,24 +17,24 @@
     }
 
     data("welcome",text) -->
-    <!-- function data(){
-        console.log("hello")
-
-       return function text(){
-            console.log("welcome")
-        }
-    }
-
-    var st = data()
-    st() -->
     <script>
-      var data = [10, 20, 30, 40, 50];
+      function data() {
+        console.log('hello')
 
-      var [a, b, ...text] = data;
+        return function text() {
+          console.log('welcome')
+        }
+      }
 
-      console.log(a);
-      console.log(b);
-      console.log(text);
+      var st = data() 
+      st()
+      //    var data = [10, 20, 30, 40, 50];
+      //
+      //    var [a, b, ...text] = data;
+      //
+      //    console.log(a);
+      //    console.log(b);
+      //    console.log(text);
     </script>
   </body>
 </html>
