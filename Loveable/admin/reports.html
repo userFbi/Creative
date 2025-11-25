@@ -194,6 +194,25 @@
           <div id="latestTransactions" class="row g-3"></div>
         </div>
 
+        <!-- year buget bar -->
+        <div class="container my-4">
+          <div
+            class="p-4 rounded"
+            style="
+              background: #fff;
+              border: 1px solid #e5e7eb;
+              max-width: 900px;
+              margin: auto;
+            "
+          >
+            <h5 class="fw-bold mb-3">Yearly Final Balance</h5>
+
+            <div style="height: 300px">
+              <canvas id="yearBalanceChart"></canvas>
+            </div>
+          </div>
+        </div>
+
         <div class="d-flex justify-content-between align-items-center mb-3">
           <div class="d-flex align-items-center gap-2">
             <h5 class="mb-0">
@@ -275,24 +294,36 @@
         card.className = 'col-md-4'
 
         card.innerHTML = `
-      <div class="card shadow-sm border-0 text-white ${
-        isIncome ? 'bg-success' : 'bg-danger'
-      }">
-        <div class="card-body">
-          <h6 class="card-title mb-1">${isIncome ? 'Income' : 'Expense'}</h6>
-          <h5 class="fw-bold">${isIncome ? '+' : '-'} ₹${tx.amount.toFixed(
-          2
-        )}</h5>
-          <p class="mb-1 small">${tx.source}</p>
-          <p class="mb-1 small">${tx.date}</p>
-          ${
-            tx.description
-              ? `<p class="small fst-italic">"${tx.description}"</p>`
-              : ''
-          }
-        </div>
-      </div>
-    `
+  <div class="card shadow-sm border-1">
+    <div class="card-body">
+
+      <h6 
+        class="card-title mb-1 fw-bold"
+        style="color: ${isIncome ? '#16A249' : '#EF4444'}"
+      >
+        ${isIncome ? 'Income' : 'Expense'}
+      </h6>
+
+      <h5 
+        class="fw-bold"
+        style="color: ${isIncome ? '#16A249' : '#EF4444'}"
+      >
+        ${isIncome ? '+' : '-'}₹${tx.amount.toFixed(2)}
+      </h5>
+
+      <p class="mb-1 small text-dark">${tx.source}</p>
+      <p class="mb-1 small text-dark">${tx.date}</p>
+
+      ${
+        tx.description
+          ? `<p class="small fst-italic text-secondary">"${tx.description}"</p>`
+          : ''
+      }
+
+    </div>
+  </div>
+`
+
         container.appendChild(card)
       })
     }
@@ -578,6 +609,87 @@
     /* --- Run on load --- */
     window.addEventListener('DOMContentLoaded', () => {
       initReportsPage()
+      loadYearBalanceChart()
     })
+
+    // ============================
+    // YEARLY FINAL BALANCE CHART
+    // ============================
+
+    let yearChart = null
+
+    function loadYearBalanceChart() {
+      const canvas = document.getElementById('yearBalanceChart')
+      const ctx = canvas.getContext('2d')
+
+      const years = getStoredYears().slice(0, 6) // LAST 6 YEARS ONLY
+
+      const finalBalances = years.map(year => {
+        const arr =
+          JSON.parse(localStorage.getItem(`transactions_${year}`)) || []
+        let bal = 0
+
+        arr.forEach(t => {
+          bal += t.type === 'income' ? Number(t.amount) : -Number(t.amount)
+        })
+
+        return bal
+      })
+
+      // destroy old chart
+      if (yearChart) yearChart.destroy()
+
+      yearChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'Final Balance',
+              data: finalBalances,
+              backgroundColor: '#134E4A', // TEAL like uploaded image
+              borderRadius: 10,
+              borderSkipped: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#fff',
+              titleColor: '#000',
+              bodyColor: '#000',
+              borderWidth: 1,
+              borderColor: '#ddd',
+              padding: 10,
+              cornerRadius: 8,
+              displayColors: false,
+              callbacks: {
+                label: ctx => `₹${ctx.raw.toLocaleString()}`
+              }
+            }
+          },
+
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#374151' }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: '#e5e7eb' },
+              ticks: {
+                color: '#6b7280',
+                callback: v => '₹' + v
+              }
+            }
+          }
+        }
+      })
+    }
   </script>
 </html>

@@ -1,5 +1,4 @@
 {
-    "liveServer.settings.port": 5501,
     "editor.tokenColorCustomizations": {
         "textMateRules": [
             {
@@ -23,6 +22,6 @@
         ]
     },
     "files.associations": {
-        "*.txt": "bg3txt"
+        "*.txt": "'txt','conf'"
     }
 }
