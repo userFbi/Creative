@@ -1,11 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Props from "./Props";
+import Props from "./2.props/Props";
+import StateExample from "./3.useState/StateExample";
 
 function App() {
   return (
     <div className="App">
-      <Props
+      {/* <Props
         data={[
           {
             image: "https://rickandmortyapi.com/api/character/avatar/144.jpeg",
@@ -56,7 +57,8 @@ function App() {
             first_seen: "Amortycan Grickfitti",
           },
         ]}
-      />
+      /> */}
+      <StateExample />
     </div>
   );
 }

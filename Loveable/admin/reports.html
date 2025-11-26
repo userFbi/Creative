@@ -288,7 +288,7 @@
       // Take latest 3
       const latestThree = allTransactions.slice(0, 3)
 
-      latestThree.forEach(tx => {
+      latestThree.reverse().forEach(tx => {
         const isIncome = tx.type === 'income'
         const card = document.createElement('div')
         card.className = 'col-md-4'
@@ -605,6 +605,10 @@
 
       attachSearchHandler()
     }
+      document.addEventListener("DOMContentLoaded", () => {
+    initReportsPage();
+    showLatestTransactions();
+  });
 
     /* --- Run on load --- */
     window.addEventListener('DOMContentLoaded', () => {
