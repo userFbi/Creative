@@ -168,15 +168,17 @@
         background: none;
         border: 1px solid black;
         color: #333;
+
         padding: 8px 16px;
         border-radius: 6px;
         transition: 0.3s;
       }
       .btn-outline:hover {
-        background-color: #6c757d;
+        /*background-color: rgb(224, 113, 82);*/
+        background-color: rgba(128, 128, 128, 0.651);
         color: white;
       }
-      .pt-10{
+      .pt-10 {
         padding: 10px !important;
       }
     </style>
@@ -261,11 +263,16 @@
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label">Date</label>
-              <input type="date" class="form-control pt-10" id="date" required />
+              <input
+                type="date"
+                class="form-control pt-10"
+                id="date"
+                required
+              />
               <div class="muted mt-1">Select the transaction date</div>
             </div>
             <div class="col-md-6">
-              <label class="form-label ">Source / Category</label>
+              <label class="form-label">Source / Category</label>
               <select class="form-select pt-10" id="source">
                 <option value="" selected disabled>Select source</option>
                 <option>Matki</option>
@@ -300,9 +307,9 @@
             >
               Save Transaction
             </button>
-            <!-- <button type="button" id="saveAddBtn" class="btn-outline">
+            <button type="button" id="saveAddBtn" class="btn-outline">
               Save & Add Another
-            </button> -->
+            </button>
             <button
               type="button"
               id="cancelBtn"
@@ -312,7 +319,13 @@
               Cancel
             </button>
           </div>
+        </form>
 
+        <div
+          id="successBox"
+          class="alert alert-success mt-3"
+          style="display: none"
+        >
           <!-- Success Message -->
           <div class="success-preview" id="successPreview" role="status">
             <div
@@ -360,13 +373,14 @@
               </div>
             </div>
           </div>
-        </form>
-        <div
-          id="successAlert"
-          class="alert alert-success d-none mt-3"
-          role="alert"
-        >
-          Transaction added successfully!
+          <!-- Toast Message -->
+          <div
+            id="successAlert"
+            class="alert alert-success d-none mt-3"
+            role="alert"
+          >
+            Transaction added successfully!
+          </div>
         </div>
       </div>
     </main>
@@ -449,7 +463,7 @@
       }
 
       /* ======= SAVE TRANSACTION (year-wise) ======= */
-      function saveTransaction() {
+      function saveTransaction(redirect = true) {
         const amount = document.getElementById('amount').value.trim()
         const inputDate = document.getElementById('date').value.trim()
         const source = document.getElementById('source').value.trim()
@@ -518,17 +532,31 @@
         alertBox.classList.remove('d-none')
         alertBox.textContent = 'Transaction saved successfully!'
 
+        // Hide the whole form
+        document.getElementById('txForm').style.display = 'none'
+
+        // Show success popup/message
+        document.getElementById('successBox').style.display = 'block'
+
         setTimeout(() => {
           alertBox.classList.add('d-none')
           successPreview.style.display = 'none'
-          // Redirect after alert fades
-          window.location.href = 'reports.html'
+
+          if (redirect) {
+            window.location.href = 'reports.html'
+          }
         }, 3000)
 
         // reset form
         document.getElementById('txForm').reset()
         switchTab(type)
       }
+
+      document
+        .getElementById('saveAddBtn')
+        .addEventListener('click', function () {
+          saveTransaction(false) // do NOT redirect
+        })
 
       /* ---- Optional: submit via form enter key ---- */
       if (txForm) {

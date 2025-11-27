@@ -605,14 +605,9 @@
 
       attachSearchHandler()
     }
-      document.addEventListener("DOMContentLoaded", () => {
-    initReportsPage();
-    showLatestTransactions();
-  });
-
-    /* --- Run on load --- */
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       initReportsPage()
+      showLatestTransactions()
       loadYearBalanceChart()
     })
 
