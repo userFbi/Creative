@@ -207,6 +207,7 @@
 
     <!-- Main Page -->
     <main class="main-content">
+      <!-- Back Button -->
       <a
         href="reports.html"
         class="btn btn-light d-inline-flex align-items-center border gap-2 mb-4"
@@ -214,8 +215,9 @@
         <i class="bi bi-arrow-left"></i>
         <span>Back to Reports</span>
       </a>
+
       <!-- Heading -->
-      <div class="heading-row">
+      <div class="heading-row mb-4">
         <div>
           <h1 class="page-title" id="pageTitle">Add Income</h1>
           <div class="muted" id="pageSubtitle">
@@ -235,7 +237,7 @@
       </div>
 
       <!-- Form -->
-      <div class="card-form">
+      <div class="card-form mt-4">
         <form id="txForm" novalidate>
           <input type="hidden" id="txType" value="income" />
 
@@ -260,7 +262,7 @@
           </div>
 
           <!-- Date & Source -->
-          <div class="row g-3">
+          <div class="row g-3 mb-3">
             <div class="col-md-6">
               <label class="form-label">Date</label>
               <input
@@ -273,10 +275,10 @@
             </div>
             <div class="col-md-6">
               <label class="form-label">Source / Category</label>
-              <select class="form-select pt-10" id="source">
+              <select class="form-select pt-10" id="source" required>
                 <option value="" selected disabled>Select source</option>
                 <option>Matki</option>
-                <option>lezim</option>
+                <option>Lezim</option>
                 <option>Donation</option>
                 <option>Other</option>
               </select>
@@ -287,7 +289,7 @@
           </div>
 
           <!-- Description -->
-          <div class="mb-3 mt-3">
+          <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea
               id="description"
@@ -298,7 +300,7 @@
           </div>
 
           <!-- Buttons -->
-          <div class="actions">
+          <div class="actions mb-3">
             <button
               type="button"
               id="saveBtn"
@@ -321,87 +323,87 @@
           </div>
         </form>
 
+        <!-- Success Box -->
         <div
           id="successBox"
-          class="alert alert-success mt-3"
-          style="display: none"
+          class="card shadow-sm mt-3"
+          style="display: none; border-radius: 12px"
         >
-          <!-- Success Message -->
-          <div class="success-preview" id="successPreview" role="status">
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-              "
-            >
+          <div class="card-body">
+            <!-- Top Section -->
+            <div class="d-flex justify-content-between align-items-start">
               <div>
-                <div class="success-line" id="successTitle">Income Added</div>
-                <div class="muted" id="successDate">Tue, Oct 7, 2025</div>
-              </div>
-              <div style="text-align: right">
                 <div
-                  style="
-                    font-weight: 700;
-                    color: var(--accent-dark);
-                    font-size: 18px;
-                  "
-                  id="successAmount"
+                  id="successTitle"
+                  style="font-size: 20px; font-weight: 600; color: #111827"
                 >
-                  +₹0.00
+                  Expense Added
                 </div>
-                <div class="muted" id="successSource">Source</div>
+                <div
+                  id="successDate"
+                  class="text-muted"
+                  style="font-size: 14px"
+                >
+                  Thu, Nov 27, 2025
+                </div>
+              </div>
+
+              <div class="text-end">
+                <div
+                  id="successAmount"
+                  style="font-size: 20px; font-weight: 700"
+                >
+                  -₹0.00
+                </div>
+                <div
+                  id="successSource"
+                  class="text-muted"
+                  style="font-size: 14px"
+                >
+                  Category
+                </div>
               </div>
             </div>
-            <div
-              style="
-                margin-top: 12px;
-                border-top: 1px solid #eef2f4;
-                padding-top: 12px;
-              "
-            >
-              <div class="muted" style="margin-bottom: 6px">Description:</div>
-              <div id="successDesc" style="font-size: 14px; color: #111827">
-                —
-              </div>
-              <div
-                style="margin-top: 8px; color: #198754; font-weight: 600"
-                id="successMsg"
-              >
-                <i class="bi bi-record-circle-fill"></i> Transaction saved
-                successfully
-              </div>
+
+            <hr style="margin: 12px 0; color: #eef2f4" />
+
+            <!-- Description -->
+            <div class="text-muted mb-1">Description:</div>
+            <div id="successDesc" style="font-size: 14px; color: #111827">
+              —
             </div>
-          </div>
-          <!-- Toast Message -->
-          <div
-            id="successAlert"
-            class="alert alert-success d-none mt-3"
-            role="alert"
-          >
-            Transaction added successfully!
+
+            <!-- Bottom Success Message -->
+            <div style="margin-top: 12px; color: #1ca54a; font-weight: 600">
+              <i class="bi bi-record-circle-fill"></i>
+              Transaction saved successfully
+            </div>
           </div>
         </div>
       </div>
     </main>
 
     <script>
-      /* ======= Unified script for add-transaction.html ======= */
+      /* ==================== CLEAN & FINAL SCRIPT ==================== */
 
-      // DOM refs
+      /* ===== DOM REFERENCES ===== */
       const txForm = document.getElementById('txForm')
       const tabIncome = document.getElementById('tabIncome')
       const tabExpense = document.getElementById('tabExpense')
+
       const pageTitle = document.getElementById('pageTitle')
       const pageSubtitle = document.getElementById('pageSubtitle')
       const txType = document.getElementById('txType')
       const sourceSelect = document.getElementById('source')
-      const saveBtn = document.getElementById('saveBtn')
 
-      // safety: ensure form exists
-      if (!txForm) console.warn('txForm not found — check form id in HTML')
+      const successBox = document.getElementById('successBox')
+      const successTitle = document.getElementById('successTitle')
+      const successAmount = document.getElementById('successAmount')
+      const successDate = document.getElementById('successDate')
+      const successSource = document.getElementById('successSource')
+      const successDesc = document.getElementById('successDesc')
 
-      // Tab handlers
+      /* ===== Tab switching ===== */
       tabIncome.addEventListener('click', () => switchTab('income'))
       tabExpense.addEventListener('click', () => switchTab('expense'))
 
@@ -410,23 +412,24 @@
 
         if (type === 'income') {
           tabIncome.classList.add('active')
-          tabExpense.classList.remove('active', 'expense')
+          tabExpense.classList.remove('active')
 
           pageTitle.textContent = 'Add Income'
           pageSubtitle.textContent =
             'Record money received during festival celebrations'
           txType.value = 'income'
-          document.getElementById('sourceNote').textContent =
-            'Choose where this income came from'
 
           sourceSelect.innerHTML = `
-      <option value="" selected disabled>Select source</option>
+      <option value="" disabled selected>Select source</option>
       <option>Matki</option>
       <option>Lezim</option>
       <option>Donation</option>
       <option>Other</option>
     `
+
           detailsTitle.innerHTML = `<i class="bi bi-graph-up"></i> &nbsp; Income Details`
+          document.getElementById('sourceNote').textContent =
+            'Choose where this income came from'
         } else {
           tabExpense.classList.add('active', 'expense')
           tabIncome.classList.remove('active')
@@ -435,150 +438,124 @@
           pageSubtitle.textContent =
             'Track your festival spending and categorize expenses'
           txType.value = 'expense'
-          document.getElementById('sourceNote').textContent =
-            'Choose where this expense was spent'
 
           sourceSelect.innerHTML = `
-      <option value="" selected disabled>Select category</option>
+      <option value="" disabled selected>Select category</option>
       <option>Food</option>
       <option>Medical</option>
       <option>Travel / Equipments</option>
       <option>Other</option>
     `
+
           detailsTitle.innerHTML = `<i class="bi bi-graph-down"></i> &nbsp; Expense Details`
+          document.getElementById('sourceNote').textContent =
+            'Choose where this expense was spent'
         }
       }
 
-      // initialize tab UI
+      // initialize
       switchTab('income')
 
-      // Clear form helper
+      /* ===== Utilities ===== */
       function clearForm() {
-        const form = document.getElementById('txForm')
-        if (form) {
-          form.reset()
-          // keep tab visuals in sync
-          switchTab(txType.value || 'income')
-        }
+        txForm.reset()
+        switchTab(txType.value || 'income')
       }
 
-      /* ======= SAVE TRANSACTION (year-wise) ======= */
+      /* ===== Save transaction ===== */
       function saveTransaction(redirect = true) {
-        const amount = document.getElementById('amount').value.trim()
+        const amountRaw = document.getElementById('amount').value.trim()
         const inputDate = document.getElementById('date').value.trim()
         const source = document.getElementById('source').value.trim()
         const description = document.getElementById('description').value.trim()
-        const type = document.getElementById('txType').value // income or expense
+        const type = txType.value
 
-        // basic validation
-        if (!amount || !inputDate || !source) {
+        if (!amountRaw || !inputDate || !source) {
           alert('Please fill in all required fields!')
           return
         }
 
-        // format date: yyyy-mm-dd -> dd-mm-yyyy
+        // Format date
         const parts = inputDate.split('-')
-        if (parts.length !== 3) {
-          alert(
-            'Invalid date format. Please choose a date using the date picker.'
-          )
+        const [year, month, day] = parts
+        const formattedDate = `${day}-${month}-${year}`
+
+        const amount = parseFloat(amountRaw)
+        if (isNaN(amount)) {
+          alert('Invalid amount.')
           return
         }
-        const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`
 
-        // transaction object
         const transaction = {
           type,
-          amount: parseFloat(amount),
+          amount,
           date: formattedDate,
           source,
-          description
+          description: description || '—'
         }
 
-        // year-key uses original inputDate to extract full year
-        const year = new Date(inputDate).getFullYear()
-        const key = `transactions_${year}`
-
-        // fetch existing, push and save
-        const existing = JSON.parse(localStorage.getItem(key) || '[]')
+        // Save by year
+        const yearKey = `transactions_${year}`
+        const existing = JSON.parse(localStorage.getItem(yearKey) || '[]')
         existing.push(transaction)
-        localStorage.setItem(key, JSON.stringify(existing))
+        localStorage.setItem(yearKey, JSON.stringify(existing))
 
-        console.log(`✅ Saved transaction to ${key}:`, transaction)
+        showSuccess(transaction, redirect)
+      }
 
-        // success preview
-        const successPreview = document.getElementById('successPreview')
-        const successAmount = document.getElementById('successAmount')
-        const successTitle = document.getElementById('successTitle')
-        const successDate = document.getElementById('successDate')
-        const successSource = document.getElementById('successSource')
-        const successDesc = document.getElementById('successDesc')
-
-        if (successPreview) {
-          successPreview.style.display = 'block'
-          successTitle.textContent =
-            type === 'income' ? 'Income Added' : 'Expense Added'
-          successAmount.textContent =
-            (type === 'income' ? '+' : '-') +
-            '₹' +
-            parseFloat(amount).toFixed(2)
-          successDate.textContent = formattedDate
-          successSource.textContent = source
-          successDesc.textContent = description || '—'
-        }
-
-        // ✅ Show success alert for 3 seconds only
-        const alertBox = document.getElementById('successAlert')
-        alertBox.classList.remove('d-none')
-        alertBox.textContent = 'Transaction saved successfully!'
-
-        // Hide the whole form
-        document.getElementById('txForm').style.display = 'none'
-
-        // Show success popup/message
-        document.getElementById('successBox').style.display = 'block'
+      /* ===== Auto-hide & show form ===== */
+      function showSuccessCard() {
+        successBox.style.display = 'block'
+        txForm.style.display = 'none'
 
         setTimeout(() => {
-          alertBox.classList.add('d-none')
-          successPreview.style.display = 'none'
-
-          if (redirect) {
-            window.location.href = 'reports.html'
-          }
+          successBox.style.display = 'none'
+          txForm.reset()
+          txForm.style.display = 'block'
         }, 3000)
-
-        // reset form
-        document.getElementById('txForm').reset()
-        switchTab(type)
       }
 
-      document
-        .getElementById('saveAddBtn')
-        .addEventListener('click', function () {
-          saveTransaction(false) // do NOT redirect
+      /* ===== Show success popup ===== */
+      function showSuccess(tx, redirect) {
+        successTitle.textContent =
+          tx.type === 'income' ? 'Income Added' : 'Expense Added'
+
+        const formattedAmount = tx.amount.toLocaleString('en-IN', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
         })
 
-      /* ---- Optional: submit via form enter key ---- */
-      if (txForm) {
-        txForm.addEventListener('submit', function (e) {
-          e.preventDefault()
-          saveTransaction()
-        })
+        successAmount.textContent =
+          (tx.type === 'income' ? '+₹' : '-₹') + formattedAmount
+        successAmount.style.color = tx.type === 'income' ? '#16a34a' : '#dc2626'
+
+        successDate.textContent = tx.date
+        successSource.textContent = tx.source
+        successDesc.textContent = tx.description || '—'
+
+        showSuccessCard()
+
+        // only redirect for Save Transaction
+        if (redirect) {
+          setTimeout(() => {
+            window.location.href = 'reports.html'
+          }, 3000)
+        }
+
+        txForm.reset()
+        switchTab(tx.type)
       }
 
-      /* ===== simple debug helper: list stored years ===== */
-      function debugListYears() {
-        const keys = Object.keys(localStorage).filter(k =>
-          k.startsWith('transactions_')
-        )
-        console.log(
-          'Stored years:',
-          keys.map(k => k.split('_')[1])
-        )
-      }
+      /* ===== Save & Add Another ===== */
+      document.getElementById('saveAddBtn').addEventListener('click', () => {
+        saveTransaction(false) // No redirect
+      })
 
-      // run once to show stored years in console (helpful while debugging)
-      debugListYears()
+      /* ===== Form submit ===== */
+      txForm.addEventListener('submit', function (e) {
+        e.preventDefault()
+        saveTransaction()
+      })
     </script>
   </body>
 </html>
