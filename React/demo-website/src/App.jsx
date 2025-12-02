@@ -1,13 +1,24 @@
-import logo from './logo.svg';
+
+import About from './About';
+import Admin from './Admin';
 import './App.css';
+import Footer from './Footer';
+import Gallery from './Gallery';
 import Hero from './Hero';
-import Header from './Header';
+import Navbar from './Navbar';
+import Testimonials from './Testimonials';
+
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Hero/>
+      {/* <Navbar />
+      <Hero />
+      <About />
+      <Testimonials />
+      <Gallery />
+      <Footer /> */}
+      <Admin/>
     </div>
   );
 }

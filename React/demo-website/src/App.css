@@ -1,75 +1,82 @@
-.App {
+body {
+  scroll-behavior: smooth;
+}
+
+.hero {
+  background: url("https://images.pexels.com/photos/305086/pexels-photo-305086.jpeg")
+    center center/cover no-repeat;
+  color: white;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  height: 60px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-brand {
+  font-size: 25px;
+  font-weight: bold;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.hero h1 {
+  color: rgb(150, 23, 23);
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero p {
+  color: #444;
+}
+
+.gallery-img {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card-img-top.rounded-circle {
+  border: 5px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* author */
+
+/* small styling for the card */
+
+.author-card {
+  max-width: 900px;
+  margin: 40px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+
+.author-card .author-img {
+  height: 100%;
+  min-height: 200px; /* ensures decent height on small screens */
+  object-fit: cover; /* crop nicely */
+  width: 100%;
+  display: block;
+}
+
+/* vertically center text column contents */
+.author-card .card-body {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 0.5rem;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* small responsive tweak: stack image on top on very small screens */
+@media (max-width: 575.98px) {
+  .author-card .row > [class*="col-"] {
+    padding: 0;
   }
-  to {
-    transform: rotate(360deg);
+  .author-card .author-img {
+    min-height: 220px;
   }
-}
-
-/* Header Start */
-
-.header {
-  display: flex;
-  height: 100px;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.logo {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.nav-links ul {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.nav-refrance ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  list-style: none;
-}
-
-/* Header End */
-
-.hero-img {
-  width: 100%;
 }

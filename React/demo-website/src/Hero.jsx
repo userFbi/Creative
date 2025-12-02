@@ -2,8 +2,12 @@ import React from 'react'
 
 const Hero = () => {
     return (
-        <div>
-            <img className='hero-img' src="https://www.seriousfitnessboulder.com/uploads/1/3/1/7/131771774/background-images/1805981455.jpg" alt="" />
+        <div className="hero d-flex flex-column justify-content-center text-white">
+            <div className="container">
+                <h1>Welcome to Our Platform</h1>
+                <p className="lead">Helping you grow with innovative tech solutions</p>
+                <a href="#about" className="btn btn-dark mt-3">Explore More</a>
+            </div>
         </div>
     )
 }
