@@ -1,24 +1,22 @@
 
-import About from './About';
-import Admin from './Admin';
 import './App.css';
-import Footer from './Footer';
-import Gallery from './Gallery';
-import Hero from './Hero';
 import Navbar from './Navbar';
+import Hero from './Hero';
+import About from './About';
 import Testimonials from './Testimonials';
+import Gallery from './Gallery';
+import Footer from './Footer';
 
 
 function App() {
   return (
     <div className="App">
-      {/* <Navbar />
+      <Navbar />
       <Hero />
       <About />
       <Testimonials />
       <Gallery />
-      <Footer /> */}
-      <Admin/>
+      <Footer />
     </div>
   );
 }
