@@ -6,6 +6,7 @@ import About from './About';
 import Testimonials from './Testimonials';
 import Gallery from './Gallery';
 import Footer from './Footer';
+import Contact from './Contact';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Testimonials />
       <Gallery />
       <Footer />
+      {/* <Contact/> */}
     </div>
   );
 }
