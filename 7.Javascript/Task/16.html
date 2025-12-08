@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Filter Data</title>
+    <style>
+      table {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td onclick="dataView()">All</td>
+        <td onclick="flowers()">Flowers</td>
+        <td onclick="clothes()">Clothes</td>
+        <td onclick="cars()">Cars</td>
+      </tr>
+      <tbody id="showData"></tbody>
+    </table>
+
+    <script>
+      let data = {
+        flower: [
+          { name: 'rose' },
+          { name: 'lotus' },
+          { name: 'Lily' },
+          { name: 'Sunflower' },
+          { name: 'Orchid' }
+        ],
+
+        clothes: [
+          { name: 'T-shirt' },
+          { name: 'Jeans' },
+          { name: 'Kurta' },
+          { name: 'Dress' },
+          { name: 'Blazer' }
+        ],
+
+        car: [
+          { name: 'Toyota Fortuner' },
+          { name: 'Hyundai Creta' },
+          { name: 'Maruti Suzuki Swift' },
+          { name: 'Tata Nexon' },
+          { name: 'Mahindra XUV700' }
+        ]
+      }
+
+      function dataView() {
+        let myData = ''
+
+        let maxLength = 5
+        for (let i = 0; i < maxLength; i++) {
+          myData += `
+        <tr>
+          <td>${data.flower[i] ? data.flower[i].name : ''},<br>${
+            data.clothes[i] ? data.clothes[i].name : ''
+          },<br>${data.car[i] ? data.car[i].name : ''}
+        </td>
+          <td>${data.flower[i] ? data.flower[i].name : ''}</td>
+          <td>${data.clothes[i] ? data.clothes[i].name : ''}</td>
+          <td>${data.car[i] ? data.car[i].name : ''}</td>
+        </tr>`
+        }
+
+        document.getElementById('showData').innerHTML = myData
+      }
+      dataView()
+
+      function all() {
+        dataView()
+      }
+
+      function flowers() {
+        let myData = ''
+        let maxLength = 5
+        for (let i = 0; i < maxLength; i++) {
+          myData += `
+        <tr> <td>${data.flower[i] ? data.flower[i].name : ''}</td></tr>`
+          document.getElementById('showData').innerHTML = myData
+        }
+      }
+      function clothes() {
+        let myData = ''
+        let maxLength = 5
+        for (let i = 0; i < maxLength; i++) {
+          myData += `
+        <tr> <td>${data.clothes[i] ? data.clothes[i].name : ''}</td></tr>`
+          document.getElementById('showData').innerHTML = myData
+        }
+      }
+      function cars() {
+        let myData = ''
+        let maxLength = 5
+        for (let i = 0; i < maxLength; i++) {
+          myData += `
+        <tr> <td>${data.car[i] ? data.car[i].name : ''}</td></tr>`
+          document.getElementById('showData').innerHTML = myData
+        }
+      }
+    </script>
+  </body>
+</html>

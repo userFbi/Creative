@@ -1,0 +1,29 @@
+  body {
+      scroll-behavior: smooth;
+  }
+
+  .hero {
+      background: url("https://fastly.picsum.photos/id/374/1600/800.jpg?hmac=AFFSJ1SKjTEgnDSmDgq5PamifvlZ6msDuSjfjvm0REQ") center center/cover no-repeat;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+  }
+
+  .hero h1 {
+      color: black;
+      font-size: 3rem;
+      font-weight: bold;
+  }
+
+  .hero p {
+      color: black;
+  }
+
+  .gallery-img {
+      height: 250px;
+      object-fit: cover;
+      width: 100%;
+  }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change position using DOM</title>
+    <style>
+      .main-div {
+        border: 1px solid black;
+        height: 400px;
+        width: 400px;
+      }
+
+      .box {
+        background-color: red;
+        border: 1px solid rgb(112, 3, 3);
+        width: 100px;
+        height: 100px;
+        position: relative;
+        transition-duration: 0.5s;
+        transition-timing-function: ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box" onclick="move()" id="box"></div>
+  </body>
+  <script>
+    let i = 1
+    function move() {
+      if (i == 1) {
+        document.getElementById('box').style.backgroundColor = 'green'
+        document.getElementById('box').style.left = '300px'
+        document.getElementById('box').style.top = '0px'
+      }
+      if (i == 2) {
+        document.getElementById('box').style.backgroundColor = 'blue'
+        document.getElementById('box').style.left = '300px'
+        document.getElementById('box').style.top = '300px'
+      }
+      if (i == 3) {
+        document.getElementById('box').style.backgroundColor = 'orange'
+        document.getElementById('box').style.left = '0px'
+        document.getElementById('box').style.top = '300px'
+      }
+      if (i == 4) {
+        document.getElementById('box').style.backgroundColor = 'red'
+        document.getElementById('box').style.left = '0px'
+        document.getElementById('box').style.top = '0px'
+      }
+
+      i++
+      if (i == 5) {
+        i = 1
+      }
+    }
+  </script>
+</html>

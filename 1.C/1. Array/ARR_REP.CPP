@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<conio.h>
+
+/*
+	10,20,30,10,20,10
+	10 -> 50
+	50,20,30,50,20,50
+*/
+
+void print(int a[], int size)
+{
+	int i;
+	for(i=0; i<size; i++)
+	{
+		printf("a[%d] : %d\n",i,a[i]);
+	}
+}
+
+void replace(int a[],int size,int replaceValue,int replaceElement)
+{
+	int i;
+	for(i=0; i<size; i++)
+	{
+		if(replaceValue == a[i])
+		{
+		   a[i] = replaceElement;
+		}
+	}
+}
+
+
+void main()
+{
+	int i, size, a[20],replaceValue ,replaceElement;
+	clrscr();
+	printf("Enter size of array : ");
+	scanf("%d",&size);
+
+	for(i=0; i<size; i++)
+	{
+		printf("a[%d] : ",i);
+		scanf("%d", &a[i]);
+	}
+
+	printf("Enter Element You want to replace : ");
+	scanf("%d",&replaceElement);
+
+	printf("Enter Replace Value : ");
+	scanf("%d",&replaceValue);
+
+	replace(a,size,replaceElement,replaceValue);
+
+	print(a,size);
+	getch();
+}
+/*
+A[]
+ENTER SIZE OF FIRST ARRAY : 2
+10
+20
+
+B[]
+ENTER SIZE ON SECOND ARRAY : 3
+100
+200
+300
+
+C[]
+10
+20
+100
+200
+300
+
+*/

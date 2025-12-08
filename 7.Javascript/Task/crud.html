@@ -1,0 +1,98 @@
+<script>
+  let setData = []
+  let editId = null
+
+  function createData() {
+    const name = document.getElementById('name').value
+    const s1 = document.getElementById('s1').value
+    const s2 = document.getElementById('s2').value
+    const s3 = document.getElementById('s3').value
+
+    const obj = { name, s1, s2, s3 }
+
+    if (editId != null) {
+      setData[editId] = obj
+      editId = null
+    } else {
+      setData.push(obj)
+    }
+
+    document.getElementById('name').value = ''
+    document.getElementById('s1').value = ''
+    document.getElementById('s2').value = ''
+    document.getElementById('s3').value = ''
+    dataView()
+  }
+
+  function total(s1, s2, s3) {
+    let sub1 = Number(s1)
+    let sub2 = Number(s2)
+    let sub3 = Number(s3)
+    let sum = sub1 + sub2 + sub3
+    return sum
+  }
+
+  function dataView() {
+    let myData = ''
+    setData.map((item, index) => {
+      const sum = total(item.s1, item.s2, item.s3)
+      const per = sum / 3
+      const min = Math.min(item.s1, item.s2, item.s3)
+      const max = Math.max(item.s1, item.s2, item.s3)
+
+      myData += `<tr>
+        <td>${index + 1} </td>
+        <td>${item.name} </td>
+        <td>${item.s1}</td>
+        <td>${item.s2}</td>
+        <td>${item.s3}</td>
+        <td>${sum}</td>
+        <td>${per}</td>
+        <td>${min}</td>
+        <td>${max}</td>
+        <td><button onClick='deleteData(${index})'>Delete</button></td>
+        <td><button onClick='editData(${index})'>Update</button></td>
+    </tr>`
+    })
+    document.getElementById('showData').innerHTML = myData
+
+    return myData
+  }
+
+  function deleteData(index) {
+    setData.splice(index, 1)
+    dataView()
+  }
+
+  function editData(index) {
+    editId = index
+    let editRecord = setData[index]
+    document.getElementById('name').value = editRecord.name
+    document.getElementById('s1').value = editRecord.s1
+    document.getElementById('s2').value = editRecord.s2
+    document.getElementById('s3').value = editRecord.s3
+  }
+</script>
+
+<input type="text" name="" id="name" /><br /><br />
+<input type="number" name="" id="s1" /><br /><br />
+<input type="number" name="" id="s2" /><br /><br />
+<input type="number" name="" id="s3" /><br /><br />
+<button onclick="createData()">Submit</button><br /><br />
+
+<table border="1">
+  <tr>
+    <td>No.</td>
+    <td>Name</td>
+    <td>s1</td>
+    <td>s2</td>
+    <td>s3</td>
+    <td>Total</td>
+    <td>Per(%)</td>
+    <td>Min</td>
+    <td>Max</td>
+    <td>Delete</td>
+    <td>Update</td>
+  </tr>
+  <tbody id="showData"></tbody>
+</table>

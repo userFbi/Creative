@@ -1,0 +1,60 @@
+<input type="text" name="" id="name" /><br /><br />
+<input type="text" name="" id="surname" /><br /><br />
+<button onclick="createData()">Submit</button><br /><br />
+
+<script>
+  let setData = []
+  let editId = null
+  function createData() {
+    let name = document.getElementById('name').value
+    let surname = document.getElementById('surname').value
+
+    let obj = { name, surname }
+
+    if (editId != null) {
+      setData[editId] = obj
+      editId = null
+    } else {
+      setData.push(obj)
+    }
+
+    document.getElementById('name').value = ''
+    document.getElementById('surname').value = ''
+    dataView()
+  }
+
+  function dataView() {
+    let myData = ''
+    setData.map((item, index) => {
+      myData += `<tr>
+        <td>${item.name}</td>
+        <td>${item.surname}</td>
+        <td><button onClick='deleteData(${index})'>DELETE</button></td>
+        <td><button onClick='editeData(${index})'>UPDATE</button></td>
+      </tr>`
+    })
+    document.getElementById('showData').innerHTML = myData
+  }
+
+  function deleteData(index) {
+    setData.splice(index, 1)
+    dataView()
+  }
+
+  function editeData(index) {
+    editId = index
+    let editRecord = setData[index]
+    console.log(editRecord);
+    document.getElementById('name').value = editRecord.name
+    document.getElementById('surname').value = editRecord.surname
+  }
+</script>
+<table border="1">
+  <tr>
+    <td>Name</td>
+    <td>Surname</td>
+    <td>Delete</td>
+    <td>Update</td>
+  </tr>
+  <tbody id="showData"></tbody>
+</table>

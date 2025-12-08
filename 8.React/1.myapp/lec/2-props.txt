@@ -1,0 +1,112 @@
+{/* components data pass */}
+{/* object */}
+{/*  => {} */}
+      {/* <PropsExample data="hello" /> */}
+      {/* <PropsExample data={{ name: "demo", age: 23 }} /> */}
+    <PropsExample data={
+        [
+            { name: "demo1", age: 13 }, 
+            { name: "demo12", age: 132 }, 
+            { name: "demo12", age: 132 }, 
+            { name: "demo12", age: 132 }, 
+            { name: "demo12", age: 132 }
+        ]
+    } />
+
+
+
+// import React from 'react'
+
+// const PropsExample = (props) => {
+//   return (
+//     <div>
+//         <h1>{props.data}</h1>
+//     </div>
+//   )
+// }
+
+// export default PropsExample
+
+// import React from 'react'
+
+// const PropsExample = ({data}) => {
+//     return (
+//         <div>
+//             <h1>{data}</h1>
+//         </div>
+//     )
+// }
+
+// export default PropsExample
+
+
+// import React from 'react'
+
+// const PropsExample = ({ data }) => {
+//     return (
+//         <div>
+//             <h1>{data.name}</h1>
+//             <h1>{data.age}</h1>
+//         </div>
+//     )
+// }
+ G
+// export default PropsExample
+
+
+import React from 'react'
+
+const PropsExample = ({ data }) => {
+    return (
+        <div>
+            {/* <h1>{data[0].name}</h1>
+            <h1>{data[0].age}</h1>
+
+            <h1>{data[1].name}</h1>
+            <h1>{data[1].age}</h1> */}
+
+
+            {/* <table border={1}>
+                <tr>
+                    <td>name</td>
+                    <td>age</td>
+                </tr>
+                {
+		data.map((i , index) => {
+                        return(
+                            <tr>
+                                <td>{i.name}</td>
+                                <td>{i.age}</td>
+                            </tr>
+                        )
+                    })
+                }
+            </table> */}
+
+
+            <table border={1}>
+                <tr>
+                    <td>name</td>
+                    <td>age</td>
+                </tr>
+                {
+		data.map((i, index) => (
+                        <tr>
+                            <td>{i.name}</td>
+                            <td>{i.age}</td>
+                        </tr>
+                    ))
+                }
+            </table>
+
+        </div>
+    )
+}
+
+export default PropsExample
+
+
+
+
+
+Task :- Rick and morty API card using props

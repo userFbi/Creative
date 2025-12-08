@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <style>
+      .header {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-bottom: 1px solid black;
+      }
+      .nav-links ul {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+      .temp-links ul {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        display: none;
+        font-size: 30px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 900px) {
+        .nav-links ul {
+          display: none;
+        }
+
+        .temp-links ul {
+          display: flex;
+        }
+
+        .nav-links a {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">Creative</div>
+      <div class="nav-links">
+        <a id="menu" onclick="openMenu()"><i class="bi bi-list"></i></a>
+        <ul>
+          <li>Home</li>
+          <li>Courses</li>
+          <li>Activities</li>
+          <li>Blog</li>
+          <li>Know us</li>
+          <li>Get in touch</li>
+          <li>Student zone</li>
+        </ul>
+      </div>
+    </div>
+    <div class="temp-links" id="temp">
+      <ul>
+        <li>Home</li>
+        <li>Courses</li>
+        <li>Activities</li>
+        <li>Blog</li>
+        <li>Know us</li>
+        <li>Get in touch</li>
+        <li>Student zone</li>
+      </ul>
+    </div>
+  </body>
+
+  <script>
+    let menuOpen = false
+
+    function openMenu() {
+      let menuIcon = document.getElementById('menu')
+      let tempMenu = document.getElementById('temp')
+
+      if (!menuIcon) {
+        menuIcon.innerHTML = '<i class="bi bi-x"></i>'
+        tempMenu.style.display = 'block'
+      } else {
+        menuIcon.innerHTML = '<i class="bi bi-list"></i>'
+        tempMenu.style.display = 'none'
+      }
+    }
+  </script>
+</html>

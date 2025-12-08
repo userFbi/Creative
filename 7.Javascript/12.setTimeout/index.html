@@ -1,0 +1,14 @@
+<button onclick="change()">stop</button>
+<script>
+  //setTimeout(()=>{
+  //    console.log("hello");
+  //},2000)
+
+  var data = setInterval(() => {
+    console.log('Loop is on infinite')
+  }, 2000)
+
+  function change() {
+    clearInterval(data)
+  }
+</script> 

@@ -1,0 +1,104 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a:link {
+    color: aquamarine;
+}
+
+a:active {
+    color: red;
+}
+
+a:visited {
+    color: gold;
+}
+
+a:hover {
+    color: green;
+}
+
+/* li:first-child{
+    color: aqua;
+} */
+/* li:first-of-type{
+    color: red;
+} */
+
+/* li:nth-child(2){
+    color: red;
+} */
+
+/* li:only-child{
+    color: aqua;
+} */
+
+/* *{
+    color: red;
+} */
+/* :not(p){
+    color: green;
+} */
+
+/* div:empty{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+} */
+
+/* input:enabled{
+    color: red;
+} */
+
+/* input:disabled{
+    background-color: aqua;
+} */
+
+/* input:focus{
+    background-color: blue;
+} */
+
+/* input:read-only{
+    background-color: black;
+} */
+
+/* input:in-range{
+    background-color: hotpink;
+}
+input:out-of-range{
+    background-color: brown;
+} */
+
+/* input:valid {
+    background-color: green;
+    color: white;
+} */
+
+/* input:invalid {
+    background-color: red;
+    color: white;
+} */
+
+/* input::placeholder {
+    color: aqua;
+} */
+
+p::first-letter {
+    color: blue;
+}
+
+p::first-line {
+    color: white;
+    background-color: red;
+}
+
+/* p::selection {
+    background-color: blue;
+    color: white;
+} */
+
+a:target {
+    border: 2px solid darkorange;
+    background-color: beige;
+    color: black;
+}

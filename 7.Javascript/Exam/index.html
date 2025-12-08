@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+    <style>
+      .btn {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        justify-content: center;
+      }
+      .btn button {
+        padding: 10px 20px;
+      }
+
+      .header {
+        justify-content: space-between;
+        display: flex;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .img-slider img {
+        width: 1265px;
+      }
+
+      body {
+        background: white;
+        color: black;
+      }
+
+      .logo {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .mode-btn {
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      /* DArk theme */
+      body.dark {
+        background: #121212;
+        color: white;
+      }
+
+      body.dark .header {
+        background: #1e1e1e;
+        color: white;
+      }
+
+      body.dark .img-slider img {
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+      }
+
+      body.dark button {
+        background: #333;
+        color: white;
+        border: 1px solid #555;
+      }
+
+      body.dark hr {
+        border-color: #444;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">Simple</div>
+      <div class="mode-btn">
+        <a id="theme-toggle" aria-label="Toggle dark mode">🌙</a>
+      </div>
+    </div>
+
+    <div class="img-slider">
+      <img src="https://www.cdmi.in/sliders/AI.jpg" alt="" id="image" />
+
+      <div class="btn">
+        <button onclick="left()">Prev</button>
+        <button onclick="right()">Next</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const toggleButton = document.getElementById('theme-toggle')
+    const body = document.body
+
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark')
+      toggleButton.textContent = '☀️'
+    }
+
+    toggleButton.addEventListener('click', () => {
+      body.classList.toggle('dark')
+      const isDark = body.classList.contains('dark')
+      toggleButton.textContent = isDark ? '☀️' : '🌙'
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    })
+
+    const img = document.getElementById('image')
+
+    const images = [
+      '../Exam/images/1.jpg',
+      '../Exam/images/2.webp',
+      '../Exam/images/3.jpg',
+      '../Exam/images/4.webp',
+      '../Exam/images/5.webp',
+      '../Exam/images/6.webp',
+      '../Exam/images/7.webp'
+    ]
+
+    let current = 0
+
+    function left() {
+      current--
+
+      if (current < 0) {
+        current = images.length - 1
+      }
+      img.src = images[current]
+    }
+
+    function right() {
+      current++
+      if (current > images.length - 1) {
+        current = 0
+      }
+
+      img.src = images[current]
+    }
+  </script>
+</html>

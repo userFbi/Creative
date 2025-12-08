@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f0f0f0;
+        font-family: Arial;
+      }
+
+      .game {
+        display: grid;
+        grid-template-columns: 100px 100px 100px;
+        gap: 5px;
+      }
+
+      .cell {
+        width: 100px;
+        height: 100px;
+        background: white;
+        border: 2px solid #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2 style="text-align: center">Tic Tac Toe</h2>
+
+      <div class="game">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+
+      <button class="btn" onclick="resetGame()">Reset</button>
+      <h3 id="status" style="text-align: center; margin-top: 10px"></h3>
+    </div>
+
+    <script>
+      let cells = document.querySelectorAll('.cell')
+      let currentPlayer = 'X'
+      let gameActive = true
+
+      const winningPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ]
+
+      cells.forEach((cell, index) => {
+        cell.addEventListener('click', () => handleClick(cell, index))
+      })
+
+      function handleClick(cell, index) {
+        if (cell.textContent !== '' || !gameActive) return
+
+       
+        cell.textContent = currentPlayer
+
+        
+        if (checkWinner()) {
+          document.getElementById('status').textContent =
+            currentPlayer + ' Wins!'
+          gameActive = false
+          return
+        }
+
+        if ([...cells].every(c => c.textContent !== '')) {
+          document.getElementById('status').textContent = "It's a Draw!"
+          gameActive = false
+          return
+        }
+
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X'
+      }
+
+      function checkWinner() {
+        return winningPatterns.some(pattern => {
+          let [a, b, c] = pattern
+          return (
+            cells[a].textContent === currentPlayer &&
+            cells[b].textContent === currentPlayer &&
+            cells[c].textContent === currentPlayer
+          )
+        })
+      }
+
+      function resetGame() {
+        cells.forEach(cell => (cell.textContent = ''))
+        currentPlayer = 'X'
+        gameActive = true
+        document.getElementById('status').textContent = ''
+      }
+    </script>
+  </body>
+</html>
