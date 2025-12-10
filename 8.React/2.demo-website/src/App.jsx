@@ -7,7 +7,13 @@ import Testimonials from './Testimonials';
 import Gallery from './Gallery';
 import Footer from './Footer';
 import Contact from './Contact';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import AppLayout from './AppLayout';
 
 function App() {
   return (
@@ -19,6 +25,26 @@ function App() {
       <Gallery />
       <Footer />
       {/* <Contact/> */}
+
+
+
+      <Router>
+        <Switch>
+          {/* <Route exect path="/">
+                  <Home />
+                </Route> */}
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/">
+            <AppLayout />
+          </Route>
+
+        </Switch>
+      </Router>
     </div>
   );
 }

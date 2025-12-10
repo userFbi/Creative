@@ -38,23 +38,25 @@
         </div>
 
         <!-- FORM -->
-        <form class="controls" id="uploadForm">
-          <div class="form-row">
-            <label class="label">Expiry</label>
-            <select id="expiry" required>
-              <option value="1">1 day</option>
-              <option value="2">2 days</option>
-              <option value="3" selected>3 days</option>
-              <option value="7">7 days</option>
-            </select>
+        <form class="controls pro-form" id="uploadForm">
+          <div class="input-group ">
+            <label for="expiry">Expiry Time</label>
+            <div class="select-box">
+              <select id="expiry" class="" required>
+                <option value="1">1 day</option>
+                <option value="2">2 days</option>
+                <option value="3" selected>3 days</option>
+                <option value="7">7 days</option>
+              </select>
+            </div>
           </div>
 
-          <div class="form-row">
-            <label class="label">Optional filename</label>
-            <input id="fname" placeholder="my-trip-photo.jpg" type="text" />
+          <div class="input-group">
+            <label for="fname">File Name (optional)</label>
+            <input id="fname" placeholder="example-photo.jpg" type="text" />
           </div>
 
-          <div class="form-actions">
+          <div class="form-actions right">
             <button id="uploadBtn" type="submit" class="btn primary">
               Upload & get link
             </button>

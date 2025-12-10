@@ -130,109 +130,77 @@
 
 /* ABOUT SECTION END */
 
-/* CHEF CONTAINER */
-.chef-container {
-  padding: 40px;
-  position: relative;
+
+/* BookTable Start */
+
+/* MAIN CONTAINER */
+.booking-container {
+  padding: 50px 30px;
+  width: 100%;
 }
 
-/* IMAGE SECTION */
-.chef-img-wrapper {
-  position: relative;
+/* LEFT IMAGE */
+.booking-image {
+  width: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.2);
 }
 
-.chef-img {
-  width: 50%;
-  border-radius: 16px;
+/* CARD */
+.booking-card {
+  padding: 10px;
+  border-radius: 16px !important;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* YEARS BADGE */
-.years-badge {
-  position: absolute;
-  top: 20px;
-  left: 300px;
-  background-color: #e64a19;
-  color: white;
-  padding: 8px;
-  border-radius: 12px;
-  text-align: center;
-  width: 150px;
-}
-
-.years-number {
-  font-size: 26px;
+/* TITLES */
+.booking-title {
+  font-size: 32px;
   font-weight: 700;
+  margin-bottom: 5px;
 }
 
-.years-text {
-  font-size: 13px;
-  line-height: 16px;
-}
-
-/* TEXT CONTENT */
-.chef-title {
-  font-size: 34px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.chef-subtitle {
+.booking-subtitle {
   color: #e64a19;
-  font-size: 18px;
   margin-bottom: 20px;
 }
 
-.chef-desc {
-  color: #555;
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-
-/* AWARDS */
-.award-section {
-  margin-bottom: 25px;
-}
-
-.award-icon {
-  color: #ff9800;
-}
-
-.award-text {
-  font-size: 15px;
-}
-
-/* QUOTE BOX */
-.quote-card {
-  background: #fff5ef;
-  border-left: 6px solid #ff7043;
-  margin-bottom: 25px;
-  border-radius: 12px;
-}
-
-.quote-text {
-  font-style: italic;
-  margin-bottom: 10px;
-  color: #444;
-}
-
-.quote-author {
-  font-weight: 600;
-}
-
-/* BUTTONS */
-.chef-buttons {
+/* FORM INPUTS */
+.booking-form {
   margin-top: 20px;
 }
 
-.primary-btn {
-  background-color: #ff7043 !important;
+.booking-input {
+  margin-bottom: 18px !important;
 }
 
-.secondary-btn {
-  border-color: #ff7043 !important;
-  color: #ff7043 !important;
+.booking-textarea {
+  margin-bottom: 22px !important;
 }
 
-.secondary-btn:hover {
-  background-color: #fff0e8 !important;
+/* BUTTON */
+.booking-btn {
+  background-color: #e64a19 !important;
+  padding: 12px 0 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
 }
+
+.booking-btn:hover {
+  background-color: #d84315 !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .booking-container {
+    padding: 20px;
+  }
+
+  .booking-title {
+    font-size: 26px;
+  }
+}
+
+
+/* BookTable End */

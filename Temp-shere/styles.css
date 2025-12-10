@@ -55,7 +55,7 @@ body {
 }
 .brand h1 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
 }
 .tag {
   margin: 6px 0 0;
@@ -108,6 +108,9 @@ body {
 }
 
 /* Form */
+
+
+
 .controls {
   display: grid;
   gap: 12px;
@@ -152,7 +155,6 @@ select {
 
 /* How it works bottom section */
 .bottom-info {
-  margin-top: 30px;
   margin-bottom: 30px;
 }
 
@@ -161,4 +163,134 @@ select {
   padding: 18px 0;
   text-align: center;
   color: rgba(47, 65, 86, 0.7);
+}
+/* Professional Form */
+.pro-form {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.select-box select,
+.pro-form input {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(47, 65, 86, 0.2);
+  background: #fdfdfd;
+  transition: 0.2s ease;
+}
+
+.pro-form input:focus,
+.select-box select:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(86, 28, 189, 0.15);
+}
+
+.full-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.form-actions {
+  margin-top: 8px;
+}
+
+.form-actions.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+/* Custom Select Wrapper */
+.custom-select {
+  position: relative;
+  width: 100%;
+  user-select: none;
+}
+
+/* Trigger box */
+.select-trigger {
+  background: var(--white);
+  border: 1px solid rgba(47, 65, 86, 0.25);
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.25s ease;
+}
+
+/* Arrow */
+.select-trigger .arrow {
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--purple);
+  border-bottom: 2px solid var(--purple);
+  transform: rotate(45deg);
+  transition: 0.25s ease;
+}
+
+/* Arrow rotate when open */
+.custom-select.open .arrow {
+  transform: rotate(-135deg);
+}
+
+/* Options dropdown */
+.options {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  border: 1px solid rgba(47, 65, 86, 0.15);
+  z-index: 10;
+}
+
+/* When select is open */
+.custom-select.open .options {
+  max-height: 260px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Individual option */
+.option {
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.option:hover {
+  background: var(--sky);
 }

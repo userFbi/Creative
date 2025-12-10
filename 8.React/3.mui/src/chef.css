@@ -1,0 +1,140 @@
+/* baseline to avoid box-sizing bugs */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.chef-container {
+  padding: 40px;
+  position: relative;
+  width: 100%;
+}
+
+/* Grid wrapper (we still allow wrap on small screens) */
+.chef-grid {
+  width: 100%;
+}
+
+/* image wrapper */
+.chef-img-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.chef-img {
+  width: 100%;
+  max-width: 480px; /* limit so it doesn't blow up */
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* badge */
+.years-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #e64a19;
+  color: white;
+  padding: 8px;
+  border-radius: 12px;
+  text-align: center;
+  width: 150px;
+}
+
+.years-number {
+  font-size: 26px;
+  font-weight: 700;
+}
+.years-text {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+/* content */
+.chef-content-wrapper {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.chef-title {
+  font-size: 34px !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+.chef-subtitle {
+  color: #e64a19 !important;
+  font-size: 18px !important;
+  margin-bottom: 12px !important;
+}
+.chef-desc {
+  color: #555 !important;
+  margin-bottom: 12px !important;
+  font-size: 16px !important;
+}
+
+.award-section {
+  margin-bottom: 20px !important;
+}
+.award-icon {
+  color: #ff9800;
+}
+.award-text {
+  font-size: 15px !important;
+}
+
+.quote-card {
+  background: #fff5ef !important;
+  border-left: 6px solid #ff7043 !important;
+  margin-bottom: 18px !important;
+  border-radius: 12px !important;
+}
+
+.quote-text {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #444;
+}
+.quote-author {
+  font-weight: 600;
+}
+
+.css-74d805-MuiButtonBase-root-MuiButton-root {
+  border-radius: 7px !important;
+  padding: 10px 40px !important;
+}
+
+.css-1blvszr-MuiButtonBase-root-MuiButton-root {
+  border-radius: 7px !important;
+  padding: 10px 30px !important;
+}
+
+.chef-buttons {
+  margin-top: 12px;
+}
+.primary-btn {
+  background-color: #ff7043 !important;
+}
+.secondary-btn {
+  border-color: #ff7043 !important;
+  color: #ff7043 !important;
+}
+.secondary-btn:hover {
+  background-color: #fff0e8 !important;
+}
+
+/* small screens: stack */
+@media (max-width: 959px) {
+  .years-badge {
+    left: 12px;
+    top: 12px;
+    width: 120px;
+  }
+  .chef-title {
+    font-size: 28px;
+  }
+}
