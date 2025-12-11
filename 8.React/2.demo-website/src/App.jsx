@@ -1,12 +1,12 @@
 
 import './App.css';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import About from './About';
-import Testimonials from './Testimonials';
-import Gallery from './Gallery';
-import Footer from './Footer';
-import Contact from './Contact';
+import Navbar from './Pages/Navbar';
+import Hero from './Pages/Hero';
+import About from './Pages/About';
+import Testimonials from './Pages/Testimonials';
+import Gallery from './Pages/Gallery';
+import Footer from './Pages/Footer';
+import Contact from './Pages/Contact';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,35 +14,38 @@ import {
   Link
 } from "react-router-dom";
 import AppLayout from './AppLayout';
+import Home from './Pages/Home';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navbar />
       <Hero />
       <About />
       <Testimonials />
       <Gallery />
-      <Footer />
-      {/* <Contact/> */}
+      <Footer /> */}
+
 
 
 
       <Router>
         <Switch>
-          {/* <Route exect path="/">
-                  <Home />
-                </Route> */}
           <Route path="/about">
             <About />
+          </Route>
+          <Route path="/testimonials">
+            <Testimonials />
+          </Route>
+          <Route path="/gallery">
+            <Gallery />
           </Route>
           <Route path="/contact">
             <Contact />
           </Route>
           <Route path="/">
-            <AppLayout />
+            <Home />
           </Route>
-
         </Switch>
       </Router>
     </div>

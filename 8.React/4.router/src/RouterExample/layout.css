@@ -1,0 +1,82 @@
+body {
+  scroll-behavior: smooth;
+}
+
+.hero {
+  background: url("https://images.pexels.com/photos/305086/pexels-photo-305086.jpeg")
+    center center/cover no-repeat;
+  color: white;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.navbar {
+  height: 60px;
+}
+
+.navbar-brand {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  color: rgb(150, 23, 23);
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero p {
+  color: #444;
+}
+
+.gallery-img {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card-img-top.rounded-circle {
+  border: 5px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* author */
+
+/* small styling for the card */
+
+.author-card {
+  max-width: 900px;
+  margin: 40px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+
+.author-card .author-img {
+  height: 100%;
+  min-height: 200px; /* ensures decent height on small screens */
+  object-fit: cover; /* crop nicely */
+  width: 100%;
+  display: block;
+}
+
+/* vertically center text column contents */
+.author-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* small responsive tweak: stack image on top on very small screens */
+@media (max-width: 575.98px) {
+  .author-card .row > [class*="col-"] {
+    padding: 0;
+  }
+  .author-card .author-img {
+    min-height: 220px;
+  }
+}
