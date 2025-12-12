@@ -4,7 +4,12 @@ import Header from "./Header";
 import Hero from "./Hero";
 import ChefSection from "./Chef";
 import "./App.css";
-import BookTable from "./Booktable";
+// import BookTable from "./Booktable";
+import EventIntro from "./Event";
+import ChoosePackage from "./ChoosePackage";
+
+
+
 
 function App() {
   return (
@@ -13,7 +18,9 @@ function App() {
       <Hero />
       <ChefSection />
       <AboutUs />
-      <BookTable/>
+      {/* <BookTable/> */}
+      <EventIntro />
+      <ChoosePackage />
     </div>
   );
 }

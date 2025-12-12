@@ -19,17 +19,18 @@ import Home from './Pages/Home';
 function App() {
   return (
     <div className="App">
-      {/* <Navbar />
-      <Hero />
-      <About />
-      <Testimonials />
-      <Gallery />
-      <Footer /> */}
+      <h1>hello</h1>
+      {/* <Navbar />   */}
+      {/* <Hero />/> */}
+      {/* <About /> */}
+      {/* <Testimonials /> */}
+      {/* <Gallery /> */}
+      {/* <Footer />  */}
 
 
 
 
-      <Router>
+      {/* <Router>
         <Switch>
           <Route path="/about">
             <About />
@@ -47,7 +48,7 @@ function App() {
             <Home />
           </Route>
         </Switch>
-      </Router>
+      </Router> */}
     </div>
   );
 }

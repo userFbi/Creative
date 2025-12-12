@@ -130,7 +130,6 @@
 
 /* ABOUT SECTION END */
 
-
 /* BookTable Start */
 
 /* MAIN CONTAINER */
@@ -202,5 +201,241 @@
   }
 }
 
-
 /* BookTable End */
+
+/* PACAGE SECTION START */
+
+.css-1xihtsn-MuiGrid-root {
+  justify-content: center !important;
+}
+
+.package-wrapper {
+  text-align: center !important;
+  padding: 50px 20px !important;
+}
+
+/* Titles */
+.package-heading {
+  font-size: 36px !important;
+  font-weight: 700 !important;
+}
+
+.package-subheading {
+  font-size: 15px !important;
+  color: #666 !important;
+  margin-top: 8px !important;
+}
+
+/* Cards */
+.package-card {
+  width: 350px;
+  border-radius: 18px !important;
+  padding-top: 40px !important;
+  padding-bottom: 20px !important;
+  position: relative !important;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.07) !important;
+  transition: transform 0.25s ease !important;
+}
+
+.package-card:hover {
+  transform: translateY(-5px) !important;
+}
+
+/* Popular card highlight (middle one) */
+.popular-card {
+  border: 2px solid #ff7b47 !important;
+}
+
+/* Most Popular badge */
+.popular-badge {
+  margin-top: 18px;
+  position: absolute !important;
+  top: -12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: #ff7b47 !important;
+  color: white !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+/* Icon */
+.package-icon {
+  width: 60px;
+  height: 60px;
+  background: #ffede3;
+  color: #d35400;
+  border-radius: 12px;
+  margin: 0 auto;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-size: 32px;
+}
+
+/* Title */
+.pkg-title {
+  margin-top: 15px !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #222;
+}
+
+/* Price */
+.price-box {
+  margin: 10px 0 20px 0;
+  justify-content: center !important;
+}
+
+.pkg-price {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: #ff7b47;
+}
+
+.pkg-per {
+  font-size: 15px !important;
+  color: #666;
+}
+
+/* Feature list */
+
+.pkg-features {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-row {
+  margin: 8px 0 !important;
+}
+
+.check-icon {
+  color: #ff7b47;
+  font-size: 18px !important;
+}
+
+.feature-text {
+  font-size: 15px !important;
+  color: #555;
+}
+
+/* Guest range badge */
+.guest-range {
+  background: #ffe6da !important;
+  padding: 10px;
+  border-radius: 12px;
+  margin-top: 25px;
+  font-weight: 600;
+  color: #ff7b47;
+  text-align: center !important;
+}
+
+/* PACAGE SECTION END */
+
+/* EVENT-PAGE SECTION START */
+.eventIntro-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 70px 40px;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* LEFT SIDE TEXT */
+.eventIntro-left {
+  flex: 1;
+  max-width: 550px;
+}
+
+.eventIntro-title {
+  font-size: 45px !important;
+  font-weight: 700 !important;
+  color: #222;
+}
+
+.eventIntro-text {
+  margin-top: 20px!important;
+  font-size: 16px!important;
+  color: #666!important;
+}
+
+/* STATS SECTION */
+
+
+.eventIntro-stats {
+  margin-top: 40px;
+  display: flex;
+  gap: 60px;
+}
+
+.stat-number {
+  color: #f15b2a;
+  font-size: 26px!important;
+  font-weight: 700!important;
+}
+
+.stat-label {
+  font-size: 14px!important;
+  color: #777!important;
+  margin-top: 3px!important;
+  letter-spacing: 1px!important;
+}
+
+/* RIGHT IMAGE SECTION */
+.eventIntro-right {
+  flex: 1;
+  position: relative;
+}
+
+.eventIntro-img {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  border-radius: 25px;
+  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.15)!important;
+}
+
+/* FLOATING BUTTON */
+.eventIntro-floating-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 25px!important;
+  border-radius: 15px;
+  background: white !important;
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+}
+
+.eventIntro-icon {
+  color: #f15b2a;
+  font-size: 30px !important;
+}
+
+.floating-btn-text {
+  font-size: 16px!important;
+  font-weight: 600!important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .eventIntro-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .eventIntro-stats {
+    justify-content: center;
+  }
+
+  .eventIntro-floating-btn {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* EVENT-PAGE SECTION END */

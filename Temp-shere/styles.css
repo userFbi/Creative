@@ -75,6 +75,7 @@ body {
 .card {
   background: var(--white);
   border-radius: var(--radius);
+  width: 500px;
   padding: 16px;
   box-shadow: 0 8px 30px rgba(47, 65, 86, 0.08);
 }
@@ -108,8 +109,6 @@ body {
 }
 
 /* Form */
-
-
 
 .controls {
   display: grid;
@@ -222,7 +221,6 @@ select {
   justify-content: flex-end;
 }
 
-
 /* Custom Select Wrapper */
 .custom-select {
   position: relative;
@@ -266,7 +264,7 @@ select {
   width: 100%;
   background: var(--white);
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -293,4 +291,9 @@ select {
 
 .option:hover {
   background: var(--sky);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
 }

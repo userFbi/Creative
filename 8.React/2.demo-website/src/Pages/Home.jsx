@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarComponent from './Navbar'
+
 import Hero from './Hero'
 import About from './About'
 import Testimonials from './Testimonials'
@@ -15,7 +15,6 @@ const Home = () => {
                 <Testimonials />
                 <Gallery />
             </AppLayout>
-
         </>
     )
 }
