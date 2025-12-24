@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.box{
+    width: 100%;
+    height: 250px;
+    margin-bottom: 70px;
+}
+
+.w-1140{
+    width: 1140px;
+    margin: auto;
+    display: flex;
+    column-gap: 20px;
+}
+.w-380{
+    width: 33%;
+}
+
+.name{
+    font-size: 14px;
+    padding-left: 69px;
+}
+
+.w-380 img {
+    width: 100%;
+    display: block;
+    transition: 1s;
+}
+
+/* 1. Zoom In #1 */
+
+.img-1{
+    display: block;
+    overflow: hidden;
+}
+
+.img-1:hover img{
+    transform: scale(1.5);
+    transition: 1s;
+}

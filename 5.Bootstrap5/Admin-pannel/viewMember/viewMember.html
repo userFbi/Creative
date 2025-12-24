@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Members</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            display: flex;
+        }
+
+        .sidebar {
+            background-color: #1e1e1e;
+            min-height: 100vh;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ccc;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .table thead {
+            color: #ccc;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+        }
+
+        .icon-action {
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .icon-action:hover {
+            transform: scale(1.2);
+        }
+
+        .btn-view {
+            background-color: #0d6efd;
+            color: #fff;
+        }
+
+        .btn-edit {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .initials-circle {
+            background-color: #0d6efd33;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column justify-content-between">
+        <div>
+            <h4 class="text-white mt-4 mb-4 text-center">Admin Panel</h4>
+            <hr class="border-secondary" />
+            <a href="../dashboard/dashboard.html">
+                <i class="bi bi-speedometer2 me-2"></i>Dashboard
+            </a>
+            <a href="../viewMember/viewMember.html" class="active">
+                <i class="bi bi-people-fill me-2"></i>View Members
+            </a>
+            <a href="../addMember/addMember.html">
+                <i class="bi bi-person-plus-fill me-2"></i>Add Member
+            </a>
+        </div>
+
+        <!-- Logout button at bottom -->
+        <div>
+            <a href="../../index.html" class="btn btn-danger w-100 mt-4">
+                <i class="bi bi-box-arrow-right me-2"></i>Logout
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <h2 class="mb-4">All Members</h2>
+        <input type="text" id="searchInput" onkeyup="renderMembers()" placeholder="Search by name..."
+            class="form-control mb-3 bg-dark text-white border-secondary" />
+        <div class="table-responsive">
+            <table class="table table-dark table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTable"></tbody>
+            </table>
+        </div>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+    <!-- View/Edit Modal -->
+    <div class="modal fade" id="memberModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title">Member Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Name:</strong> <span id="modalName"></span></p>
+                    <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
+                    <p><strong>Address:</strong> <span id="modalAddress"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const pageSize = 10;
+        let currentPage = 1;
+
+        function getInitials(firstName, lastName) {
+            return (firstName[0] + lastName[0]).toUpperCase();
+        }
+
+        function renderMembers() {
+            const search = document.getElementById("searchInput").value.toLowerCase();
+            const members = JSON.parse(localStorage.getItem("members")) || [];
+            const filtered = members.filter(m => (`${m.firstName} ${m.lastName}`).toLowerCase().includes(search));
+
+            const table = document.getElementById("membersTable");
+            table.innerHTML = "";
+            const paginated = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+            paginated.forEach((member, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+          <td>${(currentPage - 1) * pageSize + index + 1}</td>
+          <td class="text-start">
+            <div class="d-flex align-items-center gap-2">
+              <div class="initials-circle">${getInitials(member.firstName, member.lastName)}</div>
+              ${member.firstName} ${member.lastName}
+            </div>
+          </td>
+          <td>${member.phone}</td>
+          <td>${member.address}</td>
+          <td>
+            <i class="bi bi-eye text-primary me-3 icon-action" onclick="viewMember(${(currentPage - 1) * pageSize + index})"></i>
+            <i class="bi bi-pencil-fill text-warning me-3 icon-action" onclick="editMember(${(currentPage - 1) * pageSize + index})"></i>
+            <i class="bi bi-trash-fill text-danger icon-action" onclick="deleteMember(${(currentPage - 1) * pageSize + index})"></i>
+</td>
+
+        `;
+                table.appendChild(row);
+            });
+            renderPagination(filtered.length);
+        }
+
+        function renderPagination(totalItems) {
+            const pageCount = Math.ceil(totalItems / pageSize);
+            const pagination = document.querySelector(".pagination");
+            pagination.innerHTML = "";
+
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement("li");
+                li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                li.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    renderMembers();
+                });
+                pagination.appendChild(li);
+            }
+        }
+
+        function deleteMember(index) {
+            const members = JSON.parse(localStorage.getItem("members")) || [];
+            if (confirm("Are you sure you want to delete this member?")) {
+                members.splice(index, 1);
+                localStorage.setItem("members", JSON.stringify(members));
+                renderMembers();
+            }
+        }
+
+        function viewMember(index) {
+            const member = JSON.parse(localStorage.getItem("members"))[index];
+            document.getElementById("modalName").textContent = `${member.firstName} ${member.lastName}`;
+            document.getElementById("modalPhone").textContent = member.phone;
+            document.getElementById("modalAddress").textContent = member.address;
+            new bootstrap.Modal(document.getElementById("memberModal")).show();
+        }
+
+        function editMember(index) {
+            alert("Edit function triggered for index: " + index);
+        }
+
+        renderMembers();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TripMate – Offline Smart Travel Planner</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- OFFLINE BANNER -->
+    <div class="offline-banner" id="offlineBanner">Offline Mode Enabled</div>
+
+    <!-- HEADER -->
+    <header class="app-header">
+      <h1>🧳 TripMate</h1>
+      <nav>
+        <button class="nav-btn" data-section="dashboard">Dashboard</button>
+        <button class="nav-btn" data-section="itinerary">Itinerary</button>
+        <button class="nav-btn" data-section="packing">Packing</button>
+        <button class="nav-btn" data-section="budget">Budget</button>
+        <button class="nav-btn" data-section="emergency">Emergency</button>
+      </nav>
+      <button id="darkModeToggle">🌙</button>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="app-container">
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="app-section active">
+        <h2>Create New Trip</h2>
+
+        <form id="tripForm" class="card">
+          <input type="text" placeholder="Trip Name" required />
+          <input type="text" placeholder="Destination" required />
+
+          <div class="date-group">
+            <input type="date" required />
+            <input type="date" required />
+          </div>
+
+          <button type="submit" class="primary-btn">Create Trip</button>
+        </form>
+
+        <h2>Your Trips</h2> 
+        <div id="tripList" class="grid"></div>
+      </section>
+
+      <!-- ITINERARY -->
+      <section id="itinerary" class="app-section">
+        <h2>Day-wise Itinerary</h2>
+        <div id="itineraryDays"></div>
+      </section>
+
+      <!-- PACKING -->
+      <section id="packing" class="app-section">
+        <h2>Packing Checklist</h2>
+
+        <div class="packing-group">
+          <h3>Clothes</h3>
+          <ul id="clothesList"></ul>
+        </div>
+
+        <div class="packing-group">
+          <h3>Documents</h3>
+          <ul id="documentsList"></ul>
+        </div>
+
+        <div class="packing-group">
+          <h3>Essentials</h3>
+          <ul id="essentialsList"></ul>
+        </div>
+      </section>
+
+      <!-- BUDGET -->
+      <section id="budget" class="app-section">
+        <h2>Budget Planner</h2>
+
+        <div class="card">
+          <input type="number" placeholder="Total Budget" />
+          <button class="primary-btn">Save Budget</button>
+        </div>
+
+        <div id="expenseList"></div>
+        <canvas id="budgetChart"></canvas>
+      </section>
+
+      <!-- EMERGENCY -->
+      <section id="emergency" class="app-section">
+        <h2>Emergency Information</h2>
+
+        <div class="grid">
+          <div class="card">🚓 Police: 100</div>
+          <div class="card">🚑 Ambulance: 108</div>
+          <div class="card">🔥 Fire: 101</div>
+        </div>
+
+        <div class="card">
+          <h3>Important Reminders</h3>
+          <ul>
+            <li>ID Proof</li>
+            <li>Tickets</li>
+            <li>Hotel Booking</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- MAIN JS -->
+    <script src="script.js"></script>
+  </body>
+</html>

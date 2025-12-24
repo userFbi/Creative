@@ -1,0 +1,24 @@
+file structure :
+    index.html
+    admin - 
+        dashboard - 
+            dashboard.html
+            dashboard.css 
+        add-member - 
+            add-member.html
+            add-member.css
+        view-member - 
+            view-member.html
+            view-member.css
+
+* index.html :
+-Navbar 
+-Hero 
+-About us 
+-Testimonial
+-Gallery
+-Admin
+-Fotter 
+
+* dashboard.html
+-

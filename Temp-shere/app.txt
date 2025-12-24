@@ -1,0 +1,213 @@
+//MOTO : photo,videos,documents,pdf shere website
+
+It should be easy to use like i have to shere "photo,videos,documents,pdf" any of this , 
+it should be quick like shere there you get a link shere the link to your frd and your 
+frd click on link it should be data that shered but i want there some changes like user has choice to selete the 
+data what it want to download not like if the 1st person shere 20 picuters but think like in that 2nd person has only 5 picuters
+so 2nd person can just download that perticular picuters not all picuters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= server.js (Node + Express) ================= */
+
+// Minimal server: handles uploads, stores metadata locally in uploads.json, uploads file to R2 using S3 compatible SDK
+
+/*
+.env variables used:
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=
+R2_ACCOUNT_ID=
+R2_BUCKET=
+R2_ENDPOINT= (e.g. https://<accountid>.r2.cloudflarestorage.com)
+PORT=3000
+BASE_URL=https://yourdomain.example (used to generate share links)
+*/
+
+const serverCode = `
+const express = require('express');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+const { S3Client, PutObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
+const { v4: uuidv4 } = require('uuid');
+require('dotenv').config();
+
+const app = express();
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 1024*1024*1024 } }); // 1GB limit per file
+app.use(express.static(path.join(__dirname, 'public')));
+
+const r2Client = new S3Client({
+  region: 'auto',
+  endpoint: process.env.R2_ENDPOINT,
+  credentials: {
+    accessKeyId: process.env.R2_ACCESS_KEY_ID,
+    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+  },
+  forcePathStyle: false,
+});
+
+const DB_FILE = path.join(__dirname, 'uploads.json');
+if(!fs.existsSync(DB_FILE)) fs.writeFileSync(DB_FILE, JSON.stringify([]));
+
+function readDb(){ return JSON.parse(fs.readFileSync(DB_FILE)); }
+function writeDb(arr){ fs.writeFileSync(DB_FILE, JSON.stringify(arr, null, 2)); }
+
+app.post('/api/upload', upload.array('files'), async (req, res)=>{
+  try{
+    const expiryDays = parseInt(req.body.expiryDays || '3', 10);
+    const filenameHint = req.body.filename || '';
+    const files = req.files;
+    if(!files || files.length===0) return res.status(400).send('No files');
+
+    const db = readDb();
+    const links = [];
+
+    for(const f of files){
+      const id = uuidv4();
+      const key = `${id}_${f.originalname.replace(/[^a-zA-Z0-9.-_]/g,'_')}`;
+      const putCmd = new PutObjectCommand({ Bucket: process.env.R2_BUCKET, Key: key, Body: f.buffer, ContentType: f.mimetype });
+      await r2Client.send(putCmd);
+
+      const uploadedAt = Date.now();
+      const expireAt = uploadedAt + expiryDays*24*60*60*1000;
+      const publicUrl = `${process.env.BASE_URL || ''}/f/${id}`;
+
+      db.push({ id, key, originalName: f.originalname, uploadedAt, expireAt });
+      links.push(publicUrl);
+    }
+
+    writeDb(db);
+    return res.json({ links });
+  }catch(err){
+    console.error(err); return res.status(500).send('Upload error');
+  }
+});
+
+// Simple file serve route that streams from R2
+app.get('/f/:id', async (req, res)=>{
+  try{
+    const id = req.params.id;
+    const db = readDb();
+    const rec = db.find(r=>r.id===id);
+    if(!rec) return res.status(404).send('Not found');
+
+    // create a signed public url from R2 (or proxy stream). For simplicity we proxy-stream here.
+    const getUrl = `${process.env.R2_ENDPOINT}/${process.env.R2_BUCKET}/${rec.key}`;
+    // Note: Cloudflare R2 public access requires appropriate bucket policies; to keep this simple, redirect to the endpoint URL
+    return res.redirect(getUrl);
+
+  }catch(err){ console.error(err); return res.status(500).send('Error'); }
+});
+
+app.listen(process.env.PORT || 3000, ()=> console.log('Server started'));
+`;
+
+
+/* ================= cron-delete.js ================= */
+
+const cronCode = `
+// Run this script regularly (every 10 minutes) via system cron or PM2 cron
+// It deletes expired files from R2 and removes metadata from uploads.json
+
+const fs = require('fs');
+const path = require('path');
+const { S3Client, DeleteObjectCommand } = require('@aws-sdk/client-s3');
+require('dotenv').config();
+
+const DB_FILE = path.join(__dirname, 'uploads.json');
+const r2Client = new S3Client({ region:'auto', endpoint: process.env.R2_ENDPOINT, credentials: { accessKeyId: process.env.R2_ACCESS_KEY_ID, secretAccessKey: process.env.R2_SECRET_ACCESS_KEY } });
+
+function readDb(){ return JSON.parse(fs.readFileSync(DB_FILE)); }
+function writeDb(arr){ fs.writeFileSync(DB_FILE, JSON.stringify(arr, null, 2)); }
+
+(async ()=>{
+  const now = Date.now();
+  const db = readDb();
+  const keep = [];
+  for(const rec of db){
+    if(rec.expireAt <= now){
+      try{ await r2Client.send(new DeleteObjectCommand({ Bucket: process.env.R2_BUCKET, Key: rec.key })); console.log('Deleted', rec.key); }
+      catch(e){ console.error('Delete failed', rec.key, e.message); keep.push(rec); }
+    } else keep.push(rec);
+  }
+  writeDb(keep);
+})();
+`;
+
+/* ================= package.json ================= */
+
+const packageJson = `{
+  "name": "tempshare",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "cron": "node cron-delete.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.400.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "multer": "^1.4.5",
+    "uuid": "^9.0.0"
+  }
+}
+`;
+
+/* ================= .env.example ================= */
+const envEx = `
+R2_ACCESS_KEY_ID=your_r2_access_key
+R2_SECRET_ACCESS_KEY=your_r2_secret
+R2_ACCOUNT_ID=your_account_id
+R2_BUCKET=your_bucket_name
+R2_ENDPOINT=https://<accountid>.r2.cloudflarestorage.com
+PORT=3000
+BASE_URL=https://yourdomain.example
+`;
+
+/* ================= README.md (short) ================= */
+const readme = `
+# TempShare
+Temporary file sharing (mobile + desktop) sample using Cloudflare R2.
+
+## Setup
+1. Create Cloudflare R2 bucket and keys.
+2. Copy .env.example -> .env and fill in credentials.
+3. npm install
+4. npm start
+5. Run cron script periodically: npm run cron (or system cron every 10 minutes)
+
+## Notes
+- Free plan: Cloudflare R2 offers 10GB free; make sure expiry choices keep you under that limit.
+- You can improve by using a proper DB (Postgres/SQLite) and signed URLs instead of redirect.
+`;
+
+// Build combined content for the canvas: include files in one text doc separated clearly
+
+const full = `<!-- index.html -->\n${fs.readFileSync ? 'Use the files provided in this document' : ''}\n\n-----index.html-----\n${escapeHtml(`<!doctype html>\n<html lang="en">\n...`)}\n\n-----styles.css-----\n${escapeHtml("(styles from above)")}\n\n-----upload.js-----\n${escapeHtml("(upload.js from above)")}\n\n-----server.js-----\n${escapeHtml(serverCode)}\n\n-----cron-delete.js-----\n${escapeHtml(cronCode)}\n\n-----package.json-----\n${escapeHtml(packageJson)}\n\n-----.env.example-----\n${escapeHtml(envEx)}\n\n-----README.md-----\n${escapeHtml(readme)}\n`;
+
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// The canvas content below will include the main files text (server.js and cron as code blocks) plus short README
+
+const canvasContent = `# TempShare (Mobile + Desktop)\n\nIncluded files (copy into project root):\n\n1) index.html\n2) styles.css\n3) upload.js\n4) server.js\n5) cron-delete.js\n6) package.json\n7) .env.example\n8) README.md\n\n--- server.js ---\n\n${serverCode}\n\n--- cron-delete.js ---\n\n${cronCode}\n\n--- package.json ---\n\n${packageJson}\n\n--- .env.example ---\n\n${envEx}\n\n--- README ---\n\n${readme}\n\n--- Frontend files ---\nThe frontend (index.html, styles.css, upload.js) are included at the top of this document in the project template. Use them as static files under /public when serving from Express.\n`;
+
+// Write the canvas document content

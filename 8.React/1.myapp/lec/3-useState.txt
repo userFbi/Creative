@@ -1,0 +1,37 @@
+import React, { useState } from 'react'
+
+const StateExample = () => {
+
+    // get, set
+    // string,character, no, object, array, '' , null , arrayobject
+    const [text , setText] = useState('Hello')
+    const [no , setNo] = useState(0)
+
+    const changeText = () => {
+        setText('Good Afternoon')
+        setNo(10)
+    }
+
+    const changeNo = (data) => {
+        // console.log(data);
+        
+        setNo(no - data)
+    }
+
+  return (
+    <div>
+        <h1>{text}</h1>
+        <h1>{no}</h1>
+
+        <button onClick={() => setText('Good Morning')}>Good Morning</button>
+
+          <button onClick={changeText}>Good Afternoon</button>
+
+          <button onClick={changeText}>+++++</button>
+          <button onClick={() => setNo(no + 1)}>+++++</button>
+          <button onClick={() => changeNo(50)}>-----</button>
+    </div>
+  )
+}
+
+export default StateExample

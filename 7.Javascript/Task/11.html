@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chnage img using DOM (only using 1 button)</title>
+    <style>
+      div img {
+        height: 350px;
+        width: 500px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img
+        id="myImg"
+        src="https://www.cdmi.in/courses@2x/web-developments.webp"
+        alt=""
+      /><br />
+      <button onclick="changeImg()">Change Image...</button>
+    </div>
+  </body>
+  <script>
+    function changeImg() {
+      let data = document.getElementById('myImg')
+
+      let url1 = 'https://www.cdmi.in/courses@2x/web-developments.webp'
+      let url2 = 'https://www.cdmi.in/courses@2x/full-stack.webp'
+
+      if (data.src == url1) {
+        data.src = 'https://www.cdmi.in/courses@2x/full-stack.webp'
+      } else {
+        data.src = 'https://www.cdmi.in/courses@2x/web-developments.webp'
+      }
+    }
+  </script>
+</html>

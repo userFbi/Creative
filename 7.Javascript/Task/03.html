@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <button onClick={() => setCount((count) => count + 1)}>
+      count is {count}
+    </button>; -->
+    <h1 id="text">Click The Buttons.</h1>
+    <button onclick="c()"><h1>C</h1></button>
+    <button onclick="cpp()"><h1>C++</h1></button>
+    <button onclick="html()"><h1>HTML</h1></button>
+    <button onclick="css()"><h1>CSS</h1></button>
+    <button onclick="bootstrap()"><h1>Bootstrap</h1></button>
+    <button onclick="tailwind()"><h1>Tailwind</h1></button>
+    <button onclick="js()"><h1>JavaScript</h1></button>
+    <script>
+      function c() {
+        document.getElementById("text").innerHTML = "C";
+      }
+      function cpp() {
+        document.getElementById("text").innerHTML = "CPP";
+      }
+      function html() {
+        document.getElementById("text").innerHTML = "Html";
+      }
+      function css() {
+        document.getElementById("text").innerHTML = "CSS";
+      }
+      function bootstrap() {
+        document.getElementById("text").innerHTML = "Bootstrap";
+      }
+      function tailwind() {
+        document.getElementById("text").innerHTML = "Tailwind";
+      }
+      function js() {
+        document.getElementById("text").innerHTML = "Javascript";
+      }
+    </script>
+  </body>
+</html>

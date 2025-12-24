@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TempShare - Quick temporary file sharing</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background: hsl(24, 33%, 94%);
+        --foreground: hsl(213, 29%, 26%);
+        --card: hsl(0, 0%, 100%);
+        --card-foreground: hsl(213, 29%, 26%);
+        --muted-foreground: hsl(213, 29%, 40%);
+        --border: hsl(206, 39%, 84%);
+        --navy: hsl(213, 29%, 26%);
+        --purple: hsl(263, 79%, 43%);
+        --sky: hsl(206, 39%, 84%);
+        --beige: hsl(24, 33%, 94%);
+        --white: hsl(0, 0%, 100%);
+        --radius: 12px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--background);
+        color: var(--foreground);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Header */
+      .header {
+        width: 100%;
+        padding: 1.5rem 2rem;
+      }
+
+      .header-content {
+        max-width: 56rem;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.75rem;
+        background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .logo span {
+        color: white;
+        font-weight: 700;
+        font-size: 1.125rem;
+      }
+
+      .header-text h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--foreground);
+      }
+
+      .header-text p {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+      }
+
+      /* Main */
+      main {
+        padding: 0 1rem 4rem;
+      }
+
+      .container {
+        max-width: 56rem;
+        margin: 0 auto;
+      }
+
+      /* Hero */
+      .hero {
+        text-align: center;
+        padding: 2rem 0 3rem;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+      }
+
+      .hero .gradient-text {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        color: var(--muted-foreground);
+        font-size: 1.125rem;
+        max-width: 28rem;
+        margin: 0 auto;
+      }
+
+      /* Upload Card */
+      .upload-card {
+        max-width: 36rem;
+        margin: 0 auto;
+        background: var(--card);
+        border-radius: 1rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        padding: 2rem;
+      }
+
+      /* Drop Zone */
+      .drop-zone {
+        border: 2px dashed var(--border);
+        border-radius: 0.75rem;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .drop-zone:hover {
+        border-color: rgba(86, 28, 189, 0.5);
+        background-color: rgba(200, 217, 230, 0.1);
+      }
+
+      .drop-zone.dragging {
+        border-color: var(--purple);
+        background-color: rgba(86, 28, 189, 0.05);
+      }
+
+      .drop-zone input {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .drop-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background-color: rgba(200, 217, 230, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.75rem;
+      }
+
+      .drop-icon svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--navy);
+      }
+
+      .drop-zone .title {
+        font-weight: 500;
+        color: var(--foreground);
+      }
+
+      .drop-zone .subtitle {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+        margin-top: 0.25rem;
+      }
+
+      /* File Preview */
+      .file-preview {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .file-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem;
+        background-color: rgba(200, 217, 230, 0.2);
+        border-radius: 0.5rem;
+      }
+
+      .file-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .file-info svg {
+        width: 1rem;
+        height: 1rem;
+        color: var(--purple);
+      }
+
+      .file-name {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--foreground);
+      }
+
+      .file-size {
+        font-size: 0.75rem;
+        color: var(--muted-foreground);
+      }
+
+      .file-remove {
+        background: none;
+        border: none;
+        padding: 0.25rem;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background 0.2s;
+      }
+
+      .file-remove:hover {
+        background-color: rgba(200, 217, 230, 0.5);
+      }
+
+      .file-remove svg {
+        width: 1rem;
+        height: 1rem;
+        color: var(--muted-foreground);
+      }
+
+      /* Form Fields */
+      .form-fields {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--foreground);
+        margin-bottom: 0.5rem;
+      }
+
+      /* Dropdown */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .dropdown-trigger:hover {
+        border-color: rgba(86, 28, 189, 0.5);
+      }
+
+      .dropdown-trigger:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(86, 28, 189, 0.2);
+        border-color: rgba(86, 28, 189, 0.5);
+      }
+
+      .dropdown-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .dropdown-left svg {
+        width: 1rem;
+        height: 1rem;
+        color: var(--muted-foreground);
+      }
+
+      .dropdown-left span {
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .dropdown-arrow {
+        width: 1rem;
+        height: 1rem;
+        color: var(--muted-foreground);
+        transition: transform 0.2s;
+      }
+
+      .dropdown.open .dropdown-arrow {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        z-index: 50;
+        width: 100%;
+        margin-top: 0.5rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        display: none;
+      }
+
+      .dropdown.open .dropdown-menu {
+        display: block;
+        animation: fadeIn 0.2s ease;
+      }
+
+      .dropdown-option {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-size: 0.875rem;
+        font-weight: 500;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .dropdown-option:hover {
+        background-color: rgba(200, 217, 230, 0.3);
+      }
+
+      .dropdown-option.selected {
+        background-color: rgba(200, 217, 230, 0.4);
+        color: var(--purple);
+      }
+
+      /* Input */
+      .text-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--foreground);
+        transition: all 0.2s;
+      }
+
+      .text-input::placeholder {
+        color: var(--muted-foreground);
+      }
+
+      .text-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(86, 28, 189, 0.2);
+        border-color: rgba(86, 28, 189, 0.5);
+      }
+
+      /* Upload Button */
+      .button-container {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 0.5rem;
+      }
+
+      .upload-btn {
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 100%);
+        color: white;
+        font-weight: 500;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.2s;
+      }
+
+      .upload-btn:hover {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .upload-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* Progress State */
+      .progress-container {
+        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .progress-circle {
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+      }
+
+      .progress-circle svg {
+        width: 5rem;
+        height: 5rem;
+        transform: rotate(-90deg);
+      }
+
+      .progress-bg {
+        fill: none;
+        stroke: rgba(200, 217, 230, 0.5);
+        stroke-width: 6;
+      }
+
+      .progress-bar {
+        fill: none;
+        stroke: url(#progressGradient);
+        stroke-width: 6;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.2s;
+      }
+
+      .progress-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+
+      .progress-info {
+        text-align: center;
+      }
+
+      .progress-info .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-weight: 500;
+      }
+
+      .progress-info .subtitle {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+        margin-top: 0.25rem;
+      }
+
+      .linear-progress {
+        width: 100%;
+        max-width: 16rem;
+        height: 0.5rem;
+        background-color: rgba(200, 217, 230, 0.3);
+        border-radius: 9999px;
+        overflow: hidden;
+      }
+
+      .linear-progress-bar {
+        height: 100%;
+        background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 100%);
+        border-radius: 9999px;
+        transition: width 0.2s;
+      }
+
+      /* Complete State */
+      .complete-container {
+        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .success-icon {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        background-color: #dcfce7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .success-icon svg {
+        width: 2rem;
+        height: 2rem;
+        color: #16a34a;
+      }
+
+      .complete-info {
+        text-align: center;
+      }
+
+      .complete-info .title {
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+
+      .complete-info .subtitle {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+        margin-top: 0.25rem;
+      }
+
+      .share-link {
+        width: 100%;
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background-color: rgba(200, 217, 230, 0.2);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .share-link input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        font-size: 0.875rem;
+        color: var(--foreground);
+        outline: none;
+      }
+
+      .copy-btn {
+        padding: 0.5rem 1rem;
+        background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 100%);
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+      }
+
+      .copy-btn:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .upload-more {
+        margin-top: 1rem;
+        background: none;
+        border: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--purple);
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+
+      .upload-more:hover {
+        opacity: 0.8;
+      }
+
+      /* How It Works */
+      .how-it-works {
+        max-width: 56rem;
+        margin: 4rem auto 0;
+      }
+
+      .how-it-works h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .steps-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .steps-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .step-card {
+        background: var(--card);
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        transition: box-shadow 0.2s;
+      }
+
+      .step-card:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .step-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.5rem;
+        background-color: rgba(200, 217, 230, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .step-icon svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--navy);
+      }
+
+      .step-card h3 {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+
+      .step-card p {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+        line-height: 1.6;
+      }
+
+      /* Footer */
+      footer {
+        padding: 2rem 0;
+        text-align: center;
+      }
+
+      footer p {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .spinner {
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0.95);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .scale-in {
+        animation: scaleIn 0.2s ease-out;
+      }
+
+      /* Responsive */
+      @media (min-width: 640px) {
+        .hero h2 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <span>TS</span>
+        </div>
+        <div class="header-text">
+          <h1>TempShare</h1>
+          <p>Quick temporary photo & video sharing</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+      <div class="container">
+        <!-- Hero -->
+        <div class="hero">
+          <h2>Share files <span class="gradient-text">temporarily</span></h2>
+          <p>
+            Upload photos, videos, or documents and get a shareable link that
+            expires automatically.
+          </p>
+        </div>
+
+        <!-- Upload Card -->
+        <div class="upload-card" id="uploadCard">
+          <!-- Idle State -->
+          <div id="idleState">
+            <div class="drop-zone" id="dropZone">
+              <input
+                type="file"
+                id="fileInput"
+                multiple
+                accept="image/*,video/*,.pdf,.doc,.docx"
+              />
+              <div class="drop-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  />
+                </svg>
+              </div>
+              <p class="title">Drop files here or click to upload</p>
+              <p class="subtitle">Photos, videos, PDFs, documents</p>
+            </div>
+
+            <div class="file-preview" id="filePreview"></div>
+
+            <div class="form-fields">
+              <div class="form-group">
+                <label>Expiry time</label>
+                <div class="dropdown" id="expiryDropdown">
+                  <button
+                    type="button"
+                    class="dropdown-trigger"
+                    id="dropdownTrigger"
+                  >
+                    <div class="dropdown-left">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span id="selectedExpiry">1 day</span>
+                    </div>
+                    <svg
+                      class="dropdown-arrow"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-option selected" data-value="1">
+                      1 day
+                    </button>
+                    <button class="dropdown-option" data-value="2">
+                      2 days
+                    </button>
+                    <button class="dropdown-option" data-value="3">
+                      3 days
+                    </button>
+                    <button class="dropdown-option" data-value="7">
+                      7 days
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Custom filename (optional)</label>
+                <input
+                  type="text"
+                  class="text-input"
+                  id="filenameInput"
+                  placeholder="Enter a custom name..."
+                />
+              </div>
+
+              <div class="button-container">
+                <button class="upload-btn" id="uploadBtn" disabled>
+                  Upload Files
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Uploading State -->
+          <div id="uploadingState" style="display: none">
+            <div class="progress-container">
+              <div class="progress-circle">
+                <svg viewBox="0 0 80 80">
+                  <defs>
+                    <linearGradient
+                      id="progressGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="hsl(213, 29%, 26%)" />
+                      <stop offset="100%" stop-color="hsl(263, 79%, 43%)" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="progress-bg" cx="40" cy="40" r="36" />
+                  <circle
+                    class="progress-bar"
+                    id="progressCircle"
+                    cx="40"
+                    cy="40"
+                    r="36"
+                    stroke-dasharray="226"
+                    stroke-dashoffset="226"
+                  />
+                </svg>
+                <div class="progress-text" id="progressPercent">0%</div>
+              </div>
+
+              <div class="progress-info">
+                <p class="title">
+                  <svg
+                    class="spinner"
+                    width="16"
+                    height="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="var(--purple)"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                    />
+                  </svg>
+                  Uploading <span id="fileCount">1</span> file<span
+                    id="filePlural"
+                  ></span
+                  >...
+                </p>
+                <p class="subtitle">
+                  Please wait while we securely upload your files
+                </p>
+              </div>
+
+              <div class="linear-progress">
+                <div
+                  class="linear-progress-bar"
+                  id="linearProgress"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Complete State -->
+          <div id="completeState" style="display: none">
+            <div class="complete-container">
+              <div class="success-icon scale-in">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div class="complete-info">
+                <p class="title">Upload Complete!</p>
+                <p class="subtitle">
+                  Your files will expire in
+                  <span id="expiryDays">1</span> day<span
+                    id="expiryPlural"
+                  ></span>
+                </p>
+              </div>
+              <div class="share-link">
+                <input
+                  type="text"
+                  readonly
+                  value="https://tempshare.app/s/abc123xyz"
+                  id="shareUrl"
+                />
+                <button class="copy-btn" id="copyBtn">Copy</button>
+              </div>
+              <button class="upload-more" id="uploadMoreBtn">
+                Upload more files
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <section class="how-it-works">
+        <h2>How it works</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
+              </svg>
+            </div>
+            <h3>Upload your files</h3>
+            <p>Drag & drop or select photos, videos, or documents</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3>Set expiry time</h3>
+            <p>Choose how long your files stay available (1-7 days)</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+            </div>
+            <h3>Get shareable link</h3>
+            <p>Instantly receive a unique link to share with anyone</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+            </div>
+            <h3>Auto-delete</h3>
+            <p>Files are automatically removed after expiry for privacy</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        © 2024 TempShare. Files are stored securely and deleted after expiry.
+      </p>
+    </footer>
+
+    <script>
+      // DOM Elements
+      const dropZone = document.getElementById('dropZone')
+      const fileInput = document.getElementById('fileInput')
+      const filePreview = document.getElementById('filePreview')
+      const uploadBtn = document.getElementById('uploadBtn')
+      const expiryDropdown = document.getElementById('expiryDropdown')
+      const dropdownTrigger = document.getElementById('dropdownTrigger')
+      const dropdownMenu = document.getElementById('dropdownMenu')
+      const selectedExpiry = document.getElementById('selectedExpiry')
+      const idleState = document.getElementById('idleState')
+      const uploadingState = document.getElementById('uploadingState')
+      const completeState = document.getElementById('completeState')
+      const progressCircle = document.getElementById('progressCircle')
+      const progressPercent = document.getElementById('progressPercent')
+      const linearProgress = document.getElementById('linearProgress')
+      const fileCount = document.getElementById('fileCount')
+      const filePlural = document.getElementById('filePlural')
+      const expiryDaysEl = document.getElementById('expiryDays')
+      const expiryPlural = document.getElementById('expiryPlural')
+      const copyBtn = document.getElementById('copyBtn')
+      const uploadMoreBtn = document.getElementById('uploadMoreBtn')
+
+      let files = []
+      let expiryDays = 1
+
+      // Format file size
+      function formatFileSize(bytes) {
+        if (bytes < 1024) return bytes + ' B'
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'
+        return (bytes / (1024 * 1024)).toFixed(1) + ' MB'
+      }
+
+      // Get file icon SVG
+      function getFileIconSVG(file) {
+        if (file.type.startsWith('image/')) {
+          return '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>'
+        }
+        if (file.type.startsWith('video/')) {
+          return '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>'
+        }
+        if (file.type === 'application/pdf') {
+          return '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>'
+        }
+        return '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>'
+      }
+
+      // Render file preview
+      function renderFilePreview() {
+        filePreview.innerHTML = files
+          .map(
+            (file, index) => `
+        <div class="file-item">
+          <div class="file-info">
+            ${getFileIconSVG(file)}
+            <div>
+              <div class="file-name">${file.name}</div>
+              <div class="file-size">${formatFileSize(file.size)}</div>
+            </div>
+          </div>
+          <button class="file-remove" data-index="${index}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      `
+          )
+          .join('')
+
+        uploadBtn.disabled = files.length === 0
+      }
+
+      // Handle file input
+      fileInput.addEventListener('change', e => {
+        files = [...files, ...Array.from(e.target.files)]
+        renderFilePreview()
+      })
+
+      // Handle drag and drop
+      dropZone.addEventListener('dragover', e => {
+        e.preventDefault()
+        dropZone.classList.add('dragging')
+      })
+
+      dropZone.addEventListener('dragleave', e => {
+        e.preventDefault()
+        dropZone.classList.remove('dragging')
+      })
+
+      dropZone.addEventListener('drop', e => {
+        e.preventDefault()
+        dropZone.classList.remove('dragging')
+        files = [...files, ...Array.from(e.dataTransfer.files)]
+        renderFilePreview()
+      })
+
+      // Handle file remove
+      filePreview.addEventListener('click', e => {
+        const removeBtn = e.target.closest('.file-remove')
+        if (removeBtn) {
+          const index = parseInt(removeBtn.dataset.index)
+          files.splice(index, 1)
+          renderFilePreview()
+        }
+      })
+
+      // Dropdown
+      dropdownTrigger.addEventListener('click', () => {
+        expiryDropdown.classList.toggle('open')
+      })
+
+      dropdownMenu.addEventListener('click', e => {
+        const option = e.target.closest('.dropdown-option')
+        if (option) {
+          expiryDays = parseInt(option.dataset.value)
+          selectedExpiry.textContent = option.textContent
+          document
+            .querySelectorAll('.dropdown-option')
+            .forEach(opt => opt.classList.remove('selected'))
+          option.classList.add('selected')
+          expiryDropdown.classList.remove('open')
+        }
+      })
+
+      document.addEventListener('click', e => {
+        if (!expiryDropdown.contains(e.target)) {
+          expiryDropdown.classList.remove('open')
+        }
+      })
+
+      // Upload simulation
+      uploadBtn.addEventListener('click', () => {
+        if (files.length === 0) return
+
+        idleState.style.display = 'none'
+        uploadingState.style.display = 'block'
+        fileCount.textContent = files.length
+        filePlural.textContent = files.length > 1 ? 's' : ''
+
+        let progress = 0
+        const interval = setInterval(() => {
+          progress += Math.random() * 15 + 5
+          if (progress >= 100) {
+            progress = 100
+            clearInterval(interval)
+            setTimeout(() => {
+              uploadingState.style.display = 'none'
+              completeState.style.display = 'block'
+              expiryDaysEl.textContent = expiryDays
+              expiryPlural.textContent = expiryDays > 1 ? 's' : ''
+            }, 300)
+          }
+          const dashoffset = 226 - (226 * progress) / 100
+          progressCircle.style.strokeDashoffset = dashoffset
+          progressPercent.textContent = Math.round(progress) + '%'
+          linearProgress.style.width = progress + '%'
+        }, 200)
+      })
+
+      // Copy link
+      copyBtn.addEventListener('click', () => {
+        const shareUrl = document.getElementById('shareUrl')
+        shareUrl.select()
+        document.execCommand('copy')
+        copyBtn.textContent = 'Copied!'
+        setTimeout(() => (copyBtn.textContent = 'Copy'), 2000)
+      })
+
+      // Upload more
+      uploadMoreBtn.addEventListener('click', () => {
+        files = []
+        filePreview.innerHTML = ''
+        uploadBtn.disabled = true
+        completeState.style.display = 'none'
+        idleState.style.display = 'block'
+        progressCircle.style.strokeDashoffset = 226
+        progressPercent.textContent = '0%'
+        linearProgress.style.width = '0%'
+      })
+    </script>
+  </body>
+</html>

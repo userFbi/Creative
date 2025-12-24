@@ -1,0 +1,79 @@
+<!-- crud
+=> create
+=> read [view]
+=> update
+=> delete -->
+
+
+<!-- [] name , surname
+
+object => {key : "value"} -->
+<script>
+    let setData = []
+    let editId = null
+
+    function createData()
+    {
+        const name = document.getElementById('name').value
+        const surname = document.getElementById('surname').value
+
+        const obj = {name , surname}
+        console.log(obj)
+
+        if(editId != null)
+        {
+            setData[editId] = obj
+            editId = null
+        }
+        else
+        {
+            setData.push(obj)
+        }
+
+        document.getElementById('name').value=''
+        document.getElementById('surname').value=''
+        dataView()
+    }
+
+    function dataView()
+    {
+        //console.log(setData)
+        let myData = ''
+        setData.map((item , index) => {
+            myData += `<tr><td>${item.name}</td><td>${item.surname}</td><td><button onclick=deleteData(${index})>DELETE</button></td><td><button onclick=editData(${index})>UPDATE</button></td></tr>`
+        })
+        document.getElementById('showData').innerHTML=myData
+    }
+
+    function deleteData(index)
+    {
+        //alert(index)
+        setData.splice(index,1)
+        dataView()
+    }
+
+    function editData(index)
+    {
+        //alert(index)
+        editId = index
+        let editRecord = setData[index]
+        console.log(editRecord)
+        document.getElementById('name').value = editRecord.name
+        document.getElementById('surname').value = editRecord.surname
+    }
+</script>
+
+
+<input type="text" name="" id="name"> <br><br>
+<input type="text" name="" id="surname"> <br><br>
+<button onclick="createData()">Submit</button><br><br>
+
+<table border="1">
+    <tr>
+        <td>Name</td>
+        <td>Surname</td>
+        <td>Delete</td>
+        <td>Update</td>
+    </tr>
+    <tbody id="showData"></tbody>
+</table>

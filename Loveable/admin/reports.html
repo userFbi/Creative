@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f9fc;
+      }
+
+      .sidebar {
+        width: 220px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #0d1321;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem 1rem;
+      }
+
+      .nav-section {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar h5 {
+        padding-left: 10px;
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        padding-top: 30px;
+        padding-bottom: 35px;
+        color: #fff;
+        border-bottom: 2px solid #1c2232;
+      }
+
+      .sidebar a {
+        display: block;
+        color: #ccc;
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        margin-bottom: 0.4rem;
+        border-radius: 6px;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        color: #fff;
+        background-color: #1c2232;
+      }
+
+      .logout-btn {
+        text-align: center;
+      }
+
+      /* Main content (copied from viewMember style) */
+      .main-content {
+        margin-left: 220px;
+        padding: 2rem;
+      }
+
+      .table-container {
+        background-color: #fff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .table th {
+        background-color: #f1f1f1;
+      }
+
+      .table td,
+      .table th {
+        padding: 14px 16px;
+        vertical-align: middle;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .btn-primary {
+        background-color: #3b82f6;
+        border: none;
+      }
+
+      .actions button i {
+        color: grey;
+      }
+
+      .bi-eye:hover {
+        color: #3b82f6;
+      }
+      .bi-trash:hover {
+        color: red;
+      }
+
+      #latestTransactions .card {
+        border-radius: 12px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      #latestTransactions .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .page-circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid #d0d0d0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .page-circle:hover {
+        background: #e9ecef;
+      }
+
+      .active-page {
+        background: #4da6ff !important;
+        color: white !important;
+        border-color: #3b82f6 !important;
+      }
+
+      .page-circle i {
+        font-size: 18px;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Sidebar-->
+    <div class="sidebar">
+      <div class="nav-section">
+        <h5>Admin Panel</h5>
+        <a href="admin.html">
+          <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
+        >
+        <a href="reports.html" class="active">
+          <i class="bi bi-bar-chart-line me-2"></i>Reports</a
+        >
+        <a href="add-transaction.html">
+          <i class="bi bi-plus-circle me-2"></i>Add Transaction</a
+        >
+      </div>
+      <div class="logout-btn">
+        <a href="../index.html" onclick="logout()" class="text-danger"
+          >Logout</a
+        >
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <div class="top-bar">
+        <div>
+          <h2 class="fw-bold mb-0">Transactions Report</h2>
+          <p class="text-muted">Manage and view all your transactions</p>
+        </div>
+        <a href="add-transaction.html" class="btn btn-primary"
+          ><i class="bi bi-plus-circle me-2"></i> Add Transaction</a
+        >
+      </div>
+
+      <div class="table-container">
+        <div class="latest-transactions-section mb-4">
+          <h5 class="fw-bold text-dark mb-3">Latest Transactions</h5>
+          <div id="latestTransactions" class="row g-3"></div>
+        </div>
+
+        <!-- year buget bar -->
+        <div class="container my-4">
+          <div
+            class="p-4 rounded"
+            style="
+              background: #fff;
+              border: 1px solid #e5e7eb;
+              max-width: 900px;
+              margin: auto;
+            "
+          >
+            <h5 class="fw-bold mb-3">Yearly Final Balance</h5>
+
+            <div style="height: 300px">
+              <canvas id="yearBalanceChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex align-items-center gap-2">
+            <h5 class="mb-0">
+              All Transactions (<span id="reportCount">0</span>)
+            </h5>
+            <select
+              id="yearFilter"
+              class="form-select form-select-sm"
+              style="width: 120px"
+            >
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+            </select>
+          </div>
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control w-25"
+            placeholder="Search transactions..."
+          />
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th class="text-muted">Type</th>
+                <th class="text-muted">Amount</th>
+                <th class="text-muted">Date</th>
+                <th class="text-muted">Source</th>
+                <th class="text-muted">Description</th>
+                <th class="text-muted">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="reportsTableBody"></tbody>
+          </table>
+          <div id="pagination" class="mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // =========================
+    // Variables
+    // =========================
+    let allReports = []
+    let currentPage = 1
+    const itemsPerPage = 8
+    let selectedYear = null
+    let yearChart = null
+
+    // =========================
+    // Logout
+    // =========================
+    function logout() {
+      localStorage.removeItem('isAdmin')
+      window.location.href = '../index.html'
+    }
+
+    // =========================
+    // Utility: Get all years
+    // =========================
+    function getStoredYears() {
+      return Object.keys(localStorage)
+        .filter(k => k.startsWith('transactions_'))
+        .map(k => k.split('_')[1])
+        .sort((a, b) => b - a)
+    }
+
+    // =========================
+    // Show Latest Transactions (3 latest)
+    // =========================
+    function showLatestTransactions() {
+      const container = document.getElementById('latestTransactions')
+      container.innerHTML = ''
+
+      let allTransactions = []
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('transactions_')) {
+          const data = JSON.parse(localStorage.getItem(key)) || []
+          allTransactions = allTransactions.concat(
+            data.map(tx => ({ ...tx, year: key.split('_')[1] }))
+          )
+        }
+      })
+
+      if (!allTransactions.length) {
+        container.innerHTML = `<p class="text-secondary text-center">No transactions yet.</p>`
+        return
+      }
+
+      allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date))
+
+      allTransactions.slice(0, 3).forEach(tx => {
+        const isIncome = tx.type === 'income'
+        const card = document.createElement('div')
+        card.className = 'col-md-4'
+        card.innerHTML = `
+        <div class="card shadow-sm border-1">
+          <div class="card-body">
+            <h6 class="card-title mb-1 fw-bold" style="color: ${
+              isIncome ? '#16A249' : '#EF4444'
+            }">
+              ${isIncome ? 'Income' : 'Expense'}
+            </h6>
+            <h5 class="fw-bold" style="color: ${
+              isIncome ? '#16A249' : '#EF4444'
+            }">
+              ${isIncome ? '+' : '-'}₹${Number(tx.amount).toFixed(2)}
+            </h5>
+            <p class="mb-1 small text-dark">${tx.source}</p>
+            <p class="mb-1 small text-dark">${tx.date}</p>
+            ${
+              tx.description
+                ? `<p class="small fst-italic text-secondary">"${tx.description}"</p>`
+                : ''
+            }
+          </div>
+        </div>
+      `
+        container.appendChild(card)
+      })
+    }
+
+    // =========================
+    // Load reports for a year
+    // =========================
+    function loadReportsForYear(year) {
+      selectedYear = String(year)
+      allReports = JSON.parse(
+        localStorage.getItem(`transactions_${selectedYear}`) || '[]'
+      )
+      currentPage = 1
+      renderReports(allReports)
+    }
+
+    // =========================
+    // Render Reports Table
+    // =========================
+    function renderReports(reports) {
+      const tbody = document.getElementById('reportsTableBody')
+      tbody.innerHTML = ''
+
+      if (!reports.length) {
+        document.getElementById('reportCount').innerText = 0
+        renderPagination([])
+        return
+      }
+
+      const start = (currentPage - 1) * itemsPerPage
+      const paginated = reports.slice(start, start + itemsPerPage)
+
+      paginated.forEach((r, idx) => {
+        const globalIndex = start + idx
+        const tr = document.createElement('tr')
+        tr.innerHTML = `
+        <td>${r.type || '-'}</td>
+        <td>₹${r.amount || 0}</td>
+        <td>${r.date || '-'}</td>
+        <td>${r.source || '-'}</td>
+        <td>${r.description || '-'}</td>
+        <td class="actions">
+          <button class="btn btn-sm btn-view text-muted" data-index="${globalIndex}" title="View">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="btn btn-sm btn-delete text-muted ms-1" data-index="${globalIndex}" title="Delete">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      `
+        tbody.appendChild(tr)
+      })
+
+      // Attach buttons
+      tbody.querySelectorAll('.btn-view').forEach(btn => {
+        btn.addEventListener('click', e =>
+          viewReport(Number(e.currentTarget.dataset.index))
+        )
+      })
+      tbody.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', e =>
+          deleteReport(Number(e.currentTarget.dataset.index))
+        )
+      })
+
+      document.getElementById('reportCount').innerText = reports.length
+      renderPagination(reports)
+    }
+
+    // =========================
+    // Pagination
+    // =========================
+    function renderPagination(reports) {
+      const totalPages = Math.ceil(reports.length / itemsPerPage)
+      const pagination = document.getElementById('pagination')
+      pagination.innerHTML = ''
+      if (totalPages <= 1) return
+
+      const wrapper = document.createElement('div')
+      wrapper.style.display = 'flex'
+      wrapper.style.gap = '10px'
+      wrapper.style.justifyContent = 'flex-start'
+      wrapper.style.marginTop = '15px'
+
+      // Previous
+      const prev = document.createElement('div')
+      prev.innerHTML = `<i class="bi bi-chevron-left"></i>`
+      prev.className = 'page-circle'
+      prev.style.cursor = currentPage > 1 ? 'pointer' : 'not-allowed'
+      prev.onclick = () => {
+        if (currentPage > 1) {
+          currentPage--
+          renderReports(allReports)
+        }
+      }
+      wrapper.appendChild(prev)
+
+      // Pages
+      for (let i = 1; i <= totalPages; i++) {
+        const circle = document.createElement('button')
+        circle.innerText = i
+        circle.className = 'page-circle'
+        if (i === currentPage) circle.classList.add('active-page')
+        circle.onclick = () => {
+          currentPage = i
+          renderReports(allReports)
+        }
+        wrapper.appendChild(circle)
+      }
+
+      // Next
+      const next = document.createElement('div')
+      next.innerHTML = `<i class="bi bi-chevron-right"></i>`
+      next.className = 'page-circle'
+      next.style.cursor = currentPage < totalPages ? 'pointer' : 'not-allowed'
+      next.onclick = () => {
+        if (currentPage < totalPages) {
+          currentPage++
+          renderReports(allReports)
+        }
+      }
+      wrapper.appendChild(next)
+
+      pagination.appendChild(wrapper)
+    }
+
+    // =========================
+    // View / Delete
+    // =========================
+    function viewReport(index) {
+      const r = allReports[index]
+      if (!r) return alert('Record not found.')
+      alert(
+        `Type: ${r.type}\nAmount: ₹${r.amount}\nDate: ${r.date}\nSource: ${
+          r.source
+        }\nDescription: ${r.description || 'N/A'}`
+      )
+    }
+
+    function deleteReport(index) {
+      if (!confirm('Are you sure you want to delete this transaction?')) return
+      if (index < 0 || index >= allReports.length) return
+
+      allReports.splice(index, 1)
+      const key = `transactions_${selectedYear}`
+
+      if (!allReports.length) {
+        localStorage.removeItem(key)
+        rebuildYearDropdown(false)
+        return
+      }
+
+      localStorage.setItem(key, JSON.stringify(allReports))
+      const totalPages = Math.max(
+        1,
+        Math.ceil(allReports.length / itemsPerPage)
+      )
+      if (currentPage > totalPages) currentPage = totalPages
+      renderReports(allReports)
+    }
+
+    // =========================
+    // Search
+    // =========================
+    function attachSearchHandler() {
+      const input = document.getElementById('searchInput')
+      input.addEventListener('input', function () {
+        const term = this.value.toLowerCase()
+        if (!term) {
+          currentPage = 1
+          renderReports(allReports)
+          return
+        }
+        const filtered = allReports.filter(r =>
+          `${r.type} ${r.amount} ${r.date} ${r.source} ${r.description}`
+            .toLowerCase()
+            .includes(term)
+        )
+        currentPage = 1
+        renderReports(filtered)
+      })
+    }
+
+    // =========================
+    // Year Dropdown
+    // =========================
+    function rebuildYearDropdown(preserveYear = true) {
+      const dropdown = document.getElementById('yearFilter')
+      const years = getStoredYears()
+
+      if (!years.length) {
+        dropdown.innerHTML = '<option disabled>No Data</option>'
+        allReports = []
+        document.getElementById('reportsTableBody').innerHTML = ''
+        document.getElementById('reportCount').innerText = 0
+        return
+      }
+
+      dropdown.innerHTML = years
+        .map(y => `<option value="${y}">${y}</option>`)
+        .join('')
+      if (!preserveYear || !years.includes(String(selectedYear)))
+        selectedYear = years[0]
+      dropdown.value = selectedYear
+      loadReportsForYear(selectedYear)
+    }
+
+    // =========================
+    // Yearly Final Balance Chart
+    // =========================
+    function loadYearBalanceChart() {
+      const canvas = document.getElementById('yearBalanceChart')
+      const ctx = canvas.getContext('2d')
+
+      const years = getStoredYears().slice(0, 6)
+      const finalBalances = years.map(y => {
+        const arr = JSON.parse(localStorage.getItem(`transactions_${y}`)) || []
+        return arr.reduce(
+          (sum, t) =>
+            sum + (t.type === 'income' ? Number(t.amount) : -Number(t.amount)),
+          0
+        )
+      })
+
+      if (yearChart) yearChart.destroy()
+
+      yearChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'Final Balance',
+              data: finalBalances,
+              backgroundColor: '#134E4A',
+              borderRadius: 10,
+              borderSkipped: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#fff',
+              titleColor: '#000',
+              bodyColor: '#000',
+              borderWidth: 1,
+              borderColor: '#ddd',
+              padding: 10,
+              cornerRadius: 8,
+              displayColors: false,
+              callbacks: { label: ctx => `₹${ctx.raw.toLocaleString()}` }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: '#374151' } },
+            y: {
+              beginAtZero: true,
+              grid: { color: '#e5e7eb' },
+              ticks: { color: '#6b7280', callback: v => '₹' + v }
+            }
+          }
+        }
+      })
+    }
+
+    // =========================
+    // Initialize Page
+    // =========================
+    document.addEventListener('DOMContentLoaded', () => {
+      rebuildYearDropdown(true)
+      attachSearchHandler()
+      showLatestTransactions()
+      loadYearBalanceChart()
+
+      document
+        .getElementById('yearFilter')
+        ?.addEventListener('change', function () {
+          loadReportsForYear(this.value)
+        })
+    })
+
+    // Update if localStorage changes from another tab/page
+    window.addEventListener('storage', e => {
+      if (e.key?.startsWith('transactions_')) {
+        showLatestTransactions()
+        rebuildYearDropdown(true)
+        loadYearBalanceChart()
+      }
+    })
+  </script>
+</html>

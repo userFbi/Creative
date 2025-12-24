@@ -1,0 +1,299 @@
+/* Color Palette */
+:root {
+  --navy: #2f4156;
+  --purple: #561cbd;
+  --sky: #c8d9e6;
+  --white: #ffffff;
+  --beige: #f5efeb;
+
+  --radius: 12px;
+  --gap: 14px;
+  --max-width: 980px;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Arial;
+  background: linear-gradient(180deg, var(--beige), var(--white));
+  color: var(--navy);
+}
+
+/* Wrapper */
+.wrap {
+  width: 92%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  padding: 20px 0;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--navy), var(--purple));
+  color: var(--white);
+  font-weight: 700;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 20px;
+}
+.tag {
+  margin: 6px 0 0;
+  color: rgba(47, 65, 86, 0.75);
+  font-size: 13px;
+}
+
+/* Layout */
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding-bottom: 28px;
+}
+
+/* Card */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  width: 500px;
+  padding: 16px;
+  box-shadow: 0 8px 30px rgba(47, 65, 86, 0.08);
+}
+
+/* Dropzone */
+.dropzone {
+  border: 2px dashed rgba(86, 28, 189, 0.2);
+  border-radius: 10px;
+  padding: 28px;
+  background: linear-gradient(
+    180deg,
+    rgba(200, 217, 230, 0.25),
+    rgba(245, 239, 235, 0.2)
+  );
+  text-align: center;
+  cursor: pointer;
+}
+.drop-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+.drop-sub {
+  margin: 8px 0 0;
+  color: rgba(47, 65, 86, 0.7);
+}
+.choose {
+  color: var(--purple);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Form */
+
+.controls {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-size: 13px;
+  color: rgba(47, 65, 86, 0.7);
+}
+input,
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(47, 65, 86, 0.15);
+  font-size: 14px;
+}
+select {
+  background: var(--white);
+}
+
+/* Button */
+.btn {
+  padding: 10px 14px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.btn.primary {
+  background: linear-gradient(90deg, var(--purple), var(--navy));
+  color: var(--white);
+}
+
+/* Preview */
+.preview-area {
+  margin-top: 12px;
+}
+
+/* How it works bottom section */
+.bottom-info {
+  margin-bottom: 30px;
+}
+
+/* Footer */
+.site-footer {
+  padding: 18px 0;
+  text-align: center;
+  color: rgba(47, 65, 86, 0.7);
+}
+/* Professional Form */
+.pro-form {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.select-box select,
+.pro-form input {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(47, 65, 86, 0.2);
+  background: #fdfdfd;
+  transition: 0.2s ease;
+}
+
+.pro-form input:focus,
+.select-box select:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(86, 28, 189, 0.15);
+}
+
+.full-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.form-actions {
+  margin-top: 8px;
+}
+
+.form-actions.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Custom Select Wrapper */
+.custom-select {
+  position: relative;
+  width: 100%;
+  user-select: none;
+}
+
+/* Trigger box */
+.select-trigger {
+  background: var(--white);
+  border: 1px solid rgba(47, 65, 86, 0.25);
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.25s ease;
+}
+
+/* Arrow */
+.select-trigger .arrow {
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--purple);
+  border-bottom: 2px solid var(--purple);
+  transform: rotate(45deg);
+  transition: 0.25s ease;
+}
+
+/* Arrow rotate when open */
+.custom-select.open .arrow {
+  transform: rotate(-135deg);
+}
+
+/* Options dropdown */
+.options {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  border: 1px solid rgba(47, 65, 86, 0.15);
+  z-index: 10;
+}
+
+/* When select is open */
+.custom-select.open .options {
+  max-height: 260px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Individual option */
+.option {
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.option:hover {
+  background: var(--sky);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}

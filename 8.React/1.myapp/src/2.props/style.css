@@ -1,0 +1,81 @@
+.cards-container {
+  display: grid;
+  background-color: #272b33;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 40px;
+}
+
+.card {
+  display: flex;
+  background: #111216;
+  border-radius: 16px;
+  padding: 25px;
+  gap: 25px;
+  color: white;
+  min-height: 220px;
+  align-items: flex-start;
+}
+
+/* Bigger image */
+.left img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* ensures all text aligns left */
+  width: 100%; /* take full remaining width */
+}
+
+/* Bigger text */
+.right h1 {
+  font-size: 26px;
+  margin: 0 0 5px 0;
+}
+
+.sub {
+  font-size: 16px;
+  margin: 5px 0 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.sub span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.label {
+  font-size: 16px;
+  color: #c2c2c2;
+  margin: 0;
+  margin-bottom: 0px;
+}
+
+.value {
+  font-size: 18px;
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+/* Status colors */
+.alive {
+  margin-top: 6px;
+  background: #4caf50;
+}
+
+.dead {
+  margin-top: 6px;
+  background: #e53935;
+}
+
+.unknown {
+  margin-top: 6px;
+  background: #9e9e9e;
+}

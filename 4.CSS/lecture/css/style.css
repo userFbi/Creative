@@ -1,0 +1,309 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* h1 {
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+    text-align: center;
+    line-height: 100px;
+
+    border-width: 10px;
+    border-style: solid;
+    border-color: black; */
+
+/* border: 10px dotted red; */
+
+/* border-top: 10px solid blue;
+    border-bottom: ;
+    border-left: ;
+    border-right: ;
+ */
+
+/* border-top-left-radius: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 20px;
+
+    border-radius: 20px;
+    border-radius: 20px 30px;
+    border-radius: 20px 30px 10px;
+    border-radius: 20px 30px 10px 100px;
+
+    outline-width: 10px;
+    outline-style: solid;
+    outline-color: black;
+
+    outline: 10px dotted blue; */
+
+/* } */
+
+/* h2 {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    text-align: center;
+    line-height: 100px;
+
+
+    border: 2px solid black;
+    border-top: 5px solid blue;
+    border-bottom: 10px solid greenyellow;
+    border-left: 4px solid orchid;
+    border-right: 8px solid saddlebrown; 
+
+    outline: 10px solid aquamarine;
+}; */
+
+
+/* margin , padding */
+
+
+/* h1{
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    text-align: center;
+    line-height: 200px;
+
+
+    margin-top: 200px;
+    margin-bottom: 200px;
+    margin-left: 100px;
+
+
+    margin: 200px;
+    margin: 200px 100px;
+    margin: 200px 100px 20px;
+    margin: 200px 100px 200px 100px;
+
+
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+
+    padding: 100px;
+    padding: 100px 200px;
+    padding: 100px 200px 100px;
+    padding: 100px 200px 100px 100px;
+
+}
+
+.demo{
+    background-color: red;
+}
+
+#cdmi{
+    background-color: black;
+    color: white;
+} */
+
+/* 
+.box{
+    width: 100%;
+    height: 500px;
+
+    background-color: aqua;
+
+    background-image: url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg');
+
+    background-size: contain;
+
+    background-repeat: repeat;
+    background-repeat: no-repeat;
+    background-repeat: repeat-x;
+    background-repeat: repeat-y;
+
+    background-size: cover;
+    background-size: 100% 100%;
+
+
+    background-attachment: fixed;
+} */
+
+/* 
+.w-100 {
+    width: 100%;
+    height: 50px;
+    background-color: #003366;
+}
+
+.w-1140 {
+    width: 1140px;
+    height: 50px;
+    background-color: black;
+    margin: auto;
+}
+
+.w-33 {
+    width: 33.33%;
+    height: 50px;
+    background-color: blue;
+    color: white;
+    line-height: 50px;
+    float: none;
+    float: right;
+    float: left;
+}
+
+.w-33 span {
+    margin-left: 10px;
+}
+
+.last {
+    float: right;
+} */
+
+/* ul{
+
+} */
+
+
+/* mega-Menu */
+
+/* ul li{
+    list-style: none;
+    float: left;
+}
+ul li a{
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+    background-color: aqua;
+    display: block;
+    color: red;
+    margin: 5px;
+    text-align: center;
+    line-height: 30px;
+}
+ul ul{
+    display: none;
+}
+ul ul li{
+    float: none;
+}
+ul ul li a{
+    background-color: black;
+}
+ul li:hover ul{
+    display: block;
+} 
+ ul{
+    position: relative;
+}
+ul li{
+    list-style: none;
+    float: left;
+}
+ul li a{
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+    padding: 10px 25px;
+    background-color: aqua;
+    display: block;
+    margin-left: 5px;
+    text-align: center;
+    line-height: 30px;
+} 
+
+.main{
+    width: 100%;
+    height: 500px;
+    background-color: blueviolet;
+    position: absolute;
+    top: ;
+    bottom: ; 
+    left: 0px;
+    right: ;
+    display: none;
+    overflow: scroll;
+}
+.sub{
+    width: calc(25% - 20px);
+    height: 300px;
+    background-color: antiquewhite;
+    float: left;
+    padding: 10px;
+} 
+ .sub ul{
+
+}
+.sub ul li{
+
+}
+ .sub ul li a{
+    margin: 0px;
+    padding: 10px 0px;
+    background: none;
+}
+ul li:hover .main{
+    display: block;
+}  */
+
+
+
+/* Before & After */
+
+
+/* 
+span{
+    color: red;
+    position: relative;
+    margin-left: 50px;
+}
+span::before{
+    content: "";
+    width: 25px;
+    height: 5px;
+    background-color: blue;
+    position: absolute;
+    top: 6px;
+    right: 100%;
+    left: -30px;
+}
+span::after{
+    content: "";
+     width: 25px;
+    height: 5px;
+    background-color: blue;
+    position: absolute;
+    top: 6px;
+    right: 100%;
+    left: 50px;
+} */
+
+
+.box {
+    width: 100%;
+    height: 800px;
+    background-image: url("https://bootstrapmade.com/content/demo/Dewi/assets/img/hero-bg.jpg");
+    background-size: 100% 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.box::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: black;
+    opacity: 0.5;
+    /* backgro1und-color: rgba(0, 0, 0, 0.5); */
+    z-index: -1;
+}
+
+.box h1,
+p {
+    color: white;
+}
+
+h1 i{
+    font-size: 20px;
+    color: aqua;
+}

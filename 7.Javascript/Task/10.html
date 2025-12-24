@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chnage img using DOM</title>
+    <style>
+      div img {
+        height: 350px;
+        width: 500px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img
+        id="myImg"
+        src="https://www.cdmi.in/courses@2x/web-developments.webp"
+        alt=""
+      /><br />
+      <button onclick="pervious()">1</button>
+      <button onclick="next()">2</button>
+    </div>
+  </body>
+  <script>
+    function pervious() {
+      let data = document.getElementById('myImg')
+      data.src = 'https://www.cdmi.in/courses@2x/web-developments.webp'
+    }
+    function next() {
+      let data = document.getElementById('myImg')
+      data.src = 'https://www.cdmi.in/courses@2x/full-stack.webp'
+    }
+  </script>
+</html>

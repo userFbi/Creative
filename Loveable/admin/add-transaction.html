@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Transaction</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f9fc;
+      }
+      .sidebar {
+        width: 220px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #0d1321;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem 1rem;
+      }
+      .nav-section {
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar h5 {
+        padding-left: 10px;
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        padding-top: 30px;
+        padding-bottom: 35px;
+        color: #fff;
+        border-bottom: 2px solid #1c2232;
+      }
+      .sidebar a {
+        display: block;
+        color: #ccc;
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        margin-bottom: 0.4rem;
+        border-radius: 6px;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        color: #fff;
+        background-color: #1c2232;
+      }
+      .logout-btn {
+        text-align: center;
+      }
+      .main-content {
+        margin-left: 220px;
+        padding: 2rem;
+      }
+
+      /* ============ Page styling ============ */
+      .heading-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .back-btn {
+        border: none;
+        background: none;
+        padding: 0;
+      }
+      .back-arrw {
+        color: #333;
+        font-size: 1.4rem;
+        text-decoration: none;
+      }
+      .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+      .muted {
+        color: #6b7280;
+      }
+      .tab-pills {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+      }
+
+      .pill {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background-color: #e9ecef;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .pill.active {
+        border: 1px solid #16a34a;
+        background-color: #10b981;
+
+        color: #fff;
+      }
+      .pill.expense.active {
+        background-color: #ef4444;
+        border-color: #dc2626;
+      }
+      .card-form {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      .actions {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 1rem;
+      }
+      .btn-ghost {
+        background: none;
+        border: none;
+        color: #6b7280;
+      }
+      .success-preview {
+        margin-top: 1.5rem;
+        background: #f8f9fa;
+        border: 1px solid #e5e7eb;
+        padding: 1rem;
+        border-radius: 8px;
+        display: none;
+      }
+      .success-line {
+        font-weight: 600;
+        color: #111827;
+      }
+
+      h6 {
+        font-size: 20px;
+        margin-bottom: 25px;
+      }
+
+      /* Save Transaction (main button) */
+      .btn-save {
+        background-color: #3b82f6 !important;
+        border: 1px solid #2c6ace !important;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: 0.3s;
+      }
+      .btn-save:hover {
+        background-color: #0b5ed7 !important;
+      }
+
+      /* Save & Add Another and Cancel (outlined buttons) */
+      .btn-outline {
+        background: none;
+        border: 1px solid black;
+        color: #333;
+
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: 0.3s;
+      }
+      .btn-outline:hover {
+        /*background-color: rgb(224, 113, 82);*/
+        background-color: rgba(128, 128, 128, 0.651);
+        color: white;
+      }
+      .pt-10 {
+        padding: 10px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="nav-section">
+        <h5>Admin Panel</h5>
+        <a href="admin.html">
+          <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
+        >
+        <a href="reports.html">
+          <i class="bi bi-bar-chart-line me-2"></i>Reports</a
+        >
+        <a href="add-transaction.html" class="active">
+          <i class="bi bi-plus-circle me-2"></i>Add Transaction</a
+        >
+      </div>
+      <div class="logout-btn">
+        <a href="../index.html" onclick="logout()" class="text-danger"
+          >Logout</a
+        >
+      </div>
+    </div>
+
+    <!-- Main Page -->
+    <main class="main-content">
+      <!-- Back Button -->
+      <a
+        href="reports.html"
+        class="btn btn-light d-inline-flex align-items-center border gap-2 mb-4"
+      >
+        <i class="bi bi-arrow-left"></i>
+        <span>Back to Reports</span>
+      </a>
+
+      <!-- Heading -->
+      <div class="heading-row mb-4">
+        <div>
+          <h1 class="page-title" id="pageTitle">Add Income</h1>
+          <div class="muted" id="pageSubtitle">
+            Record money received during festival celebrations
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tab-pills" role="tablist">
+        <div class="pill active" data-tab="income" id="tabIncome">
+          <i class="bi bi-graph-up"></i> &nbsp; Income
+        </div>
+        <div class="pill" data-tab="expense" id="tabExpense">
+          <i class="bi bi-graph-down"></i> &nbsp; Expense
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="card-form mt-4">
+        <form id="txForm" novalidate>
+          <input type="hidden" id="txType" value="income" />
+
+          <!-- Amount -->
+          <div class="mb-3">
+            <h6 class="card-h" id="detailsTitle">
+              <i class="bi bi-graph-up"></i> &nbsp; Income Details
+            </h6>
+            <label class="form-label">Amount</label>
+            <div class="input-group">
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                class="form-control amount-input pt-10"
+                id="amount"
+                placeholder="0.00"
+                required
+              />
+            </div>
+            <div class="muted mt-1">Enter the transaction amount in INR</div>
+          </div>
+
+          <!-- Date & Source -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Date</label>
+              <input
+                type="date"
+                class="form-control pt-10"
+                id="date"
+                required
+              />
+              <div class="muted mt-1">Select the transaction date</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Source / Category</label>
+              <select class="form-select pt-10" id="source" required>
+                <option value="" selected disabled>Select source</option>
+                <option>Matki</option>
+                <option>Lezim</option>
+                <option>Donation</option>
+                <option>Other</option>
+              </select>
+              <div class="muted mt-1" id="sourceNote">
+                Choose where this income came from
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea
+              id="description"
+              class="form-control"
+              rows="3"
+              placeholder="Enter description (optional)"
+            ></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="actions mb-3">
+            <button
+              type="button"
+              id="saveBtn"
+              class="btn btn-save"
+              onclick="saveTransaction()"
+            >
+              Save Transaction
+            </button>
+            <button type="button" id="saveAddBtn" class="btn-outline">
+              Save & Add Another
+            </button>
+            <button
+              type="button"
+              id="cancelBtn"
+              class="btn-outline"
+              onclick="clearForm()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <!-- Success Box -->
+        <div
+          id="successBox"
+          class="card shadow-sm mt-3"
+          style="display: none; border-radius: 12px"
+        >
+          <div class="card-body">
+            <!-- Top Section -->
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div
+                  id="successTitle"
+                  style="font-size: 20px; font-weight: 600; color: #111827"
+                >
+                  Expense Added
+                </div>
+                <div
+                  id="successDate"
+                  class="text-muted"
+                  style="font-size: 14px"
+                >
+                  Thu, Nov 27, 2025
+                </div>
+              </div>
+
+              <div class="text-end">
+                <div
+                  id="successAmount"
+                  style="font-size: 20px; font-weight: 700"
+                >
+                  -₹0.00
+                </div>
+                <div
+                  id="successSource"
+                  class="text-muted"
+                  style="font-size: 14px"
+                >
+                  Category
+                </div>
+              </div>
+            </div>
+
+            <hr style="margin: 12px 0; color: #eef2f4" />
+
+            <!-- Description -->
+            <div class="text-muted mb-1">Description:</div>
+            <div id="successDesc" style="font-size: 14px; color: #111827">
+              —
+            </div>
+
+            <!-- Bottom Success Message -->
+            <div style="margin-top: 12px; color: #1ca54a; font-weight: 600">
+              <i class="bi bi-record-circle-fill"></i>
+              Transaction saved successfully
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      /* ==================== CLEAN & FINAL SCRIPT ==================== */
+
+      /* ===== DOM REFERENCES ===== */
+      const txForm = document.getElementById('txForm')
+      const tabIncome = document.getElementById('tabIncome')
+      const tabExpense = document.getElementById('tabExpense')
+
+      const pageTitle = document.getElementById('pageTitle')
+      const pageSubtitle = document.getElementById('pageSubtitle')
+      const txType = document.getElementById('txType')
+      const sourceSelect = document.getElementById('source')
+
+      const successBox = document.getElementById('successBox')
+      const successTitle = document.getElementById('successTitle')
+      const successAmount = document.getElementById('successAmount')
+      const successDate = document.getElementById('successDate')
+      const successSource = document.getElementById('successSource')
+      const successDesc = document.getElementById('successDesc')
+
+      /* ===== Tab switching ===== */
+      tabIncome.addEventListener('click', () => switchTab('income'))
+      tabExpense.addEventListener('click', () => switchTab('expense'))
+
+      function switchTab(type) {
+        const detailsTitle = document.getElementById('detailsTitle')
+
+        if (type === 'income') {
+          tabIncome.classList.add('active')
+          tabExpense.classList.remove('active')
+
+          pageTitle.textContent = 'Add Income'
+          pageSubtitle.textContent =
+            'Record money received during festival celebrations'
+          txType.value = 'income'
+
+          sourceSelect.innerHTML = `
+      <option value="" disabled selected>Select source</option>
+      <option>Matki</option>
+      <option>Lezim</option>
+      <option>Donation</option>
+      <option>Other</option>
+    `
+
+          detailsTitle.innerHTML = `<i class="bi bi-graph-up"></i> &nbsp; Income Details`
+          document.getElementById('sourceNote').textContent =
+            'Choose where this income came from'
+        } else {
+          tabExpense.classList.add('active', 'expense')
+          tabIncome.classList.remove('active')
+
+          pageTitle.textContent = 'Add Expense'
+          pageSubtitle.textContent =
+            'Track your festival spending and categorize expenses'
+          txType.value = 'expense'
+
+          sourceSelect.innerHTML = `
+      <option value="" disabled selected>Select category</option>
+      <option>Food</option>
+      <option>Medical</option>
+      <option>Travel / Equipments</option>
+      <option>Other</option>
+    `
+
+          detailsTitle.innerHTML = `<i class="bi bi-graph-down"></i> &nbsp; Expense Details`
+          document.getElementById('sourceNote').textContent =
+            'Choose where this expense was spent'
+        }
+      }
+
+      // initialize
+      switchTab('income')
+
+      /* ===== Utilities ===== */
+      function clearForm() {
+        txForm.reset()
+        switchTab(txType.value || 'income')
+      }
+
+      /* ===== Save transaction ===== */
+      function saveTransaction(redirect = true) {
+        const amountRaw = document.getElementById('amount').value.trim()
+        const inputDate = document.getElementById('date').value.trim()
+        const source = document.getElementById('source').value.trim()
+        const description = document.getElementById('description').value.trim()
+        const type = txType.value
+
+        if (!amountRaw || !inputDate || !source) {
+          alert('Please fill in all required fields!')
+          return
+        }
+
+        // Format date
+        const parts = inputDate.split('-')
+        const [year, month, day] = parts
+        const formattedDate = `${day}-${month}-${year}`
+
+        const amount = parseFloat(amountRaw)
+        if (isNaN(amount)) {
+          alert('Invalid amount.')
+          return
+        }
+
+        const transaction = {
+          type,
+          amount,
+          date: formattedDate,
+          source,
+          description: description || '—'
+        }
+
+        // Save by year
+        const yearKey = `transactions_${year}`
+        const existing = JSON.parse(localStorage.getItem(yearKey) || '[]')
+        existing.push(transaction)
+        localStorage.setItem(yearKey, JSON.stringify(existing))
+
+        showSuccess(transaction, redirect)
+      }
+
+      /* ===== Auto-hide & show form ===== */
+      function showSuccessCard() {
+        successBox.style.display = 'block'
+        txForm.style.display = 'none'
+
+        setTimeout(() => {
+          successBox.style.display = 'none'
+          txForm.reset()
+          txForm.style.display = 'block'
+        }, 3000)
+      }
+
+      /* ===== Show success popup ===== */
+      function showSuccess(tx, redirect) {
+        successTitle.textContent =
+          tx.type === 'income' ? 'Income Added' : 'Expense Added'
+
+        const formattedAmount = tx.amount.toLocaleString('en-IN', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })
+
+        successAmount.textContent =
+          (tx.type === 'income' ? '+₹' : '-₹') + formattedAmount
+        successAmount.style.color = tx.type === 'income' ? '#16a34a' : '#dc2626'
+
+        successDate.textContent = tx.date
+        successSource.textContent = tx.source
+        successDesc.textContent = tx.description || '—'
+
+        showSuccessCard()
+
+        // only redirect for Save Transaction
+        if (redirect) {
+          setTimeout(() => {
+            window.location.href = 'reports.html'
+          }, 3000)
+        }
+
+        txForm.reset()
+        switchTab(tx.type)
+      }
+
+      /* ===== Save & Add Another ===== */
+      document.getElementById('saveAddBtn').addEventListener('click', () => {
+        saveTransaction(false) // No redirect
+      })
+
+      /* ===== Form submit ===== */
+      txForm.addEventListener('submit', function (e) {
+        e.preventDefault()
+        saveTransaction()
+      })
+    </script>
+  </body>
+</html>

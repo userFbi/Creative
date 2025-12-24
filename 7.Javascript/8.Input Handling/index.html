@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit List Example</title>
+  </head>
+  <body>
+    <input type="text" id="firstName" placeholder="First Name" />
+    <input type="text" id="lastName" placeholder="Last Name" />
+    <button onclick="change()">Submit</button>
+
+    <ul id="setData"></ul>
+
+    <script>
+      let editLi = null
+
+      function change() {
+        const firstName = document.getElementById('firstName').value.trim()
+        const lastName = document.getElementById('lastName').value.trim()
+        const ul = document.getElementById('setData')
+
+        // Validation
+        if (!firstName || !lastName) {
+          alert('Please enter both first and last name!')
+          return
+        }
+
+        if (editLi) {
+          // Update existing list item
+          editLi.querySelector('.name').textContent = `${firstName}-${lastName}`
+          editLi = null
+        } else {
+          // Create new list item
+          const li = document.createElement('li')
+          li.innerHTML = `
+            <span class="name">${firstName}-${lastName}</span>
+            <button onclick="erase(this)">Delete</button>
+            <button onclick="edit(this)">Edit</button><br>
+          `
+          ul.appendChild(li)
+        }
+
+        // Clear inputs
+        document.getElementById('firstName').value = ''
+        document.getElementById('lastName').value = ''
+      }
+
+      function erase(btn) {
+        btn.parentElement.remove()
+      }
+
+      function edit(el) {
+        editLi = el.parentElement
+        const nameText = editLi.querySelector('.name').textContent
+        const [first, last] = nameText.split('-')
+        document.getElementById('firstName').value = first
+        document.getElementById('lastName').value = last
+      }
+    </script>
+  </body>
+</html>
+ 

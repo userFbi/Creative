@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main {
+        height: 200px;
+        width: 400px;
+        border: 1px solid black;
+        background-color: black;
+        position: relative;
+        padding: 0 20px;
+        margin-bottom: 20px;
+      }
+
+      .circle {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        transition: left 0.6s ease, background-color 0.6s ease;
+        user-select: none;
+      }
+
+      h2 {
+        margin: 0;
+        pointer-events: none;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-start;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main" id="box">
+      <div class="circle" id="circle"><h2 id="label">OFF</h2></div>
+    </div>
+
+    <div class="buttons">
+      <button onclick="setOff()">OFF</button>
+      <button onclick="setOn()">ON</button>
+    </div>
+
+    <script>
+      const box = document.getElementById('box')
+      const circle = document.getElementById('circle')
+      const label = document.getElementById('label')
+
+      function setOn() {
+        circle.style.left = '320px'
+        circle.style.backgroundColor = 'green'
+        label.innerText = 'ON'
+      }
+      function setOff() {
+        circle.style.left = '20px'
+        circle.style.backgroundColor = 'red'
+        label.innerText = 'OFF'
+      }
+    </script>
+  </body>
+</html>

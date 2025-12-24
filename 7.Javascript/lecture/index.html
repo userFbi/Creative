@@ -1,0 +1,48 @@
+<button onclick="change()">stop</button>
+<script>
+  //
+  //    function demo()
+  //    {
+  //
+  //    }
+  //
+  //    var a=12
+  //    var b=23
+  //
+  //    document.write("A = "+a+"B = "+b)
+  //
+  //    //es6
+  //
+  //    document.write(`A = ${a} B = ${b}`)
+  //
+
+  //local storage => system locally
+  //session storage => broswer tab close
+
+  //localStorage.setItem("name" , "demo")
+
+  //let st = localStorage.getItem("name")
+  //console.log(st)
+  //
+  //localStorage.removeItem("name")
+  //
+  //
+  //sessionStorage.setItem("username","test")
+  //
+  //let st1 = sessionStorage.getItem("username")
+  //console.log(st1)
+  //
+  //sessionStorage.removeItem("username")
+
+  //setTimeout(()=>{
+  //    console.log("hello");
+  //},2000)
+
+  var data = setInterval(() => {
+    console.log('hello')
+  }, 2000)
+
+  function change() {
+    clearInterval(data)
+  }
+</script>

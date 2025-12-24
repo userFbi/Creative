@@ -1,0 +1,108 @@
+/* General Theme */
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.navbar .nav-link {
+    color: #ccc;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Hero Section */
+.hero {
+    background: url('https://images.unsplash.com/photo-1530882548122-0596ee66cdfd') no-repeat 70% center/cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero .container {
+    z-index: 2;
+    position: relative;
+}
+
+.hero h1,
+.hero p {
+    color: #ffffff;
+}
+
+/* About us section */
+
+.about-us-section {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    /* background-color: #000; */
+}
+
+
+.about-us-section h2 {
+    font-weight: bold;
+}
+
+.about-us-section p {
+    font-size: 1.1rem;
+}
+
+
+/* Carousel section */
+.carousel-section img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.carousel-inner {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Optional extra style */
+ul {
+    padding-left: 1.2rem;
+}
+
+ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+
+footer {
+    font-size: 0.9rem;
+}
+
+footer small {
+    color: #bbb;
+}
+
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .hero img {
+        max-height: 300px;
+        margin-top: 20px;
+    }
+
+}

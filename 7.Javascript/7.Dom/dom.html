@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="data" id="demo">hello</h1>
+    <button onclick="change()">click me</button>
+    <script>
+      //document.getElementsByTagName("h1")[0].innerHTML = "welcome"
+
+      function change() {
+        document.getElementsByClassName('data')[0].style.color = 'red'
+        document.getElementById('demo').innerHTML = 'welcome'
+      }
+    </script>
+  </body>
+</html>

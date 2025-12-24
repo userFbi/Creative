@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Filter Data</title>
+    <style>
+      table {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td onclick="dataView('all')">All</td>
+        <td onclick="flowers('flower')">Flowers</td>
+        <td onclick="clothes('clothes')">Clothes</td>
+        <td onclick="cars('cars')">Cars</td>
+      </tr>
+      <tbody id="showData"></tbody>
+    </table>
+
+    <script>
+      let data = [
+        {
+          category: 'flower',
+          name: 'Rose'
+        },
+        {
+          category: 'flower',
+          name: 'Lotus'
+        },
+        {
+          category: 'flower',
+          name: 'Lily'
+        },
+        {
+          category: 'flower',
+          name: 'Sunflower'
+        },
+        {
+          category: 'flower',
+          name: 'Orchid'
+        },
+
+        {
+          category: 'clothes',
+          name: 'T-shirt'
+        },
+        {
+          category: 'clothes',
+          name: 'Jeans'
+        },
+        {
+          category: 'clothes',
+          name: 'Kurta'
+        },
+        {
+          category: 'clothes',
+          name: 'Dress'
+        },
+        {
+          category: 'clothes',
+          name: 'Blazer'
+        },
+
+        {
+          category: 'car',
+          name: 'Toyota Fortuner'
+        },
+        {
+          category: 'car',
+          name: 'Hyundai Creta'
+        },
+        {
+          category: 'car',
+          name: 'Maruti Suzuki Swift'
+        },
+        {
+          category: 'car',
+          name: 'Tata Nexon'
+        },
+        {
+          category: 'car',
+          name: 'Mahindra XUV700'
+        }
+      ]
+
+      function dataView() {
+        let myData = ''
+
+        data.map((items, index) => {
+          myData += `
+        <tr>
+          <td>${data[0].name ? data[0].name : ''}</td>
+        </tr>`
+        })
+
+        document.getElementById('showData').innerHTML = myData
+      }
+      dataView()
+    </script>
+  </body>
+</html>
+
+<!-- 
+
+<td>${data[0].items[0].name ? data[0].items[0].name : ''}</td>
+
+-->
+<!-- <td>${data.flower.items[i] ? data.flower[i].name : ''}</td>
+          <td>${data.clothes[i] ? data.clothes[i].name : ''}</td>
+          <td>${data.car[i] ? data.car[i].name : ''}</td> -->

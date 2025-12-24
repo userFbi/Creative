@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slide Menu</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      #menu-icon {
+        font-size: 30px;
+        cursor: pointer;
+        padding: 15px 20px;
+        display: inline-block;
+        user-select: none;
+      }
+
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -550px; /* Hidden off-screen */
+        width: 550px;
+        height: 100%;
+        background-color: #333;
+        color: white;
+        padding-top: 60px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+      }
+
+      .side-menu.open {
+        left: 0; /* Slide in */
+      }
+
+      .side-menu ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .side-menu li {
+        padding: 15px 20px;
+        border-bottom: 1px solid #444;
+      }
+
+      .side-menu a {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Optional overlay */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        display: none;
+        z-index: 900;
+      }
+
+      .overlay.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Menu Icon -->
+    <div id="menu-icon">☰</div>
+
+    <!-- Slide-in Menu -->
+    <nav id="side-menu" class="side-menu">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+      const menuIcon = document.getElementById('menu-icon')
+      const sideMenu = document.getElementById('side-menu')
+      const overlay = document.getElementById('overlay')
+
+      menuIcon.addEventListener('click', () => {
+        const isOpen = sideMenu.classList.toggle('open')
+        overlay.classList.toggle('show')
+
+        // Change icon
+        menuIcon.textContent = isOpen ? '×' : '☰'
+      })
+
+      // Close menu when clicking overlay
+      overlay.addEventListener('click', () => {
+        sideMenu.classList.remove('open')
+        overlay.classList.remove('show')
+        menuIcon.textContent = '☰'
+      })
+    </script>
+  </body>
+</html>

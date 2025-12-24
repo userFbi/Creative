@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css"
+    />
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      nav {
+        color: white;
+        display: flex;
+        flex-direction: row;
+        width: 700px;
+        justify-content: space-between;
+      }
+      nav a {
+        font-weight: 600;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+      }
+      nav a.active {
+        border-bottom: 5px solid orange;
+        color: orange;
+      }
+      .course-content ul li {
+        list-style: none;
+        padding: 20px;
+        border: 1px solid black;
+        width: 400px;
+        font-weight: bold;
+      }
+      .career-content ul li {
+        list-style: none;
+        margin-bottom: 10px;
+        color: gray;
+      }
+      .career-content ul li i {
+        padding-right: 10px;
+        color: gray;
+      }
+      .reviews-content {
+        padding: 20px;
+      }
+      .review-box p {
+        width: 600px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.733);
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="" class="active">Overview</a>
+      <a href="">Course Cover</a>
+      <a href="">Career Oppurtunities</a>
+      <a href="">Reviews</a>
+    </nav>
+
+    <div class="content">
+      <div class="overview-content hidden">
+        <h1>Lorem ipsum dolor</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt,
+          ducimus? Sit facere rem debitis quisquam optio tempore excepturi quo
+          velit molestias possimus, doloremque delectus dolores incidunt labore
+          nesciunt obcaecati aperiam?Lorem ipsum dolor sit amet, consectetur
+          adipisicing elit. Quo cupiditate commodi nostrum quis sequi minus
+          delectus, dignissimos, dolores placeat, voluptatum explicabo
+          consectetur veniam iste error autem corrupti porro? Ab. Lorem ipsum
+          dolor sit amet consectetur adipisicing elit. Esse soluta voluptas a
+          voluptates, deleniti neque commodi quibusdam, tempora ab est saepe in
+          harum voluptatem quaerat fugit minus velit cumque error?Lorem ipsum
+          dolor sit amet consectetur adipisicing elit. Unde molestias voluptate
+          beatae ducimus quaerat necessitatibus libero, a nostrum ut nesciunt
+          laudantium. Fugiat quam saepe dolorem sed architecto illo porro
+          placeat ad numquam, qui sit voluptatum tempore. Exercitationem, aut
+          aperiam! Fuga nesciunt iure pariatur, praesentium quae ut repudiandae
+          obcaecati voluptatibus sed commodi. Laborum eligendi nulla maxime
+          blanditiis at, laudantium delectus unde dolores tempora architecto
+          cumque in ab dicta nihil iure, corrupti perferendis. Molestiae
+          provident laboriosam ut facere, nisi, dignissimos id ipsum quo rem
+          dolorum fugiat reprehenderit saepe! Fugiat, quasi provident
+          necessitatibus velit quos voluptatum possimus ea at tenetur iusto!
+          Quia, autem?
+        </p>
+      </div>
+      <div class="course-content hidden">
+        <ul>
+          <li><i class="bi bi-chevron-down"></i> Photoshop</li>
+          <li><i class="bi bi-chevron-down"></i> Illustrator</li>
+          <li><i class="bi bi-chevron-down"></i> Figma</li>
+          <li><i class="bi bi-chevron-down"></i> Getting Familiar with HTML</li>
+          <li>
+            <i class="bi bi-chevron-down"></i> Make IT Beautiful with CSS / CSS3
+          </li>
+          <li>
+            <i class="bi bi-chevron-down"></i> Bootstrap Responsive Layout
+          </li>
+        </ul>
+      </div>
+      <div class="career-content hidden">
+        <ul>
+          <li><i class="bi bi-check-circle"></i>Web Designer</li>
+          <li><i class="bi bi-check-circle"></i>UX/UI Designer</li>
+          <li><i class="bi bi-check-circle"></i>Web Developer</li>
+          <li><i class="bi bi-check-circle"></i>Mobile App Developer</li>
+          <li><i class="bi bi-check-circle"></i>Game Developer</li>
+          <li><i class="bi bi-check-circle"></i>Data Analyst</li>
+        </ul>
+      </div>
+      <div class="reviews-content hidden">
+        <div class="review-box">
+          <strong class="review-name">John Smith</strong>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">
+            Great product! Works exactly as expected. Fast delivery and good
+            packaging.
+          </p>
+        </div>
+
+        <div class="review-box">
+          <strong class="review-name">Emily Carter</strong>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            Absolutely loved it! Exceeded my expectations. Will definitely
+            recommend.
+          </p>
+        </div>
+
+        <div class="review-box">
+          <strong class="review-name">Michael Lee</strong>
+          <div class="review-stars">★★★☆☆</div>
+          <p class="review-text">
+            Decent quality, but I expected more for the price. Still usable
+            though.
+          </p>
+        </div>
+
+        <div class="review-box">
+          <strong class="review-name">Sara Kim</strong>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">
+            Nice design and easy to use. Customer service was also helpful.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const navLinks = document.querySelectorAll('nav a')
+      const sections = document.querySelectorAll('.content > div')
+
+      navLinks.forEach((link, index) => {
+        link.addEventListener('click', function (event) {
+          event.preventDefault()
+
+          navLinks.forEach(l => l.classList.remove('active'))
+          this.classList.add('active')
+
+          sections.forEach(section => section.classList.add('hidden'))
+
+          sections[index].classList.remove('hidden')
+        })
+      })
+
+      sections.forEach(section => section.classList.add('hidden'))
+      sections[0].classList.remove('hidden')
+    </script>
+  </body>
+</html>

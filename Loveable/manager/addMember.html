@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Member</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f9fc;
+      }
+
+      .sidebar {
+        width: 220px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #0d1321;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem 1rem;
+      }
+
+      .nav-section {
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar h5 {
+        padding-left: 10px;
+        font-weight: 600;
+        font-size: 1.5rem; /* similar to h2 size */
+        margin-bottom: 1rem;
+        padding-top: 30px;
+        padding-bottom: 35px;
+        color: #fff;
+        border-bottom: 2px solid #1c2232; /* border separator */
+      }
+
+      .sidebar a {
+        display: block;
+        color: #ccc;
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        margin-bottom: 0.4rem;
+        border-radius: 6px;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #1c2232;
+        color: #fff;
+      }
+
+      .logout-btn {
+        text-align: center;
+      }
+
+      .main-content {
+        margin-left: 220px;
+        padding: 2rem;
+      }
+
+      .card {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-control,
+      .form-select {
+        border-radius: 8px;
+        padding: 0.75rem;
+      }
+
+      .btn-primary {
+        background-color: #3b82f6;
+        border: 1px solid #2c6ace !important;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1.2rem;
+      }
+
+      .btn-outline-secondary {
+        border-radius: 8px;
+        padding: 0.6rem 1.2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+      }
+      /* Custom small caret for select */
+      .form-select {
+        appearance: none; /* hide default arrow */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: #fff
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
+          no-repeat right 0.8rem center;
+        padding-right: 2rem; /* space for arrow */
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="nav-section">
+        <h5>Manager Panel</h5>
+        <a href="manager.html">
+          <i class="bi bi-speedometer2 me-2"></i> Dashboard</a
+        >
+        <a href="viewMember.html">
+          <i class="bi bi-people me-2"></i>View Members</a
+        >
+        <a href="addMember.html" class="active">
+          <i class="bi bi-person-plus me-2"></i>Add Member</a
+        >
+      </div>
+      <div class="logout-btn">
+        <a href="#" onclick="logout()" class="text-danger">Logout</a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <a
+        href="viewMember.html"
+        class="btn btn-light d-inline-flex align-items-center border gap-2 mb-4"
+      >
+        <i class="bi bi-arrow-left"></i>
+        <span>Back to Contacts</span>
+      </a>
+
+      <h2 id="formTitle" class="fw-bold">Add New Contact</h2>
+      <p id="formSubtitle" class="text-muted">Create a new contact entry</p>
+
+      <div class="card p-4">
+        <h5 class="section-title fw-bold">Member Information</h5>
+        <form id="memberForm" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">First Name *</label>
+            <input
+              type="text"
+              id="firstName"
+              class="form-control"
+              placeholder="Enter first name"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Last Name *</label>
+            <input
+              type="text"
+              id="lastName"
+              class="form-control"
+              placeholder="Enter last name"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Phone Number *</label>
+            <input
+              id="phone"
+              type="text"
+              class="form-control"
+              placeholder="Enter 10-digit phone number"
+              inputmode="numeric"
+              maxlength="10"
+              pattern="\d{10}"
+              required
+            />
+            <div class="invalid-feedback">
+              Phone number must be exactly 10 digits.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Aadhaar Number *</label>
+            <input
+              id="aadhar"
+              type="text"
+              class="form-control"
+              placeholder="Enter 12-digit Aadhaar number"
+              pattern="\d{12}"
+              maxlength="12"
+              required
+            />
+            <div class="invalid-feedback">
+              Aadhaar number must be exactly 12 digits.
+            </div>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Address</label>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              placeholder="Enter full address"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">T-shirt</label>
+            <select class="form-select" id="tshirtSize" required>
+              <option value="" hidden>Select Size</option>
+              <option value="SM">SM</option>
+              <option value="MD">MD</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+              <option value="XXXL">XXXL</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Shorts</label>
+            <select class="form-select" id="shortsSize" required>
+              <option value="" hidden>Select Size</option>
+              <option value="SM">SM</option>
+              <option value="MD">MD</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+              <option value="XXXL">XXXL</option>
+            </select>
+          </div>
+
+          <div class="col-12 d-flex gap-2">
+            <button type="submit" id="submitBtn" class="btn btn-primary">
+              Add Member
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              id="cancelBtn"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+      <div id="successAlert" class="alert alert-success d-none" role="alert">
+        Member added successfully!
+      </div>
+    </div>
+
+    <script>
+      function allowOnlyDigits(input, maxLength) {
+        // Only digits, enforce max length
+        input.addEventListener('input', function () {
+          this.value = this.value.replace(/\D/g, '').slice(0, maxLength)
+        })
+
+        // Block non-digit key presses
+        input.addEventListener('keydown', function (e) {
+          const allowed = [
+            'Backspace',
+            'Delete',
+            'ArrowLeft',
+            'ArrowRight',
+            'Tab',
+            'Home',
+            'End'
+          ]
+          if (allowed.includes(e.key)) return
+          if (!/^\d$/.test(e.key)) e.preventDefault()
+        })
+      }
+
+      // Apply to Phone (10 digits) and Aadhaar (12 digits)
+      allowOnlyDigits(document.getElementById('phone'), 10)
+      allowOnlyDigits(document.getElementById('aadhar'), 12)
+
+      // 🔥 Move focus to next field when pressing Enter
+      document
+        .querySelectorAll('input, select, textarea')
+        .forEach((field, index, fields) => {
+          field.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+              e.preventDefault() // stop auto submit
+              if (!field.checkValidity()) {
+                field.reportValidity() // show error
+                return
+              }
+              let next = fields[index + 1]
+              if (next) next.focus()
+            }
+          })
+        })
+    </script>
+
+    <script>
+      const phoneInput = document.getElementById('phone')
+
+      // Allow only digits while typing/pasting
+      phoneInput.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 10)
+      })
+
+      // Extra: block non-digit keys
+      phoneInput.addEventListener('keydown', function (e) {
+        const allowed = [
+          'Backspace',
+          'Delete',
+          'ArrowLeft',
+          'ArrowRight',
+          'Tab',
+          'Home',
+          'End'
+        ]
+        if (allowed.includes(e.key)) return
+        if (!/^\d$/.test(e.key)) e.preventDefault()
+      })
+    </script>
+
+    <script>
+      function logout() {
+        localStorage.removeItem('isAdmin')
+        window.location.href = '../../../index.html'
+      }
+
+      const form = document.getElementById('memberForm')
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search)
+        const editIndex = params.get('edit')
+        const members = JSON.parse(localStorage.getItem('members') || '[]')
+
+        if (editIndex !== null && members[editIndex]) {
+          const m = members[editIndex]
+
+          // Prefill values
+          document.getElementById('firstName').value = m.firstName || ''
+          document.getElementById('lastName').value = m.lastName || ''
+          document.getElementById('phone').value = m.phone || ''
+          document.getElementById('aadhar').value = m.aadhar || ''
+          document.getElementById('address').value = m.address || ''
+          document.getElementById('tshirtSize').value = m.tshirt || ''
+          document.getElementById('shortsSize').value = m.shorts || ''
+
+          // Change titles
+          document.getElementById('formTitle').textContent = 'Edit Contact'
+          document.getElementById('formSubtitle').textContent =
+            'Edit your contact entry'
+          document.getElementById('submitBtn').textContent = 'Update Contact'
+
+          // Save edit index
+          form.dataset.editIndex = editIndex
+        }
+      })
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        if (!this.checkValidity()) {
+          e.stopPropagation()
+          this.classList.add('was-validated')
+          return
+        }
+
+        let members = JSON.parse(localStorage.getItem('members') || '[]')
+
+        const member = {
+          firstName: document.getElementById('firstName').value.trim(),
+          lastName: document.getElementById('lastName').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          aadhar: document.getElementById('aadhar').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          tshirt: document.getElementById('tshirtSize').value.trim(),
+          shorts: document.getElementById('shortsSize').value.trim(),
+          createdAt: new Date().toISOString()
+        }
+
+        if (this.dataset.editIndex !== undefined) {
+          // update existing
+          members[this.dataset.editIndex] = member
+        } else {
+          // add new
+          members.push(member)
+        }
+
+        localStorage.setItem('members', JSON.stringify(members))
+
+        // Success alert
+        const alert = document.getElementById('successAlert')
+        alert.textContent =
+          this.dataset.editIndex !== undefined
+            ? 'Member updated successfully!'
+            : 'Member added successfully!'
+        alert.classList.remove('d-none')
+        setTimeout(() => alert.classList.add('d-none'), 2000)
+
+        if (this.dataset.editIndex === undefined) {
+          this.reset()
+          this.classList.remove('was-validated')
+        } else {
+          window.location.href = 'viewMember.html'
+        }
+      })
+      let editIndex = null
+
+      // existing code for checking edit mode
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('edit')) {
+        // 🔥 use "edit" not "editIndex"
+        editIndex = params.get('edit')
+      }
+
+      document
+        .getElementById('cancelBtn')
+        .addEventListener('click', function () {
+          if (editIndex !== null) {
+            // in edit mode → go back to members list
+            window.location.href = 'viewMember.html'
+          } else {
+            // in add mode → just reset the form
+            document.getElementById('memberForm').reset()
+          }
+        })
+    </script>
+  </body>
+</html>

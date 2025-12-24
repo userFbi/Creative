@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+
+nav {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.hero {
+    height: 91.5vh;
+    width: 100%;
+    background-image: url(https://bootstrapmade.com/content/demo/Siimple/assets/img/hero-bg.jpg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 50px;
+    color: #462918;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #462918;
+}
+
+.hero a {
+    color: white;
+    background-color: #fd680e;
+    text-decoration: none;
+    margin: 30px 0px 0px;
+    padding: 10px 40px;
+    border-radius: 50px;
+}

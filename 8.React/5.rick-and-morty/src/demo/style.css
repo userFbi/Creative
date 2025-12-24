@@ -1,0 +1,217 @@
+/* ===============================
+   CSS VARIABLES (LIGHT MODE)
+================================ */
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --primary: #2563eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ===============================
+   DARK MODE VARIABLES
+================================ */
+body.dark {
+  --bg: #0f172a;
+  --surface: #020617;
+  --primary: #3b82f6;
+  --text: #f9fafb;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* ===============================
+   GLOBAL RESET
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===============================
+   OFFLINE BANNER
+================================ */
+.offline-banner {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #16a34a;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  display: none;
+  z-index: 1000;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.app-header {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+.app-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text);
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+#darkModeToggle {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+.app-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.app-section {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.app-section.active {
+  display: block;
+}
+
+/* ===============================
+   CARDS & UI
+================================ */
+.card {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.primary-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===============================
+   GRID
+================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ===============================
+   PACKING
+================================ */
+.packing-group h3 {
+  margin-bottom: 10px;
+}
+
+.packing-group ul {
+  list-style: none;
+}
+
+.packing-group li {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ===============================
+   ANIMATIONS
+================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+
+  .app-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

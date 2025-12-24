@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <meta
+      name="description"
+      content="Itinerary for a 3-day trip across Ratnagiri and Chiplun including packing checklist and scenic exploration."
+    />
+
+    <title>3 Days in Ratnagiri & Chiplun</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #121212;
+        color: #b0b0b0;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      h1 {
+        margin-bottom: 0.5rem;
+        color: #3399ff;
+        text-align: center;
+        font-weight: 700;
+        font-size: clamp(1.6rem, 5vw, 2.4rem);
+        letter-spacing: 1px;
+        line-height: 1.2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        text-wrap: balance;
+        padding: 0 10px;
+      }
+
+      h1 img {
+        height: 1.8em;
+        vertical-align: middle;
+      }
+
+      .subtitle {
+        color: #a3c1ff;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        font-size: 1.1rem;
+        text-align: center;
+      }
+
+      .timeline {
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .timeline-item {
+        background: #1e1e1e;
+        border: 1px solid #3399ff;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .date-header {
+        background: #1e1e1e;
+        padding: 1rem 1.5rem;
+        color: #c6d9ff;
+        border-bottom: 1px solid #3399ff;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .content-body {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        padding: 1.2rem 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .content-img {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .content-img img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid #3399ff;
+        transition: transform 0.3s ease;
+      }
+
+      .content-img img:hover {
+        transform: scale(1.05);
+        border-color: #66b2ff;
+      }
+
+      .content-text {
+        flex: 2;
+        min-width: 250px;
+      }
+
+      .content-text ul {
+        list-style: disc;
+        padding-left: 1.2rem;
+      }
+
+      .content-text li {
+        color: #d3e0ff;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .time {
+        color: #3399ff;
+        font-weight: bold;
+      }
+
+      .packing-section {
+        max-width: 800px;
+        width: 100%;
+        margin: 3rem auto 2rem auto;
+        padding: 1.5rem 2rem;
+        background: #1e1e1e;
+        border: 1px solid #3399ff;
+        border-radius: 8px;
+        color: #c6d9ff;
+      }
+
+      .packing-section h2 {
+        color: #3399ff;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .packing-section fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .packing-section legend {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #a3c1ff;
+        text-align: center;
+      }
+
+      .packing-section form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        justify-content: center;
+      }
+
+      .packing-section label {
+        flex: 1 1 45%;
+        cursor: pointer;
+        font-size: 1rem;
+        color: #d3e0ff;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      .packing-section input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #3399ff;
+        cursor: pointer;
+      }
+
+      @media (max-width: 600px) {
+        .content-body {
+          flex-direction: column;
+        }
+
+        .packing-section label {
+          flex: 1 1 100%;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+      }
+
+      /* Slider styles for 17th June */
+      .slider {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 6px;
+        border: 1px solid #3399ff;
+      }
+
+      .slider img.slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+        transition: opacity 0.5s ease;
+        user-select: none;
+      }
+
+      .slider img.slide.active {
+        display: block;
+        position: relative;
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #0b3259;
+        font-size: 1.8rem;
+        padding: 0.2rem 0.6rem;
+        cursor: pointer;
+        border-radius: 3px;
+        user-select: none;
+        transition: color 0.3s ease;
+      }
+
+      .slider-btn:hover {
+        color: #66b2ff;
+      }
+
+      .prev-btn {
+        left: 5px;
+      }
+
+      .next-btn {
+        right: 5px;
+      }
+
+      @media (max-width: 600px) {
+        .slider {
+          max-width: 100%;
+          max-height: 250px;
+        }
+      }
+
+      /* New styles for 18th June images side by side */
+      .img-grid-18 {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .img-grid-item {
+        flex: 1 1 calc(25% - 1rem);
+        min-width: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .img-grid-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid #3399ff;
+        transition: transform 0.3s ease;
+      }
+
+      .img-grid-item img:hover {
+        transform: scale(1.05);
+        border-color: #66b2ff;
+      }
+
+      .img-grid-item h3 {
+        margin-top: 0.5rem;
+        color: #3399ff;
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      @media (max-width: 600px) {
+        .img-grid-item {
+          flex: 1 1 45%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      3 Days in Ratnagiri & Chiplun
+      <img src="images/mountain.png" alt="Mountain Icon" />
+    </h1>
+    <p class="subtitle">
+      Trip Duration: 14th June - 18th June (3 Days & 4 Nights)
+    </p>
+
+    <section class="timeline">
+      <article class="timeline-item">
+        <div class="content">
+          <div class="date-header">14–15th June: Departure & Arrival</div>
+          <div class="content-body">
+            <div class="content-img">
+              <img
+                src="images/01-ratnagiri.jfif"
+                alt="Ratnagiri train station"
+              />
+            </div>
+            <div class="content-text">
+              <ul>
+                <li>Train departure at <span class="time">8:00 PM</span></li>
+                <li>
+                  Arrive at Ratnagiri by <span class="time">6:00 AM</span>
+                </li>
+                <li>Transfer to Chiplun by local train</li>
+                <li>Reach Nirmal Vadi</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <div class="date-header">15th June: Rest & Explore Village</div>
+          <div class="content-body">
+            <div class="content-img">
+              <img
+                src="images/02-chiplun.jfif"
+                alt="Exploring Chiplun village"
+              />
+            </div>
+            <div class="content-text">
+              <ul>
+                <li>Relax</li>
+                <li>Explore village areas</li>
+                <li>Visit river</li>
+                <li>Play cricket</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <div class="date-header">16th June: Nageshwar Trek</div>
+          <div class="content-body">
+            <div class="content-img">
+              <img src="images/03.nageshwar" alt="Nageshwar trek trail" />
+            </div>
+            <div class="content-text">
+              <ul>
+                <li>
+                  Start between <span class="time">6:00 AM</span> –
+                  <span class="time">7:00 AM</span>
+                </li>
+                <li>Duration: 6–8 hours</li>
+                <li>Carry food, snacks & 6–7 liters of water</li>
+                <li>Eat light breakfast before start</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <div class="date-header">17th June: Road Trip & Exploration</div>
+          <div class="content-body">
+            <div class="content-img slider">
+              <img
+                src="images/sawatsada.jfif"
+                alt="Sawatsada Waterfall"
+                class="slide active"
+              />
+              <img
+                src="images/parshuram-temple.jfif"
+                alt="Parshuram Temple"
+                class="slide"
+              />
+              <img
+                src="images/Guhagar.jfif"
+                alt="Guhagar Beach"
+                class="slide"
+              />
+              <img
+                src="images/Hedvi beach.jfif"
+                alt="Hedvi Beach"
+                class="slide"
+              />
+              <img
+                src="images/Jaigad.jfif"
+                alt="Dhopave Jetty (Jaigad Ferry)"
+                class="slide"
+              />
+              <img
+                src="images/04-ganpatiphule.jfif"
+                alt="Ganpatiphule"
+                class="slide"
+              />
+              <button class="slider-btn prev-btn">&#10094;</button>
+              <button class="slider-btn next-btn">&#10095;</button>
+            </div>
+            <div class="content-text">
+              <ul>
+                <li>Visit Sawatsada Waterfall</li>
+                <li>Explore Parshuram Temple</li>
+                <li>Relax on Guhagar Beach</li>
+                <li>Enjoy Hedvi Beach</li>
+                <li>Reach Jaigad Fort</li>
+                <li>Last go to Ganpatiphule</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <div class="date-header">
+            18th June: Ganpatipule Beach & Nearby Sites
+          </div>
+          <div class="content-body">
+            <!-- 4 images side by side with headings for 18th June -->
+            <div class="img-grid-18">
+              <div class="img-grid-item">
+                <img
+                  src="images/04-ganpatiphule.jfif"
+                  alt="Ganpatipule Beach"
+                />
+                <h3>Ganpatipule Beach</h3>
+              </div>
+              <div class="img-grid-item">
+                <img src="images/Aare-ware.jfif" alt="Aare-Ware" />
+                <h3>Aare-Ware</h3>
+              </div>
+              <div class="img-grid-item">
+                <img src="images/Anjarle.jfif" alt="Aare-Ware" />
+                <h3>Anjarle</h3>
+              </div>
+              <div class="img-grid-item">
+                <img src="images/jay-vinayak.jfif" alt="Vinayak (Anjarle)" />
+                <h3>Vinayak (Anjarle)</h3>
+              </div>
+              <div class="img-grid-item">
+                <img src="images/purnagad.jfif" alt="Purangad Fort" />
+                <h3>Purangad Fort</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="content">
+          <div class="date-header">19th June: Return to Surat</div>
+          <div class="content-body">
+            <div class="content-img">
+              <img src="images/surat.jfif" alt="Train Journey Home" />
+            </div>
+            <div class="content-text">
+              <ul>
+                <li>Wake up early</li>
+                <li>Go to Chiplun station</li>
+                <li>
+                  Reach Surat by <span class="time">3:30 PM</span> (approx)
+                </li>
+                <li>Don't Forget to shere pictures</li>
+                <li>End of trip 🏁</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="packing-section">
+      <h2>Packing Checklist</h2>
+      <fieldset>
+        <legend>What to Bring 🧳</legend>
+        <form id="packing-form">
+          <label><input type="checkbox" data-item="clothes" />👕 Clothes</label>
+          <label
+            ><input type="checkbox" data-item="shoes" />🥾 Trekking Shoes</label
+          >
+          <label
+            ><input type="checkbox" data-item="bottle" />💧 Water Bottle</label
+          >
+          <label><input type="checkbox" data-item="snacks" />🍫 Snacks</label>
+          <label
+            ><input type="checkbox" data-item="charger" />🔌 Mobile
+            Charger</label
+          >
+          <label><input type="checkbox" data-item="camera" />📷 Camera</label>
+          <label
+            ><input type="checkbox" data-item="sunscreen" />🧴 Facewash</label
+          >
+          <label
+            ><input type="checkbox" data-item="toiletries" /> 🧥 Raincoat</label
+          >
+        </form>
+      </fieldset>
+    </section>
+
+    <footer
+      style="
+        margin-top: 3rem;
+        padding: 1rem 0;
+        text-align: center;
+        color: #66b2ff;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-top: 1px solid #3399ff;
+        width: 100%;
+        max-width: 800px;
+      "
+    >
+      - Life Hai Bidu, Moj Karle
+    </footer>
+
+    <script>
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") nextBtn.click();
+        if (e.key === "ArrowLeft") prevBtn.click();
+      });
+
+      // Persist checkbox state using localStorage
+      const checkboxes = document.querySelectorAll(
+        '#packing-form input[type="checkbox"]'
+      );
+
+      checkboxes.forEach((checkbox) => {
+        const key = `packing_${checkbox.dataset.item}`;
+        checkbox.checked = localStorage.getItem(key) === "true";
+
+        checkbox.addEventListener("change", () => {
+          localStorage.setItem(key, checkbox.checked);
+        });
+      });
+
+      // Handle slider ONLY for 17th June
+      const sliders = document.querySelectorAll(".slider");
+
+      sliders.forEach((slider) => {
+        const slides = slider.querySelectorAll("img.slide");
+        const prevBtn = slider.querySelector(".prev-btn");
+        const nextBtn = slider.querySelector(".next-btn");
+        let currentIndex = 0;
+
+        function showSlide(index) {
+          slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
+          });
+        }
+
+        // Initial show
+        showSlide(currentIndex);
+
+        // Event Listeners
+        prevBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          showSlide(currentIndex);
+        });
+      });
+    </script>
+  </body>
+</html>

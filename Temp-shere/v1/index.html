@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TempShare — Upload & Share</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <div class="brand">
+          <div class="logo-mark">TS</div>
+          <h1>TempShare</h1>
+        </div>
+        <p class="tag">Quick temporary photo & video sharing</p>
+      </div>
+    </header>
+
+    <main class="wrap flex main">
+      <section class="card upload-card">
+        <!-- DROPZONE -->
+        <div id="dropZone" class="dropzone" tabindex="0">
+          <div class="drop-inner">
+            <p class="drop-title">Drag & drop photos or videos here</p>
+            <p class="drop-sub">
+              or <label for="fileInput" class="choose">choose files</label>
+            </p>
+            <input
+              id="fileInput"
+              type="file"
+              multiple
+              accept="image/*,video/*"
+              hidden
+            />
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <form class="controls pro-form" id="uploadForm">
+          <div class="input-group">
+            <label for="expiry">Expiry Time</label>
+            <div class="select-box">
+              <select id="expiry" class="" required>
+                <option value="1">1 day</option>
+                <option value="2">2 days</option>
+                <option value="3" selected>3 days</option>
+                <option value="7">7 days</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="fname">File Name (optional)</label>
+            <input id="fname" placeholder="example-photo.jpg" type="text" />
+          </div>
+
+          <div class="form-actions right">
+            <button id="uploadBtn" type="submit" class="btn primary">
+              Upload & get link
+            </button>
+          </div>
+        </form>
+
+        <!-- PREVIEW AREA -->
+        <div id="previewArea" class="preview-area"></div>
+      </section>
+    </main>
+
+    <!-- HOW IT WORKS AT BOTTOM -->
+    <!-- <section class="card info-card wrap bottom-info">
+      <h2>How it works</h2>
+      <ul>
+        <li>Choose expiry: 1 / 2 / 3 / 7 days</li>
+        <li>Files auto-delete after expiry</li>
+        <li>Works for photos & videos</li>
+        <li>Mobile and desktop friendly</li>
+      </ul>
+    </section> -->
+
+    <footer class="site-footer">
+      <div class="wrap">Built for you & your friends — TempShare</div>
+    </footer>
+  </body>
+</html>

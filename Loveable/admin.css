@@ -1,0 +1,218 @@
+/* =========================
+   GENERAL LAYOUT
+========================= */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #1e1e1e;
+  padding: 20px 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.sidebar h2 {
+  color: #ffb74d;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #bbb;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar a i {
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+.sidebar a:hover {
+  background-color: #272727;
+  color: #fff;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+.topbar {
+  margin-left: 250px;
+  height: 60px;
+  background-color: #1e1e1e;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.topbar h1 {
+  font-size: 1.4rem;
+  color: #ffb74d;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+/* =========================
+   CARDS
+========================= */
+.card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #ffb74d;
+}
+
+.card p {
+  color: #ccc;
+}
+
+/* =========================
+   TABLE
+========================= */
+.table-container {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #272727;
+}
+
+thead th {
+  color: #ffb74d;
+  padding: 12px;
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid #333;
+}
+
+tbody tr:hover {
+  background-color: #272727;
+}
+
+td {
+  padding: 12px;
+  color: #ccc;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary {
+  background-color: #ffb74d;
+  color: #121212;
+}
+
+.btn-primary:hover {
+  background-color: #ffa726;
+  box-shadow: 0 2px 8px rgba(255, 183, 77, 0.4);
+}
+
+.btn-danger {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c62828;
+  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.4);
+}
+
+.btn-edit {
+  background-color: #42a5f5;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #1e88e5;
+  box-shadow: 0 2px 8px rgba(66, 165, 245, 0.4);
+}
+
+/* =========================
+   MODALS
+========================= */
+.modal-content {
+  background-color: #1e1e1e;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.modal-header {
+  border-bottom: 1px solid #333;
+}
+
+.modal-footer {
+  border-top: 1px solid #333;
+}
+
+/* =========================
+   SCROLLBAR STYLE
+========================= */
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffb74d;
+  border-radius: 4px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--  callback function -->
+    <!-- function data(name , callback){
+        console.log(name+"hello")
+        callback();
+    }
+
+    function text(){
+        console.log("world")
+    }
+
+    data("welcome",text) -->
+    <script>
+      function data() {
+        console.log('hello')
+
+        return function text() {
+          console.log('welcome')
+        }
+      }
+
+      var st = data() 
+      st()
+      //    var data = [10, 20, 30, 40, 50];
+      //
+      //    var [a, b, ...text] = data;
+      //
+      //    console.log(a);
+      //    console.log(b);
+      //    console.log(text);
+    </script>
+  </body>
+</html>

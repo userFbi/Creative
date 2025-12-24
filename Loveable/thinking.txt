@@ -1,0 +1,54 @@
+// Add navbar after hero section.
+
+// Replace img's to actual images.
+
+// Create manager section fully work.
+
+// Create admin section fully work.
+
+// Do changes in About-section cards.
+
+// Replace the summry of whole website.
+
+// fix join-us send message button.
+
+// fix footer year dynamicaly so when year changes year should be change it own.
+
+// Make website fully responsive.
+
+
+-> HERO SECTION  
+-> ABOUT-US SECTION 
+-> OUR-MISSION SECTION 
+-> OUT-MEMORIE SECTION  
+-> AUTHOR SECTION  
+-> JOIN-GROUP SECTION 
+-> FOOTER SECTION  
+
+
+project-root/
+│
+├── index.html                ← main entry (like Routes in React)
+│
+├── pages/                    ← all page-level HTML files
+│   ├── dashboard.html        ← Dashboard (DashboardOverview.jsx → converted)
+│   ├── add-transaction.html  ← Add Transaction page
+│   ├── financial-reports.html← Financial Reports page
+│
+├── components/               ← reusable UI parts
+│   ├── metric-card.html      ← MetricCard.jsx converted
+│   ├── quick-actions.html    ← QuickActions.jsx converted#4da6ff 
+│   ├── recent-transactions.html ← RecentTransactions.jsx converted
+│   ├── spending-breakdown.html  ← SpendingBreakdown.jsx converted
+│
+├── assets/                   ← images, icons
+│   ├── logo.png
+│   └── ...
+│
+├── css/                      ← stylesheets
+│   ├── bootstrap.min.css     ← Bootstrap CDN copy (optional if offline)
+│   ├── style.css             ← your custom styles
+│
+└── js/                       ← JavaScript
+    ├── bootstrap.bundle.min.js
+    ├── app.js                ← custom scripts

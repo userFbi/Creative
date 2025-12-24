@@ -1,0 +1,165 @@
+@media (prefers-reduced-motion: reduce) {
+
+    body,
+    header,
+    section,
+    footer,
+    input,
+    textarea {
+        transition: none !important;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+}
+
+.logo img {
+    height: 100px;
+    transition: filter 0.3s ease;
+}
+
+/* Optional tweaks to auto-adjust based on dark/light background */
+body.dark .logo img {
+    filter: brightness(1.2) contrast(1.1);
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: #f4f4f4;
+    padding: 60px 0;
+    text-align: center;
+}
+
+section {
+    padding: 40px 0;
+}
+
+.services-grid,
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+/* Dark mode support */
+body.dark .download-btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+
+
+/* Theme toggle button */
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dark mode styles */
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark header {
+    background-color: #1e1e1e;
+}
+
+body.dark section {
+    background-color: #1a1a1a;
+}
+
+body.dark footer {
+    background-color: #111;
+    color: #ccc;
+}
+
+body.dark input,
+body.dark textarea {
+    background-color: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+}
+
+/* Apply smooth transition to all theme-affected elements */
+body,
+header,
+section,
+footer,
+input,
+textarea {
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+#theme-toggle {
+    transition: transform 0.3s ease;
+}
+
+#theme-toggle:active {
+    transform: rotate(90deg);
+}

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KGSC.</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section
+      class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat">
+        <div class="my-svg-container">
+          <!-- Paste SVG code here directly -->
+          <!-- <img src="berserk wallpaper.jpg  vdsv"
+            width="100%"
+            height="100vh"
+            fill="none"
+          >
+            ...
+          </svg> -->
+        </div>
+      </div>
+      <div class="absolute inset-0 bg-gradient-hero"></div>
+
+      <!-- Content -->
+      <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+          Kamlaba Garden
+          <span class="text-accent text-yellow-400">Sport Club</span>
+        </h1>
+        <p
+          class="text-xl md:text-2xl mb-8 text-white/90 animate-fade-in"
+          style="animation-delay: 0.2s"
+        >
+          Together we grow, together we rise.
+        </p>
+
+        <!-- Login Button (can be hooked to modal via JS) -->
+        <button
+          class="hero-button px-6 py-3 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 hover:scale-105 transform transition-all duration-300 animate-fade-in"
+          style="animation-delay: 0.4s"
+          onclick="openLoginModal()"
+        >
+          Login to Portal
+        </button>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <div class="scroll-shell">
+          <div class="scroll-dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About-us Section -->
+    <section class="about-section">
+      <div class="container">
+        <!-- Heading -->
+        <div class="section-header">
+          <h2>About Our <span class="highlight-primary">Community</span></h2>
+          <p>
+            We are a vibrant community dedicated to bringing people together,
+            fostering connections, and creating meaningful experiences that
+            enrich our lives and strengthen our bonds.
+          </p>
+        </div>
+
+        <!-- Cards -->
+        <div class="card-grid">
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="heart"></i>
+            </div>
+            <h3>Community Care</h3>
+            <p>
+              We support each other through life's ups and downs, building
+              lasting friendships and bonds.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="users"></i>
+            </div>
+            <h3>Togetherness</h3>
+            <p>
+              Bringing people from all walks of life together to celebrate our
+              shared values and traditions.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="star"></i>
+            </div>
+            <h3>Excellence</h3>
+            <p>
+              Striving for excellence in all our community activities and
+              initiatives.
+            </p>
+          </div>
+          <div class="card">
+            <div class="icon-circle">
+              <i data-lucide="target"></i>
+            </div>
+            <h3>Purpose</h3>
+            <p>
+              Working towards meaningful goals that benefit our community and
+              future generations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+          <div class="mission-content">
+            <h3>Our Mission</h3>
+            <p>
+              To create a supportive, inclusive community where every member
+              feels valued, connected, and empowered to contribute their unique
+              talents and perspectives. We believe in the power of unity and
+              shared purpose to create positive change.
+            </p>
+            <div class="stats">
+              <div>
+                <div class="stat-value primary">350+</div>
+                <div class="stat-label">Members</div>
+              </div>
+              <div>
+                <div class="stat-value secondary" id="years"></div>
+                <div class="stat-label">Years</div>
+              </div>
+
+              <!-- <div>
+                <div class="stat-value accent">100+</div>
+                <div class="stat-label">Events</div>
+              </div> -->
+            </div>
+          </div>
+
+          <div class="mission-visual">
+            <div class="box outer"></div>
+            <div class="box middle"></div>
+            <div class="box inner">
+              <i data-lucide="users" class="big-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About-us Section end-->
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <h2>Our <span>Memories</span></h2>
+      <p class="subtitle">
+        We are a vibrant community dedicated to bringing people together,
+        fostering connections, and creating meaningful experiences that enrich
+        our lives and strengthen our bonds.
+      </p>
+
+      <div class="grid">
+        <div class="gallery-card">
+          <img src="images/1.jpg" alt="Community Care" />
+          <div class="overlay-text">
+            <h3>Community Care</h3>
+            <p>Helping and supporting each other always.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/2.jpg" alt="Togetherness" />
+          <div class="overlay-text">
+            <h3>Togetherness</h3>
+            <p>Connected by purpose and unity.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/3.jpg" alt="Excellence" />
+          <div class="overlay-text">
+            <h3>Excellence</h3>
+            <p>Giving our best in every step.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/4.jpg" alt="Purpose" />
+          <div class="overlay-text">
+            <h3>Purpose</h3>
+            <p>Meaningful actions, impactful results.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/5.jpg" alt="Celebration" />
+          <div class="overlay-text">
+            <h3>Celebration</h3>
+            <p>Honoring our journey together.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="images/6.jpg" alt="Growth" />
+          <div class="overlay-text">
+            <h3>Growth</h3>
+            <p>Rising higher, hand in hand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Gallery Section end -->
+
+    <!-- Author Section -->
+    <section id="author">
+      <div class="author-container">
+        <h2 class="author-heading">Meet <span>the Author</span></h2>
+        <div class="author-card">
+          <img src="images/author.jpg" alt="Author" class="author-img" />
+          <div class="author-details">
+            <h4 class="author-name">Tushar Pawar</h4>
+            <p class="author-role">Frontend Developer & UI Designer</p>
+            <p class="author-bio">
+              Hi! I'm Tushar, a frontend developer with a love for clean UI and
+              seamless user experiences. I specialize in HTML, CSS, JavaScript,
+              and Bootstrap to build modern, responsive websites.
+            </p>
+            <div class="author-socials">
+              <a
+                href="https://www.instagram.com/tushhar___/"
+                class="social-icon"
+                target="_blank"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a
+                href="https://api.whatsapp.com/send?phone=9725720612"
+                class="social-icon"
+                target="_blank"
+                ><i class="bi bi-whatsapp"></i
+              ></a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=pawartushar2024.katargam@gmail.com&su=Hello%20Tushar&body=I%20wanted%20to%20contact%20you."
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="bi bi-envelope-fill"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Author Section end -->
+
+    <!-- Join Us -->
+    <section id="contact" class="join-section">
+      <div class="join-container container">
+        <h2 class="join-heading">Join Our Group</h2>
+        <p class="join-subheading">
+          We'd love to have you on board! Fill out the form below to join our
+          community.
+        </p>
+
+        <form class="join-form">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input
+              type="tel"
+              name="number"
+              placeholder="Your Number"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              required
+            />
+          </div>
+          <input type="email" name="email" placeholder="Your Email" required />
+
+          <textarea
+            name="address"
+            placeholder="Your Address"
+            rows="5"
+            required
+          ></textarea>
+          <button type="submit" class="join-button">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Popup Box -->
+    <div id="popup" class="popup" style="display: none">
+      <div class="popup-content">
+        <span class="popup-close">&times;</span>
+        <h2 class="popup-brand">kamlaba Garden Sport Club</h2>
+        <hr />
+        <br />
+        <p class="popup-message">
+          Your request is sent. We will connect with you shortly.
+        </p>
+        <p class="popup-thank">Thank you!</p>
+      </div>
+    </div>
+
+    <!-- EmailJS Script (keep this) -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <script>
+      // initialize EmailJS
+      emailjs.init('SkPoA_5QwGs2euUG4')
+
+      const form = document.querySelector('.join-form')
+      const submitBtn = form.querySelector('.join-button')
+
+      // Popup helper
+      function showPopup(type) {
+        const popup = document.getElementById('popup')
+
+        // Set popup content based on type
+        if (type === 'success') {
+          popup.querySelector('.popup-brand').textContent =
+            'Kamlaba Garden Sport Club'
+          popup.querySelector('.popup-message').textContent =
+            'Your request is sent. We will connect with you shortly.'
+          popup.querySelector('.popup-thank').textContent = 'Thank you!'
+        } else if (type === 'error') {
+          popup.querySelector('.popup-brand').textContent = 'Oops!'
+          popup.querySelector('.popup-message').textContent =
+            'Something went wrong. Please try again.'
+          popup.querySelector('.popup-thank').textContent = ''
+        }
+
+        document.getElementById('popup').style.display = 'flex'
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          popup.style.display = 'none'
+        }, 3000)
+      }
+
+      // Close popup manually
+      document.querySelector('.popup-close').onclick = function () {
+        document.getElementById('popup').style.display = 'none'
+      }
+
+      // Submit handler (uses EmailJS)
+      form.addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        const payload = {
+          name: (this.name.value || '').trim(),
+          number: (this.number.value || '').trim(),
+          address: (this.address.value || '').trim(),
+          email: (this.email.value || '').trim()
+        }
+
+        submitBtn.disabled = true
+        submitBtn.textContent = 'Sending...'
+
+        emailjs
+          .send('service_2vc09ja', 'template_fnch9t5', payload)
+          .then(function () {
+            form.reset()
+            showPopup('success')
+          })
+          .catch(function (error) {
+            console.error('EmailJS Error:', error)
+            showPopup('error') // error popup
+          })
+          .finally(function () {
+            submitBtn.disabled = false
+            submitBtn.textContent = 'Send Message'
+          })
+      })
+
+      // Keyboard handler for Enter key
+      form.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault()
+
+          if (typeof form.requestSubmit === 'function') {
+            form.requestSubmit()
+          } else {
+            form.dispatchEvent(
+              new Event('submit', { bubbles: true, cancelable: true })
+            )
+          }
+        }
+      })
+    </script>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content container">
+        <p style="padding-right: 10px">
+          © <span id="year"></span> <strong>KGSC</strong> - All Rights Reserved.
+          <a
+            href="https://www.instagram.com/kamlaba_garden_sport_club/"
+            class="social-icon instagram"
+            target="_blank"
+          >
+            <i class="bi bi-instagram"></i>
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Set current year automatically
+      document.getElementById('year').textContent = new Date().getFullYear()
+    </script>
+
+    <!-- Footer End -->
+
+    <!-- Modal Overlay -->
+    <div
+      id="modalOverlay"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"
+    ></div>
+
+    <!-- Access Portal Modal -->
+    <div
+      id="accessPortal"
+      class="fixed inset-0 z-50 flex items-center justify-center hidden"
+    >
+      <div
+        class="bg-white rounded-xl shadow-xl w-[90%] max-w-md p-6 relative text-center"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-3 right-4 text-2xl text-gray-500 hover:text-black"
+        >
+          &times;
+        </button>
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Access Portal</h2>
+
+        <div
+          onclick="openLoginForm('manager')"
+          class="cursor-pointer p-4 border rounded-lg mb-4 hover:bg-purple-50"
+        >
+          <div
+            class="flex items-center justify-center gap-3 text-purple-600 font-medium"
+          >
+            <i data-lucide="users" class="w-6 h-6"></i>
+            Manager Portal
+          </div>
+          <p class="text-sm text-gray-500 mt-1">
+            Manage members and community activities
+          </p>
+        </div>
+
+        <div
+          onclick="openLoginForm('admin')"
+          class="cursor-pointer p-4 border rounded-lg hover:bg-purple-50"
+        >
+          <div
+            class="flex items-center justify-center gap-3 text-green-600 font-medium"
+          >
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+            Admin Portal
+          </div>
+          <p class="text-sm text-gray-500 mt-1">
+            Financial management and reporting
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actual Login Modal (after selecting admin/manager) -->
+    <div
+      id="loginForm"
+      class="fixed inset-0 z-50 flex items-center justify-center hidden"
+    >
+      <div class="bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6 relative">
+        <button
+          onclick="backToSelection()"
+          class="absolute top-3 left-4 back-arrow text-gray-500 hover:underline"
+        >
+          &larr;
+        </button>
+        <button
+          onclick="closeModal()"
+          class="absolute top-3 right-4 text-2xl text-gray-500 hover:text-black"
+        >
+          &times;
+        </button>
+
+        <h3
+          id="loginTitle"
+          class="text-xl font-semibold text-center text-gray-800 mb-4"
+        ></h3>
+
+        <form onsubmit="return login(event);" autocomplete="off">
+          <input
+            id="username"
+            autocomplete="off"
+            type="text"
+            placeholder="Email"
+            class="w-full mb-3 px-4 py-2 border rounded-md"
+            required
+          />
+          <input
+            id="password"
+            autocomplete="new-password"
+            type="password"
+            placeholder="Password"
+            class="w-full mb-6 px-4 py-2 border rounded-md"
+            required
+          />
+          <div class="mb-4 text-left">
+            <label class="text-sm text-gray-600">
+              <input type="checkbox" onclick="togglePassword()" class="mr-2" />
+              Show Password
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Hero Script -->
+    <script>
+      let selectedUserType = null
+
+      function openLoginModal() {
+        document.getElementById('modalOverlay').classList.remove('hidden')
+        document.getElementById('accessPortal').classList.remove('hidden')
+        document.body.style.overflow = 'hidden'
+      }
+
+      function openLoginForm(role) {
+        selectedUserType = role
+        document.getElementById('accessPortal').classList.add('hidden')
+        document.getElementById('loginForm').classList.remove('hidden')
+
+        document.getElementById('loginTitle').innerText =
+          role === 'manager' ? 'Manager Login' : 'Admin Login'
+
+        // Clear fields and focus username
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = ''
+        document.getElementById('username').focus()
+      }
+
+      function backToSelection() {
+        document.getElementById('loginForm').classList.add('hidden')
+        document.getElementById('accessPortal').classList.remove('hidden')
+
+        // Clear inputs
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = ''
+      }
+
+      function closeModal() {
+        document.getElementById('accessPortal').classList.add('hidden')
+        document.getElementById('loginForm').classList.add('hidden')
+        document.getElementById('modalOverlay').classList.add('hidden')
+        document.body.style.overflow = 'auto'
+
+        // Clear inputs
+        document.getElementById('username').value = ''
+        document.getElementById('password').value = ''
+      }
+
+      function login(event) {
+        event.preventDefault() // now it's explicitly passed
+
+        const username = document.getElementById('username').value.trim()
+        const password = document.getElementById('password').value.trim()
+
+        if (!selectedUserType) {
+          alert('Please choose Admin or Manager before logging in.')
+          return false
+        }
+
+        if (
+          selectedUserType === 'admin' &&
+          username === 'admin' &&
+          password === 'admin'
+        ) {
+          window.location.href = 'admin/admin.html'
+        } else if (
+          selectedUserType === 'manager' &&
+          username === 'manager' &&
+          password === 'manager'
+        ) {
+          window.location.href = 'manager/manager.html'
+        } else {
+          alert('Invalid credentials. Please try again.')
+        }
+
+        return false // prevent form from submitting
+      }
+
+      function togglePassword() {
+        const passwordInput = document.getElementById('password')
+        passwordInput.type =
+          passwordInput.type === 'password' ? 'text' : 'password'
+      }
+    </script>
+
+    <!-- About-us Script -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons()
+    </script>
+    <!-- About-us Script end -->
+
+    <!-- Foundation Script  -->
+    <script>
+      // founding year
+      const foundingYear = 1988
+
+      // current year
+      const currentYear = new Date().getFullYear()
+
+      // calculate years
+      const years = currentYear - foundingYear
+
+      // update dynamically
+      document.getElementById('years').textContent = years + '+'
+    </script>
+    <!-- Foundation Script End -->
+  </body>
+</html>

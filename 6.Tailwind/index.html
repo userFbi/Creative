@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homespace</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <style>
+      .header {
+        background-color: #077f46;
+        color: white;
+      }
+
+      .container .logo svg {
+        height: 32px;
+        margin-right: 6px;
+        color: #ffffff;
+      }
+
+      .text-color {
+        color: #103524;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header start -->
+    <div class="header w-full p-5 bg-green-500">
+      <div class="header container flex justify-around items-center">
+        <div class="logo flex items-center">
+          <svg
+            class="my-icon gray"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="bgCarrier" stroke-width="0"></g>
+            <g
+              id="tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="iconCarrier">
+              <path
+                d="M22 22L2 22"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+              <path
+                d="M2 11L6.06296 7.74968M22 11L13.8741 4.49931C12.7784 3.62279 11.2216 3.62279 10.1259 4.49931L9.34398 5.12486"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+              <path
+                d="M15.5 5.5V3.5C15.5 3.22386 15.7239 3 16 3H18.5C18.7761 3 19 3.22386 19 3.5V8.5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+              <path
+                d="M4 22V9.5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+              <path
+                d="M20 9.5V13.5M20 22V17.5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+              <path
+                d="M15 22V17C15 15.5858 15 14.8787 14.5607 14.4393C14.1213 14 13.4142 14 12 14C10.5858 14 9.87868 14 9.43934 14.4393M9 22V17"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+              ></path>
+            </g>
+          </svg>
+          <h1 class="text-3xl font-bold">HomeSpace</h1>
+        </div>
+        <nav>
+          <ul class="flex gap-13">
+            <li><a href="" class="font-bold">Home</a></li>
+            <li><a href="" class="text-gray-300">About</a></li>
+            <li><a href="" class="text-gray-300">properties</a></li>
+            <li><a href="" class="text-gray-300">Service</a></li>
+            <li><a href="" class="text-gray-300">Agents</a></li>
+            <li><a href="" class="text-gray-300">Blog</a></li>
+            <!-- Morepage with dropdown -->
+            <li class="relative group">
+              <a href="#" class="text-gray-300 font-semibold hover:text-white"
+                >Morepage <i class="bi bi-chevron-down"></i>
+              </a>
+              <ul
+                class="absolute left-0 mt-2 w-40 bg-white text-gray-700 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50"
+              >
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+                    >Sub Page 1</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+                    >Sub Page 2</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <!-- Dropdown with dropdown -->
+            <li class="relative group">
+              <a href="#" class="text-gray-300 font-semibold hover:text-white"
+                >Dropdown <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul
+                class="absolute left-0 mt-2 w-40 bg-white text-gray-700 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50"
+              >
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+                    >Option A</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+                    >Option B</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li><a href="" class="text-gray-300">contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- Header Section End -->
+
+    <!-- Hero Start -->
+    <section class="px-6 lg:px-20 py-12 bg-white">
+      <div
+        class="flex flex-col lg:flex-row items-center justify-between gap-12"
+      >
+        <!-- Left Content -->
+        <div class="flex-1">
+          <button
+            class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-4"
+          >
+            <i class="bi bi-house-heart-fill mr-2"></i> Dream Homes Await
+          </button>
+          <h1 class="text-5xl font-bold text-color leading-snug mb-4">
+            Find Your Ideal Property with Expert Guidance
+          </h1>
+          <p class="text-gray-400 text-lg mb-8">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Connect with verified real
+            estate professionals.
+          </p>
+
+          <!-- Search Box -->
+          <div class="bg-white p-6 rounded-xl shadow-xl">
+            <h2 class="text-xl font-semibold mb-1 justify-center">
+              Start Your Property Search
+            </h2>
+            <p class="text-sm text-gray-500 mb-6">
+              Discover thousands of verified listings
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                type="text"
+                placeholder="Enter city or neighborhood"
+                class="border px-4 py-2 rounded-md w-full"
+              />
+              <select class="border px-4 py-2 rounded-md w-full">
+                <option>All Types</option>
+              </select>
+              <select class="border px-4 py-2 rounded-md w-full">
+                <option>Any Price</option>
+              </select>
+              <select class="border px-4 py-2 rounded-md w-full">
+                <option>Any</option>
+              </select>
+            </div>
+            <button
+              class="mt-6 w-full bg-green-700 text-white py-3 rounded-md font-semibold flex items-center justify-center gap-2 hover:bg-green-800 transition"
+            >
+              <i class="bi bi-search"></i> Find Properties
+            </button>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-4 text-center mt-10">
+            <div class="border border-gray-200 rounded-lg p-2">
+              <h3 class="text-2xl text-green-800 font-bold">1250+</h3>
+              <p class="text-sm text-gray-500">Active Listings</p>
+            </div>
+            <div class="border border-gray-200 rounded-lg p-2">
+              <h3 class="text-2xl text-green-800 font-bold">89+</h3>
+              <p class="text-sm text-gray-500">Expert Agents</p>
+            </div>
+            <div class="border border-gray-200 rounded-lg p-2">
+              <h3 class="text-2xl text-green-800 font-bold">96%</h3>
+              <p class="text-sm text-gray-500">Success Rate</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Section -->
+        <div class="lg:w-1/2 w-full">
+          <div class="relative h-[400px]">
+            <!-- Main Image -->
+            <img
+              src="https://bootstrapmade.com/content/demo/HomeSpace/assets/img/real-estate/property-exterior-8.webp"
+              alt="Property Image"
+              class="main-img w-full h-full object-cover rounded-2xl shadow"
+            />
+
+            <!-- Small Preview Images -->
+            <div class="absolute top-0 right-0 p-3 flex flex-col gap-3">
+              <img
+                src="https://bootstrapmade.com/content/demo/HomeSpace/assets/img/real-estate/property-interior-4.webp"
+                alt="Preview 1"
+                class="w-[100px] h-[80px] object-cover rounded-md shadow-lg border-3 border-white"
+              />
+              <img
+                src="https://bootstrapmade.com/content/demo/HomeSpace/assets/img/real-estate/property-exterior-2.webp"
+                alt="Preview 2"
+                class="w-[100px] h-[80px] object-cover rounded-md shadow-lg border-3 border-white"
+              />
+            </div>
+
+            <!-- Overlay Info -->
+            <div
+              class="absolute bottom-0 left-0 w-full text-white p-4 rounded-b-2xl border-white"
+              style="
+                background: linear-gradient(
+                  to top,
+                  rgba(0, 0, 0, 0.7),
+                  transparent
+                );
+              "
+            >
+              <h4 class="font-bold mb-1">$925,000</h4>
+              <small>
+                <i class="bi bi-geo-alt-fill mr-1"></i> Downtown District
+              </small>
+              <br />
+              <small>
+                <i class="bi bi-house-fill mr-1"></i> 4 Bed, 3 Bath
+              </small>
+            </div>
+          </div>
+
+          <!-- Agent Card -->
+          <div
+            class="bg-white rounded-2xl shadow flex items-center justify-between mt-6 p-4"
+          >
+            <div class="flex items-center">
+              <img
+                src="https://bootstrapmade.com/content/demo/HomeSpace/assets/img/real-estate/agent-7.webp"
+                alt="Agent"
+                class="w-12 h-12 rounded-full mr-3"
+              />
+              <div>
+                <p class="text-gray-900 font-semibold">Michael Chen</p>
+                <p class="text-gray-500 text-sm">Senior Property Advisor</p>
+                <p class="text-yellow-500 text-sm">★ 5.0 (94 reviews)</p>
+              </div>
+            </div>
+            <div>
+              <i class="bi bi-chat-dots text-green-600 text-2xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Hero Start End -->
+
+    <!-- About Section  -->
+
+    <section class="px-6 lg:px-20 py-20 bg-[#f5fdf8]">
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <!-- Left Side Image -->
+        <div class="relative flex-1">
+          <img
+            src="https://bootstrapmade.com/content/demo/HomeSpace/assets/img/real-estate/property-exterior-1.webp"
+            class="rounded-2xl w-full"
+          />
+          <span
+            class="absolute text-center top-4 left-7 bg-green-700 text-white px-4 py-2 rounded-lg text-2xl font-bold"
+          >
+            15+<br />
+            <div class="flex flex-col text-center">
+              <span class="text-sm">Years </span>
+              <span class="text-sm"> Experience</span>
+            </div>
+          </span>
+          <img
+            src="https://bootstrapmade.com/content/demo/HomeSpace/assets/img/real-estate/property-interior-4.webp"
+            class="absolute bottom-[-40px] left-80 top-60 w-56 h-40 object-cover rounded-xl shadow-xl border-4 border-white"
+          />
+        </div>
+
+        <!-- Right Content -->
+        <div class="flex-1">
+          <span
+            class="inline-block bg-green-100 text-green-700 px-4 py-1 rounded-full font-bold text-sm mb-4"
+          >
+            About Our Company
+          </span>
+          <h2 class="text-4xl text-color font-bold mb-6">
+            Building Dreams, Creating Homes Since 2008
+          </h2>
+          <p class="text-gray-400 mb-6">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <i class="bi bi-house-door text-green-700 text-2xl"></i>
+              <div>
+                <h4 class="font-bold text-lg text-color">
+                  3200+ Properties Sold
+                </h4>
+                <p class="text-sm text-gray-400">
+                  Successfully completed transactions
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="bi bi-person text-green-700 text-2xl"></i>
+              <div>
+                <h4 class="font-bold text-lg text-color">
+                  98% Client Satisfaction
+                </h4>
+                <p class="text-sm text-gray-400">
+                  Happy customers recommend us
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-center gap-6">
+            <a
+              href="#"
+              class="bg-green-700 tel-icon text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 hover:bg-green-800"
+            >
+              Discover Our Story <i class="bi bi-arrow-right"></i>
+            </a>
+            <div class="flex items-center justify-center gap-3">
+              <div
+                class="w-12 h-12 bg-green-100 text-green-700 rounded-full flex items-center justify-center shadow-sm"
+              >
+                <i class="bi bi-telephone text-xl"></i>
+              </div>
+              <div class="desc">
+                <p class="text-sm text-gray-500">Call us today</p>
+                <h4 class="font-bold text-lg">+1 (555) 123-4567</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Section End -->
+  </body>
+</html>

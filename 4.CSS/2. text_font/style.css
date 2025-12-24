@@ -1,0 +1,28 @@
+p {
+  color: red;
+
+  text-align: left;
+  text-align: right;
+  text-align: start;
+  text-align: end;
+  text-align: center;
+  text-align: justify;
+
+  text-decoration: overline;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-style: double;
+
+  text-transform: capitalize;
+  text-transform: uppercase;
+  text-transform: lowercase;
+
+  text-shadow: 2px 1px 1px rgba(128, 21, 21, 0.5);
+
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
+  font-variant: small-caps;
+
+}

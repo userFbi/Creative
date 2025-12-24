@@ -1,0 +1,409 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER SECTION START------------------- */
+
+.header {
+  display: flex;
+  padding: 5px 15px;
+  justify-content: space-between;
+}
+
+.logo img {
+  width: 90px;
+}
+
+.css-z2uw0f-MuiTypography-root {
+  display: flex;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+}
+
+.sup-us {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 1px solid rgb(255, 152, 0);
+  background: transparent;
+  color: rgb(51, 51, 51);
+}
+
+/* HEADER SECTION END------------------- */
+
+/* HERO SECTION START------------------- */
+.css-10l7o3s-MuiTypography-root {
+  display: flex !important;
+  justify-content: center;
+  align-items: center !important;
+  height: 40vh !important;
+}
+.hero {
+  position: relative;
+  height: 400px; /* adjust if needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: 64px;
+  font-weight: 800;
+  z-index: 2;
+  color: #1f2933;
+}
+
+/* background image layer */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(data:image/png;base64,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);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 980px; /* KEY: keeps logo small */
+  opacity: 0.08; /* KEY: faded look */
+  z-index: 1;
+}
+
+.Heading {
+  padding: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  line-height: 2rem !important;
+  font-size: 100px !important;
+  font-weight: 900 !important;
+}
+/* HERO SECTION END------------------- */
+
+/* CARDS SECTION START------------------- */
+
+.card-container {
+  display: grid;
+  background-color: #272b33;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 80px 15px 80px 15px;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  background: rgb(60, 62, 68);
+  border-radius: 16px;
+  gap: 25px;
+  color: white;
+  align-items: flex-start;
+}
+
+/* Bigger image */
+.left img {
+  width: 200px;
+  height: 200px;
+  border-top-left-radius: 12px;
+  border-end-start-radius: 12px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* ensures all text aligns left */
+  width: 100%; /* take full remaining width */
+}
+
+/* Bigger text */
+.right h1 {
+  font-size: 26px !important;
+  margin-top: 5px;
+}
+
+.sub {
+  font-size: 16px;
+  margin: 5px 0 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.sub span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.label {
+  font-size: 16px;
+  color: #c2c2c2;
+  margin: 0;
+  margin-bottom: 0px;
+}
+
+.value {
+  font-size: 18px;
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+/* Status colors */
+.alive {
+  margin-top: 6px;
+  background: #4caf50;
+}
+
+.dead {
+  margin-top: 6px;
+  background: #e53935;
+}
+
+.unknown {
+  margin-top: 6px;
+  background: #9e9e9e;
+}
+
+/* CARDS SECTION END------------------- */
+
+/* FOOTER SECTION START----------------- */
+
+.footer-section {
+  background-color: #202329;
+  padding: 90px 15px;
+}
+
+.footer-abt {
+  display: flex;
+  justify-content: center;
+  font-size: 8px !important;
+  color: #9e9e9e;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: #9e9e9e;
+}
+
+.green-status {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-bottom: 2px;
+  background-color: #4caf50;
+}
+
+.company {
+  display: flex;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.788);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  color: #9e9e9e;
+  gap: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.author {
+  display: flex;
+  justify-content: center;
+  color: #9e9e9e;
+  align-items: center;
+}
+
+.author span {
+  color: white;
+  border-bottom: 1px solid rgb(255, 152, 0);
+}
+
+.css-z2uw0f-MuiTypography-root {
+  font-size: 14px !important;
+}
+
+.css-rizt0-MuiTypography-root {
+  font-weight: 600;
+}
+/* FOOTER SECTION END------------------- */
+
+/* ===============================
+   GLOBAL RESPONSIVE FIX
+================================ */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ===============================
+   TABLET (<= 1024px)
+================================ */
+@media (max-width: 1024px) {
+  .hero {
+    height: 320px;
+  }
+
+  .hero h1,
+  .Heading {
+    font-size: 64px !important;
+    text-align: center;
+  }
+
+  .hero::before {
+    background-size: 700px;
+  }
+
+  .card-container {
+    grid-template-columns: 1fr 1fr;
+    padding: 60px 20px;
+  }
+}
+
+/* ===============================
+   MOBILE (<= 768px)
+================================ */
+@media (max-width: 768px) {
+  /* HEADER */
+  .header {
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 70px;
+  }
+
+  /* HERO */
+  .hero {
+    height: 260px;
+    padding: 20px;
+  }
+
+  .hero h1,
+  .Heading {
+    font-size: 40px !important;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .hero::before {
+    background-size: 450px;
+    opacity: 0.06;
+  }
+
+  /* CARDS */
+  .card-container {
+    padding: 80px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+  }
+
+  .left img {
+    padding: 5px;
+    padding-left: 15px;
+    width: 100%;
+    height: auto;
+  }
+
+  .right {
+    padding: 15px;
+    width: 100%;
+  }
+
+  .right h1 {
+    font-size: 22px !important;
+  }
+
+  .value {
+    font-size: 16px;
+  }
+
+  /* FOOTER */
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .company,
+  .author,
+  .status {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+/* ===============================
+   SMALL MOBILE (<= 480px)
+================================ */
+@media (max-width: 480px) {
+  .hero h1,
+  .Heading {
+    font-size: 32px !important;
+  }
+
+  .hero::before {
+    background-size: 320px;
+  }
+
+  /* CARDS */
+  .card-container {
+    padding: 15px;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .card {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .left img {
+    padding: 5px;
+    padding-left: 15px;
+    width: auto;
+    height: auto;
+  }
+
+  .right {
+    padding: 15px;
+    width: 100%;
+  }
+
+  .css-z2uw0f-MuiTypography-root {
+    font-size: 10px !important;
+  }
+
+  .css-rizt0-MuiTypography-root {
+    margin-top: 10px;
+    font-weight: 600!important;
+    font-size: 12px!important;
+  }
+
+  .sub {
+    font-size: 14px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .value {
+    font-size: 15px;
+  }
+}
