@@ -5,12 +5,3 @@ Disallow:
 
 
 
-
-
-
-student result - 
-filter data -
-tik tac toe game - 
-
-
-using useState
