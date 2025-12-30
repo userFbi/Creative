@@ -1,0 +1,17 @@
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  color: white;
+  padding: 0 15px;
+  border-bottom: 1px solid black;
+}
+
+.header-right {
+  color: gray;
+  text-align: right;
+  font-weight: 600;
+}
